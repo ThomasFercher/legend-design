@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/delegate.dart';
 import 'package:webstore/router/errorpages/notfound.dart';
 import 'package:webstore/router/routeInfo.dart';
@@ -12,12 +13,14 @@ class RouterProvider extends InheritedWidget {
   final WebRouterDelegate routerDelegate;
   final Widget child;
   final List<RouteInfo> routes;
+  final List<MenuOptionHeader> menuOptions;
 
   RouterProvider({
     Key? key,
     required this.routerDelegate,
     required this.child,
     required this.routes,
+    required this.menuOptions,
   }) : super(key: key, child: child);
 
   static RouterProvider of(BuildContext context) {

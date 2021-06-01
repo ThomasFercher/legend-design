@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:webstore/objects/menuOption.dart';
+import 'package:webstore/pages/about.dart';
 import 'package:webstore/pages/home.dart';
 import 'package:webstore/pages/products.dart';
 import 'package:webstore/router/delegate.dart';
 import 'package:webstore/router/parser.dart';
 import 'package:webstore/router/routeInfo.dart';
 import 'package:webstore/router/routerProvider.dart';
+import 'package:webstore/styles/themeProvider.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,24 +18,44 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RouterProvider(
-      routerDelegate: routerDelegate,
-      routes: [
-        RouteInfo(
-          name: "/",
-          page: Home(),
-        ),
-        RouteInfo(
-          name: "/products",
-          page: ProductsPage(),
-        ),
-      ],
-      child: MaterialApp.router(
-        title: 'Flutter Webstore',
+    return ThemeProvider(
+      primaryColor: Colors.teal,
+      secondaryColor: Colors.blueGrey,
+      child: RouterProvider(
         routerDelegate: routerDelegate,
-        routeInformationParser: const MyRouteInformationParser(),
-        debugShowCheckedModeBanner: false,
-        backButtonDispatcher: RootBackButtonDispatcher(),
+        routes: [
+          RouteInfo(
+            name: "/",
+            page: Home(),
+          ),
+          RouteInfo(
+            name: "/products",
+            page: ProductsPage(),
+          ),
+          RouteInfo(
+            name: "/about",
+            page: AboutPage(),
+          ),
+        ],
+        menuOptions: [
+          MenuOptionHeader(
+            title: "Products",
+            page: "/products",
+            icon: Icons.accessibility,
+          ),
+          MenuOptionHeader(
+            title: "About",
+            page: "/about",
+            icon: Icons.info_sharp,
+          ),
+        ],
+        child: MaterialApp.router(
+          title: 'Flutter Webstore',
+          routerDelegate: routerDelegate,
+          routeInformationParser: const MyRouteInformationParser(),
+          debugShowCheckedModeBanner: false,
+          backButtonDispatcher: RootBackButtonDispatcher(),
+        ),
       ),
     );
   }
