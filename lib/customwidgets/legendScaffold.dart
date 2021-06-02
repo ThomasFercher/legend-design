@@ -8,6 +8,7 @@ import 'package:webstore/customwidgets/fixedFooter.dart';
 import 'package:webstore/customwidgets/fixedSider.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/styles/layoutType.dart';
+import 'package:webstore/styles/sizeProvider.dart';
 
 class LegendScaffold extends StatelessWidget {
   final Widget content;
@@ -23,29 +24,35 @@ class LegendScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (kIsWeb) {
-      return materialLayout();
-    } else if (Platform.isIOS || Platform.isMacOS) {
-      return cupertinoLayout();
-    } else {
-      return materialLayout();
-    }
+    return SizeProvider(
+      width: MediaQuery.of(context).size.width,
+      child: Builder(
+        builder: (context) {
+          if (kIsWeb) {
+            return materialLayout(context);
+          } else if (Platform.isIOS || Platform.isMacOS) {
+            return cupertinoLayout(context);
+          } else {
+            return materialLayout(context);
+          }
+        },
+      ),
+    );
   }
 
-  Widget cupertinoLayout() {
+  Widget cupertinoLayout(BuildContext context) {
     return CupertinoPageScaffold(
       child: content,
     );
   }
 
-  Widget getSider() {
-    switch (layoutType) {
-      case LayoutType.FixedSider:
-        return FixedSider();
-      case LayoutType.FixedHeaderSider:
-        return FixedSider();
-      default:
-        return Container();
+  Widget getSider(ScreenSize screenSize) {
+    if (layoutType == LayoutType.FixedSider  && screenSize != ScreenSize.Small) {
+      return FixedSider();
+    } else if (layoutType == LayoutType.FixedHeaderSider && screenSize != ScreenSize.Small) {
+      return FixedSider();
+    } else {
+      return Container();
     }
   }
 
@@ -54,23 +61,29 @@ class LegendScaffold extends StatelessWidget {
   }
 
   Widget getHeader() {
-    switch (layoutType) {
-      case LayoutType.FixedHeader:
-        return FixedAppBar();
-      case LayoutType.FixedHeaderSider:
-        return FixedAppBar();
-      default:
-        return SliverToBoxAdapter(
-          child: Container(),
-        );
+    if (layoutType == LayoutType.FixedHeaderSider) {
+      return FixedAppBar();
+    } else if (layoutType == LayoutType.FixedHeader) {
+      return FixedAppBar();
+    } else {
+      return SliverToBoxAdapter(
+        child: Container(),
+      );
     }
   }
 
-  Widget materialLayout() {
+  Widget materialLayout(BuildContext context) {
+    ScreenSize screenSize = SizeProvider.of(context).screenSize;
+    EdgeInsets contentPadding = const EdgeInsets.all(16);
+
+    if(screenSize == ScreenSize.Small){
+      contentPadding =const EdgeInsets.all(4);
+    }
+
     return Scaffold(
       body: Row(
         children: [
-          getSider(),
+          getSider(screenSize),
           Expanded(
             child: CustomScrollView(
               /*/ headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -84,7 +97,7 @@ class LegendScaffold extends StatelessWidget {
                   child: LayoutBuilder(builder: (context, constraints) {
                     return Container(
                       color: Colors.black12,
-                      padding: const EdgeInsets.all(16.0),
+                      padding: contentPadding,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -96,7 +109,7 @@ class LegendScaffold extends StatelessWidget {
                           Container(
                             color: Colors.white,
                             height: 1000,
-                            width: constraints.maxWidth - 32.0,
+                            width: constraints.maxWidth -  contentPadding.horizontal,
                             padding: const EdgeInsets.all(8.0),
                             child: content,
                           ),

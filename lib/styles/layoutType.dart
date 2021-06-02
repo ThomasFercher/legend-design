@@ -4,3 +4,10 @@ enum LayoutType {
   FixedHeaderSider,
   Content,
 }
+
+enum ScreenSize {
+  Small,
+  Medium,
+  Large,
+  XXL,
+}
