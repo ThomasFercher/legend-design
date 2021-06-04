@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webstore/customwidgets/drawerMenu.dart';
 import 'package:webstore/customwidgets/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:webstore/customwidgets/fixedFooter.dart';
 import 'package:webstore/customwidgets/fixedSider.dart';
 import 'package:webstore/objects/menuOption.dart';
+import 'package:webstore/router/routerProvider.dart';
 import 'package:webstore/styles/layoutType.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 
@@ -47,9 +49,10 @@ class LegendScaffold extends StatelessWidget {
   }
 
   Widget getSider(ScreenSize screenSize) {
-    if (layoutType == LayoutType.FixedSider  && screenSize != ScreenSize.Small) {
+    if (layoutType == LayoutType.FixedSider) {
       return FixedSider();
-    } else if (layoutType == LayoutType.FixedHeaderSider && screenSize != ScreenSize.Small) {
+    } else if (layoutType == LayoutType.FixedHeaderSider &&
+        screenSize != ScreenSize.Small) {
       return FixedSider();
     } else {
       return Container();
@@ -72,15 +75,22 @@ class LegendScaffold extends StatelessWidget {
     }
   }
 
+  Widget getDrawer(BuildContext context) {
+    ScreenSize ss = SizeProvider.of(context).screenSize;
+    return ss == ScreenSize.Small ? DrawerMenu() : Container();
+  }
+
   Widget materialLayout(BuildContext context) {
     ScreenSize screenSize = SizeProvider.of(context).screenSize;
     EdgeInsets contentPadding = const EdgeInsets.all(16);
 
-    if(screenSize == ScreenSize.Small){
-      contentPadding =const EdgeInsets.all(4);
+    if (screenSize == ScreenSize.Small) {
+      contentPadding = const EdgeInsets.all(4);
     }
 
     return Scaffold(
+      endDrawer: getDrawer(context),
+      endDrawerEnableOpenDragGesture: false,
       body: Row(
         children: [
           getSider(screenSize),
@@ -109,7 +119,8 @@ class LegendScaffold extends StatelessWidget {
                           Container(
                             color: Colors.white,
                             height: 1000,
-                            width: constraints.maxWidth -  contentPadding.horizontal,
+                            width: constraints.maxWidth -
+                                contentPadding.horizontal,
                             padding: const EdgeInsets.all(8.0),
                             child: content,
                           ),

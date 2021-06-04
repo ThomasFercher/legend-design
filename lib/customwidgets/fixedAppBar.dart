@@ -18,6 +18,7 @@ class FixedAppBar extends StatelessWidget {
         height: 80,
         child: Placeholder(),
       ),
+      actions: [Container()],
       title: menu(context),
       expandedHeight: 80,
       collapsedHeight: 80,
@@ -30,6 +31,7 @@ class FixedAppBar extends StatelessWidget {
   Widget menu(BuildContext context) {
     List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
     ScreenSize screenSize = SizeProvider.of(context).screenSize;
+    ThemeProvider theme = ThemeProvider.of(context);
 
     if (screenSize != ScreenSize.Small) {
       return Container(
@@ -39,9 +41,19 @@ class FixedAppBar extends StatelessWidget {
           children: options,
         ),
       );
-    } else{
+    } else {
       return Container(
-        child: Text("Collapsed Menu"),
+        alignment: Alignment.centerRight,
+        child: IconButton(
+          iconSize: 36,
+          onPressed: () {
+            Scaffold.of(context).openEndDrawer();
+          },
+          icon: Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
+        ),
       );
     }
   }

@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
     return ThemeProvider(
       primaryColor: Colors.teal,
       secondaryColor: Colors.blueGrey,
-      
       child: RouterProvider(
         routerDelegate: routerDelegate,
         routes: [
