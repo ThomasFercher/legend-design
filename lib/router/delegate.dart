@@ -51,7 +51,12 @@ class WebRouterDelegate extends RouterDelegate<List<RouteSettings>>
   }
 
   void pushPage(Page page) {
-    _pages.add(page);
+    if (_pages.last.key == page.key) {
+      _pages[_pages.length - 1] = page;
+    } else {
+      _pages.add(page);
+    }
+
     notifyListeners();
   }
 

@@ -51,24 +51,25 @@ class RouterProvider extends InheritedWidget {
   }
 
   static Page createPage(RouteSettings s, Widget page) {
+    String now = DateTime.now().millisecondsSinceEpoch.toString();
     if (kIsWeb) {
       return MaterialPage(
         child: page,
-        key: ValueKey(s.name),
+        key: ValueKey(s.name! + now),
         name: s.name,
         arguments: s.arguments,
       );
     } else if (Platform.isIOS || Platform.isMacOS) {
       return CupertinoPage(
         child: page,
-        key: ValueKey(s.name),
+        key: ValueKey(s.name! + now),
         name: s.name,
         arguments: s.arguments,
       );
     } else {
       return MaterialPage(
         child: page,
-        key: ValueKey(s.name),
+        key: ValueKey(s.name! + now),
         name: s.name,
         arguments: s.arguments,
       );

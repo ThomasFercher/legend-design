@@ -50,7 +50,9 @@ class LegendScaffold extends StatelessWidget {
 
   Widget getSider(ScreenSize screenSize) {
     if (layoutType == LayoutType.FixedSider) {
-      return FixedSider();
+      return FixedSider(
+        showMenu: true,
+      );
     } else if (layoutType == LayoutType.FixedHeaderSider &&
         screenSize != ScreenSize.Small) {
       return FixedSider();

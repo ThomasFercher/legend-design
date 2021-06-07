@@ -30,7 +30,6 @@ class SizeProvider extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant SizeProvider old) {
-    
     return old.width != this.width;
   }
 }
