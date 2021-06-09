@@ -4,11 +4,13 @@ class ThemeProvider extends InheritedWidget {
   Color primaryColor;
   Color secondaryColor;
   Widget child;
+  BorderRadius borderRadius;
 
   ThemeProvider({
     required this.primaryColor,
     required this.secondaryColor,
     required this.child,
+    required this.borderRadius,
   }) : super(child: child);
 
   static ThemeProvider of(BuildContext context) {

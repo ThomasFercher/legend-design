@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/drawerMenu.dart';
@@ -7,6 +8,7 @@ import 'package:webstore/customwidgets/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:webstore/customwidgets/fixedFooter.dart';
 import 'package:webstore/customwidgets/fixedSider.dart';
+import 'package:webstore/customwidgets/modal.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
 import 'package:webstore/styles/layoutType.dart';
@@ -82,6 +84,27 @@ class LegendScaffold extends StatelessWidget {
     return ss == ScreenSize.Small ? DrawerMenu() : Container();
   }
 
+  Widget getActionButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () => {
+        showModal(
+          context: context,
+          builder: (context) {
+            return Modal(
+              height: 800,
+              width: 400,
+            );
+          },
+          configuration: FadeScaleTransitionConfiguration(
+            transitionDuration: Duration(milliseconds: 250),
+            barrierDismissible: true,
+            reverseTransitionDuration: Duration(milliseconds: 250),
+          ),
+        ),
+      },
+    );
+  }
+
   Widget materialLayout(BuildContext context) {
     ScreenSize screenSize = SizeProvider.of(context).screenSize;
     EdgeInsets contentPadding = const EdgeInsets.all(16);
@@ -93,6 +116,7 @@ class LegendScaffold extends StatelessWidget {
     return Scaffold(
       endDrawer: getDrawer(context),
       endDrawerEnableOpenDragGesture: false,
+      floatingActionButton: getActionButton(context),
       body: Row(
         children: [
           getSider(screenSize),
