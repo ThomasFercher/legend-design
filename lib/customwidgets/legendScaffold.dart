@@ -91,8 +91,11 @@ class LegendScaffold extends StatelessWidget {
           context: context,
           builder: (context) {
             return Modal(
-              height: 800,
-              width: 400,
+              content: Text("test"),
+              height: 600,
+              width: 600,
+              onCancle: () {},
+              onConfirm: () {},
             );
           },
           configuration: FadeScaleTransitionConfiguration(

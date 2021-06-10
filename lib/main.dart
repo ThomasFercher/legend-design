@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      borderRadius: BorderRadius.circular(25),
+      borderRadius: BorderRadius.circular(16),
       primaryColor: Colors.teal,
       secondaryColor: Colors.blueGrey,
       child: RouterProvider(
