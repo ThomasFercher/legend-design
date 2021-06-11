@@ -8,7 +8,7 @@ class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LegendScaffold(
-      content: Text("Products"),
+      contentBuilder: (context) => Text("Products"),
       pageName: "Products",
       layoutType: LayoutType.FixedHeader,
     );

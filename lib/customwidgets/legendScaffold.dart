@@ -8,6 +8,7 @@ import 'package:webstore/customwidgets/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:webstore/customwidgets/fixedFooter.dart';
 import 'package:webstore/customwidgets/fixedSider.dart';
+import 'package:webstore/customwidgets/legendBottomSheet.dart';
 import 'package:webstore/customwidgets/modal.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
@@ -15,15 +16,17 @@ import 'package:webstore/styles/layoutType.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 
 class LegendScaffold extends StatelessWidget {
-  final Widget content;
   final LayoutType? layoutType;
   final String pageName;
+  final Function(BuildContext context)? onActionButtonPressed;
+  final WidgetBuilder contentBuilder;
 
   const LegendScaffold({
     Key? key,
-    required this.content,
     this.layoutType,
     required this.pageName,
+    this.onActionButtonPressed,
+    required this.contentBuilder,
   }) : super(key: key);
 
   @override
@@ -46,7 +49,7 @@ class LegendScaffold extends StatelessWidget {
 
   Widget cupertinoLayout(BuildContext context) {
     return CupertinoPageScaffold(
-      child: content,
+      child: Container(),
     );
   }
 
@@ -86,24 +89,8 @@ class LegendScaffold extends StatelessWidget {
 
   Widget getActionButton(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => {
-        showModal(
-          context: context,
-          builder: (context) {
-            return Modal(
-              content: Text("test"),
-              height: 600,
-              width: 600,
-              onCancle: () {},
-              onConfirm: () {},
-            );
-          },
-          configuration: FadeScaleTransitionConfiguration(
-            transitionDuration: Duration(milliseconds: 250),
-            barrierDismissible: true,
-            reverseTransitionDuration: Duration(milliseconds: 250),
-          ),
-        ),
+      onPressed: () {
+        onActionButtonPressed!(context);
       },
     );
   }
@@ -119,7 +106,13 @@ class LegendScaffold extends StatelessWidget {
     return Scaffold(
       endDrawer: getDrawer(context),
       endDrawerEnableOpenDragGesture: false,
-      floatingActionButton: getActionButton(context),
+      floatingActionButton: onActionButtonPressed != null
+          ? Builder(
+              builder: (context) {
+                return getActionButton(context);
+              },
+            )
+          : null,
       body: Row(
         children: [
           getSider(screenSize),
@@ -151,7 +144,7 @@ class LegendScaffold extends StatelessWidget {
                             width: constraints.maxWidth -
                                 contentPadding.horizontal,
                             padding: const EdgeInsets.all(8.0),
-                            child: content,
+                            child: Builder(builder: contentBuilder),
                           ),
                           getFooter(),
                         ],

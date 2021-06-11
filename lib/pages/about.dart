@@ -7,7 +7,9 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LegendScaffold(
-      content: Text("Products"),
+      contentBuilder: (context) {
+        return Text("Products");
+      },
       pageName: "About",
       layoutType: LayoutType.FixedSider,
     );

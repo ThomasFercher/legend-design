@@ -7,6 +7,7 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return LegendScaffold(content: Text("error"), pageName: "error");
+    return LegendScaffold(
+        contentBuilder: (context) => Text("error"), pageName: "error");
   }
 }
