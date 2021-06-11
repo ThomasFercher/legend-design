@@ -41,6 +41,7 @@ class FixedSider extends StatelessWidget {
         ),
       ),
     );
+
     return Container(
       width: 200,
       height: MediaQuery.of(context).size.height,

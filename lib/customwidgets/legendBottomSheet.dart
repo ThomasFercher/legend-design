@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:webstore/customwidgets/legendButton/buttonStyle.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
+import 'package:webstore/styles/layoutType.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 import 'package:webstore/styles/themeProvider.dart';
 
@@ -24,14 +25,23 @@ class LegendBottomSheet extends StatelessWidget {
     ThemeProvider theme = ThemeProvider.of(context);
     SizeProvider ss = SizeProvider.of(context);
 
+    double width;
+
+    if (ss.screenSize == ScreenSize.Medium ||
+        ss.screenSize == ScreenSize.Small) {
+      width = ss.width;
+    } else {
+      width = ss.width / 3;
+    }
+
     return Container(
       alignment: Alignment.bottomCenter,
       height: 160,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: ss.width / 3,
+          maxWidth: width,
           maxHeight: 160,
-          minWidth: ss.width / 3,
+          minWidth: width,
           minHeight: 160,
         ),
         child: Card(

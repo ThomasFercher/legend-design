@@ -6,8 +6,9 @@ import 'package:webstore/customwidgets/legendScaffold.dart';
 class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return LegendScaffold(
-        contentBuilder: (context) => Text("error"), pageName: "error");
+      contentBuilder: (context) => Text("error"),
+      pageName: "error",
+    );
   }
 }
