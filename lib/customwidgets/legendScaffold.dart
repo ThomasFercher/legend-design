@@ -10,10 +10,12 @@ import 'package:webstore/customwidgets/fixedFooter.dart';
 import 'package:webstore/customwidgets/fixedSider.dart';
 import 'package:webstore/customwidgets/legendBottomSheet.dart';
 import 'package:webstore/customwidgets/modal.dart';
+import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
 import 'package:webstore/styles/layoutType.dart';
 import 'package:webstore/styles/sizeProvider.dart';
+import 'package:webstore/styles/typography.dart';
 
 class LegendScaffold extends StatelessWidget {
   final LayoutType? layoutType;
@@ -134,7 +136,10 @@ class LegendScaffold extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            child: Text(pageName),
+                            child: LegendText(
+                              text: pageName,
+                              textStyle: LegendTextStyle.h1(),
+                            ),
                             padding:
                                 const EdgeInsets.only(top: 8.0, bottom: 16.0),
                           ),

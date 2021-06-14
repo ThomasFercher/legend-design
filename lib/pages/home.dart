@@ -5,7 +5,9 @@ import 'package:webstore/customwidgets/legendBottomSheet.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/legendScaffold.dart';
 import 'package:webstore/customwidgets/modal.dart';
+import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/layoutType.dart';
+import 'package:webstore/styles/typography.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -26,8 +28,10 @@ class Home extends StatelessWidget {
                       title: "Cookies",
                       onCancel: () {},
                       onConfirm: () {},
-                      content:
-                          Text("Bitte aktzeptieren Sie unsere Cookies! LIT"),
+                      content: LegendText(
+                        text: "Bitte aktzeptieren Sie unsere Cookies! LIT",
+                        textStyle: LegendTextStyle.h5(),
+                      ),
                     );
                   },
                   backgroundColor: Colors.transparent,

@@ -8,6 +8,7 @@ import 'package:webstore/router/parser.dart';
 import 'package:webstore/router/routeInfo.dart';
 import 'package:webstore/router/routerProvider.dart';
 import 'package:webstore/styles/themeProvider.dart';
+import 'package:webstore/styles/typography.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       borderRadius: BorderRadius.circular(16),
       primaryColor: Colors.teal,
       secondaryColor: Colors.blueGrey,
+      typography: LegendTypography(),
       child: RouterProvider(
         routerDelegate: routerDelegate,
         routes: [
