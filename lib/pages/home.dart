@@ -1,13 +1,13 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:webstore/customwidgets/legendBottomSheet.dart';
-import 'package:webstore/customwidgets/legendButton/legendButton.dart';
-import 'package:webstore/customwidgets/legendScaffold.dart';
-import 'package:webstore/customwidgets/modal.dart';
-import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/layoutType.dart';
-import 'package:webstore/styles/typography.dart';
+import '../customwidgets/legendBottomSheet.dart';
+import '../customwidgets/legendButton/legendButton.dart';
+import '../customwidgets/legendScaffold.dart';
+import '../customwidgets/modal.dart';
+import '../customwidgets/typography/legendText.dart';
+import '../styles/layoutType.dart';
+import '../styles/typography.dart';
 
 class Home extends StatelessWidget {
   @override

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webstore/customwidgets/siderMenuVerticalTile.dart';
-import 'package:webstore/objects/menuOption.dart';
-import 'package:webstore/router/routerProvider.dart';
-import 'package:webstore/styles/layoutType.dart';
-import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/themeProvider.dart';
+import 'siderMenuVerticalTile.dart';
+import '../objects/menuOption.dart';
+import '../router/routerProvider.dart';
+import '../styles/layoutType.dart';
+import '../styles/sizeProvider.dart';
+import '../styles/themeProvider.dart';
 
 import 'drawerMenuTile.dart';
 

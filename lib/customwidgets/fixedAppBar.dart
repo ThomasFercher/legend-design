@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:webstore/objects/menuOption.dart';
-import 'package:webstore/router/routerProvider.dart';
-import 'package:webstore/styles/layoutType.dart';
-import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/themeProvider.dart';
+import '../objects/menuOption.dart';
+import '../router/routerProvider.dart';
+import '../styles/layoutType.dart';
+import '../styles/sizeProvider.dart';
+import '../styles/themeProvider.dart';
 
 class FixedAppBar extends StatelessWidget {
   @override

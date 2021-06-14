@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webstore/router/routerProvider.dart';
+import '../router/routerProvider.dart';
 
 class SiderMenuVerticalTile extends StatelessWidget {
   final String path;

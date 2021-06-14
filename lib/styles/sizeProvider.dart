@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:webstore/styles/layoutType.dart';
+import 'layoutType.dart';
 
 class SizeProvider extends InheritedWidget {
   final Widget child;

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webstore/router/routerProvider.dart';
+import '../router/routerProvider.dart';
 
 class DrawerMenuTile extends StatelessWidget {
   final IconData icon;

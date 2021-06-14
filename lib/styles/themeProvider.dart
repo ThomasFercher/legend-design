@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:webstore/styles/typography.dart';
+import 'typography.dart';
 
 class ThemeProvider extends InheritedWidget {
   Color primaryColor;

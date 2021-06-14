@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:webstore/customwidgets/legendScaffold.dart';
-import 'package:webstore/styles/layoutType.dart';
+import '../customwidgets/legendScaffold.dart';
+import '../styles/layoutType.dart';
 
 class AboutPage extends StatelessWidget {
   @override

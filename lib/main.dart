@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:webstore/objects/menuOption.dart';
-import 'package:webstore/pages/about.dart';
-import 'package:webstore/pages/home.dart';
-import 'package:webstore/pages/products.dart';
-import 'package:webstore/router/delegate.dart';
-import 'package:webstore/router/parser.dart';
-import 'package:webstore/router/routeInfo.dart';
-import 'package:webstore/router/routerProvider.dart';
-import 'package:webstore/styles/themeProvider.dart';
-import 'package:webstore/styles/typography.dart';
+import 'objects/menuOption.dart';
+import 'pages/about.dart';
+import 'pages/home.dart';
+import 'pages/products.dart';
+import 'router/delegate.dart';
+import 'router/parser.dart';
+import 'router/routeInfo.dart';
+import 'router/routerProvider.dart';
+import 'styles/themeProvider.dart';
+import 'styles/typography.dart';
 
 void main() {
   runApp(MyApp());

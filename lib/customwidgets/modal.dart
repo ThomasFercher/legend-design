@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:webstore/customwidgets/legendButton/legendButton.dart';
-import 'package:webstore/customwidgets/legendButton/buttonStyle.dart';
-import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/themeProvider.dart';
+import 'legendButton/legendButton.dart';
+import 'legendButton/buttonStyle.dart';
+import '../styles/sizeProvider.dart';
+import '../styles/themeProvider.dart';
 
 class Modal extends StatelessWidget {
   final double? width;

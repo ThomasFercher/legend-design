@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:webstore/objects/menuOption.dart';
-import 'package:webstore/router/delegate.dart';
-import 'package:webstore/router/errorpages/notfound.dart';
-import 'package:webstore/router/routeInfo.dart';
+import '../objects/menuOption.dart';
+import 'delegate.dart';
+import 'errorpages/notfound.dart';
+import 'routeInfo.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class RouterProvider extends InheritedWidget {

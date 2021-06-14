@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webstore/pages/home.dart';
-import 'package:webstore/router/errorpages/notfound.dart';
-import 'package:webstore/router/routeInfo.dart';
-import 'package:webstore/router/routerProvider.dart';
+import '../pages/home.dart';
+import 'errorpages/notfound.dart';
+import 'routeInfo.dart';
+import 'routerProvider.dart';
 
 class WebRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<List<RouteSettings>> {

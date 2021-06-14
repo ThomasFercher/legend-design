@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:webstore/customwidgets/drawerMenuTile.dart';
-import 'package:webstore/objects/menuOption.dart';
-import 'package:webstore/router/routerProvider.dart';
-import 'package:webstore/styles/layoutType.dart';
-import 'package:webstore/styles/sizeProvider.dart';
+import 'drawerMenuTile.dart';
+import '../objects/menuOption.dart';
+import '../router/routerProvider.dart';
+import '../styles/layoutType.dart';
+import '../styles/sizeProvider.dart';
 
 class DrawerMenu extends StatelessWidget {
   @override
