@@ -35,6 +35,7 @@ class LegendScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizeProvider(
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Builder(
         builder: (context) {
           if (kIsWeb) {
@@ -105,6 +106,11 @@ class LegendScaffold extends StatelessWidget {
       contentPadding = const EdgeInsets.all(4);
     }
 
+    //TODO: Make COntent height fit screen if not specified
+    var fixedHeaderHeight = 10;
+    var whitespace = 16 * 2 + 10;
+    var footerHeight = 200;
+
     return Scaffold(
       endDrawer: getDrawer(context),
       endDrawerEnableOpenDragGesture: false,
@@ -145,7 +151,7 @@ class LegendScaffold extends StatelessWidget {
                           ),
                           Container(
                             color: Colors.white,
-                            height: 1000,
+                            //    height: 1000,
                             width: constraints.maxWidth -
                                 contentPadding.horizontal,
                             padding: const EdgeInsets.all(8.0),

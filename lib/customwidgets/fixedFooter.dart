@@ -9,10 +9,12 @@ class FixedFooter extends StatelessWidget {
 
     return Hero(
       tag: ValueKey("footer"),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 120,
-        child: Center(child: Text("Footer")),
+      child: Material(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 120,
+          child: Center(child: Text("Footer")),
+        ),
       ),
     );
   }

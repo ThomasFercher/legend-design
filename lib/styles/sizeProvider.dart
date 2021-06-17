@@ -5,10 +5,12 @@ class SizeProvider extends InheritedWidget {
   final Widget child;
   final double width;
   late final ScreenSize screenSize;
+  final double height;
 
   SizeProvider({
     required this.child,
     required this.width,
+    required this.height,
   }) : super(child: child) {
     if (width < 400) {
       screenSize = ScreenSize.Small;
