@@ -30,6 +30,12 @@ class SizeProvider extends InheritedWidget {
     return result!;
   }
 
+  static Size? getSizeFromKey(GlobalKey k) {
+    final RenderBox? renderBoxRed =
+        k.currentContext!.findRenderObject() as RenderBox?;
+    return renderBoxRed?.size;
+  }
+
   @override
   bool updateShouldNotify(covariant SizeProvider old) {
     return old.width != this.width;

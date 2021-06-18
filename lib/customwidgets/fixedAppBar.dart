@@ -13,16 +13,22 @@ class FixedAppBar extends StatelessWidget {
 
     return SliverAppBar(
       backgroundColor: theme.primaryColor,
-      leading: Container(
-        width: 80,
-        height: 80,
-        child: Placeholder(),
+      leading: Hero(
+        tag: ValueKey("appBarLeading"),
+        child: Container(
+          width: 80,
+          height: 80,
+          child: Placeholder(),
+        ),
       ),
       actions: [Container()],
-      title: menu(context),
-      expandedHeight: 80,
-      collapsedHeight: 80,
-      toolbarHeight: 80,
+      title: Hero(
+        tag: ValueKey("appBarTitle"),
+        child: Material(color: Colors.transparent, child: menu(context)),
+      ),
+      expandedHeight: theme.appbarHeight,
+      collapsedHeight: theme.appbarHeight,
+      toolbarHeight: theme.appbarHeight,
       pinned: true,
       automaticallyImplyLeading: false,
     );

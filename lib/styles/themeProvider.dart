@@ -8,6 +8,8 @@ class ThemeProvider extends InheritedWidget {
   BorderRadius borderRadius;
   LegendTypography typography;
 
+  double appbarHeight = 80.0;
+
   ThemeProvider({
     required this.primaryColor,
     required this.secondaryColor,

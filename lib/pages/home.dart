@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
           ],
         );
       },
-      layoutType: LayoutType.FixedHeaderSider,
+      layoutType: LayoutType.FixedHeader,
       pageName: "Home",
       onActionButtonPressed: (context) {
         showModal(
