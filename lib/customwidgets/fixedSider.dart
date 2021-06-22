@@ -38,6 +38,8 @@ class FixedSider extends StatelessWidget {
           icon: option.icon,
           title: option.title,
           path: option.page,
+          backgroundColor: Colors.teal,
+          left: true,
         ),
       ),
     );
