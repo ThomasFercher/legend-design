@@ -12,14 +12,18 @@ class SizeProvider extends InheritedWidget {
     required this.width,
     required this.height,
   }) : super(child: child) {
-    if (width < 400) {
-      screenSize = ScreenSize.Small;
+    screenSize = getScreenSizeFromWidth(width);
+  }
+
+  static ScreenSize getScreenSizeFromWidth(double width) {
+    if (width < 480) {
+      return ScreenSize.Small;
     } else if (width < 960) {
-      screenSize = ScreenSize.Medium;
+      return ScreenSize.Medium;
     } else if (width < 1200) {
-      screenSize = ScreenSize.Large;
+      return ScreenSize.Large;
     } else {
-      screenSize = ScreenSize.XXL;
+      return ScreenSize.XXL;
     }
   }
 

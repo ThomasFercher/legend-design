@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../styles/themeProvider.dart';
+import '../styles/legendTheme.dart';
 
 class FixedFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = ThemeProvider.of(context);
-
     return Hero(
       tag: ValueKey("footer"),
       child: Material(

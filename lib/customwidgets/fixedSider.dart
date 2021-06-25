@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'siderMenuVerticalTile.dart';
 import '../objects/menuOption.dart';
 import '../router/routerProvider.dart';
 import '../styles/layoutType.dart';
 import '../styles/sizeProvider.dart';
-import '../styles/themeProvider.dart';
+import '../styles/legendTheme.dart';
 
 import 'drawerMenuTile.dart';
 
@@ -30,7 +31,7 @@ class FixedSider extends StatelessWidget {
   }
 
   Widget sider(BuildContext context) {
-    ThemeProvider theme = ThemeProvider.of(context);
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
     List<DrawerMenuTile> tiles = List.of(
       options.map(
@@ -47,7 +48,7 @@ class FixedSider extends StatelessWidget {
     return Container(
       width: 200,
       height: MediaQuery.of(context).size.height,
-      color: theme.primaryColor,
+      color: theme.colors.primaryColor,
       child: Column(
         children: [
           Container(
@@ -66,7 +67,7 @@ class FixedSider extends StatelessWidget {
   }
 
   Widget collapsedSider(BuildContext context) {
-    ThemeProvider theme = ThemeProvider.of(context);
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
     List<SiderMenuVerticalTile> tiles = List.of(
       options.map(
@@ -80,7 +81,7 @@ class FixedSider extends StatelessWidget {
     return Container(
       width: 80,
       height: MediaQuery.of(context).size.height,
-      color: theme.primaryColor,
+      color: theme.colors.primaryColor,
       child: Column(
         children: [
           ListView(

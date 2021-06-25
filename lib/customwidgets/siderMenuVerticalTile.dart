@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/themeProvider.dart';
+import 'package:webstore/styles/legendTheme.dart';
 import 'package:webstore/styles/typography.dart';
 import '../router/routerProvider.dart';
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/themeProvider.dart';
+import 'package:webstore/styles/legendTheme.dart';
 import 'package:webstore/styles/typography.dart';
 import '../router/routerProvider.dart';
 
@@ -68,8 +69,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = ThemeProvider.of(context);
-
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     return Container(
       margin: const EdgeInsets.only(left: 32.0),
       decoration: BoxDecoration(
@@ -86,7 +86,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
           ),
         ),
       ),
-      height: theme.appbarHeight,
+      height: theme.sizing.appbarHeight,
       child: InkWell(
         onHover: (value) {
           if (value && !_isClicked) {
@@ -120,7 +120,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               Icon(
                 widget.icon,
                 color: color,
-                size: theme.appbarHeight / 3,
+                size: theme.sizing.appbarHeight / 3,
               ),
               Padding(padding: const EdgeInsets.symmetric(horizontal: 4.0)),
               Padding(
@@ -129,7 +129,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
                   text: widget.title,
                   selectable: false,
                   textStyle: LegendTextStyle.h1().copyWith(
-                    fontSize: theme.appbarHeight / 4.5,
+                    fontSize: theme.sizing.appbarHeight / 4.5,
                     color: color,
                   ),
                 ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'legendButton/buttonStyle.dart';
 import 'legendButton/legendButton.dart';
 import 'typography/legendText.dart';
 import '../styles/layoutType.dart';
 import '../styles/sizeProvider.dart';
-import '../styles/themeProvider.dart';
+import '../styles/legendTheme.dart';
 import '../styles/typography.dart';
 
 class LegendBottomSheet extends StatelessWidget {
@@ -24,8 +25,8 @@ class LegendBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = ThemeProvider.of(context);
     SizeProvider ss = SizeProvider.of(context);
+    LegendTheme theme = Provider.of<LegendTheme>(context);
 
     double width;
 
@@ -51,7 +52,7 @@ class LegendBottomSheet extends StatelessWidget {
           elevation: 10.0,
           margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
-            borderRadius: theme.borderRadius.copyWith(
+            borderRadius: theme.sizing.borderRadius.copyWith(
               bottomLeft: Radius.zero,
               bottomRight: Radius.zero,
             ),
@@ -61,10 +62,10 @@ class LegendBottomSheet extends StatelessWidget {
               children: [
                 Container(
                   padding: EdgeInsets.only(
-                    top: theme.borderRadius.topLeft.x / 2,
-                    bottom: theme.borderRadius.topLeft.x / 2,
-                    right: theme.borderRadius.topLeft.x / 2,
-                    left: theme.borderRadius.topLeft.x,
+                    top: theme.sizing.borderRadius.topLeft.x / 2,
+                    bottom: theme.sizing.borderRadius.topLeft.x / 2,
+                    right: theme.sizing.borderRadius.topLeft.x / 2,
+                    left: theme.sizing.borderRadius.topLeft.x,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,17 +89,17 @@ class LegendBottomSheet extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.symmetric(
-                      horizontal: theme.borderRadius.topLeft.x,
+                      horizontal: theme.sizing.borderRadius.topLeft.x,
                     ),
                     child: content,
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    top: theme.borderRadius.topLeft.x / 2,
-                    bottom: theme.borderRadius.topLeft.x / 2,
-                    right: theme.borderRadius.topLeft.x / 2,
-                    left: theme.borderRadius.topLeft.x,
+                    top: theme.sizing.borderRadius.topLeft.x / 2,
+                    bottom: theme.sizing.borderRadius.topLeft.x / 2,
+                    right: theme.sizing.borderRadius.topLeft.x / 2,
+                    left: theme.sizing.borderRadius.topLeft.x,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

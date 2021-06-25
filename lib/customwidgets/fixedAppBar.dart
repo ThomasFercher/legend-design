@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import '../objects/menuOption.dart';
 import '../router/routerProvider.dart';
 import '../styles/layoutType.dart';
 import '../styles/sizeProvider.dart';
-import '../styles/themeProvider.dart';
+import '../styles/legendTheme.dart';
 
 class FixedAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = ThemeProvider.of(context);
-
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     return SliverAppBar(
-      backgroundColor: theme.primaryColor,
+      backgroundColor: theme.colors.primaryColor,
       leading: Hero(
         tag: ValueKey("appBarLeading"),
         child: Container(
@@ -26,9 +26,9 @@ class FixedAppBar extends StatelessWidget {
         tag: ValueKey("appBarTitle"),
         child: Material(color: Colors.transparent, child: menu(context)),
       ),
-      expandedHeight: theme.appbarHeight,
-      collapsedHeight: theme.appbarHeight,
-      toolbarHeight: theme.appbarHeight,
+      expandedHeight: theme.sizing.appbarHeight,
+      collapsedHeight: theme.sizing.appbarHeight,
+      toolbarHeight: theme.sizing.appbarHeight,
       pinned: true,
       automaticallyImplyLeading: false,
     );
@@ -37,7 +37,6 @@ class FixedAppBar extends StatelessWidget {
   Widget menu(BuildContext context) {
     List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
     ScreenSize screenSize = SizeProvider.of(context).screenSize;
-    ThemeProvider theme = ThemeProvider.of(context);
 
     if (screenSize != ScreenSize.Small) {
       return Container(
