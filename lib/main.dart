@@ -15,12 +15,7 @@ import 'styles/typography.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<LegendTheme>(create: (_) => LegendTheme()),
-      ],
-      child: MyApp(),
-    ),
+    MyApp(),
   );
 }
 
@@ -29,45 +24,50 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RouterProvider(
-      routerDelegate: routerDelegate,
-      routes: [
-        RouteInfo(
-          name: "/",
-          page: Home(),
-        ),
-        RouteInfo(
-          name: "/products",
-          page: ProductsPage(),
-        ),
-        RouteInfo(
-          name: "/about",
-          page: AboutPage(),
-        ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<LegendTheme>(create: (_) => LegendTheme()),
       ],
-      menuOptions: [
-        MenuOptionHeader(
-          title: "Home",
-          page: "/",
-          icon: Icons.home,
-        ),
-        MenuOptionHeader(
-          title: "Products",
-          page: "/products",
-          icon: Icons.accessibility,
-        ),
-        MenuOptionHeader(
-          title: "About",
-          page: "/about",
-          icon: Icons.info_sharp,
-        ),
-      ],
-      child: MaterialApp.router(
-        title: 'Flutter Webstore',
+      child: RouterProvider(
         routerDelegate: routerDelegate,
-        routeInformationParser: const MyRouteInformationParser(),
-        debugShowCheckedModeBanner: false,
-        backButtonDispatcher: RootBackButtonDispatcher(),
+        routes: [
+          RouteInfo(
+            name: "/",
+            page: Home(),
+          ),
+          RouteInfo(
+            name: "/products",
+            page: ProductsPage(),
+          ),
+          RouteInfo(
+            name: "/about",
+            page: AboutPage(),
+          ),
+        ],
+        menuOptions: [
+          MenuOptionHeader(
+            title: "Home",
+            page: "/",
+            icon: Icons.home,
+          ),
+          MenuOptionHeader(
+            title: "Products",
+            page: "/products",
+            icon: Icons.accessibility,
+          ),
+          MenuOptionHeader(
+            title: "About",
+            page: "/about",
+            icon: Icons.info_sharp,
+          ),
+        ],
+        child: MaterialApp.router(
+          title: 'Flutter Webstore',
+          routerDelegate: routerDelegate,
+          routeInformationParser: const MyRouteInformationParser(),
+          debugShowCheckedModeBanner: false,
+          backButtonDispatcher: RootBackButtonDispatcher(),
+        ),
       ),
     );
   }

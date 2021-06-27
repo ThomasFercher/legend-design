@@ -2,11 +2,13 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/modals/legendAlert.dart';
+import 'package:webstore/customwidgets/modals/legendPopups.dart';
 import 'package:webstore/styles/legendTheme.dart';
 import '../customwidgets/legendBottomSheet.dart';
 import '../customwidgets/legendButton/legendButton.dart';
 import '../customwidgets/legendScaffold.dart';
-import '../customwidgets/modal.dart';
+import '../customwidgets/modals/modal.dart';
 import '../customwidgets/typography/legendText.dart';
 import '../styles/layoutType.dart';
 import '../styles/typography.dart';
@@ -36,6 +38,17 @@ class Home extends StatelessWidget {
               },
             ),
             LegendButton(
+              text: Text("Change Theme to Light"),
+              onPressed: () {
+                LegendPopups.showAlert(
+                  context: context,
+                  alert: LegendAlert.success(
+                    message: "Ja geschafft",
+                  ),
+                );
+              },
+            ),
+            LegendButton(
               text: Text("Show Modal Bottom"),
               onPressed: () => {
                 Scaffold.of(context).showBottomSheet(
@@ -61,21 +74,12 @@ class Home extends StatelessWidget {
       layoutType: LayoutType.FixedHeader,
       pageName: "Home",
       onActionButtonPressed: (context) {
-        showModal(
+        LegendPopups.showLegendModal(
           context: context,
-          builder: (context) {
-            return Modal(
-              content: Text("test"),
-              height: 600,
-              width: 400,
-              onCancle: () {},
-              onConfirm: () {},
-            );
-          },
-          configuration: FadeScaleTransitionConfiguration(
-            transitionDuration: Duration(milliseconds: 250),
-            barrierDismissible: true,
-            reverseTransitionDuration: Duration(milliseconds: 250),
+          modal: Modal(
+            content: Text("test"),
+            onConfirm: () => {},
+            onCancle: () => {},
           ),
         );
       },

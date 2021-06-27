@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'fixedFooter.dart';
 import 'fixedSider.dart';
 import 'legendBottomSheet.dart';
-import 'modal.dart';
+import 'modals/modal.dart';
 import 'typography/legendText.dart';
 import '../objects/menuOption.dart';
 import '../router/routerProvider.dart';

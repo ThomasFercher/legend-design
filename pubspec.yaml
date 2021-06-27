@@ -26,6 +26,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   animations: ^2.0.0
   provider: ^5.0.0
+  rive: ^0.7.22
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +37,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+
+  assets:
+    - assets/
+    - assets/flares/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
