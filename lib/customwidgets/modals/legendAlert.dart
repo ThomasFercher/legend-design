@@ -1,44 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
+import 'package:webstore/customwidgets/legendButton/buttonStyle.dart';
+import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/objects/assetInfo.dart';
+import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/typography.dart';
 
 class LegendAlert extends StatelessWidget {
   String? message;
+  String? buttonMessage;
   Widget? icon;
   IconData? iconData;
+  Function? onConfirm;
+  ButtonStyle? buttonStyle;
 
   LegendAlert({
     this.message,
+    this.buttonMessage,
     this.icon,
     this.iconData,
+    this.onConfirm,
+    this.buttonStyle,
   });
 
   LegendAlert.success({this.message}) {
     icon = flareIcon(AssetInfo.successAlert);
+    buttonStyle = LegendButtonStyle.confirm().style;
   }
 
   LegendAlert.info({this.message}) {
     icon = flareIcon(AssetInfo.successAlert);
+    buttonStyle = LegendButtonStyle.normal().style;
   }
 
   LegendAlert.danger({this.message}) {
     icon = flareIcon(AssetInfo.successAlert);
+    buttonStyle = LegendButtonStyle.danger().style;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 280,
-      width: 400,
-      child: icon == null ? Icon(iconData) : icon,
+    LegendTheme theme = Provider.of<LegendTheme>(context);
+    double height = 140.0;
+
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: Card(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: theme.sizing.borderRadius,
+            ),
+            child: Container(
+              height: height,
+              width: height * 18 / 9,
+              padding: EdgeInsets.all(
+                theme.sizing.borderRadius.bottomLeft.x / 2,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: icon ?? Icon(iconData),
+                    flex: 1,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: LegendText(
+                          text: message ?? "No Message",
+                          textStyle: LegendTextStyle.h5(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: LegendButton(
+                      text: LegendText(
+                        text: buttonMessage ?? "OK",
+                        textStyle: LegendTextStyle.h5(),
+                      ),
+                      onPressed: () {
+                        onConfirm?.call();
+                        Navigator.of(context).pop();
+                      },
+                      style: buttonStyle ?? LegendButtonStyle.normal().style,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
   Widget flareIcon(String flarePath) {
     return RiveAnimation.asset(
       flarePath,
-      fit: BoxFit.scaleDown,
+      fit: BoxFit.fitWidth,
     );
   }
 

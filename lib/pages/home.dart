@@ -38,12 +38,12 @@ class Home extends StatelessWidget {
               },
             ),
             LegendButton(
-              text: Text("Change Theme to Light"),
+              text: Text("Show Success Alert"),
               onPressed: () {
                 LegendPopups.showAlert(
                   context: context,
                   alert: LegendAlert.success(
-                    message: "Ja geschafft",
+                    message: "Ja geschafft du verdammta Trottlwichsa!",
                   ),
                 );
               },
