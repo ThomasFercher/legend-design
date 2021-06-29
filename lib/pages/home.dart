@@ -80,6 +80,8 @@ class Home extends StatelessWidget {
             content: Text("test"),
             onConfirm: () => {},
             onCancle: () => {},
+            height: 400,
+            width: 400,
           ),
         );
       },
