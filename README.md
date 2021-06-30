@@ -1,16 +1,26 @@
 # webstore
 
-A new Flutter project.
+A sample Project using the Legend Design Kit. 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Layouts
+The LegendScaffold which is the base for each page can be used with three different Layout Types.
 
-A few resources to get you started if this is your first Flutter project:
+### FixedHeader
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### FixedHeaderSider
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### FixedSider
+
+
+## Colors
+For the Color schema the object LegendColorTheme is used.
+
+## Sizing
+For Sizing Widgets the object LegendSizingTheme is used.
+
+## Routing
+
+
+
