@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
-import '../customwidgets/legendScaffold.dart';
+import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
 
 class AboutPage extends StatelessWidget {
