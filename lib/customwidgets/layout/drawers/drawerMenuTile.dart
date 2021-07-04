@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webstore/styles/typography.dart';
-import '../router/routerProvider.dart';
-import 'typography/legendText.dart';
+import '../../../router/routerProvider.dart';
+import '../../typography/legendText.dart';
 
 class DrawerMenuTile extends StatefulWidget {
   final IconData icon;

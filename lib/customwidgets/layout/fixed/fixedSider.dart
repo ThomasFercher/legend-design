@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'siderMenuVerticalTile.dart';
-import '../objects/menuOption.dart';
-import '../router/routerProvider.dart';
-import '../styles/layoutType.dart';
-import '../styles/sizeProvider.dart';
-import '../styles/legendTheme.dart';
+import '../drawers/siderMenuVerticalTile.dart';
+import '../../../objects/menuOption.dart';
+import '../../../router/routerProvider.dart';
+import '../../../styles/layoutType.dart';
+import '../../../styles/sizeProvider.dart';
+import '../../../styles/legendTheme.dart';
 
-import 'drawerMenuTile.dart';
+import '../drawers/drawerMenuTile.dart';
 
 class FixedSider extends StatelessWidget {
   final bool? showMenu;

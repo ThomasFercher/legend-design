@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'legendButton/buttonStyle.dart';
-import 'legendButton/legendButton.dart';
-import 'typography/legendText.dart';
-import '../styles/layoutType.dart';
-import '../styles/sizeProvider.dart';
-import '../styles/legendTheme.dart';
-import '../styles/typography.dart';
+import '../legendButton/buttonStyle.dart';
+import '../legendButton/legendButton.dart';
+import '../typography/legendText.dart';
+import '../../styles/layoutType.dart';
+import '../../styles/sizeProvider.dart';
+import '../../styles/legendTheme.dart';
+import '../../styles/typography.dart';
 
 class LegendBottomSheet extends StatelessWidget {
   final String title;

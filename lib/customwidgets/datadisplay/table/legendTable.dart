@@ -23,8 +23,8 @@ class LegendTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var h;
-    var w;
+    double h = 0;
+    double w = 0;
 
     return Container(
       child: LayoutBuilder(builder: (context, constraints) {
