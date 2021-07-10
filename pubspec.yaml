@@ -28,6 +28,7 @@ dependencies:
   provider: ^5.0.0
   rive: ^0.7.22
   lint: ^1.5.3
+  flutter_syntax_view: ^4.0.0
 
 dev_dependencies:
   flutter_test:

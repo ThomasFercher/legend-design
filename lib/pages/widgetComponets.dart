@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
@@ -71,6 +72,19 @@ class WidgetComponents extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  Container(
+                    height: 200,
+                    child: SyntaxView(
+                      code:
+                          "LegendButton(\n margin: EdgeInsets.all(16),\n                        text: LegendText(text: \"Gradient\"),\n                        onPressed: () => {},\n                        style: LegendButtonStyle.gradient(\n                          [\n                            Colors.red[200]!,\n                            Colors.redAccent,\n                          ],\n                        ),\n                      ),",
+                      syntax: Syntax.DART,
+                      syntaxTheme: SyntaxTheme.standard(),
+                      fontSize: 18.0,
+                      withZoom: false,
+                      withLinesCount: false,
+                      expanded: false,
+                    ),
                   ),
                 ],
               ),
