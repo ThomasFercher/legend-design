@@ -14,7 +14,7 @@ class LegendAlert extends StatelessWidget {
   Widget? icon;
   IconData? iconData;
   Function? onConfirm;
-  ButtonStyle? buttonStyle;
+  LegendButtonStyle? buttonStyle;
 
   LegendAlert({
     this.message,

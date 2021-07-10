@@ -136,6 +136,9 @@ class LegendScaffold extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: LayoutBuilder(builder: (context, constraints) {
                     return Container(
+                      constraints: BoxConstraints(
+                        minHeight: MediaQuery.of(context).size.height - 80,
+                      ),
                       color: Colors.black12,
                       padding: contentPadding,
                       child: Column(

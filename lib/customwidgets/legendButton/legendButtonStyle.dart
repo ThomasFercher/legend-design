@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:webstore/styles/legendTheme.dart';
 
 /*
 LegendButtonStyle has all the same Properties as ButtonStyle.
@@ -10,6 +12,13 @@ There are factory constructors which give a few prebuilt ButtonStyles.
   Constant Values which will be used for the factory Constructors
 */
 const Duration legendAnimationDuration = Duration(milliseconds: 500);
+const Radius legendBorderRadius = Radius.circular(20);
+BoxShadow legendBoxShadow = BoxShadow(
+  color: Colors.pink.withOpacity(0.2),
+  spreadRadius: 4,
+  blurRadius: 10,
+  offset: Offset(0, 3),
+);
 
 class LegendButtonStyle extends ButtonStyle {
   final MaterialStateProperty<TextStyle?>? textStyle;
@@ -22,7 +31,6 @@ class LegendButtonStyle extends ButtonStyle {
   final MaterialStateProperty<Size?>? minimumSize;
   final MaterialStateProperty<Size?>? fixedSize;
   final MaterialStateProperty<BorderSide?>? side;
-  final MaterialStateProperty<OutlinedBorder?>? shape;
   final MaterialStateProperty<MouseCursor?>? mouseCursor;
   final VisualDensity? visualDensity;
   final MaterialTapTargetSize? tapTargetSize;
@@ -30,6 +38,9 @@ class LegendButtonStyle extends ButtonStyle {
   final bool? enableFeedback;
   final AlignmentGeometry? alignment;
   final InteractiveInkFeatureFactory? splashFactory;
+  final Radius? borderRadius;
+  final Gradient? backgroundGradient;
+  final BoxShadow? boxShadow;
 
   LegendButtonStyle({
     this.textStyle,
@@ -42,7 +53,6 @@ class LegendButtonStyle extends ButtonStyle {
     this.minimumSize,
     this.fixedSize,
     this.side,
-    this.shape,
     this.mouseCursor,
     this.visualDensity,
     this.tapTargetSize,
@@ -50,6 +60,9 @@ class LegendButtonStyle extends ButtonStyle {
     this.enableFeedback,
     this.alignment,
     this.splashFactory,
+    this.borderRadius,
+    this.backgroundGradient,
+    this.boxShadow,
   }) : super(
           alignment: alignment,
           animationDuration: animationDuration,
@@ -63,13 +76,47 @@ class LegendButtonStyle extends ButtonStyle {
           overlayColor: overlayColor,
           padding: padding,
           shadowColor: shadowColor,
-          shape: shape,
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                borderRadius ?? Radius.zero,
+              ),
+            ),
+          ),
           side: side,
           splashFactory: splashFactory,
           tapTargetSize: tapTargetSize,
           textStyle: textStyle,
           visualDensity: visualDensity,
         );
+
+  factory LegendButtonStyle.gradient(List<Color> colors) {
+    return LegendButtonStyle(
+      backgroundColor: MaterialStateProperty.resolveWith(
+        (states) {
+          return Colors.transparent;
+        },
+      ),
+      foregroundColor: MaterialStateProperty.all(Colors.white),
+      animationDuration: legendAnimationDuration,
+      borderRadius: legendBorderRadius,
+      minimumSize: MaterialStateProperty.all(Size.zero),
+      backgroundGradient: LinearGradient(
+        colors: colors,
+      ),
+      elevation: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.hovered)) {
+          return 4.0;
+        } else {
+          return 0;
+        }
+      }),
+      shadowColor: MaterialStateProperty.all(
+        legendBoxShadow.color.withOpacity(0.4),
+      ),
+      boxShadow: legendBoxShadow,
+    );
+  }
 
   factory LegendButtonStyle.danger() {
     return LegendButtonStyle(
@@ -109,6 +156,7 @@ class LegendButtonStyle extends ButtonStyle {
           }
         },
       ),
+      borderRadius: legendBorderRadius,
     );
   }
 
@@ -126,13 +174,7 @@ class LegendButtonStyle extends ButtonStyle {
           }
         },
       ),
-      shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(4),
-          ),
-        ),
-      ),
+      borderRadius: Radius.circular(4),
       side: MaterialStateProperty.resolveWith(
         (states) {
           if (states.contains(MaterialState.hovered)) {
