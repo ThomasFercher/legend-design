@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 
 import 'objects/menuOption.dart';
-import 'pages/about.dart';
+import 'pages/widgetComponets.dart';
 import 'pages/home.dart';
 import 'pages/products.dart';
 import 'router/delegate.dart';
@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
             page: ProductsPage(),
           ),
           RouteInfo(
-            name: "/about",
-            page: AboutPage(),
+            name: "/widgetcomponents",
+            page: WidgetComponents(),
           ),
         ],
         menuOptions: [
@@ -56,13 +56,13 @@ class MyApp extends StatelessWidget {
             icon: Icons.accessibility,
           ),
           MenuOptionHeader(
-            title: "About",
-            page: "/about",
+            title: "Widget Components",
+            page: "/widgetcomponents",
             icon: Icons.info_sharp,
           ),
         ],
         child: MaterialApp.router(
-          title: 'Flutter Webstore',
+          title: 'Legend Design',
           routerDelegate: routerDelegate,
           routeInformationParser: const MyRouteInformationParser(),
           debugShowCheckedModeBanner: false,

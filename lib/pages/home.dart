@@ -54,6 +54,7 @@ class Home extends StatelessWidget {
             ),
             LegendButton(
               text: Text("Show Modal Bottom"),
+              width: 200,
               onPressed: () => {
                 Scaffold.of(context).showBottomSheet(
                   (context) {

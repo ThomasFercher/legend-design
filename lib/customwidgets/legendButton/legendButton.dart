@@ -7,6 +7,7 @@ class LegendButton extends StatelessWidget {
   final Function onPressed;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
+  final double? width;
 
   const LegendButton({
     Key? key,
@@ -15,6 +16,7 @@ class LegendButton extends StatelessWidget {
     required this.onPressed,
     this.margin,
     this.padding,
+    this.width,
   }) : super(key: key);
 
   @override
@@ -24,11 +26,13 @@ class LegendButton extends StatelessWidget {
       child: TextButton(
         onPressed: () => onPressed(),
         child: Container(
+          width: width,
           padding: padding ??
               const EdgeInsets.symmetric(
                 vertical: 8.0,
                 horizontal: 16.0,
               ),
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.all(style?.borderRadius ?? Radius.circular(0)),

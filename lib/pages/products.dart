@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
+import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
+import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
@@ -27,7 +30,31 @@ class ProductsPage extends StatelessWidget {
                     Colors.redAccent,
                   ],
                 ),
-              )
+              ),
+              LegendTable(
+                columnTypes: [
+                  LegendTableValueType.TEXT,
+                  LegendTableValueType.TEXT,
+                  LegendTableValueType.ACTION,
+                ],
+                values: [
+                  LegendRowValue(
+                      fields: ["test", "tata", "delete"],
+                      actionFunction: () {
+                        print("hello");
+                      }),
+                  LegendRowValue(
+                      fields: ["test", "tata", "delete"],
+                      actionFunction: () {
+                        print("hello");
+                      }),
+                  LegendRowValue(
+                      fields: ["test", "tata", "delete"],
+                      actionFunction: () {
+                        print("hello");
+                      }),
+                ],
+              ),
             ],
           ),
         );
