@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
-import 'package:webstore/customwidgets/legendButton/buttonStyle.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
+import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 import 'package:webstore/styles/typography.dart';
@@ -23,8 +23,8 @@ class LegendTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var h;
-    var w;
+    double h = 0;
+    double w = 0;
 
     return Container(
       child: LayoutBuilder(builder: (context, constraints) {
@@ -82,7 +82,7 @@ class LegendTable extends StatelessWidget {
           case LegendTableValueType.ACTION:
             cell = LegendTableCell.action(
               button: LegendButton(
-                style: LegendButtonStyle.danger().style,
+                style: LegendButtonStyle.danger(),
                 text: Text(
                   val.toString(),
                 ),

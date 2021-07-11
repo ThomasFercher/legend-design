@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
-import 'package:webstore/customwidgets/legendButton/buttonStyle.dart';
+import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/objects/assetInfo.dart';
@@ -14,7 +14,7 @@ class LegendAlert extends StatelessWidget {
   Widget? icon;
   IconData? iconData;
   Function? onConfirm;
-  ButtonStyle? buttonStyle;
+  LegendButtonStyle? buttonStyle;
 
   LegendAlert({
     this.message,
@@ -27,17 +27,17 @@ class LegendAlert extends StatelessWidget {
 
   LegendAlert.success({this.message}) {
     icon = flareIcon(AssetInfo.successAlert);
-    buttonStyle = LegendButtonStyle.confirm().style;
+    buttonStyle = LegendButtonStyle.confirm();
   }
 
   LegendAlert.info({this.message}) {
     icon = flareIcon(AssetInfo.successAlert);
-    buttonStyle = LegendButtonStyle.normal().style;
+    buttonStyle = LegendButtonStyle.normal();
   }
 
   LegendAlert.danger({this.message}) {
     icon = flareIcon(AssetInfo.successAlert);
-    buttonStyle = LegendButtonStyle.danger().style;
+    buttonStyle = LegendButtonStyle.danger();
   }
 
   @override
@@ -90,7 +90,7 @@ class LegendAlert extends StatelessWidget {
                         onConfirm?.call();
                         Navigator.of(context).pop();
                       },
-                      style: buttonStyle ?? LegendButtonStyle.normal().style,
+                      style: buttonStyle ?? LegendButtonStyle.normal(),
                     ),
                   ),
                 ],

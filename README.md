@@ -1,16 +1,30 @@
-# webstore
+# Legend Design Template
 
-A new Flutter project.
+A sample Project using the Legend Design Kit. This aims to be a Template for every Platform. 
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Layouts
+The LegendScaffold which is the base for each page can be used with three different Layout Types.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### FixedHeader
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### FixedHeaderSider
+
+### FixedSider
+
+
+## Theming
+The *LegendColorTheme* and *LegendSizingTheme* are provided through the *LegendTheme* class to the whole Application using Provider. This way the theme can be changed at runtime. 
+
+### Colors
+For the Color schema the object *LegendColorTheme* is used. Here all Colors can specified. Different Themes can be implemented very fast just with adding a new b Object to the *LegendTheme* class. 
+
+### Sizing
+For Sizing Widgets the object *LegendSizingTheme* is used. Values for Paddings, Margins, Font Size and TouchSize can be specific to each Platform. For Example for the Mobile and Desktop / Web Platforms.
+
+## Routing
+Custom Routing using the Navigator 2.0 API which supports Web. *RouterProvider* provides static Methods for pushing Pages. It gets initalized with your List of prefered Routes (*RouteInfo* Object) and MenuOptions (*MenuOptionHeader* Object). The Layout components *FixedSider* and *FixedHeader* will display these MenuOptions accordingly to your selected Layout.
+
+
+

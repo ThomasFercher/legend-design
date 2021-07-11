@@ -104,11 +104,11 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.h6() {
     return LegendTextStyle(
-      textColor: Colors.black87,
+      textColor: Colors.white,
       backgroundColor: Colors.transparent,
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
-      fontFamily: "sans serif",
+      fontSize: 24.0,
+      fontWeight: FontWeight.w300,
+      fontFamily: "Roboto",
     );
   }
 
@@ -118,6 +118,16 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.white,
       fontSize: 12,
       fontWeight: FontWeight.w600,
+      fontFamily: "sans serif",
+    );
+  }
+
+  factory LegendTextStyle.sectionHeader() {
+    return LegendTextStyle(
+      textColor: Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 24.0,
+      fontWeight: FontWeight.w400,
       fontFamily: "sans serif",
     );
   }

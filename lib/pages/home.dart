@@ -2,12 +2,13 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/modals/legendAlert.dart';
 import 'package:webstore/customwidgets/modals/legendPopups.dart';
 import 'package:webstore/styles/legendTheme.dart';
-import '../customwidgets/legendBottomSheet.dart';
+import '../customwidgets/modals/legendBottomSheet.dart';
 import '../customwidgets/legendButton/legendButton.dart';
-import '../customwidgets/legendScaffold.dart';
+import '../customwidgets/layout/legendScaffold.dart';
 import '../customwidgets/modals/modal.dart';
 import '../customwidgets/typography/legendText.dart';
 import '../styles/layoutType.dart';
@@ -29,6 +30,7 @@ class Home extends StatelessWidget {
                 Provider.of<LegendTheme>(context, listen: false)
                     .changeColorTheme(LegendColorThemeType.DARK);
               },
+              style: LegendButtonStyle.confirm(),
             ),
             LegendButton(
               text: Text("Change Theme to Light"),
@@ -36,6 +38,7 @@ class Home extends StatelessWidget {
                 Provider.of<LegendTheme>(context, listen: false)
                     .changeColorTheme(LegendColorThemeType.LIGHT);
               },
+              style: LegendButtonStyle.confirm(),
             ),
             LegendButton(
               text: Text("Show Success Alert"),
@@ -47,9 +50,11 @@ class Home extends StatelessWidget {
                   ),
                 );
               },
+              style: LegendButtonStyle.confirm(),
             ),
             LegendButton(
               text: Text("Show Modal Bottom"),
+              width: 200,
               onPressed: () => {
                 Scaffold.of(context).showBottomSheet(
                   (context) {
@@ -67,6 +72,7 @@ class Home extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                 ),
               },
+              style: LegendButtonStyle.confirm(),
             )
           ],
         );
@@ -80,6 +86,8 @@ class Home extends StatelessWidget {
             content: Text("test"),
             onConfirm: () => {},
             onCancle: () => {},
+            height: 400,
+            width: 400,
           ),
         );
       },

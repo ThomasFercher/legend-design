@@ -3,19 +3,19 @@ import 'dart:io';
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'drawerMenu.dart';
-import 'fixedAppBar.dart';
+import 'drawers/drawerMenu.dart';
+import 'fixed/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'fixedFooter.dart';
-import 'fixedSider.dart';
-import 'legendBottomSheet.dart';
-import 'modals/modal.dart';
-import 'typography/legendText.dart';
-import '../objects/menuOption.dart';
-import '../router/routerProvider.dart';
-import '../styles/layoutType.dart';
-import '../styles/sizeProvider.dart';
-import '../styles/typography.dart';
+import 'fixed/fixedFooter.dart';
+import 'fixed/fixedSider.dart';
+import '../modals/legendBottomSheet.dart';
+import '../modals/modal.dart';
+import '../typography/legendText.dart';
+import '../../objects/menuOption.dart';
+import '../../router/routerProvider.dart';
+import '../../styles/layoutType.dart';
+import '../../styles/sizeProvider.dart';
+import '../../styles/typography.dart';
 
 class LegendScaffold extends StatelessWidget {
   final LayoutType? layoutType;
@@ -136,6 +136,9 @@ class LegendScaffold extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: LayoutBuilder(builder: (context, constraints) {
                     return Container(
+                      constraints: BoxConstraints(
+                        minHeight: MediaQuery.of(context).size.height - 80,
+                      ),
                       color: Colors.black12,
                       padding: contentPadding,
                       child: Column(

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../styles/legendTheme.dart';
+import '../../../styles/legendTheme.dart';
 
 class FixedFooter extends StatelessWidget {
   @override
