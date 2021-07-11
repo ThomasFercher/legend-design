@@ -9,6 +9,10 @@ import 'package:webstore/customwidgets/layout/grid/legendGrid.dart';
 import 'package:webstore/customwidgets/layout/sections/section.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
+import 'package:webstore/customwidgets/modals/legendAlert.dart';
+import 'package:webstore/customwidgets/modals/legendBottomSheet.dart';
+import 'package:webstore/customwidgets/modals/legendPopups.dart';
+import 'package:webstore/customwidgets/modals/modal.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/typography.dart';
 import '../customwidgets/layout/legendScaffold.dart';
@@ -23,6 +27,7 @@ class WidgetComponents extends StatelessWidget {
           child: Column(
             children: [
               Section(
+                verticalSpacing: 8,
                 header: "Buttons",
                 children: [
                   LegendText(
@@ -30,10 +35,10 @@ class WidgetComponents extends StatelessWidget {
                           "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. "),
                   LegendGrid(
                     sizes: LegendGridSize(
-                      small: LegendGridSizeInfo(1, 320),
-                      medium: LegendGridSizeInfo(3, 160),
-                      large: LegendGridSizeInfo(4, 80),
-                      xxl: LegendGridSizeInfo(4, 80),
+                      small: LegendGridSizeInfo(1, 128),
+                      medium: LegendGridSizeInfo(3, 128),
+                      large: LegendGridSizeInfo(4, 64),
+                      xxl: LegendGridSizeInfo(4, 64),
                     ),
                     children: [
                       LegendButton(
@@ -58,10 +63,12 @@ class WidgetComponents extends StatelessWidget {
                           text: "Info",
                         ),
                         onPressed: () => {},
-                        style: LegendButtonStyle.normal(),
+                        style: LegendButtonStyle.normal(
+                            // height: 48,
+                            ),
                       ),
                       LegendButton(
-                        margin: EdgeInsets.all(16),
+                        //  margin: EdgeInsets.all(16),
                         text: LegendText(text: "Gradient"),
                         onPressed: () => {},
                         style: LegendButtonStyle.gradient(
@@ -69,6 +76,7 @@ class WidgetComponents extends StatelessWidget {
                             Colors.red[200]!,
                             Colors.redAccent,
                           ],
+                          width: 100,
                         ),
                       ),
                     ],
@@ -85,6 +93,78 @@ class WidgetComponents extends StatelessWidget {
                       withLinesCount: false,
                       expanded: false,
                     ),
+                  ),
+                ],
+              ),
+              Section(
+                header: "Modals",
+                verticalSpacing: 12,
+                children: [
+                  LegendText(
+                    text:
+                        "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. ",
+                  ),
+                  LegendGrid(
+                    sizes: LegendGridSize(
+                      small: LegendGridSizeInfo(1, 48),
+                      medium: LegendGridSizeInfo(3, 48),
+                      large: LegendGridSizeInfo(4, 48),
+                      xxl: LegendGridSizeInfo(4, 48),
+                    ),
+                    children: [
+                      LegendButton(
+                        text: Text("Show Success Alert"),
+                        margin: EdgeInsets.all(16.0),
+                        onPressed: () {
+                          LegendPopups.showAlert(
+                            context: context,
+                            alert: LegendAlert.success(
+                              message:
+                                  "Ja geschafft du verdammta Trottlwichsa!",
+                            ),
+                          );
+                        },
+                        style: LegendButtonStyle.normal(),
+                      ),
+                      LegendButton(
+                        text: Text("Show Modal Bottom"),
+                        onPressed: () => {
+                          Scaffold.of(context).showBottomSheet(
+                            (context) {
+                              return LegendBottomSheet(
+                                title: "Cookies",
+                                onCancel: () {},
+                                onConfirm: () {},
+                                content: LegendText(
+                                  text:
+                                      "Bitte aktzeptieren Sie unsere Cookies! LIT",
+                                  textStyle: LegendTextStyle.h5(),
+                                ),
+                              );
+                            },
+                            backgroundColor: Colors.transparent,
+                            clipBehavior: Clip.antiAlias,
+                          ),
+                        },
+                        style: LegendButtonStyle.normal(),
+                      ),
+                      LegendButton(
+                        text: Text("Show Modal"),
+                        onPressed: () => {
+                          LegendPopups.showLegendModal(
+                            context: context,
+                            modal: Modal(
+                              content: Text("test"),
+                              onConfirm: () => {},
+                              onCancle: () => {},
+                              height: 400,
+                              width: 400,
+                            ),
+                          ),
+                        },
+                        style: LegendButtonStyle.normal(),
+                      )
+                    ],
                   ),
                 ],
               ),

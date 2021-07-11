@@ -30,12 +30,12 @@ class LegendTypography {
 }
 
 class LegendTextStyle extends TextStyle {
-  final TextStyle? style;
   final Color textColor;
   final Color backgroundColor;
   final double fontSize;
   final FontWeight fontWeight;
   final String fontFamily;
+  final double? height;
 
   LegendTextStyle({
     required this.textColor,
@@ -43,7 +43,7 @@ class LegendTextStyle extends TextStyle {
     required this.fontSize,
     required this.fontWeight,
     required this.fontFamily,
-    this.style,
+    this.height,
   }) : super(
           color: textColor,
           backgroundColor: backgroundColor,

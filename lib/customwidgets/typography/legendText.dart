@@ -15,6 +15,7 @@ class LegendText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: textStyle?.height,
       child: kIsWeb && (selectable ?? true) ? webText() : normalText(),
     );
   }

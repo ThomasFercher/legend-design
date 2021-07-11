@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/legendTheme.dart';
 import 'drawers/drawerMenu.dart';
 import 'fixed/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -111,6 +114,8 @@ class LegendScaffold extends StatelessWidget {
     var whitespace = 16 * 2 + 10;
     var footerHeight = 200;
 
+    LegendColorTheme colors = Provider.of<LegendTheme>(context).colors;
+
     return Scaffold(
       endDrawer: getDrawer(context),
       endDrawerEnableOpenDragGesture: false,
@@ -139,7 +144,7 @@ class LegendScaffold extends StatelessWidget {
                       constraints: BoxConstraints(
                         minHeight: MediaQuery.of(context).size.height - 80,
                       ),
-                      color: Colors.black12,
+                      color: colors.scaffoldBackgroundColor,
                       padding: contentPadding,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,7 +158,7 @@ class LegendScaffold extends StatelessWidget {
                                 const EdgeInsets.only(top: 8.0, bottom: 16.0),
                           ),
                           Container(
-                            color: Colors.white,
+                            //   color: colors,
                             //    height: 1000,
                             width: constraints.maxWidth -
                                 contentPadding.horizontal,
