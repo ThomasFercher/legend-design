@@ -12,8 +12,12 @@ import '../drawers/drawerMenuTile.dart';
 
 class FixedSider extends StatelessWidget {
   final bool? showMenu;
+  WidgetBuilder? builder;
 
-  FixedSider({this.showMenu});
+  FixedSider({
+    this.showMenu,
+    this.builder,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,49 +28,23 @@ class FixedSider extends StatelessWidget {
       child: Material(
         elevation: 20,
         child: screenSize != ScreenSize.Small
-            ? sider(context)
-            : collapsedSider(context),
+            ? Sider(showMenu: showMenu, builder: builder, context: context)
+            : CollapsedSider(context: context),
       ),
     );
   }
+}
 
-  Widget sider(BuildContext context) {
-    LegendTheme theme = Provider.of<LegendTheme>(context);
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
-    List<DrawerMenuTile> tiles = List.of(
-      options.map(
-        (option) => DrawerMenuTile(
-          icon: option.icon,
-          title: option.title,
-          path: option.page,
-          backgroundColor: Colors.teal,
-          left: true,
-        ),
-      ),
-    );
+class CollapsedSider extends StatelessWidget {
+  const CollapsedSider({
+    Key? key,
+    required this.context,
+  }) : super(key: key);
 
-    return Container(
-      width: 200,
-      height: MediaQuery.of(context).size.height,
-      color: theme.colors.primaryColor,
-      child: Column(
-        children: [
-          Container(
-            child: Placeholder(),
-            height: 100,
-          ),
-          showMenu ?? false
-              ? ListView(
-                  shrinkWrap: true,
-                  children: tiles,
-                )
-              : Container()
-        ],
-      ),
-    );
-  }
+  final BuildContext context;
 
-  Widget collapsedSider(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
     List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
     List<SiderMenuVerticalTile> tiles = List.of(
@@ -89,6 +67,67 @@ class FixedSider extends StatelessWidget {
             children: tiles,
           )
         ],
+      ),
+    );
+  }
+}
+
+class Sider extends StatelessWidget {
+  const Sider({
+    Key? key,
+    required this.showMenu,
+    required this.builder,
+    required this.context,
+  }) : super(key: key);
+
+  final bool? showMenu;
+  final WidgetBuilder? builder;
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    LegendTheme theme = Provider.of<LegendTheme>(context);
+    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
+    List<DrawerMenuTile> tiles = List.of(
+      options.map(
+        (option) => DrawerMenuTile(
+          icon: option.icon,
+          title: option.title,
+          path: option.page,
+          backgroundColor: Colors.teal,
+          left: true,
+        ),
+      ),
+    );
+
+    List<Widget> children = [
+      Container(
+        child: Placeholder(),
+        height: 100,
+      ),
+    ];
+
+    if (showMenu ?? false)
+      children.add(ListView(
+        shrinkWrap: true,
+        children: tiles,
+      ));
+
+    if (builder != null)
+      children.add(
+        Expanded(
+          child: Builder(
+            builder: builder!,
+          ),
+        ),
+      );
+
+    return Container(
+      width: 200,
+      height: MediaQuery.of(context).size.height,
+      color: theme.colors.primaryColor,
+      child: Column(
+        children: children,
       ),
     );
   }

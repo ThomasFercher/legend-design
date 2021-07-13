@@ -25,13 +25,17 @@ class LegendScaffold extends StatelessWidget {
   final String pageName;
   final Function(BuildContext context)? onActionButtonPressed;
   final WidgetBuilder contentBuilder;
+  WidgetBuilder? siderBuilder;
+  bool? showSiderMenu;
 
-  const LegendScaffold({
+  LegendScaffold({
     Key? key,
     this.layoutType,
     required this.pageName,
     this.onActionButtonPressed,
     required this.contentBuilder,
+    this.siderBuilder,
+    this.showSiderMenu,
   }) : super(key: key);
 
   @override
@@ -63,10 +67,13 @@ class LegendScaffold extends StatelessWidget {
     if (layoutType == LayoutType.FixedSider) {
       return FixedSider(
         showMenu: true,
+        builder: siderBuilder,
       );
     } else if (layoutType == LayoutType.FixedHeaderSider &&
         screenSize != ScreenSize.Small) {
-      return FixedSider();
+      return FixedSider(
+        builder: siderBuilder,
+      );
     } else {
       return Container();
     }

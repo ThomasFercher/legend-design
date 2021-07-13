@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
+import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
@@ -14,6 +15,7 @@ import 'package:webstore/customwidgets/modals/legendBottomSheet.dart';
 import 'package:webstore/customwidgets/modals/legendPopups.dart';
 import 'package:webstore/customwidgets/modals/modal.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
+import 'package:webstore/styles/legendTheme.dart';
 import 'package:webstore/styles/typography.dart';
 import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
@@ -22,6 +24,30 @@ class WidgetComponents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LegendScaffold(
+      siderBuilder: (context) {
+        return Container(
+          child: Column(
+            children: [
+              LegendButton(
+                text: Text("Change Theme to Dark"),
+                onPressed: () {
+                  Provider.of<LegendTheme>(context, listen: false)
+                      .changeColorTheme(LegendColorThemeType.DARK);
+                },
+                style: LegendButtonStyle.confirm().copyWith(),
+              ),
+              LegendButton(
+                text: Text("Change Theme to Light"),
+                onPressed: () {
+                  Provider.of<LegendTheme>(context, listen: false)
+                      .changeColorTheme(LegendColorThemeType.LIGHT);
+                },
+                style: LegendButtonStyle.confirm(),
+              ),
+            ],
+          ),
+        );
+      },
       contentBuilder: (context) {
         return Container(
           child: Column(

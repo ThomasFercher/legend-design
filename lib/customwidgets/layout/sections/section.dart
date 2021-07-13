@@ -30,10 +30,11 @@ class Section extends StatelessWidget {
     if (verticalSpacing != null) {
       for (var i = 1; i < children.length; i += 2) {
         children.insert(
-            i,
-            Padding(
-              padding: EdgeInsets.only(top: verticalSpacing!),
-            ));
+          i,
+          Padding(
+            padding: EdgeInsets.only(top: verticalSpacing!),
+          ),
+        );
       }
     }
     return children;

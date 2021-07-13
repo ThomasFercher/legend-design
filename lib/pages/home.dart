@@ -25,22 +25,6 @@ class Home extends StatelessWidget {
           children: [
             Text("Home"),
             LegendButton(
-              text: Text("Change Theme to Dark"),
-              onPressed: () {
-                Provider.of<LegendTheme>(context, listen: false)
-                    .changeColorTheme(LegendColorThemeType.DARK);
-              },
-              style: LegendButtonStyle.confirm(),
-            ),
-            LegendButton(
-              text: Text("Change Theme to Light"),
-              onPressed: () {
-                Provider.of<LegendTheme>(context, listen: false)
-                    .changeColorTheme(LegendColorThemeType.LIGHT);
-              },
-              style: LegendButtonStyle.confirm(),
-            ),
-            LegendButton(
               text: Text("Show Success Alert"),
               onPressed: () {
                 LegendPopups.showAlert(

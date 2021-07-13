@@ -211,4 +211,46 @@ class LegendButtonStyle extends ButtonStyle {
       width: width,
     );
   }
+
+  @override
+  LegendButtonStyle copyWith({
+    AlignmentGeometry? alignment,
+    Duration? animationDuration,
+    MaterialStateProperty<Color?>? backgroundColor,
+    MaterialStateProperty<double?>? elevation,
+    bool? enableFeedback,
+    MaterialStateProperty<Size?>? fixedSize,
+    MaterialStateProperty<Color?>? foregroundColor,
+    MaterialStateProperty<Size?>? minimumSize,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    MaterialStateProperty<Color?>? overlayColor,
+    MaterialStateProperty<EdgeInsetsGeometry?>? padding,
+    MaterialStateProperty<Color?>? shadowColor,
+    MaterialStateProperty<OutlinedBorder?>? shape,
+    MaterialStateProperty<BorderSide?>? side,
+    InteractiveInkFeatureFactory? splashFactory,
+    MaterialTapTargetSize? tapTargetSize,
+    MaterialStateProperty<TextStyle?>? textStyle,
+    VisualDensity? visualDensity,
+  }) {
+    return LegendButtonStyle(
+      alignment: alignment,
+      animationDuration: animationDuration,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      enableFeedback: enableFeedback,
+      fixedSize: fixedSize,
+      foregroundColor: foregroundColor,
+      minimumSize: minimumSize,
+      mouseCursor: mouseCursor,
+      overlayColor: overlayColor,
+      padding: padding,
+      shadowColor: shadowColor,
+      side: side,
+      splashFactory: splashFactory,
+      tapTargetSize: tapTargetSize,
+      textStyle: textStyle,
+      visualDensity: visualDensity,
+    );
+  }
 }
