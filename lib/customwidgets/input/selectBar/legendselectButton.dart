@@ -13,6 +13,7 @@ class LegendIconButton extends StatefulWidget {
   late BoxShadow shadow;
   late Color? hoverColor;
   late Color backgroundColor;
+
   Gradient? gradient;
 
   LegendIconButton({
@@ -49,10 +50,10 @@ class _LegendIconButtonState extends State<LegendIconButton>
   late Animation<Color?> animation;
   late Animation<double> shadowAnimation;
   late AnimationController controller;
-  Color? color;
+  late Color? color;
   double shadow = 0.0;
   late bool clicked;
-  late bool selected;
+  bool selected = false;
   bool h = false;
 
   @override
@@ -60,6 +61,7 @@ class _LegendIconButtonState extends State<LegendIconButton>
     super.initState();
     hovered = false;
     clicked = false;
+    color = widget.option.color;
     controller = AnimationController(
         duration: const Duration(milliseconds: 100), vsync: this);
     animation =

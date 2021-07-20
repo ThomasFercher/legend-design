@@ -59,26 +59,6 @@ class Home extends StatelessWidget {
               },
               style: LegendButtonStyle.confirm(height: 100),
             ),
-            LegendSelectBar(
-              options: [
-                LegendSelectOption(
-                  //    color: Colors.red,
-                  gradient: LinearGradient(colors: [
-                    Colors.red,
-                    Colors.blue,
-                  ]),
-                  icon: Icons.add,
-                ),
-                LegendSelectOption(
-                  color: Colors.red,
-                  icon: Icons.add,
-                ),
-              ],
-              aligment: MainAxisAlignment.spaceAround,
-              onSelected: (a) {
-                print(a);
-              },
-            ),
           ],
         );
       },

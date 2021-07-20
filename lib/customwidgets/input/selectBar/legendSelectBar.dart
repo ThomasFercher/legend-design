@@ -15,11 +15,13 @@ class LegendSelectBar extends StatelessWidget {
   final List<LegendSelectOption> options;
   final void Function(LegendSelectOption selected) onSelected;
   final MainAxisAlignment? aligment;
+  final double? iconSize;
 
   LegendSelectBar({
     required this.options,
     required this.onSelected,
     required this.aligment,
+    this.iconSize,
   });
 
   List<Widget> getOptions(BuildContext context) {
@@ -28,7 +30,7 @@ class LegendSelectBar extends StatelessWidget {
     for (LegendSelectOption o in options) {
       Widget w = new LegendIconButton(
         option: o,
-        size: 48,
+        size: iconSize ?? 24,
         onClick: (selOption) {
           onSelected(selOption);
           Provider.of<LegendSelectProvider>(context, listen: false)
@@ -46,8 +48,8 @@ class LegendSelectBar extends StatelessWidget {
     LegendColorTheme theme = Provider.of<LegendTheme>(context).colors;
     LegendSizing sizing = Provider.of<LegendTheme>(context).sizing;
 
-    return ChangeNotifierProvider(
-      create: (context) => LegendSelectProvider(options.first),
+    return ListenableProvider<LegendSelectProvider>(
+      create: (c) => LegendSelectProvider(options.first),
       builder: (context, snapshot) {
         return Container(
           padding: EdgeInsets.all(sizing.borderRadius.bottomLeft.x / 2),

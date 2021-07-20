@@ -31,16 +31,6 @@ class WidgetComponents extends StatelessWidget {
         return Container(
           child: Column(
             children: [
-              LegendIconButton(
-                option: LegendSelectOption(
-                  color: Colors.red,
-                  icon: Icons.add,
-                ),
-                onClick: (option) {
-                  print(option);
-                },
-                size: 48,
-              ),
               LegendButton(
                 text: Text("Change Theme to Dark"),
                 onPressed: () {
@@ -207,6 +197,35 @@ class WidgetComponents extends StatelessWidget {
                   ),
                 ],
               ),
+              Section(
+                children: [
+                  Container(
+                    width: 400,
+                    child: LegendSelectBar(
+                      options: [
+                        LegendSelectOption(
+                          color: Colors.redAccent,
+                          icon: Icons.credit_card,
+                        ),
+                        LegendSelectOption(
+                          color: Colors.purpleAccent,
+                          icon: Icons.wallet_giftcard,
+                        ),
+                        LegendSelectOption(
+                          color: Colors.cyanAccent,
+                          icon: Icons.money,
+                        ),
+                      ],
+                      aligment: MainAxisAlignment.spaceAround,
+                      onSelected: (a) {
+                        print(a);
+                      },
+                      iconSize: 36,
+                    ),
+                  ),
+                ],
+                header: "Select Button Bar",
+              )
             ],
           ),
         );
