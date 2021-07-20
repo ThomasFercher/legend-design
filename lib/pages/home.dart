@@ -2,6 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
+import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/modals/legendAlert.dart';
 import 'package:webstore/customwidgets/modals/legendPopups.dart';
@@ -56,7 +58,27 @@ class Home extends StatelessWidget {
                 ),
               },
               style: LegendButtonStyle.confirm(height: 100),
-            )
+            ),
+            LegendSelectBar(
+              options: [
+                LegendSelectOption(
+                  //    color: Colors.red,
+                  gradient: LinearGradient(colors: [
+                    Colors.red,
+                    Colors.blue,
+                  ]),
+                  icon: Icons.add,
+                ),
+                LegendSelectOption(
+                  color: Colors.red,
+                  icon: Icons.add,
+                ),
+              ],
+              aligment: MainAxisAlignment.spaceAround,
+              onSelected: (a) {
+                print(a);
+              },
+            ),
           ],
         );
       },

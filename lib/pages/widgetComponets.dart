@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
+import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
+import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
+import 'package:webstore/customwidgets/input/selectBar/legendselectButton.dart';
 import 'package:webstore/customwidgets/layout/grid/legendGridSize.dart';
 import 'package:webstore/customwidgets/layout/grid/legendGrid.dart';
 import 'package:webstore/customwidgets/layout/sections/section.dart';
@@ -28,6 +31,16 @@ class WidgetComponents extends StatelessWidget {
         return Container(
           child: Column(
             children: [
+              LegendIconButton(
+                option: LegendSelectOption(
+                  color: Colors.red,
+                  icon: Icons.add,
+                ),
+                onClick: (option) {
+                  print(option);
+                },
+                size: 48,
+              ),
               LegendButton(
                 text: Text("Change Theme to Dark"),
                 onPressed: () {
