@@ -4,11 +4,11 @@ class LegendSelectOption {
   final IconData? icon;
   final Color? color;
   final Gradient? gradient;
-  final String? text;
+  final String name;
 
   LegendSelectOption({
     this.icon,
-    this.text,
+    required this.name,
     this.color,
     this.gradient,
   });

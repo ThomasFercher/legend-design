@@ -16,12 +16,16 @@ class LegendSelectBar extends StatelessWidget {
   final void Function(LegendSelectOption selected) onSelected;
   final MainAxisAlignment? aligment;
   final double? iconSize;
+  final bool? isCard;
+  final EdgeInsets? margin;
 
   LegendSelectBar({
     required this.options,
     required this.onSelected,
     required this.aligment,
     this.iconSize,
+    this.isCard,
+    this.margin,
   });
 
   List<Widget> getOptions(BuildContext context) {
@@ -32,9 +36,9 @@ class LegendSelectBar extends StatelessWidget {
         option: o,
         size: iconSize ?? 24,
         onClick: (selOption) {
-          onSelected(selOption);
           Provider.of<LegendSelectProvider>(context, listen: false)
               .selectOption(o);
+          onSelected(selOption);
         },
       );
       widgets.add(w);
@@ -49,29 +53,34 @@ class LegendSelectBar extends StatelessWidget {
     LegendSizing sizing = Provider.of<LegendTheme>(context).sizing;
 
     return ListenableProvider<LegendSelectProvider>(
-      create: (c) => LegendSelectProvider(options.first),
+      create: (c) => new LegendSelectProvider(options.first),
       builder: (context, snapshot) {
-        return Container(
-          padding: EdgeInsets.all(sizing.borderRadius.bottomLeft.x / 2),
-          decoration: BoxDecoration(
-            borderRadius: sizing.borderRadius,
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 4,
-                spreadRadius: 2,
-                offset: Offset(
-                  0,
-                  1,
-                ),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: aligment ?? MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: getOptions(context),
+        return Padding(
+          padding: margin ?? EdgeInsets.all(4.0),
+          child: Container(
+            padding: EdgeInsets.all(sizing.borderRadius.bottomLeft.x / 2),
+            decoration: isCard ?? false
+                ? BoxDecoration(
+                    borderRadius: sizing.borderRadius,
+                    color: LegendColorTheme.darken(theme.primaryColor, 0.08),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4,
+                        spreadRadius: 2,
+                        offset: Offset(
+                          0,
+                          1,
+                        ),
+                      ),
+                    ],
+                  )
+                : null,
+            child: Row(
+              mainAxisAlignment: aligment ?? MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: getOptions(context),
+            ),
           ),
         );
       },

@@ -30,22 +30,39 @@ class WidgetComponents extends StatelessWidget {
       siderBuilder: (context) {
         return Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              LegendButton(
-                text: Text("Change Theme to Dark"),
-                onPressed: () {
-                  Provider.of<LegendTheme>(context, listen: false)
-                      .changeColorTheme(LegendColorThemeType.DARK);
+              LegendSelectBar(
+                isCard: true,
+                margin: EdgeInsets.all(16),
+                options: [
+                  LegendSelectOption(
+                    color: Colors.grey,
+                    icon: Icons.dark_mode,
+                    name: "dark",
+                  ),
+                  LegendSelectOption(
+                    color: Colors.purple[200],
+                    icon: Icons.light_mode,
+                    name: "light",
+                  ),
+                ],
+                aligment: MainAxisAlignment.spaceAround,
+                onSelected: (option) {
+                  switch (option.name) {
+                    case "dark":
+                      Provider.of<LegendTheme>(context, listen: false)
+                          .changeColorTheme(LegendColorThemeType.DARK);
+                      break;
+                    case "light":
+                      Provider.of<LegendTheme>(context, listen: false)
+                          .changeColorTheme(LegendColorThemeType.LIGHT);
+                      break;
+                    default:
+                      break;
+                  }
                 },
-                style: LegendButtonStyle.confirm().copyWith(),
-              ),
-              LegendButton(
-                text: Text("Change Theme to Light"),
-                onPressed: () {
-                  Provider.of<LegendTheme>(context, listen: false)
-                      .changeColorTheme(LegendColorThemeType.LIGHT);
-                },
-                style: LegendButtonStyle.confirm(),
+                iconSize: 32,
               ),
             ],
           ),
@@ -204,16 +221,17 @@ class WidgetComponents extends StatelessWidget {
                     child: LegendSelectBar(
                       options: [
                         LegendSelectOption(
-                          color: Colors.redAccent,
-                          icon: Icons.credit_card,
-                        ),
+                            color: Colors.redAccent,
+                            icon: Icons.credit_card,
+                            name: "1"),
                         LegendSelectOption(
-                          color: Colors.purpleAccent,
-                          icon: Icons.wallet_giftcard,
-                        ),
+                            color: Colors.purpleAccent,
+                            icon: Icons.wallet_giftcard,
+                            name: "2"),
                         LegendSelectOption(
                           color: Colors.cyanAccent,
                           icon: Icons.money,
+                          name: "3",
                         ),
                       ],
                       aligment: MainAxisAlignment.spaceAround,

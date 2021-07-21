@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/icons/legendGradientIcon.dart';
@@ -52,15 +54,13 @@ class _LegendIconButtonState extends State<LegendIconButton>
   late AnimationController controller;
   late Color? color;
   double shadow = 0.0;
-  late bool clicked;
-  bool selected = false;
-  bool h = false;
+  late bool selected;
 
   @override
   void initState() {
     super.initState();
     hovered = false;
-    clicked = false;
+    selected = false;
     color = widget.option.color;
     controller = AnimationController(
         duration: const Duration(milliseconds: 100), vsync: this);
@@ -113,14 +113,14 @@ class _LegendIconButtonState extends State<LegendIconButton>
   @override
   Widget build(BuildContext context) {
     return Consumer<LegendSelectProvider>(builder: (context, sel, c) {
-      bool s = sel.selected == widget.option;
-
+      bool s = sel.selected.name == widget.option.name;
+      print(s);
       if (s && !selected) {
         controller.forward();
-        this.selected = true;
+        selected = true;
       } else if (!s && selected) {
         controller.reverse();
-        this.selected = false;
+        selected = false;
       }
       return InkWell(
         splashFactory: NoSplash.splashFactory,
@@ -129,17 +129,11 @@ class _LegendIconButtonState extends State<LegendIconButton>
         highlightColor: Colors.transparent,
         onTap: () {
           widget.onClick(widget.option);
-          setState(() {
-            clicked = true;
-          });
         },
         borderRadius: BorderRadius.all(
           Radius.circular(widget.size / 2),
         ),
         onHover: (value) {
-          setState(() {
-            h = value;
-          });
           if (selected == false) {
             if (value && !hovered) {
               if (!controller.isAnimating || !hovered) {
