@@ -81,8 +81,8 @@ class WidgetComponents extends StatelessWidget {
                           "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. "),
                   LegendGrid(
                     sizes: LegendGridSize(
-                      small: LegendGridSizeInfo(1, 128),
-                      medium: LegendGridSizeInfo(3, 128),
+                      small: LegendGridSizeInfo(2, 64),
+                      medium: LegendGridSizeInfo(3, 64),
                       large: LegendGridSizeInfo(4, 64),
                       xxl: LegendGridSizeInfo(4, 64),
                     ),
@@ -216,30 +216,81 @@ class WidgetComponents extends StatelessWidget {
               ),
               Section(
                 children: [
-                  Container(
-                    width: 400,
-                    child: LegendSelectBar(
-                      options: [
-                        LegendSelectOption(
-                            color: Colors.redAccent,
-                            icon: Icons.credit_card,
-                            name: "1"),
-                        LegendSelectOption(
-                            color: Colors.purpleAccent,
-                            icon: Icons.wallet_giftcard,
-                            name: "2"),
-                        LegendSelectOption(
-                          color: Colors.cyanAccent,
-                          icon: Icons.money,
-                          name: "3",
-                        ),
-                      ],
-                      aligment: MainAxisAlignment.spaceAround,
-                      onSelected: (a) {
-                        print(a);
-                      },
-                      iconSize: 36,
+                  LegendGrid(
+                    sizes: LegendGridSize(
+                      small: LegendGridSizeInfo(1, 80),
+                      large: LegendGridSizeInfo(3, 80),
+                      layoutDirection: LegendGridSizeDirection.DOWN,
                     ),
+                    children: [
+                      LegendSelectBar(
+                        options: [
+                          LegendSelectOption(
+                              color: Colors.redAccent,
+                              icon: Icons.credit_card,
+                              name: "1"),
+                          LegendSelectOption(
+                              color: Colors.purpleAccent,
+                              icon: Icons.wallet_giftcard,
+                              name: "2"),
+                          LegendSelectOption(
+                            color: Colors.cyanAccent,
+                            icon: Icons.money,
+                            name: "3",
+                          ),
+                        ],
+                        aligment: MainAxisAlignment.spaceAround,
+                        onSelected: (a) {
+                          print(a);
+                        },
+                        iconSize: 36,
+                      ),
+                      LegendSelectBar(
+                        options: [
+                          LegendSelectOption(
+                              color: Colors.redAccent,
+                              icon: Icons.credit_card,
+                              name: "1"),
+                          LegendSelectOption(
+                              color: Colors.purpleAccent,
+                              icon: Icons.wallet_giftcard,
+                              name: "2"),
+                          LegendSelectOption(
+                            color: Colors.cyanAccent,
+                            icon: Icons.money,
+                            name: "3",
+                          ),
+                        ],
+                        aligment: MainAxisAlignment.spaceAround,
+                        onSelected: (a) {
+                          print(a);
+                        },
+                        iconSize: 36,
+                      ),
+                      LegendSelectBar(
+                        options: [
+                          LegendSelectOption(
+                              color: Colors.redAccent,
+                              icon: Icons.credit_card,
+                              name: "1"),
+                          LegendSelectOption(
+                              color: Colors.purpleAccent,
+                              icon: Icons.wallet_giftcard,
+                              name: "2"),
+                          LegendSelectOption(
+                            color: Colors.cyanAccent,
+                            icon: Icons.money,
+                            name: "3",
+                          ),
+                        ],
+                        aligment: MainAxisAlignment.spaceAround,
+                        onSelected: (a) {
+                          print(a);
+                        },
+                        isCard: true,
+                        iconSize: 36,
+                      ),
+                    ],
                   ),
                 ],
                 header: "Select Button Bar",
