@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/datadisplay/carousel/legendCarousel.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendselectButton.dart';
+import 'package:webstore/customwidgets/input/text/legendTextField.dart';
 import 'package:webstore/customwidgets/layout/grid/legendGridSize.dart';
 import 'package:webstore/customwidgets/layout/grid/legendGrid.dart';
 import 'package:webstore/customwidgets/layout/sections/section.dart';
@@ -226,13 +228,15 @@ class WidgetComponents extends StatelessWidget {
                       LegendSelectBar(
                         options: [
                           LegendSelectOption(
-                              color: Colors.redAccent,
-                              icon: Icons.credit_card,
-                              name: "1"),
+                            color: Colors.redAccent,
+                            icon: Icons.credit_card,
+                            name: "1",
+                          ),
                           LegendSelectOption(
-                              color: Colors.purpleAccent,
-                              icon: Icons.wallet_giftcard,
-                              name: "2"),
+                            color: Colors.purpleAccent,
+                            icon: Icons.wallet_giftcard,
+                            name: "2",
+                          ),
                           LegendSelectOption(
                             color: Colors.cyanAccent,
                             icon: Icons.money,
@@ -294,6 +298,30 @@ class WidgetComponents extends StatelessWidget {
                   ),
                 ],
                 header: "Select Button Bar",
+              ),
+              Section(
+                children: [
+                  LegendTextField(),
+                ],
+                header: "Textfield",
+              ),
+              Section(
+                children: [
+                  LegendCarousel(
+                    height: 200,
+                    items: [
+                      Container(),
+                      Container(),
+                      Container(
+                        color: Colors.orange,
+                      ),
+                      Container(
+                        color: Colors.green,
+                      ),
+                    ],
+                  ),
+                ],
+                header: "Carousel",
               )
             ],
           ),

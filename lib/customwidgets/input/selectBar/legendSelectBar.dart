@@ -32,7 +32,7 @@ class LegendSelectBar extends StatelessWidget {
     List<Widget> widgets = [];
 
     for (LegendSelectOption o in options) {
-      Widget w = new LegendIconButton(
+      Widget w = new LegendSelectButton(
         option: o,
         size: iconSize ?? 24,
         onClick: (selOption) {

@@ -29,7 +29,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   late AnimationController controller;
   late Animation animation;
   late Animation animation2;
-  late Color color = Colors.white;
+  late Color color = Colors.black87;
   late Color borderColor = Colors.transparent;
 
   @override
@@ -41,11 +41,11 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
     controller = AnimationController(
       vsync: this,
       duration: Duration(
-        milliseconds: 200,
+        milliseconds: 260,
       ),
     );
     animation = ColorTween(
-      begin: Colors.white,
+      begin: color,
       end: Colors.blueAccent,
     ).animate(controller);
 
@@ -71,7 +71,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
     return Container(
-      margin: const EdgeInsets.only(left: 32.0),
+      margin: const EdgeInsets.only(left: 8.0),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
@@ -113,7 +113,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         child: Container(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -129,7 +129,6 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
                   text: widget.title,
                   selectable: false,
                   textStyle: LegendTextStyle.h1().copyWith(
-                    fontSize: theme.sizing.appbarHeight / 4.5,
                     color: color,
                   ),
                 ),

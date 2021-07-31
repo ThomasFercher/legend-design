@@ -42,8 +42,20 @@ class FixedAppBar extends StatelessWidget {
       return Container(
         margin: const EdgeInsets.only(left: 16.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: options,
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: options,
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(),
+            ),
+          ],
         ),
       );
     } else {

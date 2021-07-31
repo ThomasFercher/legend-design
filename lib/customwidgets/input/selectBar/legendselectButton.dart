@@ -8,7 +8,7 @@ import 'package:webstore/styles/legendColorTheme.dart';
 
 import 'legendSelectOption.dart';
 
-class LegendIconButton extends StatefulWidget {
+class LegendSelectButton extends StatefulWidget {
   final LegendSelectOption option;
   final void Function(LegendSelectOption option) onClick;
   final double size;
@@ -18,7 +18,7 @@ class LegendIconButton extends StatefulWidget {
 
   Gradient? gradient;
 
-  LegendIconButton({
+  LegendSelectButton({
     required this.option,
     required this.size,
     required this.onClick,
@@ -43,10 +43,10 @@ class LegendIconButton extends StatefulWidget {
   }
 
   @override
-  _LegendIconButtonState createState() => _LegendIconButtonState();
+  _LegendSelectButtonState createState() => _LegendSelectButtonState();
 }
 
-class _LegendIconButtonState extends State<LegendIconButton>
+class _LegendSelectButtonState extends State<LegendSelectButton>
     with SingleTickerProviderStateMixin {
   late bool hovered;
   late Animation<Color?> animation;

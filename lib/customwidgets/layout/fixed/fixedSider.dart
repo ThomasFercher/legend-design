@@ -22,12 +22,13 @@ class FixedSider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenSize screenSize = SizeProvider.of(context).screenSize;
-
+    bool showSider =
+        screenSize == ScreenSize.Large || screenSize == ScreenSize.XXL;
     return Hero(
       tag: ValueKey("sider"),
       child: Material(
         elevation: 20,
-        child: screenSize != ScreenSize.Small
+        child: showSider
             ? Sider(showMenu: showMenu, builder: builder, context: context)
             : CollapsedSider(context: context),
       ),

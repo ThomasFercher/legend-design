@@ -56,9 +56,9 @@ class LegendTextStyle extends TextStyle {
     return LegendTextStyle(
       textColor: Colors.grey[850]!,
       backgroundColor: Colors.transparent,
-      fontSize: 22,
-      fontWeight: FontWeight.w200,
-      fontFamily: "Roboto",
+      fontSize: 16,
+      fontWeight: FontWeight.w100,
+      fontFamily: "sans serif",
     );
   }
 
