@@ -322,6 +322,10 @@ class WidgetComponents extends StatelessWidget {
                   ),
                 ],
                 header: "Carousel",
+              ),
+              Section(
+                children: [],
+                header: "Form",
               )
             ],
           ),
