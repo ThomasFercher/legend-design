@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:webstore/customwidgets/input/text/legendInputDecoration.dart';
+import 'package:webstore/styles/typography.dart';
 
 class LegendTextField extends StatefulWidget {
-  LegendTextField({Key? key}) : super(key: key);
+  final LegendInputDecoration decoration;
+
+  LegendTextField({
+    required this.decoration,
+    Key? key,
+  }) : super(key: key);
 
   @override
   _LegendTextFieldState createState() => _LegendTextFieldState();
@@ -21,7 +28,15 @@ class _LegendTextFieldState extends State<LegendTextField> {
     return Container(
       child: TextField(
         controller: ctrl,
-        decoration: InputDecoration(),
+        decoration: widget.decoration,
+        cursorColor: widget.decoration.cursorColor,
+        textAlignVertical: TextAlignVertical.top,
+        onSubmitted: (value) {},
+        onChanged: (value) {},
+        style:
+            LegendTextStyle.textInput(textColor: widget.decoration.textColor),
+        toolbarOptions:
+            ToolbarOptions(copy: true, selectAll: true, paste: true, cut: true),
       ),
     );
   }

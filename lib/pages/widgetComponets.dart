@@ -9,6 +9,7 @@ import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendselectButton.dart';
+import 'package:webstore/customwidgets/input/text/legendInputDecoration.dart';
 import 'package:webstore/customwidgets/input/text/legendTextField.dart';
 import 'package:webstore/customwidgets/layout/grid/legendGridSize.dart';
 import 'package:webstore/customwidgets/layout/grid/legendGrid.dart';
@@ -301,7 +302,12 @@ class WidgetComponents extends StatelessWidget {
               ),
               Section(
                 children: [
-                  LegendTextField(),
+                  LegendTextField(
+                    decoration: LegendInputDecoration.rounded(
+                        focusColor: Colors.teal,
+                        textColor: Colors.grey[800],
+                        radius: BorderRadius.all(Radius.circular(2))),
+                  ),
                 ],
                 header: "Textfield",
               ),

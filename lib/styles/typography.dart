@@ -25,7 +25,7 @@ class LegendTypography {
     this.h4 ?? LegendTextStyle.h4();
     this.h5 ?? LegendTextStyle.h5();
     this.h6 ?? LegendTextStyle.h6();
-    this.h7 ?? LegendTextStyle.h7();
+    this.h7 ?? LegendTextStyle.textInput();
   }
 }
 
@@ -112,12 +112,14 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
-  factory LegendTextStyle.h7() {
+  factory LegendTextStyle.textInput({
+    Color? textColor,
+  }) {
     return LegendTextStyle(
-      textColor: Colors.black87,
-      backgroundColor: Colors.white,
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
+      textColor: textColor ?? Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 18,
+      fontWeight: FontWeight.w300,
       fontFamily: "sans serif",
     );
   }
