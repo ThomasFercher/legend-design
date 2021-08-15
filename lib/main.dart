@@ -11,7 +11,7 @@ import 'router/parser.dart';
 import 'router/routeInfo.dart';
 import 'router/routerProvider.dart';
 import 'styles/legendTheme.dart';
-import 'styles/typography.dart';
+import 'customwidgets/typography/typography.dart';
 
 void main() {
   runApp(

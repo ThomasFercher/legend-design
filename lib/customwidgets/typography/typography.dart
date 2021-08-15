@@ -133,4 +133,14 @@ class LegendTextStyle extends TextStyle {
       fontFamily: "sans serif",
     );
   }
+
+  factory LegendTextStyle.formHeader() {
+    return LegendTextStyle(
+      textColor: Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 16.0,
+      fontWeight: FontWeight.w400,
+      fontFamily: "sans serif",
+    );
+  }
 }

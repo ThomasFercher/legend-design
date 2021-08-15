@@ -7,7 +7,7 @@ import '../typography/legendText.dart';
 import '../../styles/layoutType.dart';
 import '../../styles/sizeProvider.dart';
 import '../../styles/legendTheme.dart';
-import '../../styles/typography.dart';
+import '../typography/typography.dart';
 
 class LegendBottomSheet extends StatelessWidget {
   final String title;

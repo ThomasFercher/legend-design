@@ -6,6 +6,8 @@ import 'package:webstore/customwidgets/datadisplay/carousel/legendCarousel.dart'
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
+import 'package:webstore/customwidgets/input/form/legendForm.dart';
+import 'package:webstore/customwidgets/input/form/legendFormField.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendselectButton.dart';
@@ -22,7 +24,7 @@ import 'package:webstore/customwidgets/modals/legendPopups.dart';
 import 'package:webstore/customwidgets/modals/modal.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/legendTheme.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
 
@@ -330,7 +332,63 @@ class WidgetComponents extends StatelessWidget {
                 header: "Carousel",
               ),
               Section(
-                children: [],
+                children: [
+                  LegendForm(
+                    children: [
+                      LegendFormField.text(
+                        text: LegendTextField(
+                          decoration: LegendInputDecoration.rounded(
+                            focusColor: Colors.teal,
+                            textColor: Colors.grey[800],
+                            radius: BorderRadius.all(
+                              Radius.circular(2),
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          print(value);
+                        },
+                        onSave: (value) {
+                          print("save $value");
+                        },
+                      ),
+                      LegendFormField.text(
+                        isRequired: true,
+                        text: LegendTextField(
+                          decoration: LegendInputDecoration.rounded(
+                            focusColor: Colors.teal,
+                            textColor: Colors.grey[800],
+                            radius: BorderRadius.all(
+                              Radius.circular(2),
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          print(value);
+                        },
+                        onSave: (value) {
+                          print("save $value");
+                        },
+                      ),
+                      LegendFormRow(children: [
+                        LegendFormField.boolean(
+                          title: "Test",
+                          isRequired: true,
+                          onChanged: (value) {
+                            print(value);
+                          },
+                        ),
+                        LegendFormField.boolean(
+                          isRequired: true,
+                          title: "Test",
+                          onChanged: (value) {
+                            print(value);
+                          },
+                        ),
+                      ]),
+                    ],
+                  )
+                ],
                 header: "Form",
               )
             ],

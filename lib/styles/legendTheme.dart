@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'legendColorTheme.dart';
 import 'legendSizingTheme.dart';
-import 'typography.dart';
+import '../customwidgets/typography/typography.dart';
 
 enum LegendColorThemeType {
   LIGHT,

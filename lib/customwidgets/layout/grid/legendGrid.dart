@@ -4,7 +4,7 @@ import 'package:webstore/customwidgets/layout/sections/sectionHeader.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/layoutType.dart';
 import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 
 class LegendGrid extends StatelessWidget {
   final List<Widget> children;

@@ -18,7 +18,7 @@ import '../../objects/menuOption.dart';
 import '../../router/routerProvider.dart';
 import '../../styles/layoutType.dart';
 import '../../styles/sizeProvider.dart';
-import '../../styles/typography.dart';
+import '../typography/typography.dart';
 
 class LegendScaffold extends StatelessWidget {
   final LayoutType? layoutType;

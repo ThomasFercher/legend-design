@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 import 'package:webstore/styles/legendTheme.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 import '../router/routerProvider.dart';
 
 class MenuOptionHeader extends StatefulWidget {

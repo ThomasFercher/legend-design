@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/legendTheme.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 import '../../../router/routerProvider.dart';
 
 class SiderMenuVerticalTile extends StatefulWidget {

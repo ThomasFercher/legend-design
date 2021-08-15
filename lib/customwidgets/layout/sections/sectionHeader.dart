@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 
 class SectionHeader extends StatelessWidget {
   final String text;

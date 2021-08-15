@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/input/text/legendInputDecoration.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 
 class LegendTextField extends StatefulWidget {
   final LegendInputDecoration decoration;

@@ -14,7 +14,7 @@ import '../customwidgets/layout/legendScaffold.dart';
 import '../customwidgets/modals/modal.dart';
 import '../customwidgets/typography/legendText.dart';
 import '../styles/layoutType.dart';
-import '../styles/typography.dart';
+import '../customwidgets/typography/typography.dart';
 
 class Home extends StatelessWidget {
   @override
