@@ -50,6 +50,7 @@ class _LegendFormState extends State<LegendForm> {
         row.children.map((e) => getFormfield(e, context, true)).toList();
     return Row(
       children: children,
+      mainAxisAlignment: row.alignment ?? MainAxisAlignment.start,
     );
   }
 
@@ -61,7 +62,9 @@ class _LegendFormState extends State<LegendForm> {
       case LegendFormFieldType.BOOL:
         formField = FormField<bool>(
           builder: (f) {
+            print(f);
             return LegendSwitch(
+              activeColor: f.hasError ? Colors.redAccent : Colors.tealAccent,
               onChanged: field.onChanged != null
                   ? (value) {
                       field.onChanged!(value);
@@ -96,7 +99,7 @@ class _LegendFormState extends State<LegendForm> {
           },
           decoration: field.textField?.decoration,
           initialValue: field.initalValue,
-          autovalidateMode: AutovalidateMode.disabled,
+          //     autovalidateMode: AutovalidateMode.disabled,
           onChanged: field.onChanged != null
               ? (value) {
                   field.onChanged!(value);

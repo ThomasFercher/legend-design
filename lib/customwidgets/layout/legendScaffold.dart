@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'package:webstore/styles/legendTheme.dart';
 import 'drawers/drawerMenu.dart';
-import 'fixed/fixedAppBar.dart';
+import 'fixed/appBar.dart/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'fixed/fixedFooter.dart';
 import 'fixed/fixedSider.dart';
@@ -85,7 +85,9 @@ class LegendScaffold extends StatelessWidget {
 
   Widget getHeader() {
     if (layoutType == LayoutType.FixedHeaderSider) {
-      return FixedAppBar();
+      return FixedAppBar(
+        showMenu: false,
+      );
     } else if (layoutType == LayoutType.FixedHeader) {
       return FixedAppBar();
     } else {
@@ -97,7 +99,7 @@ class LegendScaffold extends StatelessWidget {
 
   Widget getDrawer(BuildContext context) {
     ScreenSize ss = SizeProvider.of(context).screenSize;
-    return ss == ScreenSize.Small ? DrawerMenu() : Container();
+    return DrawerMenu();
   }
 
   Widget getActionButton(BuildContext context) {

@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,24 +13,27 @@ import '../../../styles/legendTheme.dart';
 import '../drawers/drawerMenuTile.dart';
 
 class FixedSider extends StatelessWidget {
-  final bool? showMenu;
+  late final bool showMenu;
   WidgetBuilder? builder;
 
   FixedSider({
-    this.showMenu,
+    bool? showMenu,
     this.builder,
-  });
+  }) {
+    this.showMenu = showMenu ?? true;
+  }
 
   @override
   Widget build(BuildContext context) {
     ScreenSize screenSize = SizeProvider.of(context).screenSize;
     bool showSider =
         screenSize == ScreenSize.Large || screenSize == ScreenSize.XXL;
+
     return Hero(
       tag: ValueKey("sider"),
       child: Material(
         elevation: 20,
-        child: showSider
+        child: showSider && showMenu
             ? Sider(showMenu: showMenu, builder: builder, context: context)
             : CollapsedSider(context: context),
       ),
@@ -63,6 +68,10 @@ class CollapsedSider extends StatelessWidget {
       color: theme.colors.primaryColor,
       child: Column(
         children: [
+          Container(
+            child: Placeholder(),
+            height: 80,
+          ),
           ListView(
             shrinkWrap: true,
             children: tiles,

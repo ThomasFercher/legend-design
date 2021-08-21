@@ -62,6 +62,16 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
+  factory LegendTextStyle.appBarMenuHeader() {
+    return LegendTextStyle(
+      textColor: Colors.grey[850]!,
+      backgroundColor: Colors.transparent,
+      fontSize: 14,
+      fontWeight: FontWeight.w300,
+      fontFamily: "sans serif",
+    );
+  }
+
   factory LegendTextStyle.h2() {
     return LegendTextStyle(
       textColor: Colors.black54,
@@ -97,6 +107,16 @@ class LegendTextStyle extends TextStyle {
       textColor: Colors.black87,
       backgroundColor: Colors.transparent,
       fontSize: 12,
+      fontWeight: FontWeight.w200,
+      fontFamily: "Roboto",
+    );
+  }
+
+  factory LegendTextStyle.siderMenuCollapsed() {
+    return LegendTextStyle(
+      textColor: Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 10,
       fontWeight: FontWeight.w200,
       fontFamily: "Roboto",
     );

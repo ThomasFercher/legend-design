@@ -120,7 +120,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               Icon(
                 widget.icon,
                 color: color,
-                size: theme.sizing.appbarHeight / 3,
+                size: theme.sizing.appbarHeight / 3.5,
               ),
               Padding(padding: const EdgeInsets.symmetric(horizontal: 4.0)),
               Padding(
@@ -128,7 +128,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
                 child: LegendText(
                   text: widget.title,
                   selectable: false,
-                  textStyle: LegendTextStyle.h1().copyWith(
+                  textStyle: LegendTextStyle.appBarMenuHeader().copyWith(
                     color: color,
                   ),
                 ),

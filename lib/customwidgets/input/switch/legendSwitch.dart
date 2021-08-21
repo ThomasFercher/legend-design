@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 class LegendSwitch extends StatefulWidget {
   final Function(bool value)? onChanged;
   late bool initalValue;
+  final Color? activeColor;
+  final Color? disabledColor;
 
   LegendSwitch({
     this.onChanged,
     bool? initalValue,
+    this.activeColor,
+    this.disabledColor,
   }) {
     this.initalValue = initalValue ?? false;
   }
@@ -30,6 +34,7 @@ class _LegendSwitchState extends State<LegendSwitch> {
     return Container(
       child: Switch(
         value: value,
+        activeColor: widget.activeColor,
         onChanged: (val) {
           setState(() {
             value = val;

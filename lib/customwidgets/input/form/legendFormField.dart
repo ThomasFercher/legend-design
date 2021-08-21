@@ -10,8 +10,12 @@ enum LegendFormFieldType {
 
 class LegendFormRow {
   final List<LegendFormField> children;
+  final MainAxisAlignment? alignment;
 
-  LegendFormRow({required this.children});
+  LegendFormRow({
+    required this.children,
+    this.alignment,
+  });
 }
 
 class LegendFormField<T> {

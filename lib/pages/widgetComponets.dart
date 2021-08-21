@@ -370,22 +370,24 @@ class WidgetComponents extends StatelessWidget {
                           print("save $value");
                         },
                       ),
-                      LegendFormRow(children: [
-                        LegendFormField.boolean(
-                          title: "Test",
-                          isRequired: true,
-                          onChanged: (value) {
-                            print(value);
-                          },
-                        ),
-                        LegendFormField.boolean(
-                          isRequired: true,
-                          title: "Test",
-                          onChanged: (value) {
-                            print(value);
-                          },
-                        ),
-                      ]),
+                      LegendFormRow(
+                        children: [
+                          LegendFormField.boolean(
+                            title: "Test",
+                            isRequired: true,
+                            onChanged: (value) {
+                              print(value);
+                            },
+                          ),
+                          LegendFormField.boolean(
+                            isRequired: true,
+                            title: "Test",
+                            onChanged: (value) {
+                              print(value);
+                            },
+                          ),
+                        ],
+                      ),
                     ],
                   )
                 ],

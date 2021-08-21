@@ -5,11 +5,13 @@ class LegendText extends StatelessWidget {
   final String text;
   final TextStyle? textStyle;
   final bool? selectable;
+  final TextAlign? textAlign;
 
   LegendText({
     required this.text,
     this.selectable,
     this.textStyle,
+    this.textAlign,
   });
 
   @override
@@ -21,10 +23,18 @@ class LegendText extends StatelessWidget {
   }
 
   webText() {
-    return SelectableText(text, style: textStyle);
+    return SelectableText(
+      text,
+      style: textStyle,
+      textAlign: textAlign,
+    );
   }
 
   normalText() {
-    return Text(text, style: textStyle);
+    return Text(
+      text,
+      style: textStyle,
+      textAlign: textAlign,
+    );
   }
 }
