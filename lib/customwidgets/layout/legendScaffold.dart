@@ -30,6 +30,7 @@ class LegendScaffold extends StatelessWidget {
   final String pageName;
   final Function(BuildContext context)? onActionButtonPressed;
   final WidgetBuilder? siderBuilder;
+  final WidgetBuilder? appBarBuilder;
   final bool? showSiderMenu;
   final bool? showAppBarMenu;
   late final bool singlePage;
@@ -43,6 +44,7 @@ class LegendScaffold extends StatelessWidget {
     this.siderBuilder,
     this.showSiderMenu,
     this.showAppBarMenu,
+    this.appBarBuilder,
     WidgetBuilder? contentBuilder,
     List<Widget>? children,
     bool? singlePage,
@@ -123,22 +125,21 @@ class LegendScaffold extends StatelessWidget {
   }
 
   Widget getHeader() {
-    if (layoutType == LayoutType.FixedHeaderSider) {
-      return FixedAppBar(
-        showMenu: showAppBarMenu ?? false,
-      );
-    } else if (layoutType == LayoutType.FixedHeader) {
-      return FixedAppBar();
-    } else {
-      return SliverToBoxAdapter(
-        child: Container(),
-      );
+    switch (layoutType) {
+      case LayoutType.FixedHeaderSider:
+        return FixedAppBar(
+          showMenu: showAppBarMenu,
+          builder: appBarBuilder,
+        );
+      case LayoutType.FixedHeader:
+        return FixedAppBar(
+          builder: appBarBuilder,
+        );
+      default:
+        return SliverToBoxAdapter(
+          child: Container(),
+        );
     }
-  }
-
-  Widget getDrawer(BuildContext context) {
-    ScreenSize ss = SizeProvider.of(context).screenSize;
-    return DrawerMenu();
   }
 
   Widget getActionButton(BuildContext context) {
@@ -165,7 +166,7 @@ class LegendScaffold extends StatelessWidget {
     LegendColorTheme colors = Provider.of<LegendTheme>(context).colors;
 
     return Scaffold(
-      endDrawer: getDrawer(context),
+      endDrawer: DrawerMenu(),
       endDrawerEnableOpenDragGesture: false,
       floatingActionButton: onActionButtonPressed != null
           ? Builder(

@@ -5,13 +5,23 @@ import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 
-class SectionTile extends StatelessWidget {
-  final String name;
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1)}";
+  }
+}
 
-  const SectionTile({
+class SectionTile extends StatelessWidget {
+  late final String name;
+  late final String displayName;
+
+  SectionTile({
     Key? key,
-    required this.name,
-  }) : super(key: key);
+    required String name,
+  }) : super(key: key) {
+    this.name = name;
+    this.displayName = name.replaceAll("/", "").capitalize();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +30,8 @@ class SectionTile extends StatelessWidget {
       title: Container(
         alignment: Alignment.center,
         child: LegendText(
-          text: name,
-          textStyle: LegendTextStyle.siderMenuCollapsed().copyWith(
+          text: displayName,
+          textStyle: LegendTextStyle.sectionLink().copyWith(
             fontSize: 16,
             fontWeight: FontWeight.w400,
           ),

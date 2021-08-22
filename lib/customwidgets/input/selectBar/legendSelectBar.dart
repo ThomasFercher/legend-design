@@ -18,6 +18,8 @@ class LegendSelectBar extends StatelessWidget {
   final double? iconSize;
   final bool? isCard;
   final EdgeInsets? margin;
+  final double? width;
+  final double? height;
 
   LegendSelectBar({
     required this.options,
@@ -26,6 +28,8 @@ class LegendSelectBar extends StatelessWidget {
     this.iconSize,
     this.isCard,
     this.margin,
+    this.width,
+    this.height,
   });
 
   List<Widget> getOptions(BuildContext context) {
@@ -58,6 +62,8 @@ class LegendSelectBar extends StatelessWidget {
         return Padding(
           padding: margin ?? EdgeInsets.all(4.0),
           child: Container(
+            width: width,
+            height: height,
             padding: EdgeInsets.all(sizing.borderRadius.bottomLeft.x / 2),
             decoration: isCard ?? false
                 ? BoxDecoration(

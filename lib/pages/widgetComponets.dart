@@ -36,44 +36,43 @@ class WidgetComponents extends StatelessWidget {
     return LegendScaffold(
       showSiderMenu: false,
       showAppBarMenu: true,
-      siderBuilder: (context) {
+      appBarBuilder: (context) {
         return Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              LegendSelectBar(
-                isCard: true,
-                margin: EdgeInsets.all(16),
-                options: [
-                  LegendSelectOption(
-                    color: Colors.grey,
-                    icon: Icons.dark_mode,
-                    name: "dark",
-                  ),
-                  LegendSelectOption(
-                    color: Colors.purple[200],
-                    icon: Icons.light_mode,
-                    name: "light",
-                  ),
-                ],
-                aligment: MainAxisAlignment.spaceAround,
-                onSelected: (option) {
-                  switch (option.name) {
-                    case "dark":
-                      Provider.of<LegendTheme>(context, listen: false)
-                          .changeColorTheme(LegendColorThemeType.DARK);
-                      break;
-                    case "light":
-                      Provider.of<LegendTheme>(context, listen: false)
-                          .changeColorTheme(LegendColorThemeType.LIGHT);
-                      break;
-                    default:
-                      break;
-                  }
-                },
-                iconSize: 32,
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: LegendSelectBar(
+            margin: EdgeInsets.all(2),
+            width: 100,
+            height: 48,
+            isCard: true,
+            options: [
+              LegendSelectOption(
+                color: Colors.grey,
+                icon: Icons.dark_mode,
+                name: "dark",
+              ),
+              LegendSelectOption(
+                color: Colors.purple[200],
+                icon: Icons.light_mode,
+                name: "light",
               ),
             ],
+            aligment: MainAxisAlignment.spaceBetween,
+            onSelected: (option) {
+              switch (option.name) {
+                case "dark":
+                  Provider.of<LegendTheme>(context, listen: false)
+                      .changeColorTheme(LegendColorThemeType.DARK);
+                  break;
+                case "light":
+                  Provider.of<LegendTheme>(context, listen: false)
+                      .changeColorTheme(LegendColorThemeType.LIGHT);
+                  break;
+                default:
+                  break;
+              }
+            },
+            iconSize: 26,
           ),
         );
       },
@@ -398,9 +397,6 @@ class WidgetComponents extends StatelessWidget {
           ],
           header: "Form",
         ),
-        Container(
-          height: 1000,
-        )
       ],
       pageName: "Widget Components",
       layoutType: LayoutType.FixedHeaderSider,

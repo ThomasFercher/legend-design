@@ -56,8 +56,8 @@ class LegendTextStyle extends TextStyle {
     return LegendTextStyle(
       textColor: Colors.grey[850]!,
       backgroundColor: Colors.transparent,
-      fontSize: 16,
-      fontWeight: FontWeight.w100,
+      fontSize: 28,
+      fontWeight: FontWeight.w300,
       fontFamily: "sans serif",
     );
   }
@@ -118,6 +118,16 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 10,
       fontWeight: FontWeight.w200,
+      fontFamily: "Roboto",
+    );
+  }
+
+  factory LegendTextStyle.sectionLink() {
+    return LegendTextStyle(
+      textColor: Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 16,
+      fontWeight: FontWeight.w300,
       fontFamily: "Roboto",
     );
   }
