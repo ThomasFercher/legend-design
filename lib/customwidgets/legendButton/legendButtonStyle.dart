@@ -41,6 +41,8 @@ class LegendButtonStyle extends ButtonStyle {
   final Radius? borderRadius;
   final Gradient? backgroundGradient;
   final BoxShadow? boxShadow;
+  final double? height;
+  final double? width;
 
   LegendButtonStyle({
     this.textStyle,
@@ -63,6 +65,8 @@ class LegendButtonStyle extends ButtonStyle {
     this.borderRadius,
     this.backgroundGradient,
     this.boxShadow,
+    this.height,
+    this.width,
   }) : super(
           alignment: alignment,
           animationDuration: animationDuration,
@@ -90,7 +94,8 @@ class LegendButtonStyle extends ButtonStyle {
           visualDensity: visualDensity,
         );
 
-  factory LegendButtonStyle.gradient(List<Color> colors) {
+  factory LegendButtonStyle.gradient(List<Color> colors,
+      {double? height, double? width}) {
     return LegendButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith(
         (states) {
@@ -100,7 +105,6 @@ class LegendButtonStyle extends ButtonStyle {
       foregroundColor: MaterialStateProperty.all(Colors.white),
       animationDuration: legendAnimationDuration,
       borderRadius: legendBorderRadius,
-      minimumSize: MaterialStateProperty.all(Size.zero),
       backgroundGradient: LinearGradient(
         colors: colors,
       ),
@@ -115,10 +119,12 @@ class LegendButtonStyle extends ButtonStyle {
         legendBoxShadow.color.withOpacity(0.4),
       ),
       boxShadow: legendBoxShadow,
+      height: height,
+      width: width,
     );
   }
 
-  factory LegendButtonStyle.danger() {
+  factory LegendButtonStyle.danger({double? height, double? width}) {
     return LegendButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith(
         (states) {
@@ -129,12 +135,17 @@ class LegendButtonStyle extends ButtonStyle {
           }
         },
       ),
+      minimumSize: width != null && height != null
+          ? MaterialStateProperty.all(Size(width, height))
+          : null,
       foregroundColor: MaterialStateProperty.all(Colors.white),
       animationDuration: legendAnimationDuration,
+      height: height,
+      width: width,
     );
   }
 
-  factory LegendButtonStyle.confirm() {
+  factory LegendButtonStyle.confirm({double? height, double? width}) {
     return LegendButtonStyle(
       backgroundColor: MaterialStateProperty.resolveWith(
         (states) {
@@ -147,6 +158,9 @@ class LegendButtonStyle extends ButtonStyle {
       ),
       foregroundColor: MaterialStateProperty.all(Colors.white),
       animationDuration: legendAnimationDuration,
+      minimumSize: width != null && height != null
+          ? MaterialStateProperty.all(Size(width, height))
+          : null,
       elevation: MaterialStateProperty.resolveWith(
         (states) {
           if (states.contains(MaterialState.hovered)) {
@@ -157,10 +171,12 @@ class LegendButtonStyle extends ButtonStyle {
         },
       ),
       borderRadius: legendBorderRadius,
+      height: height,
+      width: width,
     );
   }
 
-  factory LegendButtonStyle.normal() {
+  factory LegendButtonStyle.normal({double? height, double? width}) {
     return LegendButtonStyle(
       backgroundColor: MaterialStateProperty.all(Colors.white),
       overlayColor: MaterialStateProperty.all(Colors.white),
@@ -174,6 +190,9 @@ class LegendButtonStyle extends ButtonStyle {
           }
         },
       ),
+      fixedSize: width != null && height != null
+          ? MaterialStateProperty.all(Size(width, height))
+          : null,
       borderRadius: Radius.circular(4),
       side: MaterialStateProperty.resolveWith(
         (states) {
@@ -188,6 +207,50 @@ class LegendButtonStyle extends ButtonStyle {
           }
         },
       ),
+      height: height,
+      width: width,
+    );
+  }
+
+  @override
+  LegendButtonStyle copyWith({
+    AlignmentGeometry? alignment,
+    Duration? animationDuration,
+    MaterialStateProperty<Color?>? backgroundColor,
+    MaterialStateProperty<double?>? elevation,
+    bool? enableFeedback,
+    MaterialStateProperty<Size?>? fixedSize,
+    MaterialStateProperty<Color?>? foregroundColor,
+    MaterialStateProperty<Size?>? minimumSize,
+    MaterialStateProperty<MouseCursor?>? mouseCursor,
+    MaterialStateProperty<Color?>? overlayColor,
+    MaterialStateProperty<EdgeInsetsGeometry?>? padding,
+    MaterialStateProperty<Color?>? shadowColor,
+    MaterialStateProperty<OutlinedBorder?>? shape,
+    MaterialStateProperty<BorderSide?>? side,
+    InteractiveInkFeatureFactory? splashFactory,
+    MaterialTapTargetSize? tapTargetSize,
+    MaterialStateProperty<TextStyle?>? textStyle,
+    VisualDensity? visualDensity,
+  }) {
+    return LegendButtonStyle(
+      alignment: alignment,
+      animationDuration: animationDuration,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      enableFeedback: enableFeedback,
+      fixedSize: fixedSize,
+      foregroundColor: foregroundColor,
+      minimumSize: minimumSize,
+      mouseCursor: mouseCursor,
+      overlayColor: overlayColor,
+      padding: padding,
+      shadowColor: shadowColor,
+      side: side,
+      splashFactory: splashFactory,
+      tapTargetSize: tapTargetSize,
+      textStyle: textStyle,
+      visualDensity: visualDensity,
     );
   }
 }

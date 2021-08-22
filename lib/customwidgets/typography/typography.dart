@@ -25,17 +25,17 @@ class LegendTypography {
     this.h4 ?? LegendTextStyle.h4();
     this.h5 ?? LegendTextStyle.h5();
     this.h6 ?? LegendTextStyle.h6();
-    this.h7 ?? LegendTextStyle.h7();
+    this.h7 ?? LegendTextStyle.textInput();
   }
 }
 
 class LegendTextStyle extends TextStyle {
-  final TextStyle? style;
   final Color textColor;
   final Color backgroundColor;
   final double fontSize;
   final FontWeight fontWeight;
   final String fontFamily;
+  final double? height;
 
   LegendTextStyle({
     required this.textColor,
@@ -43,7 +43,7 @@ class LegendTextStyle extends TextStyle {
     required this.fontSize,
     required this.fontWeight,
     required this.fontFamily,
-    this.style,
+    this.height,
   }) : super(
           color: textColor,
           backgroundColor: backgroundColor,
@@ -56,9 +56,19 @@ class LegendTextStyle extends TextStyle {
     return LegendTextStyle(
       textColor: Colors.grey[850]!,
       backgroundColor: Colors.transparent,
-      fontSize: 22,
-      fontWeight: FontWeight.w200,
-      fontFamily: "Roboto",
+      fontSize: 28,
+      fontWeight: FontWeight.w300,
+      fontFamily: "sans serif",
+    );
+  }
+
+  factory LegendTextStyle.appBarMenuHeader() {
+    return LegendTextStyle(
+      textColor: Colors.grey[850]!,
+      backgroundColor: Colors.transparent,
+      fontSize: 14,
+      fontWeight: FontWeight.w300,
+      fontFamily: "sans serif",
     );
   }
 
@@ -102,6 +112,26 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
+  factory LegendTextStyle.siderMenuCollapsed() {
+    return LegendTextStyle(
+      textColor: Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 10,
+      fontWeight: FontWeight.w200,
+      fontFamily: "Roboto",
+    );
+  }
+
+  factory LegendTextStyle.sectionLink() {
+    return LegendTextStyle(
+      textColor: Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 16,
+      fontWeight: FontWeight.w300,
+      fontFamily: "Roboto",
+    );
+  }
+
   factory LegendTextStyle.h6() {
     return LegendTextStyle(
       textColor: Colors.white,
@@ -112,12 +142,14 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
-  factory LegendTextStyle.h7() {
+  factory LegendTextStyle.textInput({
+    Color? textColor,
+  }) {
     return LegendTextStyle(
-      textColor: Colors.black87,
-      backgroundColor: Colors.white,
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
+      textColor: textColor ?? Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 18,
+      fontWeight: FontWeight.w300,
       fontFamily: "sans serif",
     );
   }
@@ -127,6 +159,16 @@ class LegendTextStyle extends TextStyle {
       textColor: Colors.black87,
       backgroundColor: Colors.transparent,
       fontSize: 24.0,
+      fontWeight: FontWeight.w400,
+      fontFamily: "sans serif",
+    );
+  }
+
+  factory LegendTextStyle.formHeader() {
+    return LegendTextStyle(
+      textColor: Colors.black87,
+      backgroundColor: Colors.transparent,
+      fontSize: 16.0,
       fontWeight: FontWeight.w400,
       fontFamily: "sans serif",
     );

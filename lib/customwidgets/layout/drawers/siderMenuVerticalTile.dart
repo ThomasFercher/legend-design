@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/legendTheme.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 import '../../../router/routerProvider.dart';
 
 class SiderMenuVerticalTile extends StatefulWidget {
@@ -22,16 +22,17 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
   late AnimationController controller;
   late bool _isClicked;
   late bool _isHovered;
-  late Color? color = Colors.white;
+  late Color? color;
   Color? borderColor;
   @override
   void initState() {
     _isClicked = false;
     _isHovered = false;
+    color = Colors.black;
 
     controller = new AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250),
+      duration: Duration(milliseconds: 360),
     );
     banimation = ColorTween(
       begin: Colors.teal,
@@ -39,7 +40,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
     ).animate(controller);
 
     animation = ColorTween(
-      begin: Colors.white,
+      begin: Colors.black,
       end: Colors.blueAccent,
     ).animate(controller);
 
@@ -67,6 +68,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
     // TODO: implement build
     return Container(
       height: 64,
+      margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
@@ -113,8 +115,9 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
               ),
             ),
             LegendText(
+              textAlign: TextAlign.center,
               text: widget.title ?? "",
-              textStyle: LegendTextStyle.h5().copyWith(
+              textStyle: LegendTextStyle.siderMenuCollapsed().copyWith(
                 color: color,
               ),
             ),

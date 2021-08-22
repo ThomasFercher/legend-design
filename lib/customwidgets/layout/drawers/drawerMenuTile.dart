@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 import '../../../router/routerProvider.dart';
 import '../../typography/legendText.dart';
 
@@ -30,13 +30,13 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
   late AnimationController controller;
   late bool _isClicked;
   late bool _isHovered;
-  late Color? color = Colors.white;
+  late Color? color;
   Color? borderColor;
   @override
   void initState() {
     _isClicked = false;
     _isHovered = false;
-
+    color = Colors.black;
     controller = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 250),

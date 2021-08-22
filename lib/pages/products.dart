@@ -6,8 +6,8 @@ import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/typography.dart';
-import '../customwidgets/layout/fixed/fixedAppBar.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
+import '../customwidgets/layout/fixed/appBar.dart/fixedAppBar.dart';
 import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
 

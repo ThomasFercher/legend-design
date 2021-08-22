@@ -4,7 +4,7 @@ import 'package:webstore/customwidgets/layout/sections/sectionHeader.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/layoutType.dart';
 import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 
 class LegendGrid extends StatelessWidget {
   final List<Widget> children;
@@ -22,30 +22,14 @@ class LegendGrid extends StatelessWidget {
     int crossAxisCount;
     ScreenSize ss = SizeProvider.of(context).screenSize;
 
-    LegendGridSizeInfo size;
-    switch (ss) {
-      case ScreenSize.Small:
-        size = sizes.small;
-        break;
-      case ScreenSize.Medium:
-        size = sizes.medium;
-        break;
-      case ScreenSize.Large:
-        size = sizes.large;
-        break;
-      case ScreenSize.XXL:
-        size = sizes.xxl;
-        break;
-      default:
-        size = sizes.small;
-        break;
-    }
+    LegendGridSizeInfo size = sizes.getSizeForSize(ss);
 
     return LayoutBuilder(builder: (context, constraints) {
       int count = size.count;
-      double height = size.height;
+
       double singleChildWidth = constraints.maxWidth / count;
       int rows = (children.length / count).ceil();
+      double height = size.height * rows;
       double aspectRatio = singleChildWidth / (height / rows);
       return Container(
         height: height,

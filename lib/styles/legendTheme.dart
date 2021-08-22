@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'legendColorTheme.dart';
 import 'legendSizingTheme.dart';
-import 'typography.dart';
+import '../customwidgets/typography/typography.dart';
 
 enum LegendColorThemeType {
   LIGHT,
@@ -23,10 +23,12 @@ class LegendTheme extends ChangeNotifier {
   LegendColorTheme lightColorTheme = LegendColorTheme(
     primaryColor: Colors.teal,
     secondaryColor: Colors.blueGrey,
+    scaffoldBackgroundColor: Colors.black.withOpacity(0.06),
   );
   LegendColorTheme darkColorTheme = LegendColorTheme(
-    primaryColor: Colors.redAccent,
-    secondaryColor: Colors.blueGrey,
+    primaryColor: Colors.blueGrey,
+    secondaryColor: Colors.blueAccent,
+    scaffoldBackgroundColor: Colors.black.withOpacity(0.06),
   );
 
   void changeColorTheme(LegendColorThemeType type) {

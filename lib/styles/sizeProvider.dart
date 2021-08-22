@@ -7,6 +7,14 @@ class SizeProvider extends InheritedWidget {
   late final ScreenSize screenSize;
   final double height;
 
+  // AppBar Menu Width
+  late double _menuWidth;
+  void setMenuWidth(double width) {
+    this._menuWidth = width;
+  }
+
+  double get menuWidth => this._menuWidth;
+
   SizeProvider({
     required this.child,
     required this.width,

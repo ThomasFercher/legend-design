@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/typography.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 
 class SectionHeader extends StatelessWidget {
   final String text;
@@ -11,7 +11,7 @@ class SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      padding: EdgeInsets.only(bottom: 4.0),
       child: LegendText(
         text: text,
         textStyle: textStyle ?? LegendTextStyle.sectionHeader(),
