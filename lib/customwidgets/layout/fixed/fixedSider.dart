@@ -135,16 +135,6 @@ class Sider extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
 
-    ScrollController scrollController = ScrollController(
-      initialScrollOffset: 80.0,
-    );
-    scrollController
-      ..addListener(() {
-        if (scrollController.offset <= 80) {
-          scrollController.jumpTo(80);
-        }
-      });
-
     List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
     List<DrawerMenuTile> tiles = List.of(
       options.map(
@@ -160,6 +150,8 @@ class Sider extends StatelessWidget {
 
     List<SectionRouteInfo> sections =
         SectionProvider.of(context)?.sections ?? [];
+
+    print(sections);
     List<SectionTile> sectionTiles = List.of(
       sections.map(
         (option) => SectionTile(
@@ -171,9 +163,13 @@ class Sider extends StatelessWidget {
     List<Widget> children = [];
 
     if (showMenu ?? false) {
-      children.add(ListView(
-        shrinkWrap: true,
-        children: tiles,
+      children.add(Container(
+        height: 400,
+        child: ListView(
+          shrinkWrap: true,
+          itemExtent: 40,
+          children: tiles,
+        ),
       ));
     }
 
@@ -197,23 +193,21 @@ class Sider extends StatelessWidget {
       width: 200,
       height: MediaQuery.of(context).size.height,
       color: theme.colors.primaryColor,
-      child: Expanded(
-        child: CustomScrollView(
-          shrinkWrap: true,
-          slivers: [
-            SliverAppBar(
-              title: Container(),
-              backgroundColor: theme.colors.primaryColor,
-              actions: [Container()],
-              expandedHeight: theme.sizing.appbarHeight,
-              collapsedHeight: theme.sizing.appbarHeight,
-              toolbarHeight: theme.sizing.appbarHeight,
-              pinned: true,
-              automaticallyImplyLeading: false,
-            ),
-            SliverList(delegate: SliverChildListDelegate(children))
-          ],
-        ),
+      child: CustomScrollView(
+        shrinkWrap: true,
+        slivers: [
+          SliverAppBar(
+            title: Container(),
+            backgroundColor: theme.colors.primaryColor,
+            actions: [Container()],
+            expandedHeight: theme.sizing.appbarHeight,
+            collapsedHeight: theme.sizing.appbarHeight,
+            toolbarHeight: theme.sizing.appbarHeight,
+            pinned: true,
+            automaticallyImplyLeading: false,
+          ),
+          SliverList(delegate: SliverChildListDelegate(children))
+        ],
       ),
     );
   }

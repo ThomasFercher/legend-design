@@ -30,6 +30,7 @@ class SectionTile extends StatelessWidget {
       title: Container(
         alignment: Alignment.center,
         child: LegendText(
+          selectable: false,
           text: displayName,
           textStyle: LegendTextStyle.sectionLink().copyWith(
             fontSize: 16,
