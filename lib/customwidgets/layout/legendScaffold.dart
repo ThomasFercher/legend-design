@@ -3,7 +3,12 @@ import 'dart:io';
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
+import 'package:webstore/customwidgets/layout/sections/section.dart';
+import 'package:webstore/router/routes/sectionProvider.dart';
+import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'package:webstore/styles/legendTheme.dart';
 import 'drawers/drawerMenu.dart';
@@ -24,35 +29,67 @@ class LegendScaffold extends StatelessWidget {
   final LayoutType? layoutType;
   final String pageName;
   final Function(BuildContext context)? onActionButtonPressed;
-  final WidgetBuilder contentBuilder;
-  WidgetBuilder? siderBuilder;
-  bool? showSiderMenu;
+  final WidgetBuilder? siderBuilder;
+  final bool? showSiderMenu;
+  final bool? showAppBarMenu;
+  late final bool singlePage;
+  late final List<Widget> children;
+  late final WidgetBuilder contentBuilder;
 
   LegendScaffold({
-    Key? key,
-    this.layoutType,
     required this.pageName,
+    this.layoutType,
     this.onActionButtonPressed,
-    required this.contentBuilder,
     this.siderBuilder,
     this.showSiderMenu,
-  }) : super(key: key);
+    this.showAppBarMenu,
+    WidgetBuilder? contentBuilder,
+    List<Widget>? children,
+    bool? singlePage,
+    Key? key,
+  }) : super(key: key) {
+    this.singlePage = singlePage ?? false;
+    this.children = children ?? [];
+    this.contentBuilder = contentBuilder ?? (f) => Container();
+  }
+
+  List<SectionRouteInfo>? sections;
 
   @override
   Widget build(BuildContext context) {
+    sections = SectionProvider.of(context)?.sections;
     return SizeProvider(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      child: Builder(
-        builder: (context) {
-          if (kIsWeb) {
-            return materialLayout(context);
-          } else if (Platform.isIOS || Platform.isMacOS) {
-            return cupertinoLayout(context);
-          } else {
-            return materialLayout(context);
+      child: SectionNavigation(
+        sections: sections,
+        onNavigate: (section) {
+          // Jump to Section
+          if (sections != null) {
+            SectionRouteInfo s = sections!
+                .singleWhere((element) => element.name == section.name);
+            if (s.key != null && s.key?.currentContext != null) {
+              Scrollable.ensureVisible(
+                s.key!.currentContext!,
+                curve: Curves.easeInOut,
+                duration: Duration(
+                  milliseconds: 400,
+                ),
+              );
+            }
           }
         },
+        child: Builder(
+          builder: (context) {
+            if (kIsWeb) {
+              return materialLayout(context);
+            } else if (Platform.isIOS || Platform.isMacOS) {
+              return cupertinoLayout(context);
+            } else {
+              return materialLayout(context);
+            }
+          },
+        ),
       ),
     );
   }
@@ -73,6 +110,8 @@ class LegendScaffold extends StatelessWidget {
         screenSize != ScreenSize.Small) {
       return FixedSider(
         builder: siderBuilder,
+        showMenu: showSiderMenu,
+        showSectionMenu: true,
       );
     } else {
       return Container();
@@ -86,7 +125,7 @@ class LegendScaffold extends StatelessWidget {
   Widget getHeader() {
     if (layoutType == LayoutType.FixedHeaderSider) {
       return FixedAppBar(
-        showMenu: false,
+        showMenu: showAppBarMenu ?? false,
       );
     } else if (layoutType == LayoutType.FixedHeader) {
       return FixedAppBar();
@@ -140,51 +179,77 @@ class LegendScaffold extends StatelessWidget {
           getSider(screenSize),
           Expanded(
             child: CustomScrollView(
-              /*/ headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return <Widget>[
-                  getHeader(),
-                ];
-              },*/
               slivers: [
                 getHeader(),
-                SliverToBoxAdapter(
-                  child: LayoutBuilder(builder: (context, constraints) {
-                    return Container(
-                      constraints: BoxConstraints(
-                        minHeight: MediaQuery.of(context).size.height - 80,
-                      ),
-                      color: colors.scaffoldBackgroundColor,
-                      padding: contentPadding,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: LegendText(
-                              text: pageName,
-                              textStyle: LegendTextStyle.h1(),
+                children.isEmpty
+                    ? SliverToBoxAdapter(
+                        child: LayoutBuilder(builder: (context, constraints) {
+                          return Container(
+                            constraints: BoxConstraints(
+                              minHeight:
+                                  MediaQuery.of(context).size.height - 80,
                             ),
-                            padding:
-                                const EdgeInsets.only(top: 8.0, bottom: 16.0),
+                            color: colors.scaffoldBackgroundColor,
+                            padding: contentPadding,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: constraints.maxWidth -
+                                      contentPadding.horizontal,
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Builder(builder: contentBuilder),
+                                ),
+                                getFooter(),
+                              ],
+                            ),
+                          );
+                        }),
+                      )
+                    : SliverToBoxAdapter(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: getChildren(),
                           ),
-                          Container(
-                            //   color: colors,
-                            //    height: 1000,
-                            width: constraints.maxWidth -
-                                contentPadding.horizontal,
-                            padding: const EdgeInsets.all(8.0),
-                            child: Builder(builder: contentBuilder),
-                          ),
-                          getFooter(),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
+                        ),
+                      )
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  // Every Section Widget gets wrapped witch a Global Key for Section Navigation
+  List<Widget> getChildren() {
+    List<Widget> childs = [];
+
+    this.children.forEach((element) {
+      Widget w;
+      if (element is Section) {
+        Section s = element;
+        GlobalKey key = new GlobalKey();
+        if (sections != null) {
+          try {
+            SectionRouteInfo se =
+                sections!.singleWhere((element) => element.name == s.name);
+            int i = sections!.indexOf(se);
+            sections![i] = SectionRouteInfo(name: se.name, key: key);
+          } catch (e) {
+            print("No Section found!");
+          }
+        }
+        w = Container(
+          key: key,
+          child: s,
+        );
+      } else {
+        w = element;
+      }
+      childs.add(w);
+    });
+
+    return childs;
   }
 }

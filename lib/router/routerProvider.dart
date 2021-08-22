@@ -6,8 +6,10 @@ import 'package:flutter/widgets.dart';
 import '../objects/menuOption.dart';
 import 'delegate.dart';
 import 'errorpages/notfound.dart';
-import 'routeInfo.dart';
+import 'routes/routeInfo.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+
+import 'routes/sectionProvider.dart';
 
 class RouterProvider extends InheritedWidget {
   final WebRouterDelegate routerDelegate;
@@ -35,40 +37,46 @@ class RouterProvider extends InheritedWidget {
     this.routerDelegate.pushPage(p);
   }
 
-  static Widget getRouteWidget(RouteSettings s, List<RouteInfo> routes) {
+  static RouteInfo getRouteWidget(RouteSettings s, List<RouteInfo> routes) {
     if (routes == null || routes.isEmpty) {
-      return NotFoundPage();
+      return RouteInfo(name: "Not Found", page: NotFoundPage());
     }
 
-    Widget? w = routes.singleWhere(
+    RouteInfo? route = routes.singleWhere(
       (r) => r.name == s.name,
       orElse: () {
         return RouteInfo(name: "/notfound", page: NotFoundPage());
       },
-    ).page;
+    );
 
-    return w;
+    return route;
   }
 
-  static Page createPage(RouteSettings s, Widget page) {
+  static Page createPage(RouteSettings s, RouteInfo route) {
     String now = DateTime.now().millisecondsSinceEpoch.toString();
+
+    // create full screen Page
+
     if (kIsWeb) {
       return MaterialPage(
-        child: page,
+        child: route.page,
         key: ValueKey(s.name! + now),
         name: s.name,
         arguments: s.arguments,
       );
     } else if (Platform.isIOS || Platform.isMacOS) {
       return CupertinoPage(
-        child: page,
+        child: route.page,
         key: ValueKey(s.name! + now),
         name: s.name,
         arguments: s.arguments,
       );
     } else {
       return MaterialPage(
-        child: page,
+        child: SectionProvider(
+          sections: route.sections,
+          child: route.page,
+        ),
         key: ValueKey(s.name! + now),
         name: s.name,
         arguments: s.arguments,

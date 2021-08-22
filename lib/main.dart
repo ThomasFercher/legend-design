@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 
 import 'objects/menuOption.dart';
@@ -8,7 +9,7 @@ import 'pages/home.dart';
 import 'pages/products.dart';
 import 'router/delegate.dart';
 import 'router/parser.dart';
-import 'router/routeInfo.dart';
+import 'router/routes/routeInfo.dart';
 import 'router/routerProvider.dart';
 import 'styles/legendTheme.dart';
 import 'customwidgets/typography/typography.dart';
@@ -40,8 +41,16 @@ class MyApp extends StatelessWidget {
             page: ProductsPage(),
           ),
           RouteInfo(
-            name: "/widgetcomponents",
+            name: "/widgets",
             page: WidgetComponents(),
+            sections: [
+              SectionRouteInfo(name: "/buttons"),
+              SectionRouteInfo(name: "/modals"),
+              SectionRouteInfo(name: "/selectbar"),
+              SectionRouteInfo(name: "/carousel"),
+              SectionRouteInfo(name: "/textfield"),
+              SectionRouteInfo(name: "/form"),
+            ],
           ),
         ],
         menuOptions: [
@@ -56,9 +65,9 @@ class MyApp extends StatelessWidget {
             icon: Icons.accessibility,
           ),
           MenuOptionHeader(
-            title: "Widget Components",
-            page: "/widgetcomponents",
-            icon: Icons.info_sharp,
+            title: "Widgets",
+            page: "/widgets",
+            icon: Icons.widgets,
           ),
         ],
         child: MaterialApp.router(

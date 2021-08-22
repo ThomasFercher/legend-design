@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../pages/home.dart';
 import 'errorpages/notfound.dart';
-import 'routeInfo.dart';
+import 'routes/routeInfo.dart';
 import 'routerProvider.dart';
 
 class WebRouterDelegate extends RouterDelegate<List<RouteSettings>>

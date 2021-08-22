@@ -1,8 +1,9 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/layout/sections/sectionTile.dart';
+import 'package:webstore/router/routes/sectionProvider.dart';
+import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import '../drawers/siderMenuVerticalTile.dart';
 import '../../../objects/menuOption.dart';
 import '../../../router/routerProvider.dart';
@@ -14,13 +15,16 @@ import '../drawers/drawerMenuTile.dart';
 
 class FixedSider extends StatelessWidget {
   late final bool showMenu;
+  late final bool showSectionMenu;
   WidgetBuilder? builder;
 
   FixedSider({
     bool? showMenu,
+    bool? showSectionMenu,
     this.builder,
   }) {
     this.showMenu = showMenu ?? true;
+    this.showSectionMenu = showSectionMenu ?? false;
   }
 
   @override
@@ -33,18 +37,32 @@ class FixedSider extends StatelessWidget {
       tag: ValueKey("sider"),
       child: Material(
         elevation: 20,
-        child: showSider && showMenu
-            ? Sider(showMenu: showMenu, builder: builder, context: context)
-            : CollapsedSider(context: context),
+        child: showSider
+            ? Sider(
+                showMenu: showMenu,
+                builder: builder,
+                context: context,
+                showSectionMenu: showSectionMenu,
+              )
+            : CollapsedSider(
+                context: context,
+                showMenu: showMenu,
+                showSectionMenu: showSectionMenu,
+              ),
       ),
     );
   }
 }
 
 class CollapsedSider extends StatelessWidget {
+  final bool showMenu;
+  final bool showSectionMenu;
+
   const CollapsedSider({
     Key? key,
     required this.context,
+    required this.showMenu,
+    required this.showSectionMenu,
   }) : super(key: key);
 
   final BuildContext context;
@@ -62,6 +80,16 @@ class CollapsedSider extends StatelessWidget {
         ),
       ),
     );
+
+    List<SectionRouteInfo> sections =
+        SectionProvider.of(context)?.sections ?? [];
+    List<SectionTile> sectionTiles = List.of(
+      sections.map(
+        (option) => SectionTile(
+          name: option.name,
+        ),
+      ),
+    );
     return Container(
       width: 80,
       height: MediaQuery.of(context).size.height,
@@ -72,10 +100,16 @@ class CollapsedSider extends StatelessWidget {
             child: Placeholder(),
             height: 80,
           ),
-          ListView(
-            shrinkWrap: true,
-            children: tiles,
-          )
+          if (showMenu)
+            ListView(
+              shrinkWrap: true,
+              children: tiles,
+            ),
+          if (showSectionMenu)
+            ListView(
+              children: sectionTiles,
+              shrinkWrap: true,
+            )
         ],
       ),
     );
@@ -88,9 +122,11 @@ class Sider extends StatelessWidget {
     required this.showMenu,
     required this.builder,
     required this.context,
+    required this.showSectionMenu,
   }) : super(key: key);
 
   final bool? showMenu;
+  final bool? showSectionMenu;
   final WidgetBuilder? builder;
   final BuildContext context;
 
@@ -110,6 +146,16 @@ class Sider extends StatelessWidget {
       ),
     );
 
+    List<SectionRouteInfo> sections =
+        SectionProvider.of(context)?.sections ?? [];
+    List<SectionTile> sectionTiles = List.of(
+      sections.map(
+        (option) => SectionTile(
+          name: option.name,
+        ),
+      ),
+    );
+
     List<Widget> children = [
       Container(
         child: Placeholder(),
@@ -117,12 +163,19 @@ class Sider extends StatelessWidget {
       ),
     ];
 
-    if (showMenu ?? false)
+    if (showMenu ?? false) {
       children.add(ListView(
         shrinkWrap: true,
         children: tiles,
       ));
+    }
 
+    if (showSectionMenu ?? false) {
+      children.add(ListView(
+        shrinkWrap: true,
+        children: sectionTiles,
+      ));
+    }
     if (builder != null)
       children.add(
         Expanded(
