@@ -152,10 +152,12 @@ class Sider extends StatelessWidget {
         SectionProvider.of(context)?.sections ?? [];
 
     print(sections);
-    List<SectionTile> sectionTiles = List.of(
+    List<SiderMenuVerticalTile> sectionTiles = List.of(
       sections.map(
-        (option) => SectionTile(
-          name: option.name,
+        (option) => SiderMenuVerticalTile(
+          title: option.name.replaceAll("/", "").capitalize(),
+          path: option.name,
+          isSection: true,
         ),
       ),
     );

@@ -27,15 +27,15 @@ class SectionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.all(8),
+      enabled: true,
+      enableFeedback: true,
       title: Container(
+        color: Colors.red,
         alignment: Alignment.center,
         child: LegendText(
           selectable: false,
           text: displayName,
-          textStyle: LegendTextStyle.sectionLink().copyWith(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
+          textStyle: LegendTextStyle.sectionLink().copyWith(),
         ),
       ),
       onTap: () {

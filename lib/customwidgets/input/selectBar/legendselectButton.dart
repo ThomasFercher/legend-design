@@ -13,7 +13,7 @@ class LegendSelectButton extends StatefulWidget {
   final void Function(LegendSelectOption option) onClick;
   final double size;
   late BoxShadow shadow;
-  late Color? hoverColor;
+  late Color hoverColor;
   late Color backgroundColor;
 
   Gradient? gradient;
@@ -23,7 +23,11 @@ class LegendSelectButton extends StatefulWidget {
     required this.size,
     required this.onClick,
   }) {
-    backgroundColor = option.color ?? Colors.red;
+    hoverColor = option.color ?? Colors.red;
+    backgroundColor = LegendColorTheme.lighten(
+      hoverColor,
+      0.06,
+    ).withOpacity(0.6);
     gradient = option.gradient;
 
     if (gradient != null) {
@@ -31,14 +35,10 @@ class LegendSelectButton extends StatefulWidget {
     }
 
     shadow = BoxShadow(
-      color: backgroundColor.withOpacity(0.2),
+      color: hoverColor.withOpacity(0.4),
       spreadRadius: 2,
-      blurRadius: 16,
-      offset: Offset(0, 3),
-    );
-    hoverColor = LegendColorTheme.darken(
-      backgroundColor,
-      0.1,
+      blurRadius: 14,
+      offset: Offset(0, 2),
     );
   }
 
@@ -103,7 +103,7 @@ class _LegendSelectButtonState extends State<LegendSelectButton>
   BoxShadow getShadow(Color? color) {
     BoxShadow old = widget.shadow;
     return BoxShadow(
-      color: color?.withOpacity(0.2 + shadow * 0.02) ?? Colors.transparent,
+      color: color?.withOpacity(0.2 + shadow * 0.03) ?? Colors.transparent,
       blurRadius: old.blurRadius + shadow * 1,
       offset: old.offset,
       spreadRadius: old.spreadRadius + shadow * 1,

@@ -20,11 +20,13 @@ class LegendSelectBar extends StatelessWidget {
   final EdgeInsets? margin;
   final double? width;
   final double? height;
+  final Color? color;
 
   LegendSelectBar({
     required this.options,
     required this.onSelected,
     required this.aligment,
+    this.color,
     this.iconSize,
     this.isCard,
     this.margin,
@@ -68,12 +70,12 @@ class LegendSelectBar extends StatelessWidget {
             decoration: isCard ?? false
                 ? BoxDecoration(
                     borderRadius: sizing.borderRadius,
-                    color: LegendColorTheme.darken(theme.primaryColor, 0.08),
+                    color: color ?? Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black12,
-                        blurRadius: 4,
-                        spreadRadius: 2,
+                        blurRadius: 2,
+                        spreadRadius: 1,
                         offset: Offset(
                           0,
                           1,

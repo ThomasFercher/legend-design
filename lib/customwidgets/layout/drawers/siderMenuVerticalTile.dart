@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
+import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../../../router/routerProvider.dart';
 
 class SiderMenuVerticalTile extends StatefulWidget {
   final String path;
-  final IconData icon;
+  final IconData? icon;
   final String? title;
+  late final bool isSection;
 
-  SiderMenuVerticalTile({required this.path, required this.icon, this.title});
+  SiderMenuVerticalTile({
+    required this.path,
+    this.icon,
+    this.title,
+    bool? isSection,
+  }) {
+    this.isSection = isSection ?? false;
+  }
 
   @override
   _SiderMenuVerticalTileState createState() => _SiderMenuVerticalTileState();
@@ -67,7 +77,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      height: 64,
+      height: 48,
       margin: EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         border: Border(
@@ -88,36 +98,41 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
         enableFeedback: true,
         onHover: (value) {
           print(value);
-          if (value && !_isClicked) {
+          if (value) {
             if (!controller.isAnimating || !_isHovered) {
               controller.forward();
               _isHovered = true;
             }
           } else {
-            if (!controller.isAnimating || _isHovered && !_isClicked) {
+            if (!controller.isAnimating || _isHovered) {
               controller.reverse();
               _isHovered = false;
             }
           }
         },
         onTap: () {
-          _isClicked = !_isClicked;
-          RouterProvider.of(context).pushPage(
-            settings: RouteSettings(name: widget.path),
-          );
+          if (widget.isSection)
+            SectionNavigation.of(context)
+                ?.navigateToSection(SectionRouteInfo(name: widget.path));
+          else
+            RouterProvider.of(context).pushPage(
+              settings: RouteSettings(name: widget.path),
+            );
         },
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Icon(
-                widget.icon,
-                color: color,
+            if (widget.icon != null)
+              Expanded(
+                child: Icon(
+                  widget.icon,
+                  color: color,
+                ),
               ),
-            ),
             LegendText(
               textAlign: TextAlign.center,
               text: widget.title ?? "",
-              textStyle: LegendTextStyle.siderMenuCollapsed().copyWith(
+              textStyle: LegendTextStyle.sectionLink().copyWith(
                 color: color,
               ),
             ),

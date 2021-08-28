@@ -6,6 +6,7 @@ import 'package:webstore/customwidgets/datadisplay/carousel/legendCarousel.dart'
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
+import 'package:webstore/customwidgets/datadisplay/tag/legendTag.dart';
 import 'package:webstore/customwidgets/input/form/legendForm.dart';
 import 'package:webstore/customwidgets/input/form/legendFormField.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
@@ -225,68 +226,42 @@ class WidgetComponents extends StatelessWidget {
             LegendGrid(
               sizes: LegendGridSize(
                 small: LegendGridSizeInfo(1, 80),
-                large: LegendGridSizeInfo(3, 80),
+                large: LegendGridSizeInfo(2, 80),
                 layoutDirection: LegendGridSizeDirection.DOWN,
               ),
               children: [
                 LegendSelectBar(
                   options: [
                     LegendSelectOption(
-                      color: Colors.redAccent,
-                      icon: Icons.credit_card,
-                      name: "1",
+                        color: Colors.teal, icon: Icons.credit_card, name: "1"),
+                    LegendSelectOption(
+                        color: Colors.teal,
+                        icon: Icons.wallet_giftcard,
+                        name: "2"),
+                    LegendSelectOption(
+                      color: Colors.teal,
+                      icon: Icons.money,
+                      name: "3",
                     ),
+                  ],
+                  aligment: MainAxisAlignment.spaceAround,
+                  onSelected: (a) {
+                    print(a);
+                  },
+                  iconSize: 36,
+                ),
+                LegendSelectBar(
+                  options: [
+                    LegendSelectOption(
+                        color: Colors.purpleAccent,
+                        icon: Icons.credit_card,
+                        name: "1"),
+                    LegendSelectOption(
+                        color: Colors.purpleAccent,
+                        icon: Icons.wallet_giftcard,
+                        name: "2"),
                     LegendSelectOption(
                       color: Colors.purpleAccent,
-                      icon: Icons.wallet_giftcard,
-                      name: "2",
-                    ),
-                    LegendSelectOption(
-                      color: Colors.cyanAccent,
-                      icon: Icons.money,
-                      name: "3",
-                    ),
-                  ],
-                  aligment: MainAxisAlignment.spaceAround,
-                  onSelected: (a) {
-                    print(a);
-                  },
-                  iconSize: 36,
-                ),
-                LegendSelectBar(
-                  options: [
-                    LegendSelectOption(
-                        color: Colors.redAccent,
-                        icon: Icons.credit_card,
-                        name: "1"),
-                    LegendSelectOption(
-                        color: Colors.purpleAccent,
-                        icon: Icons.wallet_giftcard,
-                        name: "2"),
-                    LegendSelectOption(
-                      color: Colors.cyanAccent,
-                      icon: Icons.money,
-                      name: "3",
-                    ),
-                  ],
-                  aligment: MainAxisAlignment.spaceAround,
-                  onSelected: (a) {
-                    print(a);
-                  },
-                  iconSize: 36,
-                ),
-                LegendSelectBar(
-                  options: [
-                    LegendSelectOption(
-                        color: Colors.redAccent,
-                        icon: Icons.credit_card,
-                        name: "1"),
-                    LegendSelectOption(
-                        color: Colors.purpleAccent,
-                        icon: Icons.wallet_giftcard,
-                        name: "2"),
-                    LegendSelectOption(
-                      color: Colors.cyanAccent,
                       icon: Icons.money,
                       name: "3",
                     ),
@@ -396,6 +371,79 @@ class WidgetComponents extends StatelessWidget {
             )
           ],
           header: "Form",
+        ),
+        Section(
+          name: "/table",
+          children: [
+            LegendText(text: "loreasd"),
+            LegendTable(
+              header: "Test Table",
+              rowHeight: 56,
+              columnTypes: [
+                LegendTableValueType.TEXT,
+                LegendTableValueType.TAG,
+                LegendTableValueType.ACTION,
+              ],
+              values: [
+                LegendRowValue(
+                  fields: [
+                    "test",
+                    [
+                      ["Trottl", Colors.red],
+                      ["Lappen", Colors.blue],
+                    ],
+                    "delete"
+                  ],
+                  actionFunction: () {
+                    print("hello");
+                  },
+                ),
+                LegendRowValue(
+                  fields: [
+                    "asd",
+                    [
+                      ["Developer", Colors.orange],
+                      ["Coolman", Colors.green],
+                    ],
+                    "delete"
+                  ],
+                  actionFunction: () {
+                    print("hello");
+                  },
+                ),
+                LegendRowValue(
+                  fields: [
+                    "test",
+                    [
+                      ["Nice", Colors.brown],
+                      ["Cool", Colors.purple],
+                    ],
+                    "delete"
+                  ],
+                  actionFunction: () {
+                    print("hello");
+                  },
+                ),
+              ],
+            ),
+          ],
+          header: "Table",
+        ),
+        Section(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                LegendTag(color: Colors.purpleAccent, text: "Test"),
+                LegendTag(color: Colors.redAccent, text: "Test"),
+                LegendTag(color: Colors.tealAccent, text: "Test"),
+                LegendTag(color: Colors.blueAccent, text: "Test"),
+                LegendTag(color: Colors.yellow, text: "Test"),
+              ],
+            )
+          ],
+          header: "Tags",
+          name: "/tags",
         ),
       ],
       pageName: "Widget Components",

@@ -62,6 +62,16 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
+  factory LegendTextStyle.tableHeader() {
+    return LegendTextStyle(
+      textColor: Colors.grey[850]!,
+      backgroundColor: Colors.transparent,
+      fontSize: 24,
+      fontWeight: FontWeight.w500,
+      fontFamily: "sans serif",
+    );
+  }
+
   factory LegendTextStyle.appBarMenuHeader() {
     return LegendTextStyle(
       textColor: Colors.grey[850]!,
@@ -102,6 +112,16 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
+  factory LegendTextStyle.tag() {
+    return LegendTextStyle(
+      textColor: Colors.black45,
+      backgroundColor: Colors.transparent,
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      fontFamily: "sans serif",
+    );
+  }
+
   factory LegendTextStyle.h5() {
     return LegendTextStyle(
       textColor: Colors.black87,
@@ -124,10 +144,10 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.sectionLink() {
     return LegendTextStyle(
-      textColor: Colors.black87,
+      textColor: Colors.black.withOpacity(0.68),
       backgroundColor: Colors.transparent,
       fontSize: 16,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w600,
       fontFamily: "Roboto",
     );
   }

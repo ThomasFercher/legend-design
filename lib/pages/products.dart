@@ -31,30 +31,6 @@ class ProductsPage extends StatelessWidget {
                   ],
                 ),
               ),
-              LegendTable(
-                columnTypes: [
-                  LegendTableValueType.TEXT,
-                  LegendTableValueType.TEXT,
-                  LegendTableValueType.ACTION,
-                ],
-                values: [
-                  LegendRowValue(
-                      fields: ["test", "tata", "delete"],
-                      actionFunction: () {
-                        print("hello");
-                      }),
-                  LegendRowValue(
-                      fields: ["test", "tata", "delete"],
-                      actionFunction: () {
-                        print("hello");
-                      }),
-                  LegendRowValue(
-                      fields: ["test", "tata", "delete"],
-                      actionFunction: () {
-                        print("hello");
-                      }),
-                ],
-              ),
             ],
           ),
         );

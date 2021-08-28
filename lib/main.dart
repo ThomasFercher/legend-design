@@ -50,6 +50,8 @@ class MyApp extends StatelessWidget {
               SectionRouteInfo(name: "/carousel"),
               SectionRouteInfo(name: "/textfield"),
               SectionRouteInfo(name: "/form"),
+              SectionRouteInfo(name: "/table"),
+              SectionRouteInfo(name: "/tags"),
             ],
           ),
         ],
