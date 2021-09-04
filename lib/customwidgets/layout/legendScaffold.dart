@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
 import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
 import 'package:webstore/customwidgets/layout/sections/section.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
@@ -124,16 +125,21 @@ class LegendScaffold extends StatelessWidget {
     return FixedFooter();
   }
 
-  Widget getHeader() {
+  Widget getHeader(context) {
     switch (layoutType) {
       case LayoutType.FixedHeaderSider:
         return FixedAppBar(
-          showMenu: showAppBarMenu,
+          showMenu: SizeProvider.of(context).isMobile == false
+              ? showAppBarMenu
+              : false,
           builder: appBarBuilder,
         );
       case LayoutType.FixedHeader:
         return FixedAppBar(
           builder: appBarBuilder,
+          showMenu: SizeProvider.of(context).isMobile == false
+              ? showAppBarMenu
+              : false,
         );
       default:
         return SliverToBoxAdapter(
@@ -166,7 +172,9 @@ class LegendScaffold extends StatelessWidget {
     LegendColorTheme colors = Provider.of<LegendTheme>(context).colors;
 
     return Scaffold(
-      endDrawer: DrawerMenu(),
+      //endDrawer: DrawerMenu(),
+      bottomNavigationBar:
+          SizeProvider.of(context).isMobile ? FixedBottomBar() : null,
       endDrawerEnableOpenDragGesture: false,
       floatingActionButton: onActionButtonPressed != null
           ? Builder(
@@ -181,7 +189,7 @@ class LegendScaffold extends StatelessWidget {
           Expanded(
             child: CustomScrollView(
               slivers: [
-                getHeader(),
+                getHeader(context),
                 children.isEmpty
                     ? SliverToBoxAdapter(
                         child: LayoutBuilder(builder: (context, constraints) {
@@ -213,7 +221,7 @@ class LegendScaffold extends StatelessWidget {
                             children: getChildren(),
                           ),
                         ),
-                      )
+                      ),
               ],
             ),
           ),

@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
 import 'package:webstore/styles/layoutType.dart';
+import 'package:webstore/styles/legendTheme.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 
-class FixedMenu extends StatelessWidget {
+class FixedMenu extends StatefulWidget {
+  final void Function(MenuOptionHeader option)? onSelected;
   const FixedMenu({
     Key? key,
     required this.context,
+    this.onSelected,
   }) : super(key: key);
 
   final BuildContext context;
 
+  @override
+  _FixedMenuState createState() => _FixedMenuState();
+}
+
+class _FixedMenuState extends State<FixedMenu> {
   Widget getCollapsedMenu(BuildContext context) {
     return Container(
       alignment: Alignment.centerRight,
@@ -30,38 +39,35 @@ class FixedMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
-
+    List<MenuOptionHeader> options = RouterProvider.of(context)
+        .menuOptions
+        .map(
+          (option) => MenuOptionHeader(
+            title: option.title,
+            page: option.page,
+            icon: option.icon,
+            onSelected: (page) {
+              if (widget.onSelected != null) widget.onSelected!(option);
+            },
+          ),
+        )
+        .toList();
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     double menuWidth;
 
     return Container(
-      margin: const EdgeInsets.only(left: 16.0),
-      height: 80,
+      //  margin: const EdgeInsets.only(left: 16.0),
+      height: theme.appBarStyle.appBarHeight,
       child: LayoutBuilder(
         builder: (context, constraints) {
           menuWidth = constraints.maxWidth;
 
-          if (menuWidth > 600) {
-            return Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                Container(
-                  child: Row(
-                    children: options,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(),
-                ),
-              ],
-            );
-          } else {
-            return getCollapsedMenu(context);
-          }
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: options,
+          );
+
+          //return getCollapsedMenu(context);
         },
       ),
     );

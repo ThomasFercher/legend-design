@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedAppBar.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'legendColorTheme.dart';
 import 'legendSizingTheme.dart';
@@ -16,10 +17,17 @@ enum LegendSizingType {
   WEB,
 }
 
+enum FixedAppBarType {
+  NORMAl,
+  SLEEK,
+  RoundedMobile,
+}
+
 class LegendTheme extends ChangeNotifier {
   // Colors
   LegendColorThemeType colorTheme = LegendColorThemeType.LIGHT;
   LegendSizingType sizingType = LegendSizingType.WEB;
+
   LegendColorTheme lightColorTheme = LegendColorTheme(
     primaryColor: Colors.teal,
     secondaryColor: Colors.blueGrey,
@@ -38,7 +46,6 @@ class LegendTheme extends ChangeNotifier {
 
   // Sizing
   LegendSizing webSizing = LegendSizing(
-    appbarHeight: 80.0,
     borderRadius: BorderRadius.all(
       Radius.circular(20.0),
     ),
@@ -62,6 +69,50 @@ class LegendTheme extends ChangeNotifier {
         return darkColorTheme;
       default:
         return lightColorTheme;
+    }
+  }
+
+  // Custom Widgets / Overrides)
+
+  final FixedAppBarType appBarType = FixedAppBarType.RoundedMobile;
+
+  late final FixedAppBarStyle sleekAppBarStyle = FixedAppBarStyle(
+    appBarHeight: 80,
+    backgroundColor: Colors.transparent,
+    borderRadius: Radius.circular(20),
+    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+    cardColor: Colors.white,
+    pinned: true,
+  );
+
+  late final FixedAppBarStyle mobileRoundedStyle = FixedAppBarStyle(
+    appBarHeight: 80,
+    backgroundColor: Colors.teal,
+    borderRadius: Radius.circular(20),
+    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+    pinned: true,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(12.0),
+      ),
+    ),
+  );
+
+  late final FixedAppBarStyle normalAppBarStyle = FixedAppBarStyle(
+    appBarHeight: 80,
+    backgroundColor: colors.primaryColor,
+    borderRadius: Radius.circular(20),
+    contentPadding: EdgeInsets.all(8),
+  );
+
+  FixedAppBarStyle get appBarStyle {
+    switch (appBarType) {
+      case FixedAppBarType.SLEEK:
+        return sleekAppBarStyle;
+      case FixedAppBarType.RoundedMobile:
+        return mobileRoundedStyle;
+      default:
+        return normalAppBarStyle;
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'layoutType.dart';
 
@@ -6,6 +8,7 @@ class SizeProvider extends InheritedWidget {
   final double width;
   late final ScreenSize screenSize;
   final double height;
+  late final bool isMobile;
 
   // AppBar Menu Width
   late double _menuWidth;
@@ -21,6 +24,7 @@ class SizeProvider extends InheritedWidget {
     required this.height,
   }) : super(child: child) {
     screenSize = getScreenSizeFromWidth(width);
+    isMobile = true; //Platform.isIOS || Platform.isAndroid;
   }
 
   static ScreenSize getScreenSizeFromWidth(double width) {

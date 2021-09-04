@@ -11,11 +11,13 @@ class MenuOptionHeader extends StatefulWidget {
   final String title;
   final String page;
   final IconData icon;
+  final void Function(String page)? onSelected;
 
   MenuOptionHeader({
     required this.title,
     required this.page,
     required this.icon,
+    this.onSelected,
   });
 
   @override
@@ -86,7 +88,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
           ),
         ),
       ),
-      height: theme.sizing.appbarHeight,
+      height: theme.appBarStyle.appBarHeight,
       child: InkWell(
         onHover: (value) {
           if (value && !_isClicked) {
@@ -103,6 +105,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
         },
         onTap: () {
           _isClicked = !_isClicked;
+          if (widget.onSelected != null) widget.onSelected!(this.widget.page);
           RouterProvider.of(context).pushPage(
             settings: RouteSettings(name: widget.page),
           );
@@ -120,7 +123,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               Icon(
                 widget.icon,
                 color: color,
-                size: theme.sizing.appbarHeight / 3.5,
+                size: theme.appBarStyle.appBarHeight / 3.5,
               ),
               Padding(padding: const EdgeInsets.symmetric(horizontal: 4.0)),
               Padding(
