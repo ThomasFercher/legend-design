@@ -70,6 +70,12 @@ class _BottomBarItemState extends State<BottomBarItem>
     });
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   Widget getText() {
     return LegendText(
       text: widget.option.title,

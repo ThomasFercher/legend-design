@@ -24,7 +24,7 @@ class SizeProvider extends InheritedWidget {
     required this.height,
   }) : super(child: child) {
     screenSize = getScreenSizeFromWidth(width);
-    isMobile = true; //Platform.isIOS || Platform.isAndroid;
+    isMobile = Platform.isIOS || Platform.isAndroid;
   }
 
   static ScreenSize getScreenSizeFromWidth(double width) {

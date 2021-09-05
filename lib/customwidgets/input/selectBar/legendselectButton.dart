@@ -84,6 +84,12 @@ class _LegendSelectButtonState extends State<LegendSelectButton>
       );
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   Widget normalIcon() {
     return Icon(
       widget.option.icon!,
