@@ -17,6 +17,8 @@ import '../styles/layoutType.dart';
 import '../customwidgets/typography/typography.dart';
 
 class Home extends StatelessWidget {
+  const Home();
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedAppBar.dart';
+import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'legendColorTheme.dart';
 import 'legendSizingTheme.dart';
@@ -23,7 +25,28 @@ enum FixedAppBarType {
   RoundedMobile,
 }
 
+enum BottomBarType {
+  NORMAl,
+  HALFROUNDED,
+  ROUNDED,
+}
+
 class LegendTheme extends ChangeNotifier {
+  LegendTheme() {
+    Color? _systemNavigationBarColor = bottomBarStyle.decoration.color;
+
+    if (bottomBarStyle.margin.bottom != 0) {
+      _systemNavigationBarColor = colors.scaffoldBackgroundColor;
+    }
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: colors.primaryColor,
+        systemNavigationBarColor: _systemNavigationBarColor,
+      ),
+    );
+  }
+
   // Colors
   LegendColorThemeType colorTheme = LegendColorThemeType.LIGHT;
   LegendSizingType sizingType = LegendSizingType.WEB;
@@ -31,12 +54,12 @@ class LegendTheme extends ChangeNotifier {
   LegendColorTheme lightColorTheme = LegendColorTheme(
     primaryColor: Colors.teal,
     secondaryColor: Colors.blueGrey,
-    scaffoldBackgroundColor: Colors.black.withOpacity(0.06),
+    scaffoldBackgroundColor: LegendColorTheme.darken(Colors.white, 0.06),
   );
   LegendColorTheme darkColorTheme = LegendColorTheme(
     primaryColor: Colors.blueGrey,
     secondaryColor: Colors.blueAccent,
-    scaffoldBackgroundColor: Colors.black.withOpacity(0.06),
+    scaffoldBackgroundColor: LegendColorTheme.darken(Colors.white, 0.06),
   );
 
   void changeColorTheme(LegendColorThemeType type) {
@@ -73,7 +96,6 @@ class LegendTheme extends ChangeNotifier {
   }
 
   // Custom Widgets / Overrides)
-
   final FixedAppBarType appBarType = FixedAppBarType.RoundedMobile;
 
   late final FixedAppBarStyle sleekAppBarStyle = FixedAppBarStyle(
@@ -88,7 +110,7 @@ class LegendTheme extends ChangeNotifier {
   late final FixedAppBarStyle mobileRoundedStyle = FixedAppBarStyle(
     appBarHeight: 80,
     backgroundColor: Colors.teal,
-    borderRadius: Radius.circular(20),
+    borderRadius: Radius.circular(12.0),
     contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 0),
     pinned: true,
     shape: RoundedRectangleBorder(
@@ -113,6 +135,82 @@ class LegendTheme extends ChangeNotifier {
         return mobileRoundedStyle;
       default:
         return normalAppBarStyle;
+    }
+  }
+
+  // Bottom Bar
+
+  final BottomBarType bottomBarType = BottomBarType.ROUNDED;
+
+  late final BottomBarStyle normalBottomBar = BottomBarStyle(
+    showText: true,
+    textAtBottom: true,
+    height: 56,
+    margin: EdgeInsets.all(0),
+    activeColor: colors.primaryColor,
+    disabledColor: Colors.black26,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 2.0,
+          spreadRadius: 2.0,
+        ),
+      ],
+    ),
+  );
+
+  late final BottomBarStyle roundedBottomBar = BottomBarStyle(
+    showText: true,
+    textAtBottom: true,
+    height: 64,
+    margin: EdgeInsets.all(0),
+    activeColor: colors.primaryColor,
+    disabledColor: Colors.black26,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 2.0,
+          spreadRadius: 2.0,
+        ),
+      ],
+    ),
+  );
+
+  late final BottomBarStyle cardBottomBar = BottomBarStyle(
+    showText: true,
+    textAtBottom: true,
+    height: 80,
+    margin: EdgeInsets.all(8.0),
+    activeColor: colors.primaryColor,
+    disabledColor: Colors.black26,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 2.0,
+          spreadRadius: 2.0,
+        ),
+      ],
+    ),
+  );
+
+  BottomBarStyle get bottomBarStyle {
+    switch (bottomBarType) {
+      case BottomBarType.NORMAl:
+        return normalBottomBar;
+      case BottomBarType.HALFROUNDED:
+        return roundedBottomBar;
+      case BottomBarType.ROUNDED:
+        return cardBottomBar;
+      default:
+        return normalBottomBar;
     }
   }
 }

@@ -32,6 +32,8 @@ import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
 
 class WidgetComponents extends StatelessWidget {
+  const WidgetComponents();
+
   @override
   Widget build(BuildContext context) {
     return LegendScaffold(

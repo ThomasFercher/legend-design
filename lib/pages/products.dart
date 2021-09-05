@@ -12,6 +12,8 @@ import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
 
 class ProductsPage extends StatelessWidget {
+  const ProductsPage();
+
   @override
   Widget build(BuildContext context) {
     return LegendScaffold(

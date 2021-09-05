@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/bottomBarProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 
@@ -16,62 +17,71 @@ import 'customwidgets/typography/typography.dart';
 
 void main() {
   runApp(
-    MyApp(),
+    LegendApp(),
   );
 }
 
-class MyApp extends StatelessWidget {
+class LegendApp extends StatelessWidget {
   final routerDelegate = new WebRouterDelegate();
+
+  static const List<MenuOption> _menuOptions = [
+    const MenuOption(
+      title: "Home",
+      page: "/",
+      icon: Icons.home,
+    ),
+    const MenuOption(
+      title: "Products",
+      page: "/products",
+      icon: Icons.accessibility,
+    ),
+    const MenuOption(
+      title: "Widgets",
+      page: "/widgets",
+      icon: Icons.widgets,
+    ),
+  ];
+
+  static const List<RouteInfo> _routes = [
+    const RouteInfo(
+      name: "/",
+      page: Home(),
+    ),
+    const RouteInfo(
+      name: "/products",
+      page: ProductsPage(),
+    ),
+    const RouteInfo(
+      name: "/widgets",
+      page: WidgetComponents(),
+      sections: [
+        const SectionRouteInfo(name: "/buttons"),
+        const SectionRouteInfo(name: "/modals"),
+        const SectionRouteInfo(name: "/selectbar"),
+        const SectionRouteInfo(name: "/carousel"),
+        const SectionRouteInfo(name: "/textfield"),
+        const SectionRouteInfo(name: "/form"),
+        const SectionRouteInfo(name: "/table"),
+        const SectionRouteInfo(name: "/tags"),
+      ],
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LegendTheme>(create: (_) => LegendTheme()),
+        ChangeNotifierProvider<BottomBarProvider>(
+          create: (_) => BottomBarProvider(
+            _menuOptions.first,
+          ),
+        ),
       ],
       child: RouterProvider(
         routerDelegate: routerDelegate,
-        routes: [
-          RouteInfo(
-            name: "/",
-            page: Home(),
-          ),
-          RouteInfo(
-            name: "/products",
-            page: ProductsPage(),
-          ),
-          RouteInfo(
-            name: "/widgets",
-            page: WidgetComponents(),
-            sections: [
-              SectionRouteInfo(name: "/buttons"),
-              SectionRouteInfo(name: "/modals"),
-              SectionRouteInfo(name: "/selectbar"),
-              SectionRouteInfo(name: "/carousel"),
-              SectionRouteInfo(name: "/textfield"),
-              SectionRouteInfo(name: "/form"),
-              SectionRouteInfo(name: "/table"),
-              SectionRouteInfo(name: "/tags"),
-            ],
-          ),
-        ],
-        menuOptions: [
-          MenuOptionHeader(
-            title: "Home",
-            page: "/",
-            icon: Icons.home,
-          ),
-          MenuOptionHeader(
-            title: "Products",
-            page: "/products",
-            icon: Icons.accessibility,
-          ),
-          MenuOptionHeader(
-            title: "Widgets",
-            page: "/widgets",
-            icon: Icons.widgets,
-          ),
-        ],
+        routes: _routes,
+        menuOptions: _menuOptions,
         child: MaterialApp.router(
           title: 'Legend Design',
           routerDelegate: routerDelegate,

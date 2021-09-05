@@ -71,7 +71,7 @@ class CollapsedSider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     List<SiderMenuVerticalTile> tiles = List.of(
       options.map(
         (option) => SiderMenuVerticalTile(
@@ -135,7 +135,7 @@ class Sider extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
 
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     List<DrawerMenuTile> tiles = List.of(
       options.map(
         (option) => DrawerMenuTile(

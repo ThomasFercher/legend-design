@@ -112,6 +112,15 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
+  factory LegendTextStyle.bottomBar() {
+    return LegendTextStyle(
+      textColor: Colors.black54,
+      backgroundColor: Colors.white,
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
+      fontFamily: "sans serif",
+    );
+  }
   factory LegendTextStyle.tag() {
     return LegendTextStyle(
       textColor: Colors.black45,

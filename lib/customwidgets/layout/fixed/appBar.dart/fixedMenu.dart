@@ -43,12 +43,7 @@ class _FixedMenuState extends State<FixedMenu> {
         .menuOptions
         .map(
           (option) => MenuOptionHeader(
-            title: option.title,
-            page: option.page,
-            icon: option.icon,
-            onSelected: (page) {
-              if (widget.onSelected != null) widget.onSelected!(option);
-            },
+            option: option,
           ),
         )
         .toList();

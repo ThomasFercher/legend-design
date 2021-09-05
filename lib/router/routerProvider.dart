@@ -15,7 +15,7 @@ class RouterProvider extends InheritedWidget {
   final WebRouterDelegate routerDelegate;
   final Widget child;
   final List<RouteInfo> routes;
-  final List<MenuOptionHeader> menuOptions;
+  final List<MenuOption> menuOptions;
 
   RouterProvider({
     Key? key,

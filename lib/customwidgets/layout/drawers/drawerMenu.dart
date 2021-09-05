@@ -8,7 +8,7 @@ import '../../../styles/sizeProvider.dart';
 class DrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     List<DrawerMenuTile> tiles = List.of(
       options.map(
         (option) => DrawerMenuTile(

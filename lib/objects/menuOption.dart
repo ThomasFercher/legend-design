@@ -7,17 +7,25 @@ import 'package:webstore/styles/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../router/routerProvider.dart';
 
-class MenuOptionHeader extends StatefulWidget {
+class MenuOption {
   final String title;
   final String page;
   final IconData icon;
   final void Function(String page)? onSelected;
 
-  MenuOptionHeader({
+  const MenuOption({
     required this.title,
     required this.page,
     required this.icon,
     this.onSelected,
+  });
+}
+
+class MenuOptionHeader extends StatefulWidget {
+  final MenuOption option;
+
+  MenuOptionHeader({
+    required this.option,
   });
 
   @override
@@ -105,9 +113,10 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
         },
         onTap: () {
           _isClicked = !_isClicked;
-          if (widget.onSelected != null) widget.onSelected!(this.widget.page);
+          if (widget.option.onSelected != null)
+            widget.option.onSelected!(widget.option.page);
           RouterProvider.of(context).pushPage(
-            settings: RouteSettings(name: widget.page),
+            settings: RouteSettings(name: widget.option.page),
           );
         },
         splashFactory: NoSplash.splashFactory,
@@ -121,7 +130,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                widget.icon,
+                widget.option.icon,
                 color: color,
                 size: theme.appBarStyle.appBarHeight / 3.5,
               ),
@@ -129,7 +138,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               Padding(
                 padding: const EdgeInsets.only(top: 2.0),
                 child: LegendText(
-                  text: widget.title,
+                  text: widget.option.title,
                   selectable: false,
                   textStyle: LegendTextStyle.appBarMenuHeader().copyWith(
                     color: color,
