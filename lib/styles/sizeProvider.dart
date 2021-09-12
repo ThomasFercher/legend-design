@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'layoutType.dart';
 
 class SizeProvider extends InheritedWidget {
@@ -24,7 +25,7 @@ class SizeProvider extends InheritedWidget {
     required this.height,
   }) : super(child: child) {
     screenSize = getScreenSizeFromWidth(width);
-    isMobile = Platform.isIOS || Platform.isAndroid;
+    isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
   }
 
   static ScreenSize getScreenSizeFromWidth(double width) {

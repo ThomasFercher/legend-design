@@ -232,6 +232,7 @@ class LegendButtonStyle extends ButtonStyle {
     MaterialTapTargetSize? tapTargetSize,
     MaterialStateProperty<TextStyle?>? textStyle,
     VisualDensity? visualDensity,
+    MaterialStateProperty<Size?>? maximumSize,
   }) {
     return LegendButtonStyle(
       alignment: alignment,

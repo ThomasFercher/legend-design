@@ -26,7 +26,7 @@ import '../../styles/layoutType.dart';
 import '../../styles/sizeProvider.dart';
 import '../typography/typography.dart';
 
-class LegendScaffold extends StatelessWidget {
+class LegendScaffold extends StatefulWidget {
   final LayoutType? layoutType;
   final String pageName;
   final Function(BuildContext context)? onActionButtonPressed;
@@ -56,11 +56,26 @@ class LegendScaffold extends StatelessWidget {
     this.contentBuilder = contentBuilder ?? (f) => Container();
   }
 
+  @override
+  _LegendScaffoldState createState() => _LegendScaffoldState();
+}
+
+class _LegendScaffoldState extends State<LegendScaffold> {
   List<SectionRouteInfo>? sections;
+
+  late ScrollController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = new ScrollController(
+      initialScrollOffset: 0,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    sections = SectionProvider.of(context)?.sections;
+    sections = SectionProvider.of(context)?.sections ?? [];
     return SizeProvider(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -69,8 +84,12 @@ class LegendScaffold extends StatelessWidget {
         onNavigate: (section) {
           // Jump to Section
           if (sections != null) {
-            SectionRouteInfo s = sections!
-                .singleWhere((element) => element.name == section.name);
+            SectionRouteInfo s = sections!.singleWhere(
+              (element) => element.name == section.name,
+              orElse: () {
+                return sections!.first;
+              },
+            );
             if (s.key != null && s.key?.currentContext != null) {
               Scrollable.ensureVisible(
                 s.key!.currentContext!,
@@ -104,16 +123,16 @@ class LegendScaffold extends StatelessWidget {
   }
 
   Widget getSider(ScreenSize screenSize) {
-    if (layoutType == LayoutType.FixedSider) {
+    if (widget.layoutType == LayoutType.FixedSider) {
       return FixedSider(
         showMenu: true,
-        builder: siderBuilder,
+        builder: widget.siderBuilder,
       );
-    } else if (layoutType == LayoutType.FixedHeaderSider &&
+    } else if (widget.layoutType == LayoutType.FixedHeaderSider &&
         screenSize != ScreenSize.Small) {
       return FixedSider(
-        builder: siderBuilder,
-        showMenu: showSiderMenu,
+        builder: widget.siderBuilder,
+        showMenu: widget.showSiderMenu,
         showSectionMenu: true,
       );
     } else {
@@ -126,19 +145,19 @@ class LegendScaffold extends StatelessWidget {
   }
 
   Widget getHeader(context) {
-    switch (layoutType) {
+    switch (widget.layoutType) {
       case LayoutType.FixedHeaderSider:
         return FixedAppBar(
           showMenu: SizeProvider.of(context).isMobile == false
-              ? showAppBarMenu
+              ? widget.showAppBarMenu
               : false,
-          builder: appBarBuilder,
+          builder: widget.appBarBuilder,
         );
       case LayoutType.FixedHeader:
         return FixedAppBar(
-          builder: appBarBuilder,
+          builder: widget.appBarBuilder,
           showMenu: SizeProvider.of(context).isMobile == false
-              ? showAppBarMenu
+              ? widget.showAppBarMenu
               : false,
         );
       default:
@@ -151,7 +170,7 @@ class LegendScaffold extends StatelessWidget {
   Widget getActionButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        onActionButtonPressed!(context);
+        widget.onActionButtonPressed!(context);
       },
     );
   }
@@ -169,14 +188,14 @@ class LegendScaffold extends StatelessWidget {
     var whitespace = 16 * 2 + 10;
     var footerHeight = 200;
 
-    LegendColorTheme colors = Provider.of<LegendTheme>(context).colors;
+    LegendTheme theme = Provider.of<LegendTheme>(context);
 
     return Scaffold(
       //endDrawer: DrawerMenu(),
       bottomNavigationBar:
           SizeProvider.of(context).isMobile ? FixedBottomBar() : null,
       endDrawerEnableOpenDragGesture: false,
-      floatingActionButton: onActionButtonPressed != null
+      floatingActionButton: widget.onActionButtonPressed != null
           ? Builder(
               builder: (context) {
                 return getActionButton(context);
@@ -188,9 +207,10 @@ class LegendScaffold extends StatelessWidget {
           getSider(screenSize),
           Expanded(
             child: CustomScrollView(
+              controller: controller,
               slivers: [
                 getHeader(context),
-                children.isEmpty
+                widget.children.isEmpty
                     ? SliverToBoxAdapter(
                         child: LayoutBuilder(builder: (context, constraints) {
                           return Container(
@@ -198,16 +218,21 @@ class LegendScaffold extends StatelessWidget {
                               minHeight:
                                   MediaQuery.of(context).size.height - 80,
                             ),
-                            color: colors.scaffoldBackgroundColor,
+                            color: theme.colors.scaffoldBackgroundColor,
                             padding: contentPadding,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
+                                  color: Colors.red,
+                                  height: theme.appBarStyle.appBarHeight,
+                                ),
+                                Container(
                                   width: constraints.maxWidth -
                                       contentPadding.horizontal,
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Builder(builder: contentBuilder),
+                                  child:
+                                      Builder(builder: widget.contentBuilder),
                                 ),
                                 getFooter(),
                               ],
@@ -218,7 +243,7 @@ class LegendScaffold extends StatelessWidget {
                     : SliverToBoxAdapter(
                         child: SingleChildScrollView(
                           child: Column(
-                            children: getChildren(),
+                            children: getChildren(context),
                           ),
                         ),
                       ),
@@ -230,25 +255,26 @@ class LegendScaffold extends StatelessWidget {
     );
   }
 
-  // Every Section Widget gets wrapped witch a Global Key for Section Navigation
-  List<Widget> getChildren() {
+  List<Widget> getChildren(BuildContext context) {
     List<Widget> childs = [];
 
-    this.children.forEach((element) {
+    this.widget.children.forEach((element) {
       Widget w;
       if (element is Section) {
         Section s = element;
         GlobalKey key = new GlobalKey();
         if (sections != null) {
-          try {
-            SectionRouteInfo se =
-                sections!.singleWhere((element) => element.name == s.name);
-            int i = sections!.indexOf(se);
-            sections![i] = SectionRouteInfo(name: se.name, key: key);
-          } catch (e) {
-            print("No Section found!");
-          }
+          SectionRouteInfo se = sections!.singleWhere(
+            (element) => element.name == s.name,
+            orElse: () {
+              print("");
+              return sections!.last;
+            },
+          );
+          int i = sections!.indexOf(se);
+          sections![i] = SectionRouteInfo(name: se.name, key: key);
         }
+
         w = Container(
           key: key,
           child: s,

@@ -6,7 +6,7 @@ import '../../typography/legendText.dart';
 
 class DrawerMenuTile extends StatefulWidget {
   final IconData icon;
-  final String title;
+  final String? title;
   final String path;
   final Color backgroundColor;
   final bool left;
@@ -116,12 +116,14 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
             widget.icon,
             color: color,
           ),
-          title: LegendText(
-            text: widget.title,
-            textStyle: LegendTextStyle.h5().copyWith(
-              color: color,
-            ),
-          ),
+          title: widget.title != null
+              ? LegendText(
+                  text: widget.title!,
+                  textStyle: LegendTextStyle.h5().copyWith(
+                    color: color,
+                  ),
+                )
+              : Container(),
         ),
       ),
     );

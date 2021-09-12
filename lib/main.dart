@@ -42,28 +42,31 @@ class LegendApp extends StatelessWidget {
     ),
   ];
 
-  static const List<RouteInfo> _routes = [
-    const RouteInfo(
+  List<RouteInfo> _routes = [
+    RouteInfo(
       name: "/",
       page: Home(),
     ),
-    const RouteInfo(
+    RouteInfo(
       name: "/products",
       page: ProductsPage(),
     ),
-    const RouteInfo(
+    RouteInfo(
       name: "/widgets",
       page: WidgetComponents(),
-      sections: [
-        const SectionRouteInfo(name: "/buttons"),
-        const SectionRouteInfo(name: "/modals"),
-        const SectionRouteInfo(name: "/selectbar"),
-        const SectionRouteInfo(name: "/carousel"),
-        const SectionRouteInfo(name: "/textfield"),
-        const SectionRouteInfo(name: "/form"),
-        const SectionRouteInfo(name: "/table"),
-        const SectionRouteInfo(name: "/tags"),
-      ],
+      sections: List.of(
+        [
+          SectionRouteInfo(name: "/buttons"),
+          SectionRouteInfo(name: "/modals"),
+          SectionRouteInfo(name: "/selectbar"),
+          SectionRouteInfo(name: "/carousel"),
+          SectionRouteInfo(name: "/textfield"),
+          SectionRouteInfo(name: "/form"),
+          SectionRouteInfo(name: "/table"),
+          SectionRouteInfo(name: "/tags"),
+        ],
+        growable: true,
+      ),
     ),
   ];
 

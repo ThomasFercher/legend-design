@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:rive/rive.dart';
+
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedMenu.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
@@ -20,6 +21,7 @@ class FixedAppBarStyle {
   final Color? cardColor;
   late final bool pinned;
   late final bool floating;
+  final bool? onlyIcons;
   final double appBarHeight;
 
   FixedAppBarStyle({
@@ -31,6 +33,7 @@ class FixedAppBarStyle {
     this.shape,
     bool? pinned,
     bool? floating,
+    this.onlyIcons,
   }) {
     this.floating = floating ?? false;
 
@@ -79,7 +82,7 @@ class FixedAppBar extends StatelessWidget {
 
     return SliverAppBar(
       backgroundColor: style?.backgroundColor,
-      /*  flexibleSpace: Container(
+      flexibleSpace: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -96,7 +99,7 @@ class FixedAppBar extends StatelessWidget {
             ],
           ),
         ),
-      ),*/
+      ),
       shape: style?.shape,
       title: Padding(
         padding: EdgeInsets.symmetric(
@@ -150,7 +153,9 @@ class FixedAppBar extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                               horizontal: style?.borderRadius?.x ?? 0,
                             ),
-                            child: FixedMenu(context: context),
+                            child: FixedMenu(
+                              context: context,
+                            ),
                           ),
                           Expanded(
                             child: Container(),

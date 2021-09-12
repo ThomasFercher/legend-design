@@ -23,6 +23,7 @@ enum FixedAppBarType {
   NORMAl,
   SLEEK,
   RoundedMobile,
+  ICONS,
 }
 
 enum BottomBarType {
@@ -96,15 +97,23 @@ class LegendTheme extends ChangeNotifier {
   }
 
   // Custom Widgets / Overrides)
-  final FixedAppBarType appBarType = FixedAppBarType.RoundedMobile;
+  final FixedAppBarType appBarType = FixedAppBarType.ICONS;
 
   late final FixedAppBarStyle sleekAppBarStyle = FixedAppBarStyle(
     appBarHeight: 80,
     backgroundColor: Colors.transparent,
     borderRadius: Radius.circular(20),
-    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 12.0),
     cardColor: Colors.white,
     pinned: true,
+  );
+
+  late final FixedAppBarStyle iconsAppBar = FixedAppBarStyle(
+    appBarHeight: 80,
+    backgroundColor: Colors.transparent,
+    borderRadius: Radius.circular(20),
+    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 12.0),
+    onlyIcons: true,
   );
 
   late final FixedAppBarStyle mobileRoundedStyle = FixedAppBarStyle(
@@ -133,6 +142,9 @@ class LegendTheme extends ChangeNotifier {
         return sleekAppBarStyle;
       case FixedAppBarType.RoundedMobile:
         return mobileRoundedStyle;
+
+      case FixedAppBarType.ICONS:
+        return iconsAppBar;
       default:
         return normalAppBarStyle;
     }

@@ -8,10 +8,12 @@ import 'package:webstore/styles/sizeProvider.dart';
 
 class FixedMenu extends StatefulWidget {
   final void Function(MenuOptionHeader option)? onSelected;
+  final bool? showIconsOnly;
   const FixedMenu({
     Key? key,
     required this.context,
     this.onSelected,
+    this.showIconsOnly,
   }) : super(key: key);
 
   final BuildContext context;
