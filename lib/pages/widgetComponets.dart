@@ -36,6 +36,7 @@ class WidgetComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     return LegendScaffold(
       showSiderMenu: false,
       showAppBarMenu: true,
@@ -48,6 +49,7 @@ class WidgetComponents extends StatelessWidget {
             width: 100,
             height: 48,
             isCard: true,
+            color: theme.colors.secondaryColor,
             options: [
               LegendSelectOption(
                 color: Colors.grey,

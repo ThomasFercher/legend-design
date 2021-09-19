@@ -54,10 +54,10 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.h1() {
     return LegendTextStyle(
-      textColor: Colors.grey[850]!,
+      textColor: Colors.tealAccent[700]!,
       backgroundColor: Colors.transparent,
       fontSize: 28,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w600,
       fontFamily: "sans serif",
     );
   }
@@ -104,11 +104,11 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.h4() {
     return LegendTextStyle(
-      textColor: Colors.black87,
-      backgroundColor: Colors.white,
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
+      textColor: Colors.grey[100]!,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
       fontFamily: "sans serif",
+      backgroundColor: Colors.transparent,
     );
   }
 
@@ -153,9 +153,9 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.sectionLink() {
     return LegendTextStyle(
-      textColor: Colors.black.withOpacity(0.68),
+      textColor: Colors.teal[50]!,
       backgroundColor: Colors.transparent,
-      fontSize: 16,
+      fontSize: 15,
       fontWeight: FontWeight.w600,
       fontFamily: "Roboto",
     );

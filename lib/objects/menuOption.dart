@@ -8,13 +8,13 @@ import 'package:webstore/customwidgets/typography/typography.dart';
 import '../router/routerProvider.dart';
 
 class MenuOption {
-  final String title;
+  final String? title;
   final String page;
   final IconData icon;
   final void Function(String page)? onSelected;
 
   const MenuOption({
-    required this.title,
+    this.title,
     required this.page,
     required this.icon,
     this.onSelected,
@@ -23,9 +23,13 @@ class MenuOption {
 
 class MenuOptionHeader extends StatefulWidget {
   final MenuOption option;
+  final Color? color;
+  final Color? activeColor;
 
   MenuOptionHeader({
     required this.option,
+    this.color,
+    this.activeColor,
   });
 
   @override
@@ -39,8 +43,9 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   late AnimationController controller;
   late Animation animation;
   late Animation animation2;
-  late Color color = Colors.black87;
+  late Color color = widget.color ?? Colors.black87;
   late Color borderColor = Colors.transparent;
+  late Color activeColor = widget.activeColor ?? Colors.blueAccent;
 
   @override
   void initState() {
@@ -56,12 +61,12 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
     );
     animation = ColorTween(
       begin: color,
-      end: Colors.blueAccent,
+      end: activeColor,
     ).animate(controller);
 
     animation2 = ColorTween(
       begin: Colors.teal,
-      end: Colors.blueAccent,
+      end: activeColor,
     ).animate(controller);
 
     animation2.addListener(() {
@@ -125,26 +130,28 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         child: Container(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: theme.appBarStyle.spacing ?? 12.0,
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
                 widget.option.icon,
                 color: color,
-                size: theme.appBarStyle.appBarHeight / 3.5,
+                size: theme.appBarStyle.iconSize,
               ),
-              Padding(padding: const EdgeInsets.symmetric(horizontal: 4.0)),
-              Padding(
-                padding: const EdgeInsets.only(top: 2.0),
-                child: LegendText(
-                  text: widget.option.title,
-                  selectable: false,
-                  textStyle: LegendTextStyle.appBarMenuHeader().copyWith(
-                    color: color,
+              if (widget.option.title != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 2.0, left: 8.0),
+                  child: LegendText(
+                    text: widget.option.title!,
+                    selectable: false,
+                    textStyle: LegendTextStyle.appBarMenuHeader().copyWith(
+                      color: color,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

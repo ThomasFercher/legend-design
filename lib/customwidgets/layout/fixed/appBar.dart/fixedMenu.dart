@@ -9,11 +9,16 @@ import 'package:webstore/styles/sizeProvider.dart';
 class FixedMenu extends StatefulWidget {
   final void Function(MenuOptionHeader option)? onSelected;
   final bool? showIconsOnly;
+  final Color? iconColor;
+  final Color? selected;
+
   const FixedMenu({
     Key? key,
     required this.context,
     this.onSelected,
     this.showIconsOnly,
+    this.iconColor,
+    this.selected,
   }) : super(key: key);
 
   final BuildContext context;
@@ -46,6 +51,8 @@ class _FixedMenuState extends State<FixedMenu> {
         .map(
           (option) => MenuOptionHeader(
             option: option,
+            activeColor: widget.selected,
+            color: widget.iconColor,
           ),
         )
         .toList();

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/sections/sectionTile.dart';
+import 'package:webstore/customwidgets/typography/legendText.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import '../drawers/siderMenuVerticalTile.dart';
@@ -78,6 +81,8 @@ class CollapsedSider extends StatelessWidget {
           icon: option.icon,
           title: option.title,
           path: option.page,
+          activeColor: Colors.tealAccent,
+          backgroundColor: theme.colors.primaryColor,
         ),
       ),
     );
@@ -158,58 +163,95 @@ class Sider extends StatelessWidget {
           title: option.name.replaceAll("/", "").capitalize(),
           path: option.name,
           isSection: true,
+          activeColor: Colors.tealAccent,
+          backgroundColor: theme.colors.primaryColor,
         ),
       ),
     );
 
-    List<Widget> children = [];
-
-    if (showMenu ?? false) {
-      children.add(Container(
-        height: 400,
-        child: ListView(
-          shrinkWrap: true,
-          itemExtent: 40,
-          children: tiles,
+    List<Widget> children = [
+      if (showMenu ?? false)
+        Container(
+          height: 400,
+          child: ListView(
+            shrinkWrap: true,
+            itemExtent: 40,
+            children: tiles,
+          ),
         ),
-      ));
-    }
-
-    if (showSectionMenu ?? false) {
-      children.add(ListView(
-        shrinkWrap: true,
-        children: sectionTiles,
-      ));
-    }
-
-    if (builder != null)
-      children.add(Builder(
-        builder: (context) => builder!(context),
-      ));
+      if (showMenu ?? false)
+        Container(
+          height: 400,
+          child: ListView(
+            shrinkWrap: true,
+            itemExtent: 40,
+            children: tiles,
+          ),
+        ),
+      if (showMenu ?? false)
+        Container(
+          height: 400,
+          child: ListView(
+            shrinkWrap: true,
+            itemExtent: 40,
+            children: tiles,
+          ),
+        ),
+      if (showSectionMenu ?? false)
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LegendText(
+              padding: EdgeInsets.only(left: 32.0),
+              text: "Widgets",
+              textStyle: LegendTextStyle.h4().copyWith(
+                color: Colors.blueGrey[100],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32.0,
+                vertical: 8.0,
+              ),
+              child: Divider(
+                color: Colors.blueGrey[100],
+                height: 1.4,
+                thickness: 1.4,
+              ),
+            ),
+            ListView(
+              shrinkWrap: true,
+              children: sectionTiles,
+            ),
+          ],
+        ),
+      if (builder != null)
+        Builder(
+          builder: (context) => builder!(context),
+        )
+    ];
 
     for (var i = 1; i < children.length; i += 2) {
       children.insert(i, Padding(padding: EdgeInsets.only(top: 16)));
     }
 
+    ScrollController controller = new ScrollController();
+
     return Container(
-      width: 200,
+      width: 180,
       height: MediaQuery.of(context).size.height,
       color: theme.colors.primaryColor,
-      child: CustomScrollView(
-        shrinkWrap: true,
-        slivers: [
-          SliverAppBar(
-            title: Container(),
-            backgroundColor: theme.colors.primaryColor,
-            actions: [Container()],
-            expandedHeight: theme.appBarStyle.appBarHeight,
-            collapsedHeight: theme.appBarStyle.appBarHeight,
-            toolbarHeight: theme.appBarStyle.appBarHeight,
-            pinned: true,
-            automaticallyImplyLeading: false,
-          ),
-          SliverList(delegate: SliverChildListDelegate(children))
-        ],
+      padding: EdgeInsets.only(
+        top: theme.appBarStyle.appBarHeight +
+            theme.appBarStyle.contentPadding.vertical,
+      ),
+      child: Scrollbar(
+        controller: controller,
+        child: ListView(
+          controller: controller,
+          children: children,
+          shrinkWrap: true,
+        ),
       ),
     );
   }

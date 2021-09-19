@@ -78,7 +78,7 @@ class _BottomBarItemState extends State<BottomBarItem>
 
   Widget getText() {
     return LegendText(
-      text: widget.option.title,
+      text: widget.option.title!,
       textStyle: LegendTextStyle.bottomBar().copyWith(
         color: _activeColor,
       ),
@@ -123,7 +123,8 @@ class _BottomBarItemState extends State<BottomBarItem>
                         ),
                       ),
                       if ((widget.style?.textAtBottom ?? false) &&
-                          (widget.style?.showText ?? true))
+                          (widget.style?.showText ?? true) &&
+                          (widget.option.title != null))
                         Container(
                           padding: EdgeInsets.only(top: 2.0),
                           child: getText(),
@@ -131,7 +132,8 @@ class _BottomBarItemState extends State<BottomBarItem>
                     ],
                   ),
                   if ((widget.style?.showText ?? true) &&
-                      (!(widget.style?.textAtBottom ?? false)))
+                      (!(widget.style?.textAtBottom ?? false)) &&
+                      (widget.option.title != null))
                     Container(
                       padding: EdgeInsets.only(left: 4.0),
                       child: getText(),

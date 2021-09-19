@@ -54,7 +54,7 @@ class LegendTheme extends ChangeNotifier {
 
   LegendColorTheme lightColorTheme = LegendColorTheme(
     primaryColor: Colors.teal,
-    secondaryColor: Colors.blueGrey,
+    secondaryColor: Colors.teal[50]!,
     scaffoldBackgroundColor: LegendColorTheme.darken(Colors.white, 0.06),
   );
   LegendColorTheme darkColorTheme = LegendColorTheme(
@@ -110,10 +110,12 @@ class LegendTheme extends ChangeNotifier {
 
   late final FixedAppBarStyle iconsAppBar = FixedAppBarStyle(
     appBarHeight: 80,
-    backgroundColor: Colors.transparent,
-    borderRadius: Radius.circular(20),
+    backgroundColor: colors.primaryColor,
     contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 12.0),
-    onlyIcons: true,
+    iconSize: 32,
+    spacing: 16.0,
+    iconColor: colors.secondaryColor,
+    selectedColor: Colors.tealAccent,
   );
 
   late final FixedAppBarStyle mobileRoundedStyle = FixedAppBarStyle(

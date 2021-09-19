@@ -4,6 +4,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
 import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
@@ -202,52 +203,90 @@ class _LegendScaffoldState extends State<LegendScaffold> {
               },
             )
           : null,
-      body: Row(
+      body: Stack(
         children: [
-          getSider(screenSize),
-          Expanded(
-            child: CustomScrollView(
-              controller: controller,
-              slivers: [
-                getHeader(context),
-                widget.children.isEmpty
-                    ? SliverToBoxAdapter(
-                        child: LayoutBuilder(builder: (context, constraints) {
-                          return Container(
-                            constraints: BoxConstraints(
-                              minHeight:
-                                  MediaQuery.of(context).size.height - 80,
-                            ),
-                            color: theme.colors.scaffoldBackgroundColor,
-                            padding: contentPadding,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  color: Colors.red,
-                                  height: theme.appBarStyle.appBarHeight,
+          Row(
+            children: [
+              getSider(screenSize),
+              Expanded(
+                child: CustomScrollView(
+                  controller: controller,
+                  slivers: [
+                    getHeader(context),
+                    widget.children.isEmpty
+                        ? SliverToBoxAdapter(
+                            child:
+                                LayoutBuilder(builder: (context, constraints) {
+                              return Container(
+                                constraints: BoxConstraints(
+                                  minHeight:
+                                      MediaQuery.of(context).size.height - 80,
                                 ),
-                                Container(
-                                  width: constraints.maxWidth -
-                                      contentPadding.horizontal,
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                      Builder(builder: widget.contentBuilder),
+                                color: theme.colors.scaffoldBackgroundColor,
+                                padding: contentPadding,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      color: Colors.red,
+                                      height: theme.appBarStyle.appBarHeight,
+                                    ),
+                                    Container(
+                                      width: constraints.maxWidth -
+                                          contentPadding.horizontal,
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Builder(
+                                          builder: widget.contentBuilder),
+                                    ),
+                                    getFooter(),
+                                  ],
                                 ),
-                                getFooter(),
-                              ],
+                              );
+                            }),
+                          )
+                        : SliverToBoxAdapter(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: getChildren(context),
+                              ),
                             ),
-                          );
-                        }),
-                      )
-                    : SliverToBoxAdapter(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: getChildren(context),
                           ),
-                        ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            left: 32.0,
+            top: 32.0,
+            child: Material(
+              color: Colors.transparent,
+              child: Hero(
+                tag: ValueKey("title"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 48,
+                      width: 48,
+                      margin: EdgeInsets.only(right: 16.0),
+                      child: SvgPicture.asset(
+                        "assets/photos/larrylegend.svg",
+                        alignment: Alignment.centerLeft,
                       ),
-              ],
+                    ),
+                    LegendText(
+                      text: "Legend Design",
+                      textStyle: LegendTextStyle.h1().copyWith(
+                        fontSize: 22,
+                        color: theme.colors.secondaryColor,
+                        letterSpacing: 0.1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],

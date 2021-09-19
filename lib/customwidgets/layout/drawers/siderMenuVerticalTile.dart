@@ -11,9 +11,13 @@ class SiderMenuVerticalTile extends StatefulWidget {
   final IconData? icon;
   final String? title;
   late final bool isSection;
+  final Color? backgroundColor;
+  final Color? activeColor;
 
   SiderMenuVerticalTile({
     required this.path,
+    this.backgroundColor,
+    this.activeColor,
     this.icon,
     this.title,
     bool? isSection,
@@ -33,25 +37,26 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
   late bool _isClicked;
   late bool _isHovered;
   late Color? color;
+
   Color? borderColor;
   @override
   void initState() {
     _isClicked = false;
     _isHovered = false;
-    color = Colors.black;
+    color = LegendTextStyle.sectionLink().color;
 
     controller = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 360),
     );
     banimation = ColorTween(
-      begin: Colors.teal,
-      end: Colors.blueAccent,
+      begin: widget.backgroundColor ?? Colors.transparent,
+      end: widget.activeColor ?? LegendTextStyle.sectionLink().color,
     ).animate(controller);
 
     animation = ColorTween(
-      begin: Colors.black,
-      end: Colors.blueAccent,
+      begin: color,
+      end: widget.activeColor,
     ).animate(controller);
 
     animation.addListener(() {
@@ -79,17 +84,18 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
     return Container(
       height: 48,
       margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(left: 32.0),
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
             color: borderColor ?? Colors.teal,
             width: 4,
-            style: BorderStyle.solid,
+            style: BorderStyle.none,
           ),
           right: BorderSide(
             color: borderColor ?? Colors.teal,
             width: 4,
-            style: BorderStyle.none,
+            style: BorderStyle.solid,
           ),
         ),
       ),
@@ -120,6 +126,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
             );
         },
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (widget.icon != null)

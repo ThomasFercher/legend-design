@@ -12,6 +12,7 @@ import '../../../../router/routerProvider.dart';
 import '../../../../styles/layoutType.dart';
 import '../../../../styles/sizeProvider.dart';
 import '../../../../styles/legendTheme.dart';
+import '../fixedSider.dart';
 
 class FixedAppBarStyle {
   final Color backgroundColor;
@@ -21,8 +22,11 @@ class FixedAppBarStyle {
   final Color? cardColor;
   late final bool pinned;
   late final bool floating;
-  final bool? onlyIcons;
+  final double? spacing;
   final double appBarHeight;
+  final double? iconSize;
+  final Color? iconColor;
+  final Color? selectedColor;
 
   FixedAppBarStyle({
     required this.backgroundColor,
@@ -33,7 +37,10 @@ class FixedAppBarStyle {
     this.shape,
     bool? pinned,
     bool? floating,
-    this.onlyIcons,
+    this.iconSize,
+    this.spacing,
+    this.iconColor,
+    this.selectedColor,
   }) {
     this.floating = floating ?? false;
 
@@ -82,7 +89,7 @@ class FixedAppBar extends StatelessWidget {
 
     return SliverAppBar(
       backgroundColor: style?.backgroundColor,
-      flexibleSpace: Container(
+      /*flexibleSpace: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -99,9 +106,10 @@ class FixedAppBar extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ),*/
+
       shape: style?.shape,
-      title: Padding(
+      title: Container(
         padding: EdgeInsets.symmetric(
           vertical: style?.contentPadding.top ?? 0,
           horizontal: 12.0,
@@ -109,40 +117,13 @@ class FixedAppBar extends StatelessWidget {
         child: Container(
           height: theme.appBarStyle.appBarHeight,
           child: Hero(
-            tag: ValueKey("appBarTitle"),
+            tag: ValueKey("appBar"),
             child: Material(
               color: Colors.transparent,
               child: Row(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: style?.borderRadius?.x ?? 0,
-                          ),
-                          height: theme.appBarStyle.appBarHeight,
-                          alignment: Alignment.center,
-                          decoration: getCard(),
-                          child: leading ??
-                              LegendText(
-                                text: "Legend Design",
-                                textStyle: LegendTextStyle.h1().copyWith(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                        ),
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                  ),
                   if (showMenu ?? true)
                     Expanded(
-                      flex: 4,
                       child: Row(
                         children: [
                           Expanded(
@@ -155,6 +136,8 @@ class FixedAppBar extends StatelessWidget {
                             ),
                             child: FixedMenu(
                               context: context,
+                              iconColor: theme.appBarStyle.iconColor,
+                              selected: theme.appBarStyle.selectedColor,
                             ),
                           ),
                           Expanded(
@@ -163,26 +146,13 @@ class FixedAppBar extends StatelessWidget {
                         ],
                       ),
                     ),
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(),
-                        ),
-                        if (builder != null)
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: style?.borderRadius?.x ?? 0,
-                            ),
-                            decoration: getCard(),
-                            child: Builder(
-                              builder: builder ?? (c) => Container(),
-                            ),
-                          ),
-                      ],
+                  if (builder != null)
+                    Container(
+                      decoration: getCard(),
+                      child: Builder(
+                        builder: builder ?? (c) => Container(),
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -195,7 +165,7 @@ class FixedAppBar extends StatelessWidget {
       pinned: style?.pinned ?? false,
       snap: style?.floating ?? false,
       floating: style?.floating ?? false,
-      elevation: 0,
+      elevation: 12.0,
       automaticallyImplyLeading: false,
     );
   }
