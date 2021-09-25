@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedMenu.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
+import 'package:webstore/styles/legendColorTheme.dart';
 import '../../../../objects/menuOption.dart';
 import '../../../../router/routerProvider.dart';
 import '../../../../styles/layoutType.dart';
@@ -57,13 +58,14 @@ class FixedAppBar extends StatelessWidget {
   final Widget? leading;
   final Radius? bottomBorderRadius;
   late FixedAppBarStyle? style;
-
+  final BuildContext pcontext;
   FixedAppBar({
     this.showMenu,
     this.builder,
     this.leading,
     this.bottomBorderRadius,
     this.style,
+    required this.pcontext,
   });
 
   BoxDecoration? getCard() {
@@ -109,48 +111,67 @@ class FixedAppBar extends StatelessWidget {
       ),*/
 
       shape: style?.shape,
+      actions: [Container()],
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              theme.colors.primaryColor,
+              LegendColorTheme.lighten(
+                theme.colors.primaryColor,
+                0.04,
+              ),
+            ],
+          ),
+        ),
+      ),
       title: Container(
+        height: theme.appBarStyle.appBarHeight +
+            (style?.contentPadding.vertical ?? 0.0),
         padding: EdgeInsets.symmetric(
           vertical: style?.contentPadding.top ?? 0,
           horizontal: 12.0,
         ),
         child: Container(
-          height: theme.appBarStyle.appBarHeight,
+          //     height: theme.appBarStyle.appBarHeight,
           child: Hero(
             tag: ValueKey("appBar"),
             child: Material(
               color: Colors.transparent,
-              child: Row(
+              child: Stack(
                 children: [
-                  if (showMenu ?? true)
-                    Expanded(
-                      child: Row(
-                        children: [
+                  Container(
+                    child: Row(
+                      children: [
+                        if (showMenu ?? true)
                           Expanded(
-                            child: Container(),
-                          ),
-                          Container(
-                            decoration: getCard(),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: style?.borderRadius?.x ?? 0,
+                            child: Container(
+                              //    margin: EdgeInsets.only(right: theme.),
+                              decoration: getCard(),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: style?.borderRadius?.x ?? 0,
+                              ),
+                              child: FixedMenu(
+                                context: context,
+                                iconColor: theme.appBarStyle.iconColor,
+                                selected: theme.appBarStyle.selectedColor,
+                              ),
                             ),
-                            child: FixedMenu(
-                              context: context,
-                              iconColor: theme.appBarStyle.iconColor,
-                              selected: theme.appBarStyle.selectedColor,
-                            ),
                           ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                        ],
-                      ),
+                      ],
                     ),
+                  ),
                   if (builder != null)
-                    Container(
-                      decoration: getCard(),
-                      child: Builder(
-                        builder: builder ?? (c) => Container(),
+                    Positioned(
+                      right:
+                          SizeProvider.of(context).isMenuCollapsed() ? 64 : 0,
+                      child: Container(
+                        height: theme.appBarStyle.appBarHeight,
+                        alignment: Alignment.center,
+                        decoration: getCard(),
+                        child: Builder(
+                          builder: builder ?? (c) => Container(),
+                        ),
                       ),
                     ),
                 ],
@@ -161,7 +182,11 @@ class FixedAppBar extends StatelessWidget {
       ),
       titleSpacing: 0,
       toolbarHeight: theme.appBarStyle.appBarHeight +
-          ((style?.contentPadding.top ?? 0.0) * 2),
+          (style?.contentPadding.vertical ?? 0.0),
+      expandedHeight: theme.appBarStyle.appBarHeight +
+          (style?.contentPadding.vertical ?? 0.0),
+      collapsedHeight: theme.appBarStyle.appBarHeight +
+          (style?.contentPadding.vertical ?? 0.0),
       pinned: style?.pinned ?? false,
       snap: style?.floating ?? false,
       floating: style?.floating ?? false,

@@ -30,7 +30,6 @@ class SectionTile extends StatelessWidget {
       enabled: true,
       enableFeedback: true,
       title: Container(
-        color: Colors.red,
         alignment: Alignment.center,
         child: LegendText(
           selectable: false,

@@ -8,6 +8,7 @@ import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
+import 'package:webstore/styles/legendColorTheme.dart';
 import '../drawers/siderMenuVerticalTile.dart';
 import '../../../objects/menuOption.dart';
 import '../../../router/routerProvider.dart';
@@ -79,8 +80,8 @@ class CollapsedSider extends StatelessWidget {
       options.map(
         (option) => SiderMenuVerticalTile(
           icon: option.icon,
-          title: option.title,
           path: option.page,
+          collapsed: true,
           activeColor: Colors.tealAccent,
           backgroundColor: theme.colors.primaryColor,
         ),
@@ -89,27 +90,43 @@ class CollapsedSider extends StatelessWidget {
 
     List<SectionRouteInfo> sections =
         SectionProvider.of(context)?.sections ?? [];
-    List<SectionTile> sectionTiles = List.of(
+    List<SiderMenuVerticalTile> sectionTiles = List.of(
       sections.map(
-        (option) => SectionTile(
-          name: option.name,
+        (option) => SiderMenuVerticalTile(
+          title: option.name.replaceAll("/", "").capitalize(),
+          path: option.name,
+          isSection: true,
+          collapsed: true,
+          activeColor: Colors.tealAccent,
+          backgroundColor: theme.colors.primaryColor,
         ),
       ),
     );
+
     return Container(
       width: 80,
       height: MediaQuery.of(context).size.height,
+      padding: EdgeInsets.only(
+          top: theme.appBarStyle.appBarHeight +
+              theme.appBarStyle.contentPadding.vertical),
       color: theme.colors.primaryColor,
       child: Column(
         children: [
-          Container(
-            child: Placeholder(),
-            height: 80,
+          Divider(
+            color: theme.colors.secondaryColor.withOpacity(0.2),
+            height: 1.0,
+            thickness: 1.0,
           ),
           if (showMenu)
-            ListView(
-              shrinkWrap: true,
-              children: tiles,
+            Padding(
+              padding: EdgeInsets.only(bottom: 24.0),
+              child: ListView(
+                shrinkWrap: true,
+                children: tiles,
+                padding: EdgeInsets.only(
+                  top: 32,
+                ),
+              ),
             ),
           if (showSectionMenu)
             ListView(
@@ -148,7 +165,9 @@ class Sider extends StatelessWidget {
           title: option.title,
           path: option.page,
           backgroundColor: Colors.teal,
-          left: true,
+          left: false,
+          activeColor: Colors.tealAccent,
+          color: theme.colors.secondaryColor,
         ),
       ),
     );
@@ -163,6 +182,7 @@ class Sider extends StatelessWidget {
           title: option.name.replaceAll("/", "").capitalize(),
           path: option.name,
           isSection: true,
+          collapsed: false,
           activeColor: Colors.tealAccent,
           backgroundColor: theme.colors.primaryColor,
         ),
@@ -170,60 +190,52 @@ class Sider extends StatelessWidget {
     );
 
     List<Widget> children = [
+      Divider(
+        color: theme.colors.secondaryColor.withOpacity(0.2),
+        height: 1.0,
+        thickness: 1.0,
+      ),
       if (showMenu ?? false)
-        Container(
-          height: 400,
-          child: ListView(
-            shrinkWrap: true,
-            itemExtent: 40,
-            children: tiles,
-          ),
-        ),
-      if (showMenu ?? false)
-        Container(
-          height: 400,
-          child: ListView(
-            shrinkWrap: true,
-            itemExtent: 40,
-            children: tiles,
-          ),
-        ),
-      if (showMenu ?? false)
-        Container(
-          height: 400,
-          child: ListView(
-            shrinkWrap: true,
-            itemExtent: 40,
-            children: tiles,
+        ListView(
+          shrinkWrap: true,
+          children: tiles,
+          padding: EdgeInsets.only(
+            top: 32,
           ),
         ),
       if (showSectionMenu ?? false)
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            LegendText(
-              padding: EdgeInsets.only(left: 32.0),
-              text: "Widgets",
-              textStyle: LegendTextStyle.h4().copyWith(
-                color: Colors.blueGrey[100],
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LegendText(
+                padding: EdgeInsets.only(left: 32.0),
+                text: "Widgets",
+                textStyle: LegendTextStyle.h4().copyWith(
+                  color: LegendColorTheme.darken(
+                    theme.colors.secondaryColor,
+                    0.12,
+                  ),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 32.0,
-                vertical: 8.0,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32.0,
+                  vertical: 8.0,
+                ),
+                child: Divider(
+                  color: theme.colors.secondaryColor.withOpacity(0.6),
+                  height: 1.5,
+                  thickness: 1.5,
+                ),
               ),
-              child: Divider(
-                color: Colors.blueGrey[100],
-                height: 1.4,
-                thickness: 1.4,
+              ListView(
+                shrinkWrap: true,
+                children: sectionTiles,
               ),
-            ),
-            ListView(
-              shrinkWrap: true,
-              children: sectionTiles,
-            ),
-          ],
+            ],
+          ),
         ),
       if (builder != null)
         Builder(
@@ -242,9 +254,8 @@ class Sider extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       color: theme.colors.primaryColor,
       padding: EdgeInsets.only(
-        top: theme.appBarStyle.appBarHeight +
-            theme.appBarStyle.contentPadding.vertical,
-      ),
+          top: theme.appBarStyle.appBarHeight +
+              theme.appBarStyle.contentPadding.vertical),
       child: Scrollbar(
         controller: controller,
         child: ListView(

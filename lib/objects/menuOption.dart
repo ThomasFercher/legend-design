@@ -48,6 +48,13 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   late Color activeColor = widget.activeColor ?? Colors.blueAccent;
 
   @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     _isHovered = false;
@@ -86,7 +93,6 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
     return Container(
-      margin: const EdgeInsets.only(left: 8.0),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
@@ -135,6 +141,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 widget.option.icon,

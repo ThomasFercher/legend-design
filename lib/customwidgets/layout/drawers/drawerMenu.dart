@@ -17,6 +17,8 @@ class DrawerMenu extends StatelessWidget {
           path: option.page,
           left: false,
           backgroundColor: Colors.white,
+          activeColor: Colors.tealAccent,
+          color: Colors.teal,
         ),
       ),
     );

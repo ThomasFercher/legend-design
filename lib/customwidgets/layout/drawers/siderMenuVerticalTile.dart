@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
@@ -13,9 +14,11 @@ class SiderMenuVerticalTile extends StatefulWidget {
   late final bool isSection;
   final Color? backgroundColor;
   final Color? activeColor;
+  final bool collapsed;
 
   SiderMenuVerticalTile({
     required this.path,
+    required this.collapsed,
     this.backgroundColor,
     this.activeColor,
     this.icon,
@@ -84,7 +87,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
     return Container(
       height: 48,
       margin: EdgeInsets.only(bottom: 16),
-      padding: EdgeInsets.only(left: 32.0),
+      padding: EdgeInsets.only(left: widget.collapsed ? 0 : 32.0),
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
@@ -131,18 +134,30 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
           children: [
             if (widget.icon != null)
               Expanded(
-                child: Icon(
-                  widget.icon,
-                  color: color,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    widget.icon,
+                    color: color,
+                  ),
                 ),
               ),
-            LegendText(
-              textAlign: TextAlign.center,
-              text: widget.title ?? "",
-              textStyle: LegendTextStyle.sectionLink().copyWith(
-                color: color,
+            if (widget.title != null)
+              Container(
+                padding: EdgeInsets.only(
+                  left: widget.collapsed ? 8.0 : 0,
+                ),
+                child: LegendText(
+                  textAlign: TextAlign.center,
+                  text: widget.title ?? "",
+                  textStyle: LegendTextStyle.sectionLink().copyWith(
+                    color: color,
+                    fontSize: widget.collapsed ? 14.0 : 16,
+                    fontWeight:
+                        widget.collapsed ? FontWeight.w400 : FontWeight.normal,
+                  ),
+                ),
               ),
-            ),
           ],
         ),
       ),

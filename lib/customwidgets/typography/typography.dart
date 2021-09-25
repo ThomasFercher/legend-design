@@ -57,11 +57,10 @@ class LegendTextStyle extends TextStyle {
       textColor: Colors.tealAccent[700]!,
       backgroundColor: Colors.transparent,
       fontSize: 28,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w100,
       fontFamily: "sans serif",
     );
   }
-
   factory LegendTextStyle.tableHeader() {
     return LegendTextStyle(
       textColor: Colors.grey[850]!,

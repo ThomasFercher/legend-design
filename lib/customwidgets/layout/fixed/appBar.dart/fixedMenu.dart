@@ -57,21 +57,30 @@ class _FixedMenuState extends State<FixedMenu> {
         )
         .toList();
     LegendTheme theme = Provider.of<LegendTheme>(context);
-    double menuWidth;
 
     return Container(
       //  margin: const EdgeInsets.only(left: 16.0),
       height: theme.appBarStyle.appBarHeight,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          menuWidth = constraints.maxWidth;
-
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: options,
-          );
-
-          //return getCollapsedMenu(context);
+          if (!SizeProvider.of(widget.context).isMenuCollapsed())
+            return Center(
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return options[index];
+                },
+                separatorBuilder: (context, index) {
+                  return Container(
+                    width: 12,
+                  );
+                },
+                itemCount: options.length,
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+              ),
+            );
+          else
+            return getCollapsedMenu(context);
         },
       ),
     );

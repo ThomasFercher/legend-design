@@ -11,6 +11,8 @@ class SizeProvider extends InheritedWidget {
   final double height;
   late final bool isMobile;
 
+  double? titleWidth;
+
   // AppBar Menu Width
   late double _menuWidth;
   void setMenuWidth(double width) {
@@ -26,6 +28,14 @@ class SizeProvider extends InheritedWidget {
   }) : super(child: child) {
     screenSize = getScreenSizeFromWidth(width);
     isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
+  }
+
+  double getTitleIndent() {
+    return this.titleWidth ?? 0;
+  }
+
+  bool isMenuCollapsed() {
+    return width - getTitleIndent() <= 620;
   }
 
   static ScreenSize getScreenSizeFromWidth(double width) {
@@ -56,5 +66,14 @@ class SizeProvider extends InheritedWidget {
   @override
   bool updateShouldNotify(covariant SizeProvider old) {
     return old.width != this.width;
+  }
+
+  static Size calcTextSize(String text, TextStyle style) {
+    final TextPainter textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
+      textScaleFactor: WidgetsBinding.instance?.window.textScaleFactor ?? 1,
+    )..layout();
+    return textPainter.size;
   }
 }

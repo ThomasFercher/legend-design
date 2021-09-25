@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -69,6 +71,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
   @override
   void initState() {
     super.initState();
+
     controller = new ScrollController(
       initialScrollOffset: 0,
     );
@@ -76,7 +79,6 @@ class _LegendScaffoldState extends State<LegendScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    sections = SectionProvider.of(context)?.sections ?? [];
     return SizeProvider(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -153,6 +155,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
               ? widget.showAppBarMenu
               : false,
           builder: widget.appBarBuilder,
+          pcontext: context,
         );
       case LayoutType.FixedHeader:
         return FixedAppBar(
@@ -160,6 +163,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
           showMenu: SizeProvider.of(context).isMobile == false
               ? widget.showAppBarMenu
               : false,
+          pcontext: context,
         );
       default:
         return SliverToBoxAdapter(
@@ -190,9 +194,18 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     var footerHeight = 200;
 
     LegendTheme theme = Provider.of<LegendTheme>(context);
+    SizeProvider.of(context).titleWidth = SizeProvider.calcTextSize(
+          "Legend Design",
+          LegendTextStyle.h1().copyWith(
+            color: theme.colors.secondaryColor,
+            letterSpacing: 0.1,
+          ),
+        ).width +
+        26.0 +
+        48.0;
 
     return Scaffold(
-      //endDrawer: DrawerMenu(),
+      endDrawer: DrawerMenu(),
       bottomNavigationBar:
           SizeProvider.of(context).isMobile ? FixedBottomBar() : null,
       endDrawerEnableOpenDragGesture: false,
@@ -257,7 +270,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
             ],
           ),
           Positioned(
-            left: 32.0,
+            left: 26.0,
             top: 32.0,
             child: Material(
               color: Colors.transparent,
@@ -279,7 +292,6 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                     LegendText(
                       text: "Legend Design",
                       textStyle: LegendTextStyle.h1().copyWith(
-                        fontSize: 22,
                         color: theme.colors.secondaryColor,
                         letterSpacing: 0.1,
                       ),
