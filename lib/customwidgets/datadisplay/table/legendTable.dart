@@ -5,8 +5,8 @@ import 'package:webstore/customwidgets/datadisplay/table/legendTableRow.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
-import 'package:webstore/styles/sizeProvider.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
+import 'package:webstore/styles/theming/sizing/sizeProvider.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 
 class LegendTable extends StatelessWidget {

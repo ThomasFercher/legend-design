@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:webstore/styles/theming/colors/legendColors.dart';
 
 class LegendTypography {
   final TextStyle? h1;
@@ -87,6 +88,16 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.white,
       fontSize: 12,
       fontWeight: FontWeight.w600,
+      fontFamily: "sans serif",
+    );
+  }
+
+  factory LegendTextStyle.p() {
+    return LegendTextStyle(
+      textColor: LegendColors.gray6,
+      backgroundColor: Colors.transparent,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
       fontFamily: "sans serif",
     );
   }

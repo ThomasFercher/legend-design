@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
-import 'package:webstore/styles/layoutType.dart';
+import 'package:webstore/styles/layouts/layoutType.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
-import 'package:webstore/styles/sizeProvider.dart';
+import 'package:webstore/styles/theming/sizing/sizeProvider.dart';
 
 class FixedMenu extends StatefulWidget {
   final void Function(MenuOptionHeader option)? onSelected;

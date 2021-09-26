@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:webstore/styles/layoutType.dart';
+import 'package:webstore/styles/layouts/layoutType.dart';
 import '../legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
-import '../../styles/sizeProvider.dart';
+import '../../styles/theming/sizing/sizeProvider.dart';
 import '../../styles/theming/legendTheme.dart';
 
 class Modal extends StatelessWidget {
@@ -47,7 +47,7 @@ class Modal extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: padding),
             child: Material(
-              borderRadius: theme.sizing.borderRadius,
+              borderRadius: theme.sizing.borderRadius[0],
               color: Colors.white,
               child: Container(
                 height: height,
@@ -56,10 +56,10 @@ class Modal extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(
-                        top: theme.sizing.borderRadius.topLeft.x / 2,
-                        bottom: theme.sizing.borderRadius.topLeft.x / 2,
-                        right: theme.sizing.borderRadius.topLeft.x / 2,
-                        left: theme.sizing.borderRadius.topLeft.x,
+                        top: theme.sizing.borderInset[0] / 2,
+                        bottom: theme.sizing.borderInset[0] / 2,
+                        right: theme.sizing.borderInset[0] / 2,
+                        left: theme.sizing.borderInset[0],
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,10 +88,10 @@ class Modal extends StatelessWidget {
                     ),
                     Container(
                       padding: EdgeInsets.only(
-                        top: theme.sizing.borderRadius.topLeft.x / 2,
-                        bottom: theme.sizing.borderRadius.topLeft.x / 2,
-                        right: theme.sizing.borderRadius.topLeft.x / 2,
-                        left: theme.sizing.borderRadius.topLeft.x,
+                        top: theme.sizing.borderInset[0] / 2,
+                        bottom: theme.sizing.borderInset[0] / 2,
+                        right: theme.sizing.borderInset[0] / 2,
+                        left: theme.sizing.borderInset[0],
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

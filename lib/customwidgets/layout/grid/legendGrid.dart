@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/layout/grid/legendGridSize.dart';
 import 'package:webstore/customwidgets/layout/sections/sectionHeader.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/layoutType.dart';
-import 'package:webstore/styles/sizeProvider.dart';
+import 'package:webstore/styles/layouts/layoutType.dart';
+import 'package:webstore/styles/theming/sizing/sizeProvider.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 
 class LegendGrid extends StatelessWidget {

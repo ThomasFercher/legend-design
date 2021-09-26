@@ -9,7 +9,7 @@ import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../customwidgets/layout/fixed/appBar.dart/fixedAppBar.dart';
 import '../customwidgets/layout/legendScaffold.dart';
-import '../styles/layoutType.dart';
+import '../styles/layouts/layoutType.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage();

@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import '../legendButton/legendButton.dart';
 import '../typography/legendText.dart';
-import '../../styles/layoutType.dart';
-import '../../styles/sizeProvider.dart';
+import '../../styles/layouts/layoutType.dart';
+import '../../styles/theming/sizing/sizeProvider.dart';
 import '../../styles/theming/legendTheme.dart';
 import '../typography/typography.dart';
 
@@ -52,7 +52,7 @@ class LegendBottomSheet extends StatelessWidget {
           elevation: 10.0,
           margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
-            borderRadius: theme.sizing.borderRadius.copyWith(
+            borderRadius: theme.sizing.borderRadius[0].copyWith(
               bottomLeft: Radius.zero,
               bottomRight: Radius.zero,
             ),
@@ -62,10 +62,10 @@ class LegendBottomSheet extends StatelessWidget {
               children: [
                 Container(
                   padding: EdgeInsets.only(
-                    top: theme.sizing.borderRadius.topLeft.x / 2,
-                    bottom: theme.sizing.borderRadius.topLeft.x / 2,
-                    right: theme.sizing.borderRadius.topLeft.x / 2,
-                    left: theme.sizing.borderRadius.topLeft.x,
+                    top: theme.sizing.borderInset[0] / 2,
+                    bottom: theme.sizing.borderInset[0] / 2,
+                    right: theme.sizing.borderInset[0] / 2,
+                    left: theme.sizing.borderInset[0],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,17 +89,17 @@ class LegendBottomSheet extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.symmetric(
-                      horizontal: theme.sizing.borderRadius.topLeft.x,
+                      horizontal: theme.sizing.borderInset[0],
                     ),
                     child: content,
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    top: theme.sizing.borderRadius.topLeft.x / 2,
-                    bottom: theme.sizing.borderRadius.topLeft.x / 2,
-                    right: theme.sizing.borderRadius.topLeft.x / 2,
-                    left: theme.sizing.borderRadius.topLeft.x,
+                    top: theme.sizing.borderInset[0] / 2,
+                    bottom: theme.sizing.borderInset[0] / 2,
+                    right: theme.sizing.borderInset[0] / 2,
+                    left: theme.sizing.borderInset[0],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/icons/legendGradientIcon.dart';
 import 'package:webstore/customwidgets/input/selectBar/selectProvider.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 
 import 'legendSelectOption.dart';
 

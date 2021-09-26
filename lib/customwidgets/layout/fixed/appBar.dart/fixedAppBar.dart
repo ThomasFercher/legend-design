@@ -8,11 +8,11 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedMenu.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 import '../../../../objects/menuOption.dart';
 import '../../../../router/routerProvider.dart';
-import '../../../../styles/layoutType.dart';
-import '../../../../styles/sizeProvider.dart';
+import '../../../../styles/layouts/layoutType.dart';
+import '../../../../styles/theming/sizing/sizeProvider.dart';
 import '../../../../styles/theming/legendTheme.dart';
 import '../fixedSider.dart';
 
@@ -94,116 +94,90 @@ class FixedAppBar extends StatelessWidget {
 
     return SliverAppBar(
       backgroundColor: style?.backgroundColor,
-      /*flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.black54,
-              Colors.black12,
-              Colors.transparent,
-            ],
-            stops: [
-              -0.3,
-              0.1,
-              0.4,
-            ],
-          ),
-        ),
-      ),*/
-
       shape: style?.shape,
+      leadingWidth: 0,
+      leading: Container(
+        width: 0,
+      ),
       actions: [Container()],
-      /*flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              theme.colors.primaryColor,
-              LegendColorTheme.lighten(
-                theme.colors.primaryColor,
-                0.04,
-              ),
-            ],
-          ),
-        ),
-      ),*/
       title: Container(
         height: theme.appBarStyle.appBarHeight +
             (style?.contentPadding.vertical ?? 0.0),
         padding: EdgeInsets.only(
           left: style?.contentPadding.left ?? 0,
+          right: style?.contentPadding.right ?? 0,
           top: style?.contentPadding.top ?? 0,
           bottom: style?.contentPadding.bottom ?? 0,
         ),
-        child: Container(
-          //     height: theme.appBarStyle.appBarHeight,
-          child: Hero(
-            tag: ValueKey("appBar"),
-            child: Material(
-              color: Colors.transparent,
-              child: Stack(
-                children: [
+        child: Hero(
+          tag: ValueKey("appBar"),
+          child: Material(
+            color: Colors.transparent,
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 24,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (layoutType != LayoutType.FixedSider &&
+                          layoutType != LayoutType.FixedHeaderSider)
+                        Container(
+                          height: (style?.appBarHeight ?? 80),
+                          width: style?.appBarHeight ?? 80,
+                          margin: EdgeInsets.only(right: 16.0),
+                          child: SvgPicture.asset(
+                            "assets/photos/larrylegend.svg",
+                            alignment: Alignment.centerLeft,
+                          ),
+                        ),
+                      if (layoutType != LayoutType.FixedSider &&
+                          layoutType != LayoutType.FixedHeaderSider)
+                        LegendText(
+                          text: "Legend Design",
+                          textStyle: LegendTextStyle.h1().copyWith(
+                            color: theme.colors.secondaryColor,
+                            letterSpacing: 0.1,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                if (showMenu ?? true)
                   Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        if (layoutType != LayoutType.FixedSider &&
-                            layoutType != LayoutType.FixedHeaderSider)
-                          Container(
-                            height: (style?.appBarHeight ?? 80),
-                            width: style?.appBarHeight ?? 80,
-                            margin: EdgeInsets.only(right: 16.0),
-                            child: SvgPicture.asset(
-                              "assets/photos/larrylegend.svg",
-                              alignment: Alignment.centerLeft,
-                            ),
-                          ),
-                        if (layoutType != LayoutType.FixedSider &&
-                            layoutType != LayoutType.FixedHeaderSider)
-                          LegendText(
-                            text: "Legend Design",
-                            textStyle: LegendTextStyle.h1().copyWith(
-                              color: theme.colors.secondaryColor,
-                              letterSpacing: 0.1,
-                            ),
-                          ),
-                        if (showMenu ?? true)
-                          Expanded(
-                            child: Container(
-                              //    margin: EdgeInsets.only(right: theme.),
-                              decoration: getCard(),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: style?.borderRadius?.x ?? 0,
-                              ),
-                              child: FixedMenu(
-                                context: context,
-                                iconColor: theme.appBarStyle.iconColor,
-                                selected: theme.appBarStyle.selectedColor,
-                              ),
-                            ),
-                          ),
-                      ],
+                    margin: layoutType == LayoutType.FixedSider ||
+                            layoutType == LayoutType.FixedHeaderSider
+                        ? EdgeInsets.only(
+                            right: 80 + (style?.contentPadding.horizontal ?? 0),
+                          )
+                        : EdgeInsets.zero,
+                    decoration: getCard(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: style?.borderRadius?.x ?? 0,
+                    ),
+                    child: FixedMenu(
+                      context: context,
+                      iconColor: theme.appBarStyle.iconColor,
+                      selected: theme.appBarStyle.selectedColor,
                     ),
                   ),
-                  if (builder != null)
-                    Positioned(
-                      right: SizeProvider.of(context).isMenuCollapsed() &&
-                              !theme.isMobile
-                          ? 64
-                          : 0,
-                      child: Container(
-                        height: theme.appBarStyle.appBarHeight,
-                        alignment: Alignment.center,
-                        decoration: getCard(),
-                        child: Builder(
-                          builder: builder ?? (c) => Container(),
-                        ),
+                if (builder != null)
+                  Positioned(
+                    right: SizeProvider.of(context).isMenuCollapsed() &&
+                            !theme.isMobile
+                        ? 64
+                        : 0,
+                    child: Container(
+                      height: theme.appBarStyle.appBarHeight,
+                      alignment: Alignment.center,
+                      decoration: getCard(),
+                      child: Builder(
+                        builder: builder ?? (c) => Container(),
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ),
         ),

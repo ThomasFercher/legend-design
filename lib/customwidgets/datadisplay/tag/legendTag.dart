@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
-import 'package:webstore/styles/legendColors.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColors.dart';
 
 class LegendTag extends StatelessWidget {
   final Color color;

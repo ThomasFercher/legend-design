@@ -29,7 +29,7 @@ import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../customwidgets/layout/legendScaffold.dart';
-import '../styles/layoutType.dart';
+import '../styles/layouts/layoutType.dart';
 
 class WidgetComponents extends StatelessWidget {
   const WidgetComponents();
@@ -88,8 +88,10 @@ class WidgetComponents extends StatelessWidget {
           header: "Buttons",
           children: [
             LegendText(
-                text:
-                    "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. "),
+              text:
+                  "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. ",
+              textStyle: LegendTextStyle.p(),
+            ),
             LegendGrid(
               margin: EdgeInsets.symmetric(vertical: 12.0),
               sizes: LegendGridSize(
@@ -123,6 +125,7 @@ class WidgetComponents extends StatelessWidget {
                   onPressed: () => {},
                   style: LegendButtonStyle.normal(
                       // height: 48,
+
                       ),
                 ),
                 LegendButton(
@@ -142,9 +145,7 @@ class WidgetComponents extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: theme.colors.foreground[1],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12.0),
-                ),
+                borderRadius: theme.sizing.borderRadius[1],
               ),
               margin: EdgeInsets.all(8.0),
               padding: EdgeInsets.all(6.0),
@@ -177,13 +178,14 @@ class WidgetComponents extends StatelessWidget {
             LegendText(
               text:
                   "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. ",
+              textStyle: LegendTextStyle.p(),
             ),
             LegendGrid(
               sizes: LegendGridSize(
                 small: LegendGridSizeInfo(1, 64),
-                medium: LegendGridSizeInfo(3, 48),
-                large: LegendGridSizeInfo(4, 48),
-                xxl: LegendGridSizeInfo(4, 48),
+                medium: LegendGridSizeInfo(3, 64),
+                large: LegendGridSizeInfo(4, 64),
+                xxl: LegendGridSizeInfo(4, 64),
               ),
               children: [
                 LegendButton(
@@ -197,7 +199,11 @@ class WidgetComponents extends StatelessWidget {
                       ),
                     );
                   },
-                  style: LegendButtonStyle.normal(),
+                  style: LegendButtonStyle.normal(
+                    borderRadius: Radius.circular(
+                      theme.sizing.borderInset[1],
+                    ),
+                  ),
                 ),
                 LegendButton(
                   text: Text("Show Modal Bottom"),
@@ -218,7 +224,11 @@ class WidgetComponents extends StatelessWidget {
                       clipBehavior: Clip.antiAlias,
                     ),
                   },
-                  style: LegendButtonStyle.normal(),
+                  style: LegendButtonStyle.normal(
+                    borderRadius: Radius.circular(
+                      theme.sizing.borderInset[1],
+                    ),
+                  ),
                 ),
                 LegendButton(
                   text: Text("Show Modal"),
@@ -234,7 +244,11 @@ class WidgetComponents extends StatelessWidget {
                       ),
                     ),
                   },
-                  style: LegendButtonStyle.normal(),
+                  style: LegendButtonStyle.normal(
+                    borderRadius: Radius.circular(
+                      theme.sizing.borderInset[1],
+                    ),
+                  ),
                 )
               ],
             ),
@@ -251,6 +265,7 @@ class WidgetComponents extends StatelessWidget {
               ),
               children: [
                 LegendSelectBar(
+                  borderRadius: theme.sizing.borderRadius[1],
                   options: [
                     LegendSelectOption(
                         color: Colors.teal, icon: Icons.credit_card, name: "1"),
@@ -272,6 +287,7 @@ class WidgetComponents extends StatelessWidget {
                 ),
                 LegendSelectBar(
                   color: theme.colors.foreground[1],
+                  borderRadius: theme.sizing.borderRadius[1],
                   options: [
                     LegendSelectOption(
                         color: Colors.purpleAccent,

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'layoutType.dart';
+import '../../layouts/layoutType.dart';
 
 class SizeProvider extends InheritedWidget {
   final Widget child;

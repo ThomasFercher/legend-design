@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 
 class LegendInputDecoration extends InputDecoration {
   final Widget? icon;

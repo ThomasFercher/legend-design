@@ -6,23 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedAppBar.dart';
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
-import 'package:webstore/styles/legendColors.dart';
-import 'package:webstore/styles/theming/appBarTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColors.dart';
+import 'package:webstore/styles/theming/sizing/legendSizing.dart';
+import 'package:webstore/styles/theming/widget/appBarTheme.dart';
 import 'package:webstore/utils/restart.dart';
-import '../legendColorTheme.dart';
-import '../legendSizingTheme.dart';
+import 'colors/legendColorTheme.dart';
+import 'sizing/legendSizingTheme.dart';
 import '../../customwidgets/typography/typography.dart';
 
 enum LegendColorThemeType {
   LIGHT,
   DARK,
-}
-
-enum LegendSizingType {
-  MOBILE,
-  TABLET,
-  WEB,
 }
 
 enum BottomBarType {
@@ -52,7 +47,6 @@ class LegendTheme extends ChangeNotifier {
 
   // Colors
   LegendColorThemeType colorTheme = LegendColorThemeType.DARK;
-  LegendSizingType sizingType = LegendSizingType.WEB;
 
   LegendColorTheme lightColorTheme = LegendColorTheme(
     primaryColor: Colors.teal,
@@ -69,7 +63,7 @@ class LegendTheme extends ChangeNotifier {
     scaffoldBackgroundColor: LegendColors.gray12,
     foreground: [LegendColors.gray10, LegendColors.gray9],
     selectionColor: Colors.tealAccent,
-    textColorDark: Colors.black54,
+    textColorDark: LegendColors.gray6,
     textColorLight: Colors.teal[200]!,
   );
 
@@ -84,22 +78,11 @@ class LegendTheme extends ChangeNotifier {
     RestartWidget.restartApp(context);
   }
 
-  // Sizing
-  LegendSizing webSizing = LegendSizing(
-    borderRadius: BorderRadius.all(
-      Radius.circular(20.0),
-    ),
-    typography: LegendTypography(),
+//Sizing
+  LegendSizingTheme _sizing = LegendSizingTheme(
+    sizingType: LegendSizingType.WEB,
   );
-
-  LegendSizing get sizing {
-    switch (sizingType) {
-      case LegendSizingType.WEB:
-        return webSizing;
-      default:
-        return webSizing;
-    }
-  }
+  LegendSizing get sizing => _sizing.sizing;
 
   LegendColorTheme get colors {
     switch (colorTheme) {

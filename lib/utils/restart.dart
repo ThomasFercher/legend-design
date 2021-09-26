@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 
 class RestartWidget extends StatefulWidget {
   RestartWidget({

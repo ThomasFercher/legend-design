@@ -13,7 +13,7 @@ import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigatio
 import 'package:webstore/customwidgets/layout/sections/section.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
 import 'drawers/drawerMenu.dart';
 import 'fixed/appBar.dart/fixedAppBar.dart';
@@ -25,8 +25,8 @@ import '../modals/modal.dart';
 import '../typography/legendText.dart';
 import '../../objects/menuOption.dart';
 import '../../router/routerProvider.dart';
-import '../../styles/layoutType.dart';
-import '../../styles/sizeProvider.dart';
+import '../../styles/layouts/layoutType.dart';
+import '../../styles/theming/sizing/sizeProvider.dart';
 import '../typography/typography.dart';
 
 class LegendScaffold extends StatefulWidget {

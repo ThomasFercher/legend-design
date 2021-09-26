@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 
 class SectionHeader extends StatelessWidget {
   final String text;
@@ -14,7 +16,10 @@ class SectionHeader extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 4.0),
       child: LegendText(
         text: text,
-        textStyle: textStyle ?? LegendTextStyle.sectionHeader(),
+        textStyle: textStyle ??
+            LegendTextStyle.sectionHeader().copyWith(
+              color: Provider.of<LegendTheme>(context).colors.textColorDark,
+            ),
       ),
     );
   }

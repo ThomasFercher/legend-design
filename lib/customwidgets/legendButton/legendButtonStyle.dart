@@ -176,7 +176,11 @@ class LegendButtonStyle extends ButtonStyle {
     );
   }
 
-  factory LegendButtonStyle.normal({double? height, double? width}) {
+  factory LegendButtonStyle.normal({
+    double? height,
+    double? width,
+    Radius? borderRadius,
+  }) {
     return LegendButtonStyle(
       backgroundColor: MaterialStateProperty.all(Colors.white),
       overlayColor: MaterialStateProperty.all(Colors.white),
@@ -193,7 +197,7 @@ class LegendButtonStyle extends ButtonStyle {
       fixedSize: width != null && height != null
           ? MaterialStateProperty.all(Size(width, height))
           : null,
-      borderRadius: Radius.circular(4),
+      borderRadius: borderRadius ?? Radius.circular(4),
       side: MaterialStateProperty.resolveWith(
         (states) {
           if (states.contains(MaterialState.hovered)) {

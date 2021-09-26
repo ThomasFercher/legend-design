@@ -8,12 +8,12 @@ import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 import '../drawers/siderMenuVerticalTile.dart';
 import '../../../objects/menuOption.dart';
 import '../../../router/routerProvider.dart';
-import '../../../styles/layoutType.dart';
-import '../../../styles/sizeProvider.dart';
+import '../../../styles/layouts/layoutType.dart';
+import '../../../styles/theming/sizing/sizeProvider.dart';
 import '../../../styles/theming/legendTheme.dart';
 
 import '../drawers/drawerMenuTile.dart';

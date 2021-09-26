@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/sections/sectionHeader.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 
@@ -46,7 +46,7 @@ class Section extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendColorTheme colors = Provider.of<LegendTheme>(context).colors;
+    LegendTheme theme = Provider.of<LegendTheme>(context);
 
     return Container(
       color: Colors.transparent,
@@ -58,10 +58,8 @@ class Section extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 24),
             padding: EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: colors.foreground[0],
-              borderRadius: BorderRadius.all(
-                Radius.circular(4),
-              ),
+              color: theme.colors.foreground[0],
+              borderRadius: theme.sizing.borderRadius[0],
             ),
             width: constraints.maxWidth,
             child: Column(

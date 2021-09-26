@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/icons/legendGradientIcon.dart';
 import 'package:webstore/customwidgets/input/selectBar/selectProvider.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
-import 'package:webstore/styles/legendSizingTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
+import 'package:webstore/styles/theming/sizing/legendSizing.dart';
+import 'package:webstore/styles/theming/sizing/legendSizingTheme.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
 
 import 'legendSelectOption.dart';
@@ -21,6 +22,7 @@ class LegendSelectBar extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
+  final BorderRadius? borderRadius;
 
   LegendSelectBar({
     required this.options,
@@ -32,6 +34,7 @@ class LegendSelectBar extends StatelessWidget {
     this.margin,
     this.width,
     this.height,
+    this.borderRadius,
   });
 
   List<Widget> getOptions(BuildContext context) {
@@ -66,10 +69,10 @@ class LegendSelectBar extends StatelessWidget {
           child: Container(
             width: width,
             height: height,
-            padding: EdgeInsets.all(sizing.borderRadius.bottomLeft.x / 2),
+            padding: EdgeInsets.all(sizing.borderInset[0] / 2),
             decoration: isCard ?? false
                 ? BoxDecoration(
-                    borderRadius: sizing.borderRadius,
+                    borderRadius: borderRadius ?? sizing.borderRadius[0],
                     color: color ?? Colors.white,
                     boxShadow: [
                       BoxShadow(

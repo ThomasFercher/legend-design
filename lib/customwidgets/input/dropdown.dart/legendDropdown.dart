@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/input/dropdown.dart/legendDropdownOption.dart';
-import 'package:webstore/styles/legendColorTheme.dart';
-import 'package:webstore/styles/legendSizingTheme.dart';
+import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
+import 'package:webstore/styles/theming/sizing/legendSizing.dart';
+import 'package:webstore/styles/theming/sizing/legendSizingTheme.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
 
 class LegendDropdown extends StatefulWidget {

@@ -52,13 +52,13 @@ class LegendAlert extends StatelessWidget {
           child: Card(
             color: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: theme.sizing.borderRadius,
+              borderRadius: theme.sizing.borderRadius[0],
             ),
             child: Container(
               height: height,
               width: height * 18 / 9,
               padding: EdgeInsets.all(
-                theme.sizing.borderRadius.bottomLeft.x / 2,
+                theme.sizing.borderInset[0] / 2,
               ),
               child: Row(
                 children: [
