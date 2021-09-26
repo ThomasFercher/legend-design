@@ -54,10 +54,19 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.h1() {
     return LegendTextStyle(
-      textColor: Colors.grey[850]!,
+      textColor: Colors.tealAccent[700]!,
       backgroundColor: Colors.transparent,
       fontSize: 28,
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w100,
+      fontFamily: "sans serif",
+    );
+  }
+  factory LegendTextStyle.tableHeader() {
+    return LegendTextStyle(
+      textColor: Colors.grey[850]!,
+      backgroundColor: Colors.transparent,
+      fontSize: 24,
+      fontWeight: FontWeight.w500,
       fontFamily: "sans serif",
     );
   }
@@ -94,10 +103,29 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.h4() {
     return LegendTextStyle(
-      textColor: Colors.black87,
+      textColor: Colors.grey[100]!,
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      fontFamily: "sans serif",
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  factory LegendTextStyle.bottomBar() {
+    return LegendTextStyle(
+      textColor: Colors.black54,
       backgroundColor: Colors.white,
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
+      fontFamily: "sans serif",
+    );
+  }
+  factory LegendTextStyle.tag() {
+    return LegendTextStyle(
+      textColor: Colors.black45,
+      backgroundColor: Colors.transparent,
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
       fontFamily: "sans serif",
     );
   }
@@ -124,10 +152,10 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.sectionLink() {
     return LegendTextStyle(
-      textColor: Colors.black87,
+      textColor: Colors.teal[50]!,
       backgroundColor: Colors.transparent,
-      fontSize: 16,
-      fontWeight: FontWeight.w300,
+      fontSize: 15,
+      fontWeight: FontWeight.w600,
       fontFamily: "Roboto",
     );
   }

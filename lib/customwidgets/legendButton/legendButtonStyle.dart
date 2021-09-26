@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 
 /*
 LegendButtonStyle has all the same Properties as ButtonStyle.
@@ -232,6 +232,7 @@ class LegendButtonStyle extends ButtonStyle {
     MaterialTapTargetSize? tapTargetSize,
     MaterialStateProperty<TextStyle?>? textStyle,
     VisualDensity? visualDensity,
+    MaterialStateProperty<Size?>? maximumSize,
   }) {
     return LegendButtonStyle(
       alignment: alignment,

@@ -12,6 +12,8 @@ import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
 
 class ProductsPage extends StatelessWidget {
+  const ProductsPage();
+
   @override
   Widget build(BuildContext context) {
     return LegendScaffold(
@@ -30,30 +32,6 @@ class ProductsPage extends StatelessWidget {
                     Colors.redAccent,
                   ],
                 ),
-              ),
-              LegendTable(
-                columnTypes: [
-                  LegendTableValueType.TEXT,
-                  LegendTableValueType.TEXT,
-                  LegendTableValueType.ACTION,
-                ],
-                values: [
-                  LegendRowValue(
-                      fields: ["test", "tata", "delete"],
-                      actionFunction: () {
-                        print("hello");
-                      }),
-                  LegendRowValue(
-                      fields: ["test", "tata", "delete"],
-                      actionFunction: () {
-                        print("hello");
-                      }),
-                  LegendRowValue(
-                      fields: ["test", "tata", "delete"],
-                      actionFunction: () {
-                        print("hello");
-                      }),
-                ],
               ),
             ],
           ),

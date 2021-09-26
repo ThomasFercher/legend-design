@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
 import 'package:webstore/styles/layoutType.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 
-class FixedMenu extends StatelessWidget {
+class FixedMenu extends StatefulWidget {
+  final void Function(MenuOptionHeader option)? onSelected;
+  final bool? showIconsOnly;
+  final Color? iconColor;
+  final Color? selected;
+
   const FixedMenu({
     Key? key,
     required this.context,
+    this.onSelected,
+    this.showIconsOnly,
+    this.iconColor,
+    this.selected,
   }) : super(key: key);
 
   final BuildContext context;
 
+  @override
+  _FixedMenuState createState() => _FixedMenuState();
+}
+
+class _FixedMenuState extends State<FixedMenu> {
   Widget getCollapsedMenu(BuildContext context) {
     return Container(
       alignment: Alignment.centerRight,
@@ -30,38 +46,42 @@ class FixedMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
-
-    double menuWidth;
+    LegendTheme theme = Provider.of<LegendTheme>(context);
+    List<MenuOptionHeader> options = RouterProvider.of(context)
+        .menuOptions
+        .map(
+          (option) => MenuOptionHeader(
+            option: option,
+            activeColor: widget.selected,
+            color: theme.colors.textColorLight,
+            backgroundColor: theme.colors.primaryColor,
+          ),
+        )
+        .toList();
 
     return Container(
-      margin: const EdgeInsets.only(left: 16.0),
-      height: 80,
+      //  margin: const EdgeInsets.only(left: 16.0),
+      height: theme.appBarStyle.appBarHeight,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          menuWidth = constraints.maxWidth;
-
-          if (menuWidth > 600) {
-            return Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                Container(
-                  child: Row(
-                    children: options,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(),
-                ),
-              ],
+          if (!SizeProvider.of(widget.context).isMenuCollapsed())
+            return Center(
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return options[index];
+                },
+                separatorBuilder: (context, index) {
+                  return Container(
+                    width: 12,
+                  );
+                },
+                itemCount: options.length,
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+              ),
             );
-          } else {
+          else
             return getCollapsedMenu(context);
-          }
         },
       ),
     );

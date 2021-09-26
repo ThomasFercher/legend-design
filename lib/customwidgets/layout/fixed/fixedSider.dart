@@ -1,16 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/sections/sectionTile.dart';
+import 'package:webstore/customwidgets/typography/legendText.dart';
+import 'package:webstore/customwidgets/typography/typography.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
+import 'package:webstore/styles/legendColorTheme.dart';
 import '../drawers/siderMenuVerticalTile.dart';
 import '../../../objects/menuOption.dart';
 import '../../../router/routerProvider.dart';
 import '../../../styles/layoutType.dart';
 import '../../../styles/sizeProvider.dart';
-import '../../../styles/legendTheme.dart';
+import '../../../styles/theming/legendTheme.dart';
 
 import '../drawers/drawerMenuTile.dart';
 
@@ -71,40 +75,60 @@ class CollapsedSider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     List<SiderMenuVerticalTile> tiles = List.of(
       options.map(
         (option) => SiderMenuVerticalTile(
           icon: option.icon,
-          title: option.title,
           path: option.page,
+          collapsed: true,
+          activeColor: Colors.tealAccent,
+          backgroundColor: theme.colors.primaryColor,
+          color: theme.colors.textColorLight,
         ),
       ),
     );
 
     List<SectionRouteInfo> sections =
         SectionProvider.of(context)?.sections ?? [];
-    List<SectionTile> sectionTiles = List.of(
+    List<SiderMenuVerticalTile> sectionTiles = List.of(
       sections.map(
-        (option) => SectionTile(
-          name: option.name,
+        (option) => SiderMenuVerticalTile(
+          title: option.name.replaceAll("/", "").capitalize(),
+          path: option.name,
+          isSection: true,
+          collapsed: true,
+          activeColor: Colors.tealAccent,
+          backgroundColor: theme.colors.primaryColor,
+          color: theme.colors.textColorLight,
         ),
       ),
     );
+
     return Container(
       width: 80,
       height: MediaQuery.of(context).size.height,
+      padding: EdgeInsets.only(
+          top: theme.appBarStyle.appBarHeight +
+              theme.appBarStyle.contentPadding.vertical),
       color: theme.colors.primaryColor,
       child: Column(
         children: [
-          Container(
-            child: Placeholder(),
-            height: 80,
+          Divider(
+            color: theme.colors.secondaryColor.withOpacity(0.2),
+            height: 1.0,
+            thickness: 1.0,
           ),
           if (showMenu)
-            ListView(
-              shrinkWrap: true,
-              children: tiles,
+            Padding(
+              padding: EdgeInsets.only(bottom: 24.0),
+              child: ListView(
+                shrinkWrap: true,
+                children: tiles,
+                padding: EdgeInsets.only(
+                  top: 32,
+                ),
+              ),
             ),
           if (showSectionMenu)
             ListView(
@@ -135,84 +159,112 @@ class Sider extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
 
-    ScrollController scrollController = ScrollController(
-      initialScrollOffset: 80.0,
-    );
-    scrollController
-      ..addListener(() {
-        if (scrollController.offset <= 80) {
-          scrollController.jumpTo(80);
-        }
-      });
-
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     List<DrawerMenuTile> tiles = List.of(
       options.map(
         (option) => DrawerMenuTile(
           icon: option.icon,
           title: option.title,
           path: option.page,
-          backgroundColor: Colors.teal,
-          left: true,
+          backgroundColor: theme.colors.primaryColor,
+          left: false,
+          activeColor: theme.colors.selectionColor,
+          color: theme.colors.secondaryColor,
         ),
       ),
     );
 
     List<SectionRouteInfo> sections =
         SectionProvider.of(context)?.sections ?? [];
-    List<SectionTile> sectionTiles = List.of(
+
+    print(sections);
+    List<SiderMenuVerticalTile> sectionTiles = List.of(
       sections.map(
-        (option) => SectionTile(
-          name: option.name,
+        (option) => SiderMenuVerticalTile(
+          title: option.name.replaceAll("/", "").capitalize(),
+          path: option.name,
+          isSection: true,
+          collapsed: false,
+          activeColor: Colors.tealAccent,
+          backgroundColor: theme.colors.primaryColor,
+          color: theme.colors.textColorLight,
         ),
       ),
     );
 
-    List<Widget> children = [];
-
-    if (showMenu ?? false) {
-      children.add(ListView(
-        shrinkWrap: true,
-        children: tiles,
-      ));
-    }
-
-    if (showSectionMenu ?? false) {
-      children.add(ListView(
-        shrinkWrap: true,
-        children: sectionTiles,
-      ));
-    }
-
-    if (builder != null)
-      children.add(Builder(
-        builder: (context) => builder!(context),
-      ));
+    List<Widget> children = [
+      Divider(
+        color: theme.colors.secondaryColor.withOpacity(0.2),
+        height: 1.0,
+        thickness: 1.0,
+      ),
+      if (showMenu ?? false)
+        ListView(
+          shrinkWrap: true,
+          children: tiles,
+          padding: EdgeInsets.only(
+            top: 32,
+          ),
+        ),
+      if (showSectionMenu ?? false)
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              LegendText(
+                padding: EdgeInsets.only(left: 32.0),
+                text: "Widgets",
+                textStyle: LegendTextStyle.h4().copyWith(
+                  color: LegendColorTheme.darken(
+                    theme.colors.secondaryColor,
+                    0.12,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32.0,
+                  vertical: 8.0,
+                ),
+                child: Divider(
+                  color: theme.colors.secondaryColor.withOpacity(0.6),
+                  height: 1.5,
+                  thickness: 1.5,
+                ),
+              ),
+              ListView(
+                shrinkWrap: true,
+                children: sectionTiles,
+              ),
+            ],
+          ),
+        ),
+      if (builder != null)
+        Builder(
+          builder: (context) => builder!(context),
+        )
+    ];
 
     for (var i = 1; i < children.length; i += 2) {
       children.insert(i, Padding(padding: EdgeInsets.only(top: 16)));
     }
 
+    ScrollController controller = new ScrollController();
+
     return Container(
-      width: 200,
+      width: 180,
       height: MediaQuery.of(context).size.height,
       color: theme.colors.primaryColor,
-      child: Expanded(
-        child: CustomScrollView(
+      padding: EdgeInsets.only(
+          top: theme.appBarStyle.appBarHeight +
+              theme.appBarStyle.contentPadding.vertical),
+      child: Scrollbar(
+        controller: controller,
+        child: ListView(
+          controller: controller,
+          children: children,
           shrinkWrap: true,
-          slivers: [
-            SliverAppBar(
-              title: Container(),
-              backgroundColor: theme.colors.primaryColor,
-              actions: [Container()],
-              expandedHeight: theme.sizing.appbarHeight,
-              collapsedHeight: theme.sizing.appbarHeight,
-              toolbarHeight: theme.sizing.appbarHeight,
-              pinned: true,
-              automaticallyImplyLeading: false,
-            ),
-            SliverList(delegate: SliverChildListDelegate(children))
-          ],
         ),
       ),
     );

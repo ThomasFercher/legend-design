@@ -1,23 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../../../router/routerProvider.dart';
 import '../../typography/legendText.dart';
 
 class DrawerMenuTile extends StatefulWidget {
   final IconData icon;
-  final String title;
+  final String? title;
   final String path;
   final Color backgroundColor;
   final bool left;
+  final Color color;
+  final Color activeColor;
+  late final bool collapsed;
 
-  const DrawerMenuTile({
+  DrawerMenuTile({
     required this.icon,
     required this.path,
     required this.title,
     required this.backgroundColor,
     required this.left,
-  });
+    required this.color,
+    required this.activeColor,
+    bool collapsed = false,
+  }) {
+    this.collapsed = collapsed;
+  }
 
   @override
   _DrawerMenuTileState createState() => _DrawerMenuTileState();
@@ -36,19 +45,20 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
   void initState() {
     _isClicked = false;
     _isHovered = false;
-    color = Colors.black;
+    color = widget.color;
+    borderColor = widget.backgroundColor;
     controller = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 250),
     );
     banimation = ColorTween(
-      begin: widget.backgroundColor,
-      end: Colors.blueAccent,
+      begin: borderColor,
+      end: widget.activeColor,
     ).animate(controller);
 
     animation = ColorTween(
-      begin: Colors.black,
-      end: Colors.blueAccent,
+      begin: widget.color,
+      end: widget.activeColor,
     ).animate(controller);
 
     animation.addListener(() {
@@ -74,19 +84,25 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
+      margin: EdgeInsets.only(
+        bottom: 24.0,
+      ),
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
-            color: borderColor ?? Colors.teal,
+            color: borderColor ?? Colors.red,
             width: 4,
             style: widget.left ? BorderStyle.solid : BorderStyle.none,
           ),
           right: BorderSide(
-            color: borderColor ?? Colors.teal,
+            color: borderColor ?? Colors.red,
             width: 4,
             style: widget.left ? BorderStyle.none : BorderStyle.solid,
           ),
         ),
+      ),
+      padding: EdgeInsets.only(
+        left: widget.collapsed ? 0 : 26.0,
       ),
       child: InkWell(
         hoverColor: Colors.transparent,
@@ -111,17 +127,27 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
             settings: RouteSettings(name: widget.path),
           );
         },
-        child: ListTile(
-          leading: Icon(
-            widget.icon,
-            color: color,
-          ),
-          title: LegendText(
-            text: widget.title,
-            textStyle: LegendTextStyle.h5().copyWith(
+        child: Row(
+          children: [
+            Icon(
+              widget.icon,
               color: color,
+              size: 28.0,
             ),
-          ),
+            if (widget.title != null)
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(left: 12.0),
+                  child: LegendText(
+                    text: widget.title!,
+                    textStyle: LegendTextStyle.h5().copyWith(
+                      color: color,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              )
+          ],
         ),
       ),
     );

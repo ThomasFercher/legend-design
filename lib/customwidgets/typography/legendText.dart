@@ -6,17 +6,20 @@ class LegendText extends StatelessWidget {
   final TextStyle? textStyle;
   final bool? selectable;
   final TextAlign? textAlign;
+  final EdgeInsets? padding;
 
   LegendText({
     required this.text,
     this.selectable,
     this.textStyle,
     this.textAlign,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: padding ?? EdgeInsets.zero,
       height: textStyle?.height,
       child: kIsWeb && (selectable ?? true) ? webText() : normalText(),
     );

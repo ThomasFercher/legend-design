@@ -4,11 +4,19 @@ class LegendColorTheme {
   final Color primaryColor;
   final Color secondaryColor;
   final Color scaffoldBackgroundColor;
+  final List<Color> foreground;
+  final Color selectionColor;
+  final Color textColorDark;
+  final Color textColorLight;
 
   LegendColorTheme({
     required this.primaryColor,
     required this.secondaryColor,
     required this.scaffoldBackgroundColor,
+    required this.foreground,
+    required this.selectionColor,
+    required this.textColorDark,
+    required this.textColorLight,
   });
 
   // ranges from 0.0 to 1.0

@@ -3,19 +3,35 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../router/routerProvider.dart';
 
-class MenuOptionHeader extends StatefulWidget {
-  final String title;
+class MenuOption {
+  final String? title;
   final String page;
   final IconData icon;
+  final void Function(String page)? onSelected;
 
-  MenuOptionHeader({
-    required this.title,
+  const MenuOption({
+    this.title,
     required this.page,
     required this.icon,
+    this.onSelected,
+  });
+}
+
+class MenuOptionHeader extends StatefulWidget {
+  final MenuOption option;
+  final Color? color;
+  final Color? activeColor;
+  final Color? backgroundColor;
+
+  MenuOptionHeader({
+    required this.option,
+    this.color,
+    this.activeColor,
+    this.backgroundColor,
   });
 
   @override
@@ -29,15 +45,24 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   late AnimationController controller;
   late Animation animation;
   late Animation animation2;
-  late Color color = Colors.black87;
-  late Color borderColor = Colors.transparent;
+  late Color color = widget.color ?? Colors.black87;
+  late Color borderColor;
+  late Color activeColor;
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
     _isHovered = false;
     _isClicked = false;
-
+    borderColor = widget.backgroundColor ?? Colors.red;
+    activeColor = widget.activeColor ?? Colors.blueAccent;
     controller = AnimationController(
       vsync: this,
       duration: Duration(
@@ -46,12 +71,12 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
     );
     animation = ColorTween(
       begin: color,
-      end: Colors.blueAccent,
+      end: activeColor,
     ).animate(controller);
 
     animation2 = ColorTween(
-      begin: Colors.teal,
-      end: Colors.blueAccent,
+      begin: borderColor,
+      end: activeColor,
     ).animate(controller);
 
     animation2.addListener(() {
@@ -71,7 +96,6 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
     return Container(
-      margin: const EdgeInsets.only(left: 8.0),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
@@ -86,7 +110,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
           ),
         ),
       ),
-      height: theme.sizing.appbarHeight,
+      height: theme.appBarStyle.appBarHeight,
       child: InkWell(
         onHover: (value) {
           if (value && !_isClicked) {
@@ -103,8 +127,10 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
         },
         onTap: () {
           _isClicked = !_isClicked;
+          if (widget.option.onSelected != null)
+            widget.option.onSelected!(widget.option.page);
           RouterProvider.of(context).pushPage(
-            settings: RouteSettings(name: widget.page),
+            settings: RouteSettings(name: widget.option.page),
           );
         },
         splashFactory: NoSplash.splashFactory,
@@ -113,26 +139,29 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         child: Container(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: theme.appBarStyle.spacing ?? 12.0,
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                widget.icon,
+                widget.option.icon,
                 color: color,
-                size: theme.sizing.appbarHeight / 3.5,
+                size: theme.appBarStyle.iconSize,
               ),
-              Padding(padding: const EdgeInsets.symmetric(horizontal: 4.0)),
-              Padding(
-                padding: const EdgeInsets.only(top: 2.0),
-                child: LegendText(
-                  text: widget.title,
-                  selectable: false,
-                  textStyle: LegendTextStyle.appBarMenuHeader().copyWith(
-                    color: color,
+              if (widget.option.title != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 2.0, left: 8.0),
+                  child: LegendText(
+                    text: widget.option.title!,
+                    selectable: false,
+                    textStyle: LegendTextStyle.appBarMenuHeader().copyWith(
+                      color: color,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

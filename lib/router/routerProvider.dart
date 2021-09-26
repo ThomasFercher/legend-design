@@ -15,7 +15,7 @@ class RouterProvider extends InheritedWidget {
   final WebRouterDelegate routerDelegate;
   final Widget child;
   final List<RouteInfo> routes;
-  final List<MenuOptionHeader> menuOptions;
+  final List<MenuOption> menuOptions;
 
   RouterProvider({
     Key? key,
@@ -59,7 +59,10 @@ class RouterProvider extends InheritedWidget {
 
     if (kIsWeb) {
       return MaterialPage(
-        child: route.page,
+        child: SectionProvider(
+          sections: route.sections,
+          child: route.page,
+        ),
         key: ValueKey(s.name! + now),
         name: s.name,
         arguments: s.arguments,

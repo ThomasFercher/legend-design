@@ -8,7 +8,7 @@ import '../../../styles/sizeProvider.dart';
 class DrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<MenuOptionHeader> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     List<DrawerMenuTile> tiles = List.of(
       options.map(
         (option) => DrawerMenuTile(
@@ -17,6 +17,8 @@ class DrawerMenu extends StatelessWidget {
           path: option.page,
           left: false,
           backgroundColor: Colors.white,
+          activeColor: Colors.tealAccent,
+          color: Colors.teal,
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/sections/sectionHeader.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 
 class Section extends StatelessWidget {
@@ -48,26 +48,29 @@ class Section extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendColorTheme colors = Provider.of<LegendTheme>(context).colors;
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Padding(
-        padding: EdgeInsets.all(margin ?? 12.0),
-        child: Container(
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(bottom: 24),
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.06),
-            borderRadius: BorderRadius.all(
-              Radius.circular(4),
+    return Container(
+      color: Colors.transparent,
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Padding(
+          padding: EdgeInsets.all(margin ?? 8.0),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(bottom: 24),
+            padding: EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: colors.foreground[0],
+              borderRadius: BorderRadius.all(
+                Radius.circular(4),
+              ),
+            ),
+            width: constraints.maxWidth,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: getWidgets(),
             ),
           ),
-          width: constraints.maxWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: getWidgets(),
-          ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 }

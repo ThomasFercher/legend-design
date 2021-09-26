@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/input/dropdown.dart/legendDropdownOption.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'package:webstore/styles/legendSizingTheme.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 
 class LegendDropdown extends StatefulWidget {
   final List<PopupMenuOption> options;

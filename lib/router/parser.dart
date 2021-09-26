@@ -29,9 +29,16 @@ class MyRouteInformationParser
 
   @override
   RouteInformation? restoreRouteInformation(configuration) {
-    final location = configuration.last.name;
-    final arguments = _restoreArguments(configuration.last);
-    return RouteInformation(location: '$location$arguments');
+    final String name;
+    final String arguments;
+    if (configuration.isNotEmpty) {
+      name = configuration.last.name ?? "";
+      arguments = _restoreArguments(configuration.last);
+    } else {
+      name = "";
+      arguments = "";
+    }
+    return RouteInformation(location: '$name$arguments');
   }
 
   String _restoreArguments(RouteSettings routeSettings) {

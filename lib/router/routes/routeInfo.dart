@@ -7,7 +7,7 @@ class RouteInfo {
   final Object? arguments;
   final List<SectionRouteInfo>? sections;
 
-  RouteInfo({
+  const RouteInfo({
     required this.name,
     required this.page,
     this.arguments,
