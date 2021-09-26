@@ -6,7 +6,7 @@ import 'package:webstore/customwidgets/icons/legendGradientIcon.dart';
 import 'package:webstore/customwidgets/input/selectBar/selectProvider.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
 import 'package:webstore/styles/legendSizingTheme.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 
 import 'legendSelectOption.dart';
 import 'legendselectButton.dart';

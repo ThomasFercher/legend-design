@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/styles/sizeProvider.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../router/routerProvider.dart';
 
@@ -25,11 +25,13 @@ class MenuOptionHeader extends StatefulWidget {
   final MenuOption option;
   final Color? color;
   final Color? activeColor;
+  final Color? backgroundColor;
 
   MenuOptionHeader({
     required this.option,
     this.color,
     this.activeColor,
+    this.backgroundColor,
   });
 
   @override
@@ -44,8 +46,8 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
   late Animation animation;
   late Animation animation2;
   late Color color = widget.color ?? Colors.black87;
-  late Color borderColor = Colors.transparent;
-  late Color activeColor = widget.activeColor ?? Colors.blueAccent;
+  late Color borderColor;
+  late Color activeColor;
 
   @override
   void dispose() {
@@ -59,7 +61,8 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
     super.initState();
     _isHovered = false;
     _isClicked = false;
-
+    borderColor = widget.backgroundColor ?? Colors.red;
+    activeColor = widget.activeColor ?? Colors.blueAccent;
     controller = AnimationController(
       vsync: this,
       duration: Duration(
@@ -72,7 +75,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
     ).animate(controller);
 
     animation2 = ColorTween(
-      begin: Colors.teal,
+      begin: borderColor,
       end: activeColor,
     ).animate(controller);
 

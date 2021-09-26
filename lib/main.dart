@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/bottomBarProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
+import 'package:webstore/utils/restart.dart';
 
 import 'objects/menuOption.dart';
 import 'pages/widgetComponets.dart';
@@ -12,7 +13,7 @@ import 'router/delegate.dart';
 import 'router/parser.dart';
 import 'router/routes/routeInfo.dart';
 import 'router/routerProvider.dart';
-import 'styles/legendTheme.dart';
+import 'styles/theming/legendTheme.dart';
 import 'customwidgets/typography/typography.dart';
 
 void main() {
@@ -81,18 +82,22 @@ class LegendApp extends StatelessWidget {
           ),
         ),
       ],
-      child: RouterProvider(
-        routerDelegate: routerDelegate,
-        routes: _routes,
-        menuOptions: _menuOptions,
-        child: MaterialApp.router(
-          title: 'Legend Design',
+      child: Builder(builder: (context) {
+        return RouterProvider(
           routerDelegate: routerDelegate,
-          routeInformationParser: const MyRouteInformationParser(),
-          debugShowCheckedModeBanner: false,
-          backButtonDispatcher: RootBackButtonDispatcher(),
-        ),
-      ),
+          routes: _routes,
+          menuOptions: _menuOptions,
+          child: RestartWidget(
+            child: MaterialApp.router(
+              title: 'Legend Design',
+              routerDelegate: routerDelegate,
+              routeInformationParser: const MyRouteInformationParser(),
+              debugShowCheckedModeBanner: false,
+              backButtonDispatcher: RootBackButtonDispatcher(),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

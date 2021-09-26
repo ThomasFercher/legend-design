@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedMenu.dart';
@@ -12,7 +13,7 @@ import '../../../../objects/menuOption.dart';
 import '../../../../router/routerProvider.dart';
 import '../../../../styles/layoutType.dart';
 import '../../../../styles/sizeProvider.dart';
-import '../../../../styles/legendTheme.dart';
+import '../../../../styles/theming/legendTheme.dart';
 import '../fixedSider.dart';
 
 class FixedAppBarStyle {
@@ -59,12 +60,14 @@ class FixedAppBar extends StatelessWidget {
   final Radius? bottomBorderRadius;
   late FixedAppBarStyle? style;
   final BuildContext pcontext;
+  final LayoutType? layoutType;
   FixedAppBar({
     this.showMenu,
     this.builder,
     this.leading,
     this.bottomBorderRadius,
     this.style,
+    this.layoutType,
     required this.pcontext,
   });
 
@@ -112,7 +115,7 @@ class FixedAppBar extends StatelessWidget {
 
       shape: style?.shape,
       actions: [Container()],
-      flexibleSpace: Container(
+      /*flexibleSpace: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -124,13 +127,14 @@ class FixedAppBar extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ),*/
       title: Container(
         height: theme.appBarStyle.appBarHeight +
             (style?.contentPadding.vertical ?? 0.0),
-        padding: EdgeInsets.symmetric(
-          vertical: style?.contentPadding.top ?? 0,
-          horizontal: 12.0,
+        padding: EdgeInsets.only(
+          left: style?.contentPadding.left ?? 0,
+          top: style?.contentPadding.top ?? 0,
+          bottom: style?.contentPadding.bottom ?? 0,
         ),
         child: Container(
           //     height: theme.appBarStyle.appBarHeight,
@@ -142,7 +146,29 @@ class FixedAppBar extends StatelessWidget {
                 children: [
                   Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        if (layoutType != LayoutType.FixedSider &&
+                            layoutType != LayoutType.FixedHeaderSider)
+                          Container(
+                            height: (style?.appBarHeight ?? 80),
+                            width: style?.appBarHeight ?? 80,
+                            margin: EdgeInsets.only(right: 16.0),
+                            child: SvgPicture.asset(
+                              "assets/photos/larrylegend.svg",
+                              alignment: Alignment.centerLeft,
+                            ),
+                          ),
+                        if (layoutType != LayoutType.FixedSider &&
+                            layoutType != LayoutType.FixedHeaderSider)
+                          LegendText(
+                            text: "Legend Design",
+                            textStyle: LegendTextStyle.h1().copyWith(
+                              color: theme.colors.secondaryColor,
+                              letterSpacing: 0.1,
+                            ),
+                          ),
                         if (showMenu ?? true)
                           Expanded(
                             child: Container(
@@ -163,8 +189,10 @@ class FixedAppBar extends StatelessWidget {
                   ),
                   if (builder != null)
                     Positioned(
-                      right:
-                          SizeProvider.of(context).isMenuCollapsed() ? 64 : 0,
+                      right: SizeProvider.of(context).isMenuCollapsed() &&
+                              !theme.isMobile
+                          ? 64
+                          : 0,
                       child: Container(
                         height: theme.appBarStyle.appBarHeight,
                         alignment: Alignment.center,

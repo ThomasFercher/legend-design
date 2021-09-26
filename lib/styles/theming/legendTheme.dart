@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedAppBar.dart';
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
-import 'legendColorTheme.dart';
-import 'legendSizingTheme.dart';
-import '../customwidgets/typography/typography.dart';
+import 'package:webstore/styles/legendColors.dart';
+import 'package:webstore/styles/theming/appBarTheme.dart';
+import 'package:webstore/utils/restart.dart';
+import '../legendColorTheme.dart';
+import '../legendSizingTheme.dart';
+import '../../customwidgets/typography/typography.dart';
 
 enum LegendColorThemeType {
   LIGHT,
@@ -17,13 +23,6 @@ enum LegendSizingType {
   MOBILE,
   TABLET,
   WEB,
-}
-
-enum FixedAppBarType {
-  NORMAl,
-  SLEEK,
-  RoundedMobile,
-  ICONS,
 }
 
 enum BottomBarType {
@@ -47,25 +46,42 @@ class LegendTheme extends ChangeNotifier {
       ),
     );
   }
+  // Platform INfo
+
+  final bool isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
 
   // Colors
-  LegendColorThemeType colorTheme = LegendColorThemeType.LIGHT;
+  LegendColorThemeType colorTheme = LegendColorThemeType.DARK;
   LegendSizingType sizingType = LegendSizingType.WEB;
 
   LegendColorTheme lightColorTheme = LegendColorTheme(
     primaryColor: Colors.teal,
     secondaryColor: Colors.teal[50]!,
-    scaffoldBackgroundColor: LegendColorTheme.darken(Colors.white, 0.06),
+    scaffoldBackgroundColor: LegendColors.gray2,
+    foreground: [LegendColors.gray4, LegendColors.gray5],
+    selectionColor: Colors.tealAccent,
+    textColorDark: Colors.tealAccent,
+    textColorLight: Colors.tealAccent,
   );
   LegendColorTheme darkColorTheme = LegendColorTheme(
-    primaryColor: Colors.blueGrey,
-    secondaryColor: Colors.blueAccent,
-    scaffoldBackgroundColor: LegendColorTheme.darken(Colors.white, 0.06),
+    primaryColor: Colors.teal[900]!,
+    secondaryColor: Colors.tealAccent,
+    scaffoldBackgroundColor: LegendColors.gray12,
+    foreground: [LegendColors.gray10, LegendColors.gray9],
+    selectionColor: Colors.tealAccent,
+    textColorDark: Colors.black54,
+    textColorLight: Colors.teal[200]!,
   );
 
-  void changeColorTheme(LegendColorThemeType type) {
+  void changeColorTheme(LegendColorThemeType type, BuildContext context) {
     this.colorTheme = type;
+
+    _appBarTheme = new LegendAppBarTheme(
+      colors: colors,
+      appBarType: FixedAppBarType.ICONS,
+    );
     notifyListeners();
+    RestartWidget.restartApp(context);
   }
 
   // Sizing
@@ -97,69 +113,22 @@ class LegendTheme extends ChangeNotifier {
   }
 
   // Custom Widgets / Overrides)
-  final FixedAppBarType appBarType = FixedAppBarType.ICONS;
 
-  late final FixedAppBarStyle sleekAppBarStyle = FixedAppBarStyle(
-    appBarHeight: 80,
-    backgroundColor: Colors.transparent,
-    borderRadius: Radius.circular(20),
-    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 12.0),
-    cardColor: Colors.white,
-    pinned: true,
+  // App Bar
+
+  late LegendAppBarTheme _appBarTheme = new LegendAppBarTheme(
+    colors: colors,
+    appBarType: FixedAppBarType.ICONS,
   );
-
-  late final FixedAppBarStyle iconsAppBar = FixedAppBarStyle(
-    appBarHeight: 80,
-    backgroundColor: colors.primaryColor,
-    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 12.0),
-    iconSize: 32,
-    spacing: 16.0,
-    iconColor: colors.secondaryColor,
-    selectedColor: Colors.tealAccent,
-  );
-
-  late final FixedAppBarStyle mobileRoundedStyle = FixedAppBarStyle(
-    appBarHeight: 80,
-    backgroundColor: Colors.teal,
-    borderRadius: Radius.circular(12.0),
-    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 0),
-    pinned: true,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(12.0),
-      ),
-    ),
-  );
-
-  late final FixedAppBarStyle normalAppBarStyle = FixedAppBarStyle(
-    appBarHeight: 80,
-    backgroundColor: colors.primaryColor,
-    borderRadius: Radius.circular(20),
-    contentPadding: EdgeInsets.all(8),
-  );
-
-  FixedAppBarStyle get appBarStyle {
-    switch (appBarType) {
-      case FixedAppBarType.SLEEK:
-        return sleekAppBarStyle;
-      case FixedAppBarType.RoundedMobile:
-        return mobileRoundedStyle;
-
-      case FixedAppBarType.ICONS:
-        return iconsAppBar;
-      default:
-        return normalAppBarStyle;
-    }
-  }
+  FixedAppBarStyle get appBarStyle => _appBarTheme.appBarStyle;
 
   // Bottom Bar
-
-  final BottomBarType bottomBarType = BottomBarType.ROUNDED;
+  final BottomBarType bottomBarType = BottomBarType.NORMAl;
 
   late final BottomBarStyle normalBottomBar = BottomBarStyle(
-    showText: true,
+    showText: false,
     textAtBottom: true,
-    height: 56,
+    height: 48,
     margin: EdgeInsets.all(0),
     activeColor: colors.primaryColor,
     disabledColor: Colors.black26,

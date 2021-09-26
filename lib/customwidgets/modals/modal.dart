@@ -5,7 +5,7 @@ import 'package:webstore/styles/layoutType.dart';
 import '../legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import '../../styles/sizeProvider.dart';
-import '../../styles/legendTheme.dart';
+import '../../styles/theming/legendTheme.dart';
 
 class Modal extends StatelessWidget {
   final double? width;

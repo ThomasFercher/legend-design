@@ -46,6 +46,7 @@ class LegendTableCell extends StatelessWidget {
       case LegendTableValueType.TEXT:
         return Container(
           padding: EdgeInsets.all(8.0),
+          color: Colors.red,
           child: LegendText(text: text ?? ""),
         );
       case LegendTableValueType.ACTION:

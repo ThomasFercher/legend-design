@@ -14,7 +14,7 @@ import 'package:webstore/customwidgets/layout/sections/section.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/legendColorTheme.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'drawers/drawerMenu.dart';
 import 'fixed/appBar.dart/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -79,6 +79,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    sections = SectionProvider.of(context)?.sections;
+
     return SizeProvider(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
@@ -143,8 +145,10 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     }
   }
 
-  Widget getFooter() {
-    return FixedFooter();
+  Widget getFooter(double height) {
+    return FixedFooter(
+      height: height,
+    );
   }
 
   Widget getHeader(context) {
@@ -156,6 +160,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
               : false,
           builder: widget.appBarBuilder,
           pcontext: context,
+          layoutType: widget.layoutType,
         );
       case LayoutType.FixedHeader:
         return FixedAppBar(
@@ -164,6 +169,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
               ? widget.showAppBarMenu
               : false,
           pcontext: context,
+          layoutType: widget.layoutType,
         );
       default:
         return SliverToBoxAdapter(
@@ -204,6 +210,10 @@ class _LegendScaffoldState extends State<LegendScaffold> {
         26.0 +
         48.0;
 
+    double maxHeight = SizeProvider.of(context).height;
+
+    List<Widget> children = getChildren(context);
+    if (children.isNotEmpty) children.add(getFooter(120));
     return Scaffold(
       endDrawer: DrawerMenu(),
       bottomNavigationBar:
@@ -230,37 +240,43 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                         ? SliverToBoxAdapter(
                             child:
                                 LayoutBuilder(builder: (context, constraints) {
+                              double footerheight = 120;
+                              double space = maxHeight -
+                                  footerheight -
+                                  contentPadding.vertical -
+                                  100;
+
                               return Container(
-                                constraints: BoxConstraints(
-                                  minHeight:
-                                      MediaQuery.of(context).size.height - 80,
-                                ),
                                 color: theme.colors.scaffoldBackgroundColor,
                                 padding: contentPadding,
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      color: Colors.red,
-                                      height: theme.appBarStyle.appBarHeight,
+                                      child: SingleChildScrollView(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          constraints: BoxConstraints(
+                                            minHeight: space,
+                                          ),
+                                          child: Builder(
+                                            builder: widget.contentBuilder,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                    Container(
-                                      width: constraints.maxWidth -
-                                          contentPadding.horizontal,
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Builder(
-                                          builder: widget.contentBuilder),
-                                    ),
-                                    getFooter(),
+                                    getFooter(footerheight),
                                   ],
                                 ),
                               );
                             }),
                           )
                         : SliverToBoxAdapter(
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: getChildren(context),
+                            child: Container(
+                              color: theme.colors.scaffoldBackgroundColor,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: children,
+                                ),
                               ),
                             ),
                           ),
@@ -269,38 +285,45 @@ class _LegendScaffoldState extends State<LegendScaffold> {
               ),
             ],
           ),
-          Positioned(
-            left: 26.0,
-            top: 32.0,
-            child: Material(
-              color: Colors.transparent,
-              child: Hero(
-                tag: ValueKey("title"),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 48,
-                      width: 48,
-                      margin: EdgeInsets.only(right: 16.0),
-                      child: SvgPicture.asset(
-                        "assets/photos/larrylegend.svg",
-                        alignment: Alignment.centerLeft,
+          if ((widget.layoutType == LayoutType.FixedSider ||
+                  widget.layoutType == LayoutType.FixedHeaderSider) &&
+              !theme.isMobile)
+            Positioned(
+              left: theme.appBarStyle.contentPadding.left,
+              top: theme.appBarStyle.contentPadding.top,
+              child: Material(
+                color: Colors.transparent,
+                child: Hero(
+                  tag: ValueKey("title"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: theme.appBarStyle.appBarHeight,
+                        width: theme.appBarStyle.appBarHeight - 12,
+                        margin: EdgeInsets.only(right: 16.0),
+                        child: SvgPicture.asset(
+                          "assets/photos/larrylegend.svg",
+                          alignment: Alignment.centerLeft,
+                        ),
                       ),
-                    ),
-                    LegendText(
-                      text: "Legend Design",
-                      textStyle: LegendTextStyle.h1().copyWith(
-                        color: theme.colors.secondaryColor,
-                        letterSpacing: 0.1,
+                      Container(
+                        height: theme.appBarStyle.appBarHeight,
+                        alignment: Alignment.center,
+                        child: LegendText(
+                          text: "Legend Design",
+                          textStyle: LegendTextStyle.h1().copyWith(
+                            color: theme.colors.secondaryColor,
+                            letterSpacing: 0.1,
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

@@ -10,11 +10,13 @@ class LegendGrid extends StatelessWidget {
   final List<Widget> children;
   final LegendGridSize sizes;
   final int? crossAxisCount;
+  final EdgeInsets? margin;
 
   LegendGrid({
     required this.children,
     required this.sizes,
     this.crossAxisCount,
+    this.margin,
   });
 
   @override
@@ -33,11 +35,13 @@ class LegendGrid extends StatelessWidget {
       double aspectRatio = singleChildWidth / (height / rows);
       return Container(
         height: height,
+        margin: margin,
         child: GridView.count(
           childAspectRatio: aspectRatio,
           crossAxisCount: count,
           children: children,
           shrinkWrap: true,
+          padding: EdgeInsets.all(0),
           physics: NeverScrollableScrollPhysics(),
         ),
       );

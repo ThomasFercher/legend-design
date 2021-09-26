@@ -46,12 +46,13 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
     _isClicked = false;
     _isHovered = false;
     color = widget.color;
+    borderColor = widget.backgroundColor;
     controller = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 250),
     );
     banimation = ColorTween(
-      begin: widget.backgroundColor,
+      begin: borderColor,
       end: widget.activeColor,
     ).animate(controller);
 
@@ -89,12 +90,12 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
-            color: borderColor ?? Colors.teal,
+            color: borderColor ?? Colors.red,
             width: 4,
             style: widget.left ? BorderStyle.solid : BorderStyle.none,
           ),
           right: BorderSide(
-            color: borderColor ?? Colors.teal,
+            color: borderColor ?? Colors.red,
             width: 4,
             style: widget.left ? BorderStyle.none : BorderStyle.solid,
           ),

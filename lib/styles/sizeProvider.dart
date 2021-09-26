@@ -9,7 +9,7 @@ class SizeProvider extends InheritedWidget {
   final double width;
   late final ScreenSize screenSize;
   final double height;
-  late final bool isMobile;
+  late final bool _isMobile;
 
   double? titleWidth;
 
@@ -27,8 +27,10 @@ class SizeProvider extends InheritedWidget {
     required this.height,
   }) : super(child: child) {
     screenSize = getScreenSizeFromWidth(width);
-    isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
+    _isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
   }
+
+  bool get isMobile => _isMobile;
 
   double getTitleIndent() {
     return this.titleWidth ?? 0;

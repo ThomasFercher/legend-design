@@ -5,7 +5,7 @@ import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/objects/assetInfo.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 
 class LegendAlert extends StatelessWidget {

@@ -14,7 +14,7 @@ import '../../../objects/menuOption.dart';
 import '../../../router/routerProvider.dart';
 import '../../../styles/layoutType.dart';
 import '../../../styles/sizeProvider.dart';
-import '../../../styles/legendTheme.dart';
+import '../../../styles/theming/legendTheme.dart';
 
 import '../drawers/drawerMenuTile.dart';
 
@@ -84,6 +84,7 @@ class CollapsedSider extends StatelessWidget {
           collapsed: true,
           activeColor: Colors.tealAccent,
           backgroundColor: theme.colors.primaryColor,
+          color: theme.colors.textColorLight,
         ),
       ),
     );
@@ -99,6 +100,7 @@ class CollapsedSider extends StatelessWidget {
           collapsed: true,
           activeColor: Colors.tealAccent,
           backgroundColor: theme.colors.primaryColor,
+          color: theme.colors.textColorLight,
         ),
       ),
     );
@@ -164,9 +166,9 @@ class Sider extends StatelessWidget {
           icon: option.icon,
           title: option.title,
           path: option.page,
-          backgroundColor: Colors.teal,
+          backgroundColor: theme.colors.primaryColor,
           left: false,
-          activeColor: Colors.tealAccent,
+          activeColor: theme.colors.selectionColor,
           color: theme.colors.secondaryColor,
         ),
       ),
@@ -185,6 +187,7 @@ class Sider extends StatelessWidget {
           collapsed: false,
           activeColor: Colors.tealAccent,
           backgroundColor: theme.colors.primaryColor,
+          color: theme.colors.textColorLight,
         ),
       ),
     );

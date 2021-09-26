@@ -26,7 +26,7 @@ import 'package:webstore/customwidgets/modals/legendPopups.dart';
 import 'package:webstore/customwidgets/modals/modal.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../customwidgets/layout/legendScaffold.dart';
 import '../styles/layoutType.dart';
@@ -49,7 +49,7 @@ class WidgetComponents extends StatelessWidget {
             width: 100,
             height: 48,
             isCard: true,
-            color: theme.colors.secondaryColor,
+            color: theme.colors.foreground[1],
             options: [
               LegendSelectOption(
                 color: Colors.grey,
@@ -67,11 +67,11 @@ class WidgetComponents extends StatelessWidget {
               switch (option.name) {
                 case "dark":
                   Provider.of<LegendTheme>(context, listen: false)
-                      .changeColorTheme(LegendColorThemeType.DARK);
+                      .changeColorTheme(LegendColorThemeType.DARK, context);
                   break;
                 case "light":
                   Provider.of<LegendTheme>(context, listen: false)
-                      .changeColorTheme(LegendColorThemeType.LIGHT);
+                      .changeColorTheme(LegendColorThemeType.LIGHT, context);
                   break;
                 default:
                   break;
@@ -91,8 +91,9 @@ class WidgetComponents extends StatelessWidget {
                 text:
                     "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. "),
             LegendGrid(
+              margin: EdgeInsets.symmetric(vertical: 12.0),
               sizes: LegendGridSize(
-                small: LegendGridSizeInfo(2, 64),
+                small: LegendGridSizeInfo(1, 64),
                 medium: LegendGridSizeInfo(3, 64),
                 large: LegendGridSizeInfo(4, 64),
                 xxl: LegendGridSizeInfo(4, 64),
@@ -125,7 +126,7 @@ class WidgetComponents extends StatelessWidget {
                       ),
                 ),
                 LegendButton(
-                  //  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(16),
                   text: LegendText(text: "Gradient"),
                   onPressed: () => {},
                   style: LegendButtonStyle.gradient(
@@ -133,22 +134,37 @@ class WidgetComponents extends StatelessWidget {
                       Colors.red[200]!,
                       Colors.redAccent,
                     ],
-                    width: 100,
+                    height: 48,
                   ),
                 ),
               ],
             ),
             Container(
-              height: 200,
-              child: SyntaxView(
-                code:
-                    "LegendButton(\n margin: EdgeInsets.all(16),\n                        text: LegendText(text: \"Gradient\"),\n                        onPressed: () => {},\n                        style: LegendButtonStyle.gradient(\n                          [\n                            Colors.red[200]!,\n                            Colors.redAccent,\n                          ],\n                        ),\n                      ),",
-                syntax: Syntax.DART,
-                syntaxTheme: SyntaxTheme.standard(),
-                fontSize: 18.0,
-                withZoom: false,
-                withLinesCount: false,
-                expanded: false,
+              decoration: BoxDecoration(
+                color: theme.colors.foreground[1],
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12.0),
+                ),
+              ),
+              margin: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(6.0),
+              child: Container(
+                height: 180,
+                child: SyntaxView(
+                  code:
+                      "LegendButton(\n margin: EdgeInsets.all(16),\n text: LegendText(text: \"Gradient\"),\n onPressed: () => {},\n style: LegendButtonStyle.gradient(\n  [\n   Colors.red[200]!,\n   Colors.redAccent \n  ] \n);  ",
+                  syntax: Syntax.DART,
+                  syntaxTheme: SyntaxTheme(
+                    backgroundColor: Colors.transparent,
+                    baseStyle: LegendTextStyle.h5().copyWith(
+                      color: Colors.white70,
+                    ),
+                  ),
+                  fontSize: 12.0,
+                  withZoom: false,
+                  withLinesCount: false,
+                  expanded: true,
+                ),
               ),
             ),
           ],
@@ -164,7 +180,7 @@ class WidgetComponents extends StatelessWidget {
             ),
             LegendGrid(
               sizes: LegendGridSize(
-                small: LegendGridSizeInfo(1, 48),
+                small: LegendGridSizeInfo(1, 64),
                 medium: LegendGridSizeInfo(3, 48),
                 large: LegendGridSizeInfo(4, 48),
                 xxl: LegendGridSizeInfo(4, 48),
@@ -229,7 +245,7 @@ class WidgetComponents extends StatelessWidget {
           children: [
             LegendGrid(
               sizes: LegendGridSize(
-                small: LegendGridSizeInfo(1, 80),
+                small: LegendGridSizeInfo(1, 64),
                 large: LegendGridSizeInfo(2, 80),
                 layoutDirection: LegendGridSizeDirection.DOWN,
               ),
@@ -255,6 +271,7 @@ class WidgetComponents extends StatelessWidget {
                   iconSize: 36,
                 ),
                 LegendSelectBar(
+                  color: theme.colors.foreground[1],
                   options: [
                     LegendSelectOption(
                         color: Colors.purpleAccent,

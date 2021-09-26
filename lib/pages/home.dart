@@ -7,7 +7,7 @@ import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
 import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
 import 'package:webstore/customwidgets/modals/legendAlert.dart';
 import 'package:webstore/customwidgets/modals/legendPopups.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import '../customwidgets/modals/legendBottomSheet.dart';
 import '../customwidgets/legendButton/legendButton.dart';
 import '../customwidgets/layout/legendScaffold.dart';

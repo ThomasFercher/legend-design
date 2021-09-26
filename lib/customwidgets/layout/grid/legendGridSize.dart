@@ -1,5 +1,5 @@
 import 'package:webstore/styles/layoutType.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 
 enum LegendGridSizeDirection {
   UP,

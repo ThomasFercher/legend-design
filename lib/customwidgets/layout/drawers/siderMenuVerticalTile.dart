@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import '../../../router/routerProvider.dart';
 
@@ -14,6 +14,7 @@ class SiderMenuVerticalTile extends StatefulWidget {
   late final bool isSection;
   final Color? backgroundColor;
   final Color? activeColor;
+  final Color? color;
   final bool collapsed;
 
   SiderMenuVerticalTile({
@@ -21,6 +22,7 @@ class SiderMenuVerticalTile extends StatefulWidget {
     required this.collapsed,
     this.backgroundColor,
     this.activeColor,
+    this.color,
     this.icon,
     this.title,
     bool? isSection,
@@ -40,20 +42,20 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
   late bool _isClicked;
   late bool _isHovered;
   late Color? color;
-
   Color? borderColor;
   @override
   void initState() {
     _isClicked = false;
     _isHovered = false;
-    color = LegendTextStyle.sectionLink().color;
+    color = widget.color;
+    borderColor = widget.backgroundColor;
 
     controller = new AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 360),
     );
     banimation = ColorTween(
-      begin: widget.backgroundColor ?? Colors.transparent,
+      begin: borderColor ?? Colors.transparent,
       end: widget.activeColor ?? LegendTextStyle.sectionLink().color,
     ).animate(controller);
 

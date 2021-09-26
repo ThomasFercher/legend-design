@@ -5,7 +5,7 @@ import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/bottomBarItem
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/bottomBarProvider.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 
 class BottomBarStyle {
   final EdgeInsets margin;
@@ -88,19 +88,22 @@ class FixedBottomBar extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
-      child: Container(
-        color: theme.colors.scaffoldBackgroundColor,
-        padding: style?.margin,
+      child: Hero(
+        tag: ValueKey("BottomBar"),
         child: Container(
-          decoration: style?.decoration,
+          color: theme.colors.scaffoldBackgroundColor,
+          padding: style?.margin,
           child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: getItems(context),
+            decoration: style?.decoration,
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: getItems(context),
+              ),
             ),
           ),
+          height: style?.height,
         ),
-        height: style?.height,
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/objects/menuOption.dart';
 import 'package:webstore/router/routerProvider.dart';
 import 'package:webstore/styles/layoutType.dart';
-import 'package:webstore/styles/legendTheme.dart';
+import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/styles/sizeProvider.dart';
 
 class FixedMenu extends StatefulWidget {
@@ -46,17 +46,18 @@ class _FixedMenuState extends State<FixedMenu> {
 
   @override
   Widget build(BuildContext context) {
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     List<MenuOptionHeader> options = RouterProvider.of(context)
         .menuOptions
         .map(
           (option) => MenuOptionHeader(
             option: option,
             activeColor: widget.selected,
-            color: widget.iconColor,
+            color: theme.colors.textColorLight,
+            backgroundColor: theme.colors.primaryColor,
           ),
         )
         .toList();
-    LegendTheme theme = Provider.of<LegendTheme>(context);
 
     return Container(
       //  margin: const EdgeInsets.only(left: 16.0),

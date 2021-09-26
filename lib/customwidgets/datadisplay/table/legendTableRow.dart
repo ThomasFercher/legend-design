@@ -63,7 +63,7 @@ class _LegendTableRowState extends State<LegendTableRow>
         child: Row(
           children: List.of(
             widget.columnsCells.map(
-              (e) => Expanded(child: e),
+              (e) => Expanded(child: OverflowBox(child: e)),
             ),
           ),
         ),

@@ -60,6 +60,11 @@ class LegendTable extends StatelessWidget {
             ),
           Table(
             defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            columnWidths: {
+              1: FlexColumnWidth(0.2),
+              2: FlexColumnWidth(0.4),
+              3: FlexColumnWidth(0.4),
+            },
             children: getRows(),
           ),
         ],
@@ -121,7 +126,10 @@ class LegendTable extends StatelessWidget {
 
       row = new TableRow(
         children: [
-          LegendTableRow(columnsCells: columnsCells, height: rowHeight ?? 48),
+          LegendTableRow(
+            columnsCells: columnsCells,
+            height: rowHeight ?? 48,
+          ),
         ],
         decoration: BoxDecoration(
           border: j % 2 == 0
