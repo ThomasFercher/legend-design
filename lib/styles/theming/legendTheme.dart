@@ -64,7 +64,7 @@ class LegendTheme extends ChangeNotifier {
     foreground: [LegendColors.gray10, LegendColors.gray9],
     selectionColor: Colors.tealAccent,
     textColorDark: LegendColors.gray6,
-    textColorLight: Colors.teal[200]!,
+    textColorLight: LegendColors.gray4,
   );
 
   void changeColorTheme(LegendColorThemeType type, BuildContext context) {

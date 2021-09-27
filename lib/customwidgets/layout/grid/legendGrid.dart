@@ -11,12 +11,14 @@ class LegendGrid extends StatelessWidget {
   final LegendGridSize sizes;
   final int? crossAxisCount;
   final EdgeInsets? margin;
+  final double? width;
 
   LegendGrid({
     required this.children,
     required this.sizes,
     this.crossAxisCount,
     this.margin,
+    this.width,
   });
 
   @override
@@ -28,8 +30,15 @@ class LegendGrid extends StatelessWidget {
 
     return LayoutBuilder(builder: (context, constraints) {
       int count = size.count;
-
-      double singleChildWidth = constraints.maxWidth / count;
+      double singleChildWidth;
+      print(width);
+      if (constraints.maxWidth == 0.0) {
+        if (width != null)
+          singleChildWidth = width! / count;
+        else
+          throw Error();
+      } else
+        singleChildWidth = constraints.maxWidth / count;
       int rows = (children.length / count).ceil();
       double height = size.height * rows;
       double aspectRatio = singleChildWidth / (height / rows);

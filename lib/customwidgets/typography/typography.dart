@@ -85,9 +85,9 @@ class LegendTextStyle extends TextStyle {
   factory LegendTextStyle.h2() {
     return LegendTextStyle(
       textColor: Colors.black54,
-      backgroundColor: Colors.white,
-      fontSize: 12,
-      fontWeight: FontWeight.w600,
+      backgroundColor: Colors.transparent,
+      fontSize: 24,
+      fontWeight: FontWeight.w300,
       fontFamily: "sans serif",
     );
   }

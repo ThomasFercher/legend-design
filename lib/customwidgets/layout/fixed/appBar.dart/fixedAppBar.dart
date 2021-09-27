@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedMenu.dart';
+import 'package:webstore/customwidgets/legendButton/legendButton.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
 import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
@@ -54,6 +55,8 @@ class FixedAppBarStyle {
 }
 
 class FixedAppBar extends StatelessWidget {
+  final void Function(int i)? onActionPressed;
+
   final bool? showMenu;
   final WidgetBuilder? builder;
   final Widget? leading;
@@ -69,6 +72,7 @@ class FixedAppBar extends StatelessWidget {
     this.style,
     this.layoutType,
     required this.pcontext,
+    this.onActionPressed,
   });
 
   BoxDecoration? getCard() {
@@ -168,13 +172,25 @@ class FixedAppBar extends StatelessWidget {
                             !theme.isMobile
                         ? 64
                         : 0,
-                    child: Container(
-                      height: theme.appBarStyle.appBarHeight,
-                      alignment: Alignment.center,
-                      decoration: getCard(),
-                      child: Builder(
-                        builder: builder ?? (c) => Container(),
-                      ),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: theme.appBarStyle.appBarHeight,
+                          alignment: Alignment.center,
+                          decoration: getCard(),
+                          child: Builder(
+                            builder: builder ?? (c) => Container(),
+                          ),
+                        ),
+                        LegendButton(
+                          text: LegendText(
+                            text: "Settings",
+                          ),
+                          onPressed: () {
+                            if (onActionPressed != null) onActionPressed!(0);
+                          },
+                        ),
+                      ],
                     ),
                   ),
               ],

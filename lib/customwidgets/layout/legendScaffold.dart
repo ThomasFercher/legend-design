@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
 import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
 import 'package:webstore/customwidgets/layout/sections/section.dart';
+import 'package:webstore/customwidgets/modals/legendDrawer.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
@@ -68,10 +69,13 @@ class _LegendScaffoldState extends State<LegendScaffold> {
 
   late ScrollController controller;
 
+  late bool showSettings;
+
   @override
   void initState() {
     super.initState();
 
+    showSettings = false;
     controller = new ScrollController(
       initialScrollOffset: 0,
     );
@@ -161,6 +165,16 @@ class _LegendScaffoldState extends State<LegendScaffold> {
           builder: widget.appBarBuilder,
           pcontext: context,
           layoutType: widget.layoutType,
+          onActionPressed: (i) {
+            switch (i) {
+              case 0:
+                setState(() {
+                  showSettings = true;
+                });
+                break;
+              default:
+            }
+          },
         );
       case LayoutType.FixedHeader:
         return FixedAppBar(
@@ -170,6 +184,16 @@ class _LegendScaffoldState extends State<LegendScaffold> {
               : false,
           pcontext: context,
           layoutType: widget.layoutType,
+          onActionPressed: (i) {
+            switch (i) {
+              case 0:
+                setState(() {
+                  showSettings = true;
+                });
+                break;
+              default:
+            }
+          },
         );
       default:
         return SliverToBoxAdapter(
@@ -194,11 +218,6 @@ class _LegendScaffoldState extends State<LegendScaffold> {
       contentPadding = const EdgeInsets.all(4);
     }
 
-    //TODO: Make COntent height fit screen if not specified
-    var fixedHeaderHeight = 10;
-    var whitespace = 16 * 2 + 10;
-    var footerHeight = 200;
-
     LegendTheme theme = Provider.of<LegendTheme>(context);
     SizeProvider.of(context).titleWidth = SizeProvider.calcTextSize(
           "Legend Design",
@@ -214,118 +233,132 @@ class _LegendScaffoldState extends State<LegendScaffold> {
 
     List<Widget> children = getChildren(context);
     if (children.isNotEmpty) children.add(getFooter(120));
-    return Scaffold(
-      endDrawer: DrawerMenu(),
-      bottomNavigationBar:
-          SizeProvider.of(context).isMobile ? FixedBottomBar() : null,
-      endDrawerEnableOpenDragGesture: false,
-      floatingActionButton: widget.onActionButtonPressed != null
-          ? Builder(
-              builder: (context) {
-                return getActionButton(context);
-              },
-            )
-          : null,
-      body: Stack(
-        children: [
-          Row(
-            children: [
-              getSider(screenSize),
-              Expanded(
-                child: CustomScrollView(
-                  controller: controller,
-                  slivers: [
-                    getHeader(context),
-                    widget.children.isEmpty
-                        ? SliverToBoxAdapter(
-                            child:
-                                LayoutBuilder(builder: (context, constraints) {
-                              double footerheight = 120;
-                              double space = maxHeight -
-                                  footerheight -
-                                  contentPadding.vertical -
-                                  100;
 
-                              return Container(
-                                color: theme.colors.scaffoldBackgroundColor,
-                                padding: contentPadding,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      child: SingleChildScrollView(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                          constraints: BoxConstraints(
-                                            minHeight: space,
-                                          ),
-                                          child: Builder(
-                                            builder: widget.contentBuilder,
+    return Stack(
+      children: [
+        Scaffold(
+          endDrawer: DrawerMenu(),
+          bottomNavigationBar:
+              SizeProvider.of(context).isMobile ? FixedBottomBar() : null,
+          endDrawerEnableOpenDragGesture: false,
+          floatingActionButton: widget.onActionButtonPressed != null
+              ? Builder(
+                  builder: (context) {
+                    return getActionButton(context);
+                  },
+                )
+              : null,
+          body: Stack(
+            children: [
+              Row(
+                children: [
+                  getSider(screenSize),
+                  Expanded(
+                    child: CustomScrollView(
+                      controller: controller,
+                      slivers: [
+                        getHeader(context),
+                        widget.children.isEmpty
+                            ? SliverToBoxAdapter(
+                                child: LayoutBuilder(
+                                    builder: (context, constraints) {
+                                  double footerheight = 120;
+                                  double space = maxHeight -
+                                      footerheight -
+                                      contentPadding.vertical -
+                                      100;
+
+                                  return Container(
+                                    color: theme.colors.scaffoldBackgroundColor,
+                                    padding: contentPadding,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          child: SingleChildScrollView(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              constraints: BoxConstraints(
+                                                minHeight: space,
+                                              ),
+                                              child: Builder(
+                                                builder: widget.contentBuilder,
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        getFooter(footerheight),
+                                      ],
                                     ),
-                                    getFooter(footerheight),
-                                  ],
+                                  );
+                                }),
+                              )
+                            : SliverToBoxAdapter(
+                                child: Container(
+                                  color: theme.colors.scaffoldBackgroundColor,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: children,
+                                    ),
+                                  ),
                                 ),
-                              );
-                            }),
-                          )
-                        : SliverToBoxAdapter(
-                            child: Container(
-                              color: theme.colors.scaffoldBackgroundColor,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: children,
-                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              if ((widget.layoutType == LayoutType.FixedSider ||
+                      widget.layoutType == LayoutType.FixedHeaderSider) &&
+                  !theme.isMobile)
+                Positioned(
+                  left: theme.appBarStyle.contentPadding.left,
+                  top: theme.appBarStyle.contentPadding.top,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Hero(
+                      tag: ValueKey("title"),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: theme.appBarStyle.appBarHeight,
+                            width: theme.appBarStyle.appBarHeight - 12,
+                            margin: EdgeInsets.only(right: 16.0),
+                            child: SvgPicture.asset(
+                              "assets/photos/larrylegend.svg",
+                              alignment: Alignment.centerLeft,
+                            ),
+                          ),
+                          Container(
+                            height: theme.appBarStyle.appBarHeight,
+                            alignment: Alignment.center,
+                            child: LegendText(
+                              text: "Legend Design",
+                              textStyle: LegendTextStyle.h1().copyWith(
+                                color: theme.colors.secondaryColor,
+                                letterSpacing: 0.1,
                               ),
                             ),
                           ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          if ((widget.layoutType == LayoutType.FixedSider ||
-                  widget.layoutType == LayoutType.FixedHeaderSider) &&
-              !theme.isMobile)
-            Positioned(
-              left: theme.appBarStyle.contentPadding.left,
-              top: theme.appBarStyle.contentPadding.top,
-              child: Material(
-                color: Colors.transparent,
-                child: Hero(
-                  tag: ValueKey("title"),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: theme.appBarStyle.appBarHeight,
-                        width: theme.appBarStyle.appBarHeight - 12,
-                        margin: EdgeInsets.only(right: 16.0),
-                        child: SvgPicture.asset(
-                          "assets/photos/larrylegend.svg",
-                          alignment: Alignment.centerLeft,
-                        ),
+                        ],
                       ),
-                      Container(
-                        height: theme.appBarStyle.appBarHeight,
-                        alignment: Alignment.center,
-                        child: LegendText(
-                          text: "Legend Design",
-                          textStyle: LegendTextStyle.h1().copyWith(
-                            color: theme.colors.secondaryColor,
-                            letterSpacing: 0.1,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-        ],
-      ),
+            ],
+          ),
+        ),
+        if (showSettings)
+          LegendDrawer(
+            width: 600,
+            onClosed: () {
+              setState(() {
+                showSettings = false;
+              });
+            },
+          ),
+      ],
     );
   }
 
