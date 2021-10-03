@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/bottomBarProvider.dart';
+import 'package:webstore/customwidgets/modals/drawer/legendDrawerInfo.dart';
+import 'package:webstore/customwidgets/modals/drawer/legendDrawerProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 import 'package:webstore/utils/restart.dart';
@@ -81,6 +83,21 @@ class LegendApp extends StatelessWidget {
             _menuOptions.first,
           ),
         ),
+        ChangeNotifierProvider(
+          create: (context) => LegendDrawerProvider(
+            drawerRoutes: [
+              LegendDrawerRoute(
+                title: "Settings",
+                name: "/settings",
+                contentBuilder: (context) {
+                  return Container();
+                },
+                actions: [],
+                width: 400,
+              ),
+            ],
+          ),
+        )
       ],
       child: Builder(builder: (context) {
         return RouterProvider(

@@ -106,7 +106,7 @@ class _BottomBarItemState extends State<BottomBarItem>
               onTap: () {
                 widget.onSelected(widget.option);
 
-                RouterProvider.of(context).pushPage(
+                Provider.of<RouterProvider>(context).pushPage(
                   settings: RouteSettings(name: widget.option.page),
                 );
               },

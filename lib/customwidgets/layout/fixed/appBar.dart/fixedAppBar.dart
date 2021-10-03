@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/icons/legendAnimatedIcon.dart';
 
 import 'package:webstore/customwidgets/layout/fixed/appBar.dart/fixedMenu.dart';
 import 'package:webstore/customwidgets/legendButton/legendButton.dart';
@@ -166,14 +167,16 @@ class FixedAppBar extends StatelessWidget {
                       selected: theme.appBarStyle.selectedColor,
                     ),
                   ),
-                if (builder != null)
-                  Positioned(
-                    right: SizeProvider.of(context).isMenuCollapsed() &&
-                            !theme.isMobile
-                        ? 64
-                        : 0,
-                    child: Row(
-                      children: [
+                Positioned(
+                  right: SizeProvider.of(context).isMenuCollapsed() &&
+                          !theme.isMobile
+                      ? 64
+                      : 0,
+                  height: style?.appBarHeight,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      if (builder != null)
                         Container(
                           height: theme.appBarStyle.appBarHeight,
                           alignment: Alignment.center,
@@ -182,17 +185,19 @@ class FixedAppBar extends StatelessWidget {
                             builder: builder ?? (c) => Container(),
                           ),
                         ),
-                        LegendButton(
-                          text: LegendText(
-                            text: "Settings",
-                          ),
-                          onPressed: () {
-                            if (onActionPressed != null) onActionPressed!(0);
-                          },
+                      LegendAnimatedIcon(
+                        icon: Icons.settings,
+                        theme: LegendAnimtedIconTheme(
+                          enabled: theme.colors.selectionColor,
+                          disabled: theme.colors.foreground[3],
                         ),
-                      ],
-                    ),
+                        onPressed: () {
+                          if (onActionPressed != null) onActionPressed!(0);
+                        },
+                      ),
+                    ],
                   ),
+                ),
               ],
             ),
           ),

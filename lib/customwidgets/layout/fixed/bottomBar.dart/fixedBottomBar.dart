@@ -43,7 +43,7 @@ class FixedBottomBar extends StatelessWidget {
   late List<BottomBarItem> items;
 
   List<BottomBarItem> getOptions(BuildContext context) {
-    List<MenuOption> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = Provider.of<RouterProvider>(context).menuOptions;
     List<BottomBarItem> it = [];
 
     for (MenuOption o in options) {
@@ -62,7 +62,7 @@ class FixedBottomBar extends StatelessWidget {
   }
 
   List<BottomBarItem> getItems(context) {
-    List<MenuOption> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = Provider.of<RouterProvider>(context).menuOptions;
     List<BottomBarItem> it = [];
     for (var i = 0; i < options.length; i++) {
       MenuOption option = options[i];
@@ -82,7 +82,7 @@ class FixedBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MenuOption> options = RouterProvider.of(context).menuOptions;
+    List<MenuOption> options = Provider.of<RouterProvider>(context).menuOptions;
     LegendTheme theme = Provider.of<LegendTheme>(context);
     if (style == null) style = theme.bottomBarStyle;
 

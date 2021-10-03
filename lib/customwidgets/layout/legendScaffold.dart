@@ -11,7 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:webstore/customwidgets/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
 import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
 import 'package:webstore/customwidgets/layout/sections/section.dart';
-import 'package:webstore/customwidgets/modals/legendDrawer.dart';
+import 'package:webstore/customwidgets/modals/drawer/legendDrawer.dart';
+import 'package:webstore/customwidgets/modals/drawer/legendDrawerInfo.dart';
+import 'package:webstore/customwidgets/modals/drawer/legendDrawerProvider.dart';
 import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
@@ -187,9 +189,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
           onActionPressed: (i) {
             switch (i) {
               case 0:
-                setState(() {
-                  showSettings = true;
-                });
+                Provider.of<LegendDrawerProvider>(context, listen: false)
+                    .showDrawer("/settings");
                 break;
               default:
             }
@@ -349,17 +350,19 @@ class _LegendScaffoldState extends State<LegendScaffold> {
             ],
           ),
         ),
-        if (showSettings)
-          LegendDrawer(
-            width: 600,
-            onClosed: () {
-              setState(() {
-                showSettings = false;
-              });
-            },
-          ),
+        getDrawer(context),
       ],
     );
+  }
+
+  Widget getDrawer(context) {
+    List<LegendDrawerRoute> routes =
+        Provider.of<LegendDrawerProvider>(context).drawerRoutes;
+    for (LegendDrawerRoute route in routes) {
+      print(route.visible);
+      if (route.visible) return LegendDrawer(route: route);
+    }
+    return Container();
   }
 
   List<Widget> getChildren(BuildContext context) {

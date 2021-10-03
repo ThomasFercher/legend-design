@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:webstore/customwidgets/modals/drawer/legendDrawer.dart';
+import 'package:webstore/customwidgets/modals/drawer/legendDrawerInfo.dart';
 import '../objects/menuOption.dart';
 import 'delegate.dart';
 import 'errorpages/notfound.dart';

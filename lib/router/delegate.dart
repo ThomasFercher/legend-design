@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../pages/home.dart';
 import 'errorpages/notfound.dart';
 import 'routes/routeInfo.dart';
