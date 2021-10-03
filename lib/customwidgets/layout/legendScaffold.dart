@@ -170,9 +170,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
           onActionPressed: (i) {
             switch (i) {
               case 0:
-                setState(() {
-                  showSettings = true;
-                });
+                Provider.of<LegendDrawerProvider>(context, listen: false)
+                    .showDrawer("/settings");
                 break;
               default:
             }
@@ -360,7 +359,10 @@ class _LegendScaffoldState extends State<LegendScaffold> {
         Provider.of<LegendDrawerProvider>(context).drawerRoutes;
     for (LegendDrawerRoute route in routes) {
       print(route.visible);
-      if (route.visible) return LegendDrawer(route: route);
+      if (route.visible) {
+        return LegendDrawer(route: route);
+      }
+      ;
     }
     return Container();
   }
