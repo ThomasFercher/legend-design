@@ -360,7 +360,9 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     for (LegendDrawerRoute route in routes) {
       print(route.visible);
       if (route.visible) {
-        return LegendDrawer(route: route);
+        return LegendDrawer(
+          route: route,
+        );
       }
       ;
     }

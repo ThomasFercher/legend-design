@@ -40,47 +40,6 @@ class WidgetComponents extends StatelessWidget {
     return LegendScaffold(
       showSiderMenu: false,
       showAppBarMenu: true,
-      appBarBuilder: (context) {
-        return Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 12),
-          child: LegendSelectBar(
-            margin: EdgeInsets.all(2),
-            width: 100,
-            height: 48,
-            isCard: true,
-            color: theme.colors.foreground[1],
-            options: [
-              LegendSelectOption(
-                color: Colors.grey,
-                icon: Icons.dark_mode,
-                name: "dark",
-              ),
-              LegendSelectOption(
-                color: Colors.purple[200],
-                icon: Icons.light_mode,
-                name: "light",
-              ),
-            ],
-            aligment: MainAxisAlignment.spaceBetween,
-            onSelected: (option) {
-              switch (option.name) {
-                case "dark":
-                  Provider.of<LegendTheme>(context, listen: false)
-                      .changeColorTheme(LegendColorThemeType.DARK, context);
-                  break;
-                case "light":
-                  Provider.of<LegendTheme>(context, listen: false)
-                      .changeColorTheme(LegendColorThemeType.LIGHT, context);
-                  break;
-                default:
-                  break;
-              }
-            },
-            iconSize: 26,
-          ),
-        );
-      },
       children: [
         Section(
           name: "/buttons",

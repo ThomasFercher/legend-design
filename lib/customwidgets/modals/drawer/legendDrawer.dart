@@ -147,7 +147,7 @@ class _LegendDrawerState extends State<LegendDrawer>
                               controller.reverse();
                               controller2.reverse();
                               Future.delayed(
-                                Duration(milliseconds: 200),
+                                Duration(milliseconds: 425),
                                 () {
                                   Provider.of<LegendDrawerProvider>(
                                     context,
