@@ -88,8 +88,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     sections = SectionProvider.of(context)?.sections;
 
     return SizeProvider(
-      width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       child: SectionNavigation(
         sections: sections,
         onNavigate: (section) {
@@ -212,11 +212,6 @@ class _LegendScaffoldState extends State<LegendScaffold> {
 
   Widget materialLayout(BuildContext context) {
     ScreenSize screenSize = SizeProvider.of(context).screenSize;
-    EdgeInsets contentPadding = const EdgeInsets.all(16);
-
-    if (screenSize == ScreenSize.Small) {
-      contentPadding = const EdgeInsets.all(4);
-    }
 
     LegendTheme theme = Provider.of<LegendTheme>(context);
     SizeProvider.of(context).titleWidth = SizeProvider.calcTextSize(
@@ -265,17 +260,17 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                                   double footerheight = 120;
                                   double space = maxHeight -
                                       footerheight -
-                                      contentPadding.vertical -
-                                      100;
+                                      theme.sizing.contentPadding -
+                                      84;
 
                                   return Container(
                                     color: theme.colors.scaffoldBackgroundColor,
-                                    padding: contentPadding,
+                                    padding: EdgeInsets.all(
+                                        theme.sizing.contentPadding),
                                     child: Column(
                                       children: [
                                         Container(
                                           child: SingleChildScrollView(
-                                            padding: const EdgeInsets.all(8.0),
                                             child: Container(
                                               constraints: BoxConstraints(
                                                 minHeight: space,

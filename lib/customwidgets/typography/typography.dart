@@ -37,6 +37,9 @@ class LegendTextStyle extends TextStyle {
   final FontWeight fontWeight;
   final String fontFamily;
   final double? height;
+  final double? wordSpacing;
+  final double? letterSpacing;
+  final TextOverflow? textOverflow;
 
   LegendTextStyle({
     required this.textColor,
@@ -45,12 +48,19 @@ class LegendTextStyle extends TextStyle {
     required this.fontWeight,
     required this.fontFamily,
     this.height,
+    this.letterSpacing,
+    this.wordSpacing,
+    this.textOverflow,
   }) : super(
           color: textColor,
           backgroundColor: backgroundColor,
           fontSize: fontSize,
           fontFamily: fontFamily,
           fontWeight: fontWeight,
+          wordSpacing: wordSpacing,
+          letterSpacing: letterSpacing,
+          overflow: textOverflow,
+          height: height,
         );
 
   factory LegendTextStyle.h1() {
@@ -99,14 +109,16 @@ class LegendTextStyle extends TextStyle {
       fontSize: 14,
       fontWeight: FontWeight.w400,
       fontFamily: "sans serif",
+      letterSpacing: 0.4,
+      wordSpacing: 0.4,
     );
   }
 
   factory LegendTextStyle.h3() {
     return LegendTextStyle(
-      textColor: Colors.black87,
-      backgroundColor: Colors.white,
-      fontSize: 12,
+      textColor: LegendColors.gray10,
+      backgroundColor: Colors.transparent,
+      fontSize: 24,
       fontWeight: FontWeight.w600,
       fontFamily: "sans serif",
     );

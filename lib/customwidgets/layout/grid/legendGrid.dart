@@ -12,13 +12,17 @@ class LegendGrid extends StatelessWidget {
   final int? crossAxisCount;
   final EdgeInsets? margin;
   final double? width;
+  final double? crossAxisSpacing;
+  final double? mainAxisSpacing;
 
   LegendGrid({
-    required this.children,
     required this.sizes,
+    required this.children,
     this.crossAxisCount,
     this.margin,
     this.width,
+    this.crossAxisSpacing,
+    this.mainAxisSpacing,
   });
 
   @override
@@ -40,8 +44,11 @@ class LegendGrid extends StatelessWidget {
       } else
         singleChildWidth = constraints.maxWidth / count;
       int rows = (children.length / count).ceil();
-      double height = size.height * rows;
-      double aspectRatio = singleChildWidth / (height / rows);
+      double height = size.height * rows +
+          (rows - 1) * (mainAxisSpacing ?? 4) +
+          (margin?.vertical ?? 0);
+      double aspectRatio = singleChildWidth /
+          ((height - (rows - 1) * (mainAxisSpacing ?? 4)) / rows);
       return Container(
         height: height,
         margin: margin,
@@ -50,8 +57,10 @@ class LegendGrid extends StatelessWidget {
           crossAxisCount: count,
           children: children,
           shrinkWrap: true,
+          crossAxisSpacing: crossAxisSpacing ?? 4.0,
           padding: EdgeInsets.all(0),
           physics: NeverScrollableScrollPhysics(),
+          mainAxisSpacing: mainAxisSpacing ?? 4.0,
         ),
       );
     });

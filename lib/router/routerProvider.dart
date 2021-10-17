@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:webstore/customwidgets/modals/drawer/legendDrawer.dart';
 import 'package:webstore/customwidgets/modals/drawer/legendDrawerInfo.dart';
+import 'package:webstore/styles/theming/sizing/sizeProvider.dart';
 import '../objects/menuOption.dart';
 import 'delegate.dart';
 import 'errorpages/notfound.dart';
@@ -58,18 +59,7 @@ class RouterProvider extends InheritedWidget {
     String now = DateTime.now().millisecondsSinceEpoch.toString();
 
     // create full screen Page
-
-    if (kIsWeb) {
-      return MaterialPage(
-        child: SectionProvider(
-          sections: route.sections,
-          child: route.page,
-        ),
-        key: ValueKey(s.name! + now),
-        name: s.name,
-        arguments: s.arguments,
-      );
-    } else if (Platform.isIOS || Platform.isMacOS) {
+    if (Platform.isIOS || Platform.isMacOS) {
       return CupertinoPage(
         child: route.page,
         key: ValueKey(s.name! + now),
@@ -78,9 +68,12 @@ class RouterProvider extends InheritedWidget {
       );
     } else {
       return MaterialPage(
-        child: SectionProvider(
-          sections: route.sections,
-          child: route.page,
+        child: Material(
+          color: Colors.transparent,
+          child: SectionProvider(
+            sections: route.sections,
+            child: route.page,
+          ),
         ),
         key: ValueKey(s.name! + now),
         name: s.name,

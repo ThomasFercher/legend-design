@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:provider/provider.dart';
+import 'package:webstore/customwidgets/datadisplay/card/legendCard.dart';
 import 'package:webstore/customwidgets/datadisplay/carousel/legendCarousel.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
 import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
 import 'package:webstore/customwidgets/datadisplay/tag/legendTag.dart';
+import 'package:webstore/customwidgets/icons/legendAnimatedIcon.dart';
+import 'package:webstore/customwidgets/icons/legendGradientIcon.dart';
 import 'package:webstore/customwidgets/input/form/legendForm.dart';
 import 'package:webstore/customwidgets/input/form/legendFormField.dart';
 import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
@@ -275,13 +278,36 @@ class WidgetComponents extends StatelessWidget {
           header: "Select Button Bar",
         ),
         Section(
+          name: "/cards",
+          children: [
+            LegendGrid(
+              children: [
+                LegendCard(
+                  title: "Polkadot",
+                  subtitle: "+6.44% ",
+                  icon: Icons.money,
+                  value: "30.94\$",
+                ),
+              ],
+              sizes: LegendGridSize(
+                medium: LegendGridSizeInfo(6, 164),
+                layoutDirection: LegendGridSizeDirection.DOWN,
+              ),
+            ),
+          ],
+          header: "Cards",
+        ),
+        Section(
           name: "/textfield",
           children: [
             LegendTextField(
               decoration: LegendInputDecoration.rounded(
-                  focusColor: Colors.teal,
-                  textColor: Colors.grey[800],
-                  radius: BorderRadius.all(Radius.circular(2))),
+                focusColor: Colors.teal,
+                textColor: Colors.grey[800],
+                radius: BorderRadius.all(
+                  Radius.circular(2),
+                ),
+              ),
             ),
           ],
           header: "Textfield",
@@ -441,6 +467,96 @@ class WidgetComponents extends StatelessWidget {
           header: "Tags",
           name: "/tags",
         ),
+        LegendGrid(
+          children: [
+            Section(
+              header: "Icon Button",
+              name: "/iconbutton",
+              verticalSpacing: 8,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    LegendAnimatedIcon(
+                      icon: Icons.add,
+                      theme: LegendAnimtedIconTheme(
+                        enabled: Colors.red,
+                        disabled: Colors.red[300]!,
+                      ),
+                      onPressed: () => {},
+                      iconSize: 64,
+                    ),
+                    LegendAnimatedIcon(
+                      icon: Icons.add,
+                      theme: LegendAnimtedIconTheme(
+                        enabled: Colors.green,
+                        disabled: Colors.green[300]!,
+                      ),
+                      onPressed: () => {},
+                      iconSize: 64,
+                    ),
+                    LegendAnimatedIcon(
+                      icon: Icons.add,
+                      theme: LegendAnimtedIconTheme(
+                        enabled: Colors.blue,
+                        disabled: Colors.blue[300]!,
+                      ),
+                      onPressed: () => {},
+                      iconSize: 64,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Section(
+              header: "Gradient Icons",
+              name: "/gradientIcon",
+              verticalSpacing: 8,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GradientIcon(
+                      Icons.read_more,
+                      64,
+                      LinearGradient(
+                        colors: [
+                          Colors.greenAccent,
+                          Colors.greenAccent[700]!,
+                        ],
+                      ),
+                    ),
+                    GradientIcon(
+                      Icons.data_saver_off,
+                      64,
+                      LinearGradient(
+                        colors: [
+                          Colors.purple,
+                          Colors.deepPurple,
+                        ],
+                      ),
+                    ),
+                    GradientIcon(
+                      Icons.adb_sharp,
+                      64,
+                      LinearGradient(
+                        colors: [
+                          Colors.red,
+                          Colors.redAccent,
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+          sizes: LegendGridSize(
+            medium: LegendGridSizeInfo(2, 200),
+          ),
+        )
       ],
       pageName: "Widget Components",
       layoutType: LayoutType.FixedHeaderSider,

@@ -14,9 +14,9 @@ class GradientIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      child: SizedBox(
-        width: size * 1.2,
-        height: size * 1.2,
+      child: Container(
+        width: size + 1,
+        height: size + 1,
         child: Icon(
           icon,
           size: size,

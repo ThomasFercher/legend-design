@@ -6,11 +6,13 @@ class LegendAnimatedIcon extends StatefulWidget {
   final LegendAnimtedIconTheme theme;
   final Function onPressed;
   final EdgeInsetsGeometry? padding;
+  final double? iconSize;
 
   LegendAnimatedIcon({
     required this.icon,
     required this.theme,
     required this.onPressed,
+    this.iconSize,
     this.padding,
   });
 
@@ -34,13 +36,13 @@ class _LegendAnimatedIconState extends State<LegendAnimatedIcon>
     _animation =
         ColorTween(begin: widget.theme.disabled, end: widget.theme.enabled)
             .animate(_controller)
-              ..addListener(
-                () {
-                  setState(() {
-                    color = _animation.value;
-                  });
-                },
-              );
+          ..addListener(
+            () {
+              setState(() {
+                color = _animation.value;
+              });
+            },
+          );
     super.initState();
   }
 
@@ -70,10 +72,14 @@ class _LegendAnimatedIconState extends State<LegendAnimatedIcon>
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [widget.theme.getAnimatedShadow(color)],
+            borderRadius: BorderRadius.all(
+              Radius.circular(widget.iconSize ?? 8 / 2),
+            ),
           ),
           child: Icon(
             widget.icon,
             color: color,
+            size: widget.iconSize,
           ),
         ),
       ),

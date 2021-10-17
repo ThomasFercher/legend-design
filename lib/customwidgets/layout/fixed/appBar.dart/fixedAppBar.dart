@@ -104,7 +104,11 @@ class FixedAppBar extends StatelessWidget {
       leading: Container(
         width: 0,
       ),
-      actions: [Container()],
+      actions: [
+        Container(
+          width: 0,
+        )
+      ],
       title: Container(
         height: theme.appBarStyle.appBarHeight +
             (style?.contentPadding.vertical ?? 0.0),
@@ -121,7 +125,6 @@ class FixedAppBar extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                  left: 24,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -170,32 +173,34 @@ class FixedAppBar extends StatelessWidget {
                 Positioned(
                   right: SizeProvider.of(context).isMenuCollapsed() &&
                           !theme.isMobile
-                      ? 64
+                      ? 96
                       : 0,
                   height: style?.appBarHeight,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      if (builder != null)
-                        Container(
-                          height: theme.appBarStyle.appBarHeight,
-                          alignment: Alignment.center,
-                          decoration: getCard(),
-                          child: Builder(
-                            builder: builder ?? (c) => Container(),
+                  child: Container(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (builder != null)
+                          Container(
+                            height: theme.appBarStyle.appBarHeight,
+                            alignment: Alignment.center,
+                            decoration: getCard(),
+                            child: Builder(
+                              builder: builder ?? (c) => Container(),
+                            ),
                           ),
+                        LegendAnimatedIcon(
+                          icon: Icons.settings,
+                          theme: LegendAnimtedIconTheme(
+                            enabled: theme.colors.selectionColor,
+                            disabled: theme.colors.foreground[3],
+                          ),
+                          onPressed: () {
+                            if (onActionPressed != null) onActionPressed!(0);
+                          },
                         ),
-                      LegendAnimatedIcon(
-                        icon: Icons.settings,
-                        theme: LegendAnimtedIconTheme(
-                          enabled: theme.colors.selectionColor,
-                          disabled: theme.colors.foreground[3],
-                        ),
-                        onPressed: () {
-                          if (onActionPressed != null) onActionPressed!(0);
-                        },
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

@@ -15,8 +15,8 @@ class Section extends StatelessWidget {
   final double? margin;
 
   Section({
-    required this.children,
     required this.header,
+    required this.children,
     this.name,
     this.headerTextStyle,
     this.verticalSpacing,

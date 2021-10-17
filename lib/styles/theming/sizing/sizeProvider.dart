@@ -37,7 +37,7 @@ class SizeProvider extends InheritedWidget {
   }
 
   bool isMenuCollapsed() {
-    return width - getTitleIndent() <= 620;
+    return width - getTitleIndent() <= 820;
   }
 
   static ScreenSize getScreenSizeFromWidth(double width) {

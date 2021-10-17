@@ -10,6 +10,7 @@ import 'package:webstore/customwidgets/modals/drawer/legendDrawerInfo.dart';
 import 'package:webstore/customwidgets/modals/drawer/legendDrawerProvider.dart';
 import 'package:webstore/customwidgets/typography/legendText.dart';
 import 'package:webstore/customwidgets/typography/typography.dart';
+import 'package:webstore/styles/theming/colors/legendColors.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
 import 'package:webstore/styles/theming/sizing/sizeProvider.dart';
 
@@ -29,24 +30,23 @@ class _LegendDrawerState extends State<LegendDrawer>
     with TickerProviderStateMixin {
   late double width;
   late double maxWidth;
-
   late AnimationController controller;
   late AnimationController controller2;
   late Animation<double> animation;
-  late Animation<Color?> background;
-  late Animation<double> opcaitya;
-  late Color backgroundColor;
-  late double opcaity;
+  late Animation<double> opacityContentA;
+  late Animation<double> opacityBackgroundA;
+  late double opacityContent;
+  late double opacityBackground;
   @override
   void initState() {
     width = 0;
-    backgroundColor = Colors.black54;
-    opcaity = 0;
+    opacityBackground = 0;
+    opacityContent = 0;
 
     controller2 = AnimationController(
       vsync: this,
       duration: Duration(
-        milliseconds: 140,
+        milliseconds: 200,
       ),
     );
     controller = AnimationController(
@@ -55,37 +55,45 @@ class _LegendDrawerState extends State<LegendDrawer>
         milliseconds: 400,
       ),
     );
-    background = ColorTween(
-      begin: Colors.transparent,
-      end: backgroundColor,
-    ).animate(controller)
-      ..addListener(() {
-        setState(() {
-          backgroundColor = background.value ?? backgroundColor;
-        });
-      });
+
     animation = Tween<double>(
       begin: 0,
       end: widget.route.width,
-    ).animate(controller)
+    ).animate(new CurvedAnimation(parent: controller, curve: Curves.easeInSine))
       ..addListener(() {
         setState(() {
           width = animation.value;
         });
       });
 
-    opcaitya = Tween<double>(
+    opacityContentA = Tween<double>(
       begin: 0,
       end: 1,
-    ).animate(controller2)
-      ..addListener(() {
+    ).animate(
+      new CurvedAnimation(parent: controller2, curve: Curves.easeInOutExpo),
+    )..addListener(() {
         setState(() {
-          opcaity = opcaitya.value;
+          opacityContent = opacityContentA.value;
+        });
+      });
+
+    opacityBackgroundA = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(
+      new CurvedAnimation(parent: controller, curve: Curves.easeInOutExpo),
+    )..addListener(() {
+        setState(() {
+          opacityBackground = opacityBackgroundA.value;
         });
       });
 
     controller.forward();
-    controller2.forward();
+    Future.delayed(
+      Duration(milliseconds: 200),
+      () => controller2.forward(),
+    );
+
     super.initState();
   }
 
@@ -99,12 +107,13 @@ class _LegendDrawerState extends State<LegendDrawer>
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
-    return Material(
-      color: Colors.transparent,
+    print(SizeProvider.of(context).width);
+    return Opacity(
+      opacity: opacityBackground,
       child: Container(
         width: SizeProvider.of(context).width,
         height: SizeProvider.of(context).height,
-        color: backgroundColor,
+        color: Colors.black54,
         alignment: Alignment.centerRight,
         child: Container(
           decoration: BoxDecoration(
@@ -117,7 +126,7 @@ class _LegendDrawerState extends State<LegendDrawer>
             ],
           ),
           child: Opacity(
-            opacity: opcaity,
+            opacity: opacityContent,
             child: Container(
               width: width,
               height: SizeProvider.of(context).height,
@@ -146,6 +155,7 @@ class _LegendDrawerState extends State<LegendDrawer>
                             onPressed: () {
                               controller.reverse();
                               controller2.reverse();
+
                               Future.delayed(
                                 Duration(milliseconds: 425),
                                 () {
@@ -164,7 +174,7 @@ class _LegendDrawerState extends State<LegendDrawer>
                               ),
                               text: "Settings",
                               textStyle: LegendTextStyle.h2().copyWith(
-                                color: theme.colors.textColorDark,
+                                color: theme.colors.foreground[3],
                               ),
                             ),
                           ),
@@ -207,16 +217,35 @@ class _LegendDrawerState extends State<LegendDrawer>
                           ),
                           Icon(
                             Icons.settings_applications,
-                            color: theme.colors.textColorLight,
+                            color: theme.colors.foreground[2],
                             size: 30,
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 32),
                           ),
-                          Icon(
-                            Icons.info_outlined,
-                            color: theme.colors.textColorLight,
-                            size: 30,
+                          LegendAnimatedIcon(
+                            iconSize: 30,
+                            icon: Icons.info_outlined,
+                            onPressed: () {
+                              showAboutDialog(
+                                context: context,
+                                applicationIcon: Container(
+                                  width: 96,
+                                  height: 96,
+                                  child: Image.asset(
+                                      "assets/photos/larrylegend.png"),
+                                ),
+                                applicationLegalese: "Not for commercial use.",
+                                applicationVersion: "0.0.4",
+                                useRootNavigator: true,
+                                applicationName: "Legend Design",
+                              );
+                            },
+                            theme: LegendAnimtedIconTheme(
+                              enabled: Colors.tealAccent,
+                              disabled: theme.colors.foreground[2],
+                            ),
+                            padding: EdgeInsets.all(0),
                           ),
                         ],
                       ),

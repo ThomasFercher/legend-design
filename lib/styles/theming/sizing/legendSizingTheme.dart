@@ -38,5 +38,6 @@ class LegendSizingTheme {
       12,
     ],
     typography: LegendTypography(),
+    contentPadding: 8,
   );
 }
