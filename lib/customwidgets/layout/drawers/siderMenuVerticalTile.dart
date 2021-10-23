@@ -108,7 +108,6 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
         hoverColor: Colors.transparent,
         enableFeedback: true,
         onHover: (value) {
-          print(value);
           if (value) {
             if (!controller.isAnimating || !_isHovered) {
               controller.forward();

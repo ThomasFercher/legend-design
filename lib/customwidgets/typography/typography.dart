@@ -80,10 +80,10 @@ class LegendTextStyle extends TextStyle {
 
   factory LegendTextStyle.h1() {
     return LegendTextStyle.fromGoogleFonts(
-      GoogleFonts.lato(
+      GoogleFonts.lobsterTwo(
         color: Colors.tealAccent[700]!,
         backgroundColor: Colors.transparent,
-        fontSize: 28,
+        fontSize: 32,
         fontWeight: FontWeight.w400,
         letterSpacing: 0,
         wordSpacing: 0,

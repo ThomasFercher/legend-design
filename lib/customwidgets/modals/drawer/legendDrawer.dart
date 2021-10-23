@@ -107,7 +107,7 @@ class _LegendDrawerState extends State<LegendDrawer>
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = Provider.of<LegendTheme>(context);
-    print(SizeProvider.of(context).width);
+
     return Opacity(
       opacity: opacityBackground,
       child: Container(

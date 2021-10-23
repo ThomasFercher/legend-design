@@ -180,7 +180,6 @@ class Sider extends StatelessWidget {
     List<SectionRouteInfo> sections =
         SectionProvider.of(context)?.sections ?? [];
 
-    print(sections);
     List<SiderMenuVerticalTile> sectionTiles = List.of(
       sections.map(
         (option) => SiderMenuVerticalTile(

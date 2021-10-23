@@ -108,7 +108,6 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
         hoverColor: Colors.transparent,
         enableFeedback: true,
         onHover: (value) {
-          print(value);
           if (value && !_isClicked) {
             if (!controller.isAnimating || !_isHovered) {
               controller.forward();

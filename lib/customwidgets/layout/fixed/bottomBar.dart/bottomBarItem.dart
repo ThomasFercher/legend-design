@@ -90,7 +90,7 @@ class _BottomBarItemState extends State<BottomBarItem>
     return Consumer<BottomBarProvider>(
       builder: (context, sel, c) {
         bool isSelected = sel.selected.page == widget.option.page;
-        print(isSelected);
+
         if (isSelected && !_isSelected) {
           _controller.forward();
           _isSelected = true;

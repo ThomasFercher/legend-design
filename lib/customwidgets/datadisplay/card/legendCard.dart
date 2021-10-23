@@ -34,12 +34,13 @@ class LegendCard extends StatelessWidget {
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                LegendText(
-                  text: title ?? "",
-                  textStyle: LegendTextStyle.h3().copyWith(
-                    color: theme.colors.foreground[3],
+                Expanded(
+                  child: LegendText(
+                    text: title ?? "",
+                    textStyle: LegendTextStyle.h3().copyWith(
+                      color: theme.colors.foreground[3],
+                    ),
                   ),
                 ),
                 LegendText(
@@ -53,7 +54,6 @@ class LegendCard extends StatelessWidget {
           ),
           Expanded(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Icon(
@@ -61,11 +61,16 @@ class LegendCard extends StatelessWidget {
                   size: 64,
                   color: Colors.pinkAccent,
                 ),
-                LegendText(
-                  text: value ?? "",
-                  textStyle: LegendTextStyle.h2().copyWith(
-                    color: theme.colors.foreground[3],
-                    fontSize: 26,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: LegendText(
+                      text: value ?? "",
+                      textStyle: LegendTextStyle.h2().copyWith(
+                        color: theme.colors.foreground[3],
+                        fontSize: 26,
+                      ),
+                    ),
                   ),
                 ),
               ],

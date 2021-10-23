@@ -120,7 +120,7 @@ class _LegendSelectButtonState extends State<LegendSelectButton>
   Widget build(BuildContext context) {
     return Consumer<LegendSelectProvider>(builder: (context, sel, c) {
       bool s = sel.selected.name == widget.option.name;
-      print(s);
+
       if (s && !selected) {
         controller.forward();
         selected = true;

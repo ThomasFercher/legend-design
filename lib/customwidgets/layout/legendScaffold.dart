@@ -306,7 +306,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                       widget.layoutType == LayoutType.FixedHeaderSider) &&
                   !theme.isMobile)
                 Positioned(
-                  left: theme.appBarStyle.contentPadding.left,
+                  left: theme.appBarStyle.contentPadding.horizontal,
                   top: theme.appBarStyle.contentPadding.top,
                   child: Material(
                     color: Colors.transparent,
@@ -319,7 +319,10 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                           Container(
                             height: theme.appBarStyle.appBarHeight,
                             width: theme.appBarStyle.appBarHeight - 12,
-                            margin: EdgeInsets.only(right: 16.0),
+                            margin: EdgeInsets.only(
+                              right: 16.0,
+                              left: 8,
+                            ),
                             child: SvgPicture.asset(
                               "assets/photos/larrylegend.svg",
                               alignment: Alignment.centerLeft,
@@ -353,13 +356,11 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     List<LegendDrawerRoute> routes =
         Provider.of<LegendDrawerProvider>(context).drawerRoutes;
     for (LegendDrawerRoute route in routes) {
-      print(route.visible);
       if (route.visible) {
         return LegendDrawer(
           route: route,
         );
       }
-      ;
     }
     return Container();
   }
@@ -376,7 +377,6 @@ class _LegendScaffoldState extends State<LegendScaffold> {
           SectionRouteInfo se = sections!.singleWhere(
             (element) => element.name == s.name,
             orElse: () {
-              print("");
               return sections!.last;
             },
           );

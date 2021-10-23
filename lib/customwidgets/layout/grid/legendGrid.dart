@@ -35,7 +35,7 @@ class LegendGrid extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       int count = size.count;
       double singleChildWidth;
-      print(width);
+
       if (constraints.maxWidth == 0.0) {
         if (width != null)
           singleChildWidth = width! / count;

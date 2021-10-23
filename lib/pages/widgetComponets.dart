@@ -242,9 +242,7 @@ class WidgetComponents extends StatelessWidget {
                     ),
                   ],
                   aligment: MainAxisAlignment.spaceAround,
-                  onSelected: (a) {
-                    print(a);
-                  },
+                  onSelected: (a) {},
                   iconSize: 36,
                 ),
                 LegendSelectBar(

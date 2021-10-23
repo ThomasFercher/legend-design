@@ -62,7 +62,6 @@ class _LegendFormState extends State<LegendForm> {
       case LegendFormFieldType.BOOL:
         formField = FormField<bool>(
           builder: (f) {
-            print(f);
             return LegendSwitch(
               activeColor: f.hasError ? Colors.redAccent : Colors.tealAccent,
               onChanged: field.onChanged != null
