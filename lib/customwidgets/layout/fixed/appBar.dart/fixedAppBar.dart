@@ -134,10 +134,14 @@ class FixedAppBar extends StatelessWidget {
                         Container(
                           height: (style?.appBarHeight ?? 80),
                           width: style?.appBarHeight ?? 80,
-                          margin: EdgeInsets.only(right: 16.0),
-                          child: SvgPicture.asset(
-                            "assets/photos/larrylegend.svg",
-                            alignment: Alignment.centerLeft,
+                          margin: EdgeInsets.only(right: 8.0),
+                          padding:
+                              EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              "assets/photos/larrylegend.svg",
+                              alignment: Alignment.centerLeft,
+                            ),
                           ),
                         ),
                       if (layoutType != LayoutType.FixedSider &&
@@ -146,35 +150,16 @@ class FixedAppBar extends StatelessWidget {
                           text: "Legend Design",
                           textStyle: LegendTextStyle.h1().copyWith(
                             color: theme.colors.secondaryColor,
-                            letterSpacing: 0.1,
                           ),
                         ),
                     ],
                   ),
                 ),
-                if (showMenu ?? true)
-                  Container(
-                    margin: layoutType == LayoutType.FixedSider ||
-                            layoutType == LayoutType.FixedHeaderSider
-                        ? EdgeInsets.only(
-                            right: 80 + (style?.contentPadding.horizontal ?? 0),
-                          )
-                        : EdgeInsets.zero,
-                    decoration: getCard(),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: style?.borderRadius?.x ?? 0,
-                    ),
-                    child: FixedMenu(
-                      context: context,
-                      iconColor: theme.appBarStyle.iconColor,
-                      selected: theme.appBarStyle.selectedColor,
-                    ),
-                  ),
                 Positioned(
                   right: SizeProvider.of(context).isMenuCollapsed() &&
                           !theme.isMobile
-                      ? 96
-                      : 0,
+                      ? 84
+                      : 16,
                   height: style?.appBarHeight,
                   child: Container(
                     child: Row(
@@ -203,6 +188,21 @@ class FixedAppBar extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (showMenu ?? true)
+                  Container(
+                    margin: EdgeInsets.only(
+                      right: (style?.contentPadding.horizontal ?? 0),
+                    ),
+                    decoration: getCard(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: style?.borderRadius?.x ?? 0,
+                    ),
+                    child: FixedMenu(
+                      context: context,
+                      iconColor: theme.appBarStyle.iconColor,
+                      selected: theme.appBarStyle.selectedColor,
+                    ),
+                  ),
               ],
             ),
           ),

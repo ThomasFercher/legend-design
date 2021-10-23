@@ -18,7 +18,7 @@ import 'package:webstore/router/routes/sectionProvider.dart';
 import 'package:webstore/router/routes/sectionRouteInfo.dart';
 import 'package:webstore/styles/theming/colors/legendColorTheme.dart';
 import 'package:webstore/styles/theming/legendTheme.dart';
-import 'drawers/drawerMenu.dart';
+import 'drawers/menuDrawer.dart';
 import 'fixed/appBar.dart/fixedAppBar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'fixed/fixedFooter.dart';
@@ -232,7 +232,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     return Stack(
       children: [
         Scaffold(
-          endDrawer: DrawerMenu(),
+          endDrawer: MenuDrawer(),
           bottomNavigationBar:
               SizeProvider.of(context).isMobile ? FixedBottomBar() : null,
           endDrawerEnableOpenDragGesture: false,
@@ -257,7 +257,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                             ? SliverToBoxAdapter(
                                 child: LayoutBuilder(
                                     builder: (context, constraints) {
-                                  double footerheight = 120;
+                                  double footerheight = 160;
                                   double space = maxHeight -
                                       footerheight -
                                       theme.sizing.contentPadding -

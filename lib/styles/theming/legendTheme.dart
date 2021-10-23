@@ -64,7 +64,7 @@ class LegendTheme extends ChangeNotifier {
   );
   LegendColorTheme darkColorTheme = LegendColorTheme(
     primaryColor: Colors.teal[900]!,
-    secondaryColor: Colors.tealAccent,
+    secondaryColor: Color(0xFFb3dedb),
     scaffoldBackgroundColor: LegendColors.gray12,
     foreground: [
       LegendColors.gray10,

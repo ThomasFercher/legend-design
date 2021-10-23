@@ -35,7 +35,7 @@ class LegendAppBarTheme {
     appBarHeight: 80,
     backgroundColor: Colors.transparent,
     borderRadius: Radius.circular(20),
-    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 12.0),
+    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 12.0),
     cardColor: Colors.white,
     pinned: true,
     selectedColor: colors.selectionColor,
@@ -44,7 +44,7 @@ class LegendAppBarTheme {
   late FixedAppBarStyle iconsAppBar = FixedAppBarStyle(
     appBarHeight: 60,
     backgroundColor: colors.primaryColor,
-    contentPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 12.0),
+    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 12.0),
     iconSize: 32,
     spacing: 16.0,
     iconColor: colors.secondaryColor,

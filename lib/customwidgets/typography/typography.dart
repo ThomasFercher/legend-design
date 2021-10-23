@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:webstore/styles/theming/colors/legendColors.dart';
 
 class LegendTypography {
@@ -31,22 +32,22 @@ class LegendTypography {
 }
 
 class LegendTextStyle extends TextStyle {
-  final Color textColor;
-  final Color backgroundColor;
-  final double fontSize;
-  final FontWeight fontWeight;
-  final String fontFamily;
+  final Color? textColor;
+  final Color? backgroundColor;
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final String? fontFamily;
   final double? height;
   final double? wordSpacing;
   final double? letterSpacing;
   final TextOverflow? textOverflow;
 
   LegendTextStyle({
-    required this.textColor,
-    required this.backgroundColor,
-    required this.fontSize,
-    required this.fontWeight,
-    required this.fontFamily,
+    this.textColor,
+    this.backgroundColor,
+    this.fontSize,
+    this.fontWeight,
+    this.fontFamily,
     this.height,
     this.letterSpacing,
     this.wordSpacing,
@@ -63,13 +64,30 @@ class LegendTextStyle extends TextStyle {
           height: height,
         );
 
-  factory LegendTextStyle.h1() {
+  factory LegendTextStyle.fromGoogleFonts(TextStyle style) {
     return LegendTextStyle(
-      textColor: Colors.tealAccent[700]!,
-      backgroundColor: Colors.transparent,
-      fontSize: 28,
-      fontWeight: FontWeight.w100,
-      fontFamily: "sans serif",
+      textColor: style.color,
+      backgroundColor: style.backgroundColor,
+      fontSize: style.fontSize,
+      fontWeight: style.fontWeight,
+      fontFamily: style.fontFamily,
+      height: style.height,
+      letterSpacing: style.letterSpacing,
+      wordSpacing: style.wordSpacing,
+      textOverflow: style.overflow,
+    );
+  }
+
+  factory LegendTextStyle.h1() {
+    return LegendTextStyle.fromGoogleFonts(
+      GoogleFonts.lato(
+        color: Colors.tealAccent[700]!,
+        backgroundColor: Colors.transparent,
+        fontSize: 28,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0,
+        wordSpacing: 0,
+      ),
     );
   }
   factory LegendTextStyle.tableHeader() {

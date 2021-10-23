@@ -131,9 +131,12 @@ class CollapsedSider extends StatelessWidget {
               ),
             ),
           if (showSectionMenu)
-            ListView(
-              children: sectionTiles,
-              shrinkWrap: true,
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: ListView(
+                children: sectionTiles,
+                shrinkWrap: true,
+              ),
             )
         ],
       ),

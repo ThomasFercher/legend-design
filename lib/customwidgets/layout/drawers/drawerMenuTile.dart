@@ -135,18 +135,16 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
               size: 28.0,
             ),
             if (widget.title != null)
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(left: 12.0),
-                  child: LegendText(
-                    text: widget.title!,
-                    textStyle: LegendTextStyle.h5().copyWith(
-                      color: color,
-                      fontSize: 16,
-                    ),
+              Container(
+                margin: EdgeInsets.only(left: 24.0),
+                child: LegendText(
+                  text: widget.title!,
+                  textStyle: LegendTextStyle.h5().copyWith(
+                    color: color,
+                    fontSize: 16,
                   ),
                 ),
-              )
+              ),
           ],
         ),
       ),
