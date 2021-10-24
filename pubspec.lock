@@ -7,7 +7,7 @@ packages:
       name: animations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.2"
   antdesign_icons:
     dependency: "direct main"
     description:
@@ -184,6 +184,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  legend_design_core:
+    dependency: "direct main"
+    description:
+      path: legend_design_core
+      relative: true
+    source: path
+    version: "0.0.1"
+  legend_design_widgets:
+    dependency: "direct main"
+    description:
+      path: legend_design_widgets
+      relative: true
+    source: path
+    version: "0.0.1"
   lint:
     dependency: "direct main"
     description:
@@ -309,7 +323,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.1"
   rive:
     dependency: "direct main"
     description:

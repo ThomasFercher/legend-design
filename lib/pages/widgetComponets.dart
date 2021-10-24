@@ -1,45 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
+import 'package:legend_design_core/icons/legendAnimatedIcon.dart';
+import 'package:legend_design_core/icons/legendGradientIcon.dart';
+import 'package:legend_design_core/layout/legendScaffold.dart';
+import 'package:legend_design_core/layout/sections/section.dart';
+import 'package:legend_design_core/styles/layouts/layoutType.dart';
+import 'package:legend_design_core/styles/theming/legendTheme.dart';
+import 'package:legend_design_core/styles/theming/themeProvider.dart';
+import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/typography/typography.dart';
+import 'package:legend_design_widgets/datadisplay/carousel/legendCarousel.dart';
+import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
+import 'package:legend_design_widgets/datadisplay/table/legendTable.dart';
+import 'package:legend_design_widgets/datadisplay/table/legendTableCell.dart';
+import 'package:legend_design_widgets/datadisplay/tag/legendTag.dart';
+import 'package:legend_design_widgets/input/form/legendForm.dart';
+import 'package:legend_design_widgets/input/form/legendFormField.dart';
+import 'package:legend_design_widgets/input/selectBar/legendSelectBar.dart';
+import 'package:legend_design_widgets/input/selectBar/legendSelectOption.dart';
+import 'package:legend_design_widgets/input/text/legendInputDecoration.dart';
+import 'package:legend_design_widgets/input/text/legendTextField.dart';
+import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
+import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
+import 'package:legend_design_widgets/legendButton/legendButton.dart';
+import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
+import 'package:legend_design_widgets/modals/legendAlert.dart';
+import 'package:legend_design_widgets/modals/legendBottomSheet.dart';
+import 'package:legend_design_widgets/modals/legendPopups.dart';
+import 'package:legend_design_widgets/modals/modal.dart';
 import 'package:provider/provider.dart';
-import 'package:webstore/customwidgets/datadisplay/card/legendCard.dart';
-import 'package:webstore/customwidgets/datadisplay/carousel/legendCarousel.dart';
-import 'package:webstore/customwidgets/datadisplay/table/legendRowValue.dart';
-import 'package:webstore/customwidgets/datadisplay/table/legendTable.dart';
-import 'package:webstore/customwidgets/datadisplay/table/legendTableCell.dart';
-import 'package:webstore/customwidgets/datadisplay/tag/legendTag.dart';
-import 'package:webstore/customwidgets/icons/legendAnimatedIcon.dart';
-import 'package:webstore/customwidgets/icons/legendGradientIcon.dart';
-import 'package:webstore/customwidgets/input/form/legendForm.dart';
-import 'package:webstore/customwidgets/input/form/legendFormField.dart';
-import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
-import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
-import 'package:webstore/customwidgets/input/selectBar/legendselectButton.dart';
-import 'package:webstore/customwidgets/input/text/legendInputDecoration.dart';
-import 'package:webstore/customwidgets/input/text/legendTextField.dart';
-import 'package:webstore/customwidgets/layout/grid/legendGridSize.dart';
-import 'package:webstore/customwidgets/layout/grid/legendGrid.dart';
-import 'package:webstore/customwidgets/layout/sectionNavigation/sectionNavigation.dart';
-import 'package:webstore/customwidgets/layout/sections/section.dart';
-import 'package:webstore/customwidgets/legendButton/legendButton.dart';
-import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
-import 'package:webstore/customwidgets/modals/legendAlert.dart';
-import 'package:webstore/customwidgets/modals/legendBottomSheet.dart';
-import 'package:webstore/customwidgets/modals/legendPopups.dart';
-import 'package:webstore/customwidgets/modals/modal.dart';
-import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/router/routes/sectionRouteInfo.dart';
-import 'package:webstore/styles/theming/legendTheme.dart';
-import 'package:webstore/customwidgets/typography/typography.dart';
-import '../customwidgets/layout/legendScaffold.dart';
-import '../styles/layouts/layoutType.dart';
 
 class WidgetComponents extends StatelessWidget {
   const WidgetComponents();
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = Provider.of<LegendTheme>(context);
+    ThemeProvider theme = Provider.of<ThemeProvider>(context);
     return LegendScaffold(
       showSiderMenu: false,
       showAppBarMenu: true,
@@ -280,12 +277,13 @@ class WidgetComponents extends StatelessWidget {
           children: [
             LegendGrid(
               children: [
-                LegendCard(
+                /* LegendCard(
                   title: "Polkadot",
                   subtitle: "+6.44% ",
                   icon: Icons.money,
                   value: "30.94\$",
-                ),
+                ),*/
+                Container(),
               ],
               sizes: LegendGridSize(
                 medium: LegendGridSizeInfo(6, 164),

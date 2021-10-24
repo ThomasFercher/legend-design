@@ -1,0 +1,166 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/sectionNavigation/sectionNavigation.dart';
+import 'package:legend_design_core/router/routerProvider.dart';
+import 'package:legend_design_core/router/routes/sectionRouteInfo.dart';
+import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/typography/typography.dart';
+
+class SiderMenuVerticalTile extends StatefulWidget {
+  final String path;
+  final IconData? icon;
+  final String? title;
+  late final bool isSection;
+  final Color? backgroundColor;
+  final Color? activeColor;
+  final Color? color;
+  final bool collapsed;
+
+  SiderMenuVerticalTile({
+    required this.path,
+    required this.collapsed,
+    this.backgroundColor,
+    this.activeColor,
+    this.color,
+    this.icon,
+    this.title,
+    bool? isSection,
+  }) {
+    this.isSection = isSection ?? false;
+  }
+
+  @override
+  _SiderMenuVerticalTileState createState() => _SiderMenuVerticalTileState();
+}
+
+class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
+    with SingleTickerProviderStateMixin {
+  late Animation<Color?> animation;
+  late Animation<Color?> banimation;
+  late AnimationController controller;
+  late bool _isClicked;
+  late bool _isHovered;
+  late Color? color;
+  Color? borderColor;
+  @override
+  void initState() {
+    _isClicked = false;
+    _isHovered = false;
+    color = widget.color;
+    borderColor = widget.backgroundColor;
+
+    controller = new AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 360),
+    );
+    banimation = ColorTween(
+      begin: borderColor ?? Colors.transparent,
+      end: widget.activeColor ?? LegendTextStyle.sectionLink().color,
+    ).animate(controller);
+
+    animation = ColorTween(
+      begin: color,
+      end: widget.activeColor,
+    ).animate(controller);
+
+    animation.addListener(() {
+      setState(() {
+        color = animation.value;
+      });
+    });
+    banimation.addListener(() {
+      setState(() {
+        borderColor = banimation.value;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  dispose() {
+    controller.dispose(); // you need this
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      height: 48,
+      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(left: widget.collapsed ? 0 : 32.0),
+      decoration: BoxDecoration(
+        border: Border(
+          left: BorderSide(
+            color: borderColor ?? Colors.teal,
+            width: 4,
+            style: BorderStyle.none,
+          ),
+          right: BorderSide(
+            color: borderColor ?? Colors.teal,
+            width: 4,
+            style: BorderStyle.solid,
+          ),
+        ),
+      ),
+      child: InkWell(
+        hoverColor: Colors.transparent,
+        enableFeedback: true,
+        onHover: (value) {
+          if (value) {
+            if (!controller.isAnimating || !_isHovered) {
+              controller.forward();
+              _isHovered = true;
+            }
+          } else {
+            if (!controller.isAnimating || _isHovered) {
+              controller.reverse();
+              _isHovered = false;
+            }
+          }
+        },
+        onTap: () {
+          if (widget.isSection)
+            SectionNavigation.of(context)
+                ?.navigateToSection(SectionRouteInfo(name: widget.path));
+          else
+            RouterProvider.of(context).pushPage(
+              settings: RouteSettings(name: widget.path),
+            );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (widget.icon != null)
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    widget.icon,
+                    color: color,
+                  ),
+                ),
+              ),
+            if (widget.title != null)
+              Container(
+                padding: EdgeInsets.only(
+                  left: widget.collapsed ? 8.0 : 0,
+                ),
+                child: LegendText(
+                  textAlign: TextAlign.center,
+                  text: widget.title ?? "",
+                  textStyle: LegendTextStyle.sectionLink().copyWith(
+                    color: color,
+                    fontSize: widget.collapsed ? 14.0 : 16,
+                    fontWeight:
+                        widget.collapsed ? FontWeight.w400 : FontWeight.normal,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

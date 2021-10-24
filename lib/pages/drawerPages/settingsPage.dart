@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/styles/theming/colors/legendColors.dart';
+import 'package:legend_design_core/styles/theming/themeProvider.dart';
+import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/typography/typography.dart';
+import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
+import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
 import 'package:provider/provider.dart';
-import 'package:webstore/customwidgets/layout/grid/legendGrid.dart';
-import 'package:webstore/customwidgets/layout/grid/legendGridSize.dart';
-import 'package:webstore/customwidgets/typography/legendText.dart';
-import 'package:webstore/customwidgets/typography/typography.dart';
-import 'package:webstore/styles/theming/colors/legendColors.dart';
-import 'package:webstore/styles/theming/legendTheme.dart';
-import 'package:webstore/styles/theming/sizing/sizeProvider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({
@@ -46,8 +45,8 @@ class _SettingsPageState extends State<SettingsPage>
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = Provider.of<LegendTheme>(context);
-    themeType = theme.colorTheme;
+    ThemeProvider theme = Provider.of<ThemeProvider>(context);
+    themeType = theme.themeType;
 
     return Container(
       child: Column(
@@ -67,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage>
             children: [
               InkWell(
                 onTap: () {
-                  Provider.of<LegendTheme>(context, listen: false)
+                  Provider.of<ThemeProvider>(context, listen: false)
                       .changeColorTheme(LegendColorThemeType.DARK, context);
                 },
                 child: Container(
@@ -153,7 +152,7 @@ class _SettingsPageState extends State<SettingsPage>
               ),
               InkWell(
                 onTap: () {
-                  Provider.of<LegendTheme>(context, listen: false)
+                  Provider.of<ThemeProvider>(context, listen: false)
                       .changeColorTheme(LegendColorThemeType.LIGHT, context);
                 },
                 child: Container(

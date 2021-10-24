@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   animations: ^2.0.0
-  provider: ^5.0.0
+  provider: ^6.0.1
   rive: ^0.7.22
   lint: ^1.5.3
   flutter_syntax_view: ^4.0.0
@@ -34,6 +34,10 @@ dependencies:
   url_launcher: ^6.0.12
   antdesign_icons: ^0.0.3
   google_fonts: ^2.1.0
+  legend_design_widgets:
+    path: ./legend_design_widgets
+  legend_design_core:
+    path: ./legend_design_core
 
 dev_dependencies:
   flutter_test:
