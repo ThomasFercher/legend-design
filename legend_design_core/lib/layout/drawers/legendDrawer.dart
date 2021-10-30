@@ -14,10 +14,12 @@ import 'package:provider/provider.dart';
 
 class LegendDrawer extends StatefulWidget {
   final LegendDrawerRoute route;
+  final bool isMobile;
 
   LegendDrawer({
     Key? key,
     required this.route,
+    required this.isMobile,
   }) : super(key: key);
 
   @override
@@ -56,7 +58,7 @@ class _LegendDrawerState extends State<LegendDrawer>
 
     animation = Tween<double>(
       begin: 0,
-      end: widget.route.width,
+      end: widget.isMobile ? widget.route.mobileWidth : widget.route.width,
     ).animate(new CurvedAnimation(parent: controller, curve: Curves.easeInSine))
       ..addListener(() {
         setState(() {

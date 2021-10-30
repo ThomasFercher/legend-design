@@ -116,9 +116,9 @@ class LayoutInfo {
                         disabled: theme.colors.foreground[2],
                       ),
                       onPressed: () => {},
-                      iconSize: 32,
+                      iconSize: 12,
                     ),
-                    Padding(padding: EdgeInsets.only(left: 32)),
+                    /* Padding(padding: EdgeInsets.only(left: 32)),
                     LegendAnimatedIcon(
                       icon: AntIcons.linkedinFilled,
                       theme: LegendAnimtedIconTheme(
@@ -126,7 +126,7 @@ class LayoutInfo {
                         disabled: theme.colors.foreground[2],
                       ),
                       onPressed: () => {},
-                      iconSize: 32,
+                      iconSize: 12,
                     ),
                     Padding(padding: EdgeInsets.only(left: 32)),
                     LegendAnimatedIcon(
@@ -136,8 +136,8 @@ class LayoutInfo {
                         disabled: theme.colors.foreground[2],
                       ),
                       onPressed: () => {},
-                      iconSize: 32,
-                    ),
+                      iconSize: 12,
+                    ),*/
                   ],
                 ),
                 Expanded(flex: 3, child: Container()),

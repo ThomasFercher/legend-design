@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:legend_design_core/legend_design_app.dart';
+import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
 import 'package:legend_design_core/styles/theming/legendTheme.dart';
 import 'package:legend_design_core/styles/theming/themeProvider.dart';
 import 'package:webstore/styles/layoutInfo.dart';
@@ -19,18 +20,8 @@ void main() {
         height: 54,
       ),
       theme: ThemeProvider(
-        darkTheme: LegendTheme(
-          colorTheme: AppConfig.darkColorTheme,
-          sizingTheme: AppConfig.sizingTheme,
-          appBarStyle: AppConfig.appBarStyle,
-          bottomBarStyle: AppConfig.bottomBarStyle,
-        ),
-        lightTheme: LegendTheme(
-          colorTheme: AppConfig.lightColorTheme,
-          sizingTheme: AppConfig.sizingTheme,
-          appBarStyle: AppConfig.appBarStyle,
-          bottomBarStyle: AppConfig.bottomBarStyle,
-        ),
+        darkTheme: AppConfig.darkColorTheme,
+        lightTheme: AppConfig.lightColorTheme,
         sizingTheme: AppConfig.sizingTheme,
         themeType: LegendColorThemeType.DARK,
       ),

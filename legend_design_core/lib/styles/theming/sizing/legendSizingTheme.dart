@@ -1,43 +1,46 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/fixedAppBar.dart';
 import 'package:legend_design_core/styles/theming/sizing/legendSizing.dart';
 import 'package:legend_design_core/typography/typography.dart';
 
 class LegendSizingTheme {
-  final LegendSizingType sizingType;
+  final LegendSizing mobile;
+  final LegendSizing tablet;
+  final LegendSizing web;
+  final LegendSizing desktop;
+  late final LegendSizingType sizingType;
 
   LegendSizingTheme({
-    required this.sizingType,
-  });
+    required this.mobile,
+    required this.tablet,
+    required this.desktop,
+    required this.web,
+  }) {
+    if (kIsWeb)
+      sizingType = LegendSizingType.WEB;
+    else if (Platform.isIOS || Platform.isAndroid)
+      sizingType = LegendSizingType.MOBILE;
+    else if (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
+      sizingType = LegendSizingType.DESTKOP;
+    else
+      LegendSizingType.WEB;
+  }
 
   LegendSizing get sizing {
     switch (sizingType) {
       case LegendSizingType.WEB:
-        return webSizing;
+        return web;
       case LegendSizingType.MOBILE:
-        return webSizing;
+        return mobile;
       case LegendSizingType.TABLET:
-        return webSizing;
+        return tablet;
       case LegendSizingType.DESTKOP:
-        return webSizing;
+        return desktop;
       default:
-        return webSizing;
+        return web;
     }
   }
-
-  final LegendSizing webSizing = LegendSizing(
-    borderRadius: [
-      BorderRadius.all(
-        Radius.circular(12),
-      ),
-      BorderRadius.all(
-        Radius.circular(6),
-      ),
-    ],
-    borderInset: [
-      12,
-      12,
-    ],
-    typography: LegendTypography(),
-    contentPadding: 8,
-  );
 }

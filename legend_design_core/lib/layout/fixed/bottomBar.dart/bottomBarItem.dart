@@ -10,12 +10,14 @@ import 'package:provider/provider.dart';
 
 class BottomBarItem extends StatefulWidget {
   final MenuOption option;
-  final BottomBarStyle? style;
+  final BottomBarSizing? sizing;
+  final BottomBarColors colors;
   final void Function(MenuOption option) onSelected;
 
   const BottomBarItem({
     required this.option,
-    required this.style,
+    required this.sizing,
+    required this.colors,
     required this.onSelected,
     Key? key,
   }) : super(key: key);
@@ -38,7 +40,7 @@ class _BottomBarItemState extends State<BottomBarItem>
   @override
   void initState() {
     super.initState();
-    _disabledColor = widget.style?.disabledColor ?? Colors.black38;
+    _disabledColor = widget.colors.disabledColor ?? Colors.black38;
     _activeColor = _disabledColor;
     _isSelected = false;
 
@@ -50,7 +52,7 @@ class _BottomBarItemState extends State<BottomBarItem>
     );
     _foregroundAnimation = ColorTween(
       begin: _disabledColor,
-      end: widget.style?.activeColor,
+      end: widget.colors.activeColor,
     ).animate(_controller);
 
     _backgroundAnimation = ColorTween(
@@ -103,43 +105,51 @@ class _BottomBarItemState extends State<BottomBarItem>
         return Material(
           color: Colors.transparent,
           child: Container(
+            padding: EdgeInsets.all(4),
             child: InkWell(
+              borderRadius: BorderRadius.all(
+                Radius.circular(widget.sizing?.height ?? 1 / 2),
+              ),
               onTap: () {
                 widget.onSelected(widget.option);
 
-                Provider.of<RouterProvider>(context).pushPage(
+                RouterProvider.of(context).pushPage(
                   settings: RouteSettings(name: widget.option.page),
                 );
               },
-              child: Row(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Icon(
-                          widget.option.icon,
-                          size: widget.style?.iconSize ?? 28,
-                          color: _activeColor,
-                        ),
-                      ),
-                      if ((widget.style?.textAtBottom ?? false) &&
-                          (widget.style?.showText ?? true) &&
-                          (widget.option.title != null))
+              child: Container(
+                width: widget.sizing?.height,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                         Container(
-                          padding: EdgeInsets.only(top: 2.0),
-                          child: getText(),
+                          child: Icon(
+                            widget.option.icon,
+                            size: widget.sizing?.iconSize ?? 28,
+                            color: _activeColor,
+                          ),
                         ),
-                    ],
-                  ),
-                  if ((widget.style?.showText ?? true) &&
-                      (!(widget.style?.textAtBottom ?? false)) &&
-                      (widget.option.title != null))
-                    Container(
-                      padding: EdgeInsets.only(left: 4.0),
-                      child: getText(),
+                        if ((widget.sizing?.textAtBottom ?? false) &&
+                            (widget.sizing?.showText ?? true) &&
+                            (widget.option.title != null))
+                          Container(
+                            padding: EdgeInsets.only(top: 2.0),
+                            child: getText(),
+                          ),
+                      ],
                     ),
-                ],
+                    if ((widget.sizing?.showText ?? true) &&
+                        (!(widget.sizing?.textAtBottom ?? false)) &&
+                        (widget.option.title != null))
+                      Container(
+                        padding: EdgeInsets.only(left: 4.0),
+                        child: getText(),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),

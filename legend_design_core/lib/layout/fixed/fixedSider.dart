@@ -109,9 +109,9 @@ class CollapsedSider extends StatelessWidget {
       width: 80,
       height: MediaQuery.of(context).size.height,
       padding: EdgeInsets.only(
-          top: theme.appBarStyle.appBarHeight +
-              theme.appBarStyle.contentPadding.vertical),
-      color: theme.appBarStyle.backgroundColor,
+          top: theme.appBarSizing.appBarHeight +
+              theme.appBarSizing.contentPadding.vertical),
+      color: theme.appBarColors.backgroundColor,
       child: Column(
         children: [
           Divider(
@@ -257,10 +257,10 @@ class Sider extends StatelessWidget {
     return Container(
       width: 180,
       height: MediaQuery.of(context).size.height,
-      color: theme.appBarStyle.backgroundColor,
+      color: theme.appBarColors.backgroundColor,
       padding: EdgeInsets.only(
-          top: theme.appBarStyle.appBarHeight +
-              theme.appBarStyle.contentPadding.vertical),
+          top: theme.appBarSizing.appBarHeight +
+              theme.appBarSizing.contentPadding.vertical),
       child: Scrollbar(
         controller: controller,
         child: ListView(

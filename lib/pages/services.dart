@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:legend_design_core/icons/legendGradientIcon.dart';
 import 'package:legend_design_core/layout/legendScaffold.dart';
+import 'package:legend_design_core/layout/sections/section.dart';
 import 'package:legend_design_core/styles/layouts/layoutType.dart';
+import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/typography/typography.dart';
+import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
+import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
+import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage();
@@ -14,7 +21,6 @@ class ProductsPage extends StatelessWidget {
         return Container(
           child: Column(
             children: [
-              /*
               Section(
                 header: "Services",
                 verticalSpacing: 12,
@@ -144,7 +150,6 @@ class ProductsPage extends StatelessWidget {
                   )
                 ],
               ),
-            */
             ],
           ),
         );

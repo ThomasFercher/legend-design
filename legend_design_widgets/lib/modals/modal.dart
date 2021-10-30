@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/styles/layouts/layoutType.dart';
 import 'package:legend_design_core/styles/theming/legendTheme.dart';
 import 'package:legend_design_core/styles/theming/sizing/sizeProvider.dart';
+import 'package:legend_design_core/styles/theming/themeProvider.dart';
 import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class Modal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = Provider.of<LegendTheme>(context);
+    ThemeProvider theme = Provider.of<ThemeProvider>(context);
     double maxWidth = MediaQuery.of(context).size.width;
     double padding = 0;
 

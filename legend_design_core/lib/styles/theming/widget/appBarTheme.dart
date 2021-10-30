@@ -1,37 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/fixed/appBar.dart/fixedAppBar.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
 
-enum FixedAppBarType {
-  NORMAl,
-  SLEEK,
-  RoundedMobile,
-  ICONS,
-}
 
-class LegendAppBarTheme {
-  LegendAppBarTheme({
-    required this.colors,
-    required this.appBarType,
-  });
-
-  final LegendColorTheme colors;
-  final FixedAppBarType appBarType;
-
-  FixedAppBarStyle get appBarStyle {
-    switch (appBarType) {
-      case FixedAppBarType.SLEEK:
-        return sleekAppBarStyle;
-      case FixedAppBarType.RoundedMobile:
-        return mobileRoundedStyle;
-      case FixedAppBarType.ICONS:
-        return iconsAppBar;
-      default:
-        return normalAppBarStyle;
-    }
-  }
-
-  late final FixedAppBarStyle sleekAppBarStyle = FixedAppBarStyle(
+  /*late final FixedAppBarStyle sleekAppBarStyle = FixedAppBarStyle(
     appBarHeight: 80,
     backgroundColor: Colors.transparent,
     borderRadius: Radius.circular(20),
@@ -71,5 +40,4 @@ class LegendAppBarTheme {
     borderRadius: Radius.circular(20),
     contentPadding: EdgeInsets.all(8),
     selectedColor: colors.selectionColor,
-  );
-}
+  );*/

@@ -9,6 +9,7 @@ import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
 import 'package:legend_design_core/styles/theming/colors/legendColors.dart';
 import 'package:legend_design_core/styles/theming/sizing/legendSizing.dart';
 import 'package:legend_design_core/styles/theming/sizing/legendSizingTheme.dart';
+import 'package:legend_design_core/typography/typography.dart';
 import 'package:webstore/pages/about.dart';
 import 'package:webstore/pages/drawerPages/settingsPage.dart';
 import 'package:webstore/pages/home.dart';
@@ -16,15 +17,12 @@ import 'package:webstore/pages/services.dart';
 import 'package:webstore/pages/widgetComponets.dart';
 
 class AppConfig {
-  static BottomBarStyle bottomBarStyle = BottomBarStyle(
+  static BottomBarSizing bottomBarSizing = BottomBarSizing(
     showText: false,
     textAtBottom: true,
-    height: 48,
+    height: 56,
     margin: EdgeInsets.all(0),
-    activeColor: Colors.teal[900]!,
-    disabledColor: Colors.black26,
     decoration: BoxDecoration(
-      color: Colors.white,
       boxShadow: [
         BoxShadow(
           color: Colors.black12,
@@ -35,19 +33,108 @@ class AppConfig {
     ),
   );
 
-  static FixedAppBarStyle appBarStyle = FixedAppBarStyle(
-    appBarHeight: 80,
-    backgroundColor: Colors.teal,
-    borderRadius: Radius.circular(20),
-    contentPadding: EdgeInsets.all(8),
-    selectedColor: Colors.tealAccent,
-  );
-
   static LegendSizingTheme sizingTheme = LegendSizingTheme(
-    sizingType: LegendSizingType.WEB,
+    desktop: LegendSizing(
+      borderRadius: [
+        BorderRadius.all(
+          Radius.circular(12),
+        ),
+        BorderRadius.all(
+          Radius.circular(6),
+        ),
+      ],
+      borderInset: [
+        12,
+        12,
+      ],
+      typography: LegendTypography(),
+      contentPadding: 8,
+      appBarSizing: FixedAppBarSizing(
+        appBarHeight: 80,
+        contentPadding: EdgeInsets.all(0),
+        borderRadius: Radius.circular(20),
+        iconSize: 24,
+        spacing: 20,
+      ),
+    ),
+    mobile: LegendSizing(
+      borderRadius: [
+        BorderRadius.all(
+          Radius.circular(8),
+        ),
+        BorderRadius.all(
+          Radius.circular(4),
+        ),
+      ],
+      borderInset: [
+        8,
+        4,
+      ],
+      typography: LegendTypography(),
+      contentPadding: 4,
+      appBarSizing: FixedAppBarSizing(
+        appBarHeight: 80,
+        contentPadding: EdgeInsets.all(0),
+        borderRadius: Radius.circular(20),
+        iconSize: 24,
+        spacing: 20,
+      ),
+      bottomBarSizing: bottomBarSizing,
+    ),
+    tablet: LegendSizing(
+      borderRadius: [
+        BorderRadius.all(
+          Radius.circular(12),
+        ),
+        BorderRadius.all(
+          Radius.circular(6),
+        ),
+      ],
+      borderInset: [
+        12,
+        12,
+      ],
+      typography: LegendTypography(),
+      contentPadding: 8,
+      appBarSizing: FixedAppBarSizing(
+        appBarHeight: 80,
+        contentPadding: EdgeInsets.all(0),
+        borderRadius: Radius.circular(20),
+        iconSize: 24,
+        spacing: 20,
+      ),
+    ),
+    web: LegendSizing(
+      borderRadius: [
+        BorderRadius.all(
+          Radius.circular(12),
+        ),
+        BorderRadius.all(
+          Radius.circular(6),
+        ),
+      ],
+      borderInset: [
+        12,
+        12,
+      ],
+      typography: LegendTypography(),
+      contentPadding: 8,
+      appBarSizing: FixedAppBarSizing(
+        appBarHeight: 80,
+        contentPadding: EdgeInsets.all(0),
+        borderRadius: Radius.circular(20),
+        iconSize: 24,
+        spacing: 20,
+      ),
+    ),
   );
 
   static LegendColorTheme lightColorTheme = LegendColorTheme(
+    bottomBarColors: BottomBarColors(
+      activeColor: Colors.teal,
+      disabledColor: Colors.black26,
+      backgroundColor: LegendColors.gray10,
+    ),
     primaryColor: Colors.teal,
     secondaryColor: Colors.teal[50]!,
     scaffoldBackgroundColor: LegendColors.gray2,
@@ -60,9 +147,19 @@ class AppConfig {
     selectionColor: Colors.tealAccent,
     textColorDark: Colors.tealAccent,
     textColorLight: Colors.tealAccent,
+    appBarColors: FixedAppBarColors(
+      backgroundColor: Colors.teal,
+      iconColor: Colors.tealAccent,
+      selectedColor: Colors.teal,
+    ),
   );
   static LegendColorTheme darkColorTheme = LegendColorTheme(
-    primaryColor: Colors.teal[900]!,
+    bottomBarColors: BottomBarColors(
+      activeColor: Colors.teal,
+      disabledColor: Colors.black26,
+      backgroundColor: LegendColors.gray10,
+    ),
+    primaryColor: Colors.teal,
     secondaryColor: Color(0xFFb3dedb),
     scaffoldBackgroundColor: LegendColors.gray12,
     foreground: [
@@ -74,6 +171,11 @@ class AppConfig {
     selectionColor: Colors.tealAccent,
     textColorDark: LegendColors.gray6,
     textColorLight: LegendColors.gray4,
+    appBarColors: FixedAppBarColors(
+      backgroundColor: Colors.teal,
+      iconColor: Colors.tealAccent,
+      selectedColor: Colors.teal,
+    ),
   );
 
   static List<MenuOption> menuOptions = [
@@ -107,6 +209,7 @@ class AppConfig {
       },
       actions: [],
       width: 400,
+      mobileWidth: 320,
     ),
   ];
 

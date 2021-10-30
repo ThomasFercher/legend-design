@@ -111,7 +111,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
           ),
         ),
       ),
-      height: theme.appBarStyle.appBarHeight,
+      height: theme.appBarSizing.appBarHeight,
       child: InkWell(
         onHover: (value) {
           if (value && !_isClicked) {
@@ -141,7 +141,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
         highlightColor: Colors.transparent,
         child: Container(
           padding: EdgeInsets.symmetric(
-            horizontal: theme.appBarStyle.spacing ?? 12.0,
+            horizontal: theme.appBarSizing.spacing ?? 12.0,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,7 +150,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               Icon(
                 widget.option.icon,
                 color: color,
-                size: theme.appBarStyle.iconSize,
+                size: theme.appBarSizing.iconSize,
               ),
               if (widget.option.title != null)
                 Padding(

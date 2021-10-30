@@ -8,23 +8,32 @@ import 'package:legend_design_core/styles/theming/themeProvider.dart';
 
 import 'package:provider/provider.dart';
 
-class BottomBarStyle {
+class BottomBarColors {
+  final Color? activeColor;
+  final Color? disabledColor;
+  final Color? backgroundColor;
+
+  BottomBarColors({
+    this.activeColor,
+    this.disabledColor,
+    this.backgroundColor,
+  });
+}
+
+class BottomBarSizing {
   final EdgeInsets margin;
   final BoxDecoration decoration;
   final double height;
   final bool showText;
   final bool? textAtBottom;
-  final Color? activeColor;
-  final Color? disabledColor;
+
   final double? iconSize;
 
-  BottomBarStyle({
+  BottomBarSizing({
     required this.showText,
     required this.margin,
     required this.decoration,
     required this.height,
-    this.activeColor,
-    this.disabledColor,
     this.textAtBottom,
     this.iconSize,
   });
@@ -32,29 +41,31 @@ class BottomBarStyle {
 
 class FixedBottomBar extends StatelessWidget {
   final bool? fit;
-  late BottomBarStyle? style;
+  late BottomBarSizing? sizing;
+  late BottomBarColors colors;
 
   FixedBottomBar({
     Key? key,
     this.fit,
-    this.style,
+    required this.sizing,
+    required this.colors,
   }) : super(key: key);
 
   late int index;
   late List<BottomBarItem> items;
 
-  List<BottomBarItem> getOptions(BuildContext context) {
-    List<MenuOption> options = Provider.of<RouterProvider>(context).menuOptions;
+  List<BottomBarItem> getOptions(BuildContext c) {
+    List<MenuOption> options = RouterProvider.of(c).menuOptions;
     List<BottomBarItem> it = [];
 
     for (MenuOption o in options) {
       BottomBarItem w = new BottomBarItem(
         option: o,
         onSelected: (selOption) {
-          Provider.of<BottomBarProvider>(context, listen: false)
-              .selectOption(o);
+          Provider.of<BottomBarProvider>(c, listen: false).selectOption(o);
         },
-        style: style,
+        sizing: sizing,
+        colors: colors,
       );
       it.add(w);
     }
@@ -63,17 +74,18 @@ class FixedBottomBar extends StatelessWidget {
   }
 
   List<BottomBarItem> getItems(context) {
-    List<MenuOption> options = Provider.of<RouterProvider>(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     List<BottomBarItem> it = [];
     for (var i = 0; i < options.length; i++) {
       MenuOption option = options[i];
       BottomBarItem item = BottomBarItem(
         option: option,
-        style: style,
+        sizing: sizing,
         onSelected: (o) {
           Provider.of<BottomBarProvider>(context, listen: false)
               .selectOption(option);
         },
+        colors: colors,
       );
       it.add(item);
     }
@@ -83,19 +95,18 @@ class FixedBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MenuOption> options = Provider.of<RouterProvider>(context).menuOptions;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
-    if (style == null) style = theme.bottomBarStyle;
+    if (sizing == null) sizing = theme.bottomBarStyle;
 
     return Material(
-      color: Colors.transparent,
+      color: colors.backgroundColor,
       child: Hero(
         tag: ValueKey("BottomBar"),
         child: Container(
-          color: theme.colors.scaffoldBackgroundColor,
-          padding: style?.margin,
+          color: colors.backgroundColor,
+          padding: sizing?.margin,
           child: Container(
-            decoration: style?.decoration,
             child: Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -103,7 +114,7 @@ class FixedBottomBar extends StatelessWidget {
               ),
             ),
           ),
-          height: style?.height,
+          height: sizing?.height,
         ),
       ),
     );

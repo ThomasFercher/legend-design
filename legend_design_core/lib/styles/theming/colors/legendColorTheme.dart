@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/fixedAppBar.dart';
+import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
 
 class LegendColorTheme {
   final Color primaryColor;
@@ -8,6 +10,8 @@ class LegendColorTheme {
   final Color selectionColor;
   final Color textColorDark;
   final Color textColorLight;
+  final FixedAppBarColors appBarColors;
+  final BottomBarColors bottomBarColors;
 
   LegendColorTheme({
     required this.primaryColor,
@@ -17,6 +21,8 @@ class LegendColorTheme {
     required this.selectionColor,
     required this.textColorDark,
     required this.textColorLight,
+    required this.appBarColors,
+    required this.bottomBarColors,
   });
 
   // ranges from 0.0 to 1.0

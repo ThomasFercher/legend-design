@@ -7,6 +7,7 @@ class LegendDrawerRoute {
   final List<Widget> actions;
   late bool visible;
   late final double width;
+  final double mobileWidth;
 
   LegendDrawerRoute({
     required this.title,
@@ -15,6 +16,7 @@ class LegendDrawerRoute {
     required this.actions,
     bool? visible,
     required this.width,
+    required this.mobileWidth,
   }) {
     this.visible = visible ?? false;
   }

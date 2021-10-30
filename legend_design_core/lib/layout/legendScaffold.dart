@@ -230,8 +230,12 @@ class _LegendScaffoldState extends State<LegendScaffold> {
       children: [
         Scaffold(
           endDrawer: MenuDrawer(),
-          bottomNavigationBar:
-              SizeProvider.of(context).isMobile ? FixedBottomBar() : null,
+          bottomNavigationBar: SizeProvider.of(context).isMobile
+              ? FixedBottomBar(
+                  colors: theme.bottomBarColors,
+                  sizing: theme.bottomBarStyle,
+                )
+              : null,
           endDrawerEnableOpenDragGesture: false,
           floatingActionButton: widget.onActionButtonPressed != null
               ? Builder(
@@ -254,11 +258,18 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                             ? SliverToBoxAdapter(
                                 child: LayoutBuilder(
                                     builder: (context, constraints) {
-                                  double footerheight = 160;
+                                  double footerheight = 120;
                                   double space = maxHeight -
                                       footerheight -
-                                      theme.sizing.contentPadding -
-                                      84;
+                                      theme.sizing.contentPadding * 2 -
+                                      100;
+
+                                  if (SizeProvider.of(context).isMobile)
+                                    space -=
+                                        (theme.bottomBarStyle?.height ?? 0) +
+                                            (theme.bottomBarStyle?.margin
+                                                    .vertical ??
+                                                0);
 
                                   return Container(
                                     color: theme.colors.scaffoldBackgroundColor,
@@ -303,8 +314,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                       widget.layoutType == LayoutType.FixedHeaderSider) &&
                   !theme.isMobile)
                 Positioned(
-                  left: theme.appBarStyle.contentPadding.horizontal,
-                  top: theme.appBarStyle.contentPadding.top,
+                  left: theme.appBarSizing.contentPadding.horizontal,
+                  top: theme.appBarSizing.contentPadding.top,
                   child: Material(
                     color: Colors.transparent,
                     child: Hero(
@@ -314,8 +325,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            height: theme.appBarStyle.appBarHeight,
-                            width: theme.appBarStyle.appBarHeight - 12,
+                            height: theme.appBarSizing.appBarHeight,
+                            width: theme.appBarSizing.appBarHeight - 12,
                             margin: EdgeInsets.only(
                               right: 16.0,
                               left: 8,
@@ -324,7 +335,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                                 LayoutProvider.of(context)?.logo ?? Container(),
                           ),
                           Container(
-                            height: theme.appBarStyle.appBarHeight,
+                            height: theme.appBarSizing.appBarHeight,
                             alignment: Alignment.center,
                             child: LegendText(
                               text: "Legend Design",
@@ -355,6 +366,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
       if (route.visible) {
         return LegendDrawer(
           route: route,
+          isMobile: SizeProvider.of(context).isMobile,
         );
       }
     }

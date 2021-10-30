@@ -20,26 +20,3 @@ enum BottomBarType {
   HALFROUNDED,
   ROUNDED,
 }
-
-class LegendTheme {
-  LegendTheme({
-    required this.colorTheme,
-    required this.sizingTheme,
-    required this.appBarStyle,
-    required this.bottomBarStyle,
-  });
-
-  // App Bar
-  final FixedAppBarStyle appBarStyle;
-
-  // Bottom Bar
-  final BottomBarStyle bottomBarStyle;
-
-  //Sizing
-  final LegendSizingTheme sizingTheme;
-  LegendSizing get sizing => sizingTheme.sizing;
-
-  // Colors
-
-  final LegendColorTheme colorTheme;
-}

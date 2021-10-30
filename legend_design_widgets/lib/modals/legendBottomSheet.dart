@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/styles/layouts/layoutType.dart';
 import 'package:legend_design_core/styles/theming/legendTheme.dart';
 import 'package:legend_design_core/styles/theming/sizing/sizeProvider.dart';
+import 'package:legend_design_core/styles/theming/themeProvider.dart';
 import 'package:legend_design_core/typography/legendText.dart';
 import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class LegendBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeProvider ss = SizeProvider.of(context);
-    LegendTheme theme = Provider.of<LegendTheme>(context);
+    ThemeProvider theme = Provider.of<ThemeProvider>(context);
 
     double width;
 

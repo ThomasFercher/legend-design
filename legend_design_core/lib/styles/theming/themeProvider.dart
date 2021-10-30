@@ -15,6 +15,7 @@ import 'package:legend_design_core/utils/restart.dart';
 enum LegendColorThemeType {
   LIGHT,
   DARK,
+  SYSTEM,
 }
 
 class ThemeProvider extends ChangeNotifier {
@@ -23,8 +24,8 @@ class ThemeProvider extends ChangeNotifier {
   // Platform INfo
   final bool isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
 
-  final LegendTheme lightTheme;
-  final LegendTheme darkTheme;
+  final LegendColorTheme lightTheme;
+  final LegendColorTheme darkTheme;
   final LegendSizingTheme sizingTheme;
 
   ThemeProvider({
@@ -33,9 +34,9 @@ class ThemeProvider extends ChangeNotifier {
     required this.themeType,
     required this.sizingTheme,
   }) {
-    Color? _systemNavigationBarColor = bottomBarStyle.decoration.color;
+    Color? _systemNavigationBarColor = bottomBarColors.backgroundColor;
 
-    if (bottomBarStyle.margin.bottom != 0) {
+    if (bottomBarStyle?.margin.bottom != 0) {
       _systemNavigationBarColor = colors.scaffoldBackgroundColor;
     }
 
@@ -50,37 +51,26 @@ class ThemeProvider extends ChangeNotifier {
   LegendColorTheme get colors {
     switch (themeType) {
       case LegendColorThemeType.DARK:
-        return darkTheme.colorTheme;
+        return darkTheme;
       case LegendColorThemeType.LIGHT:
-        return lightTheme.colorTheme;
+        return lightTheme;
       default:
-        return darkTheme.colorTheme;
+        // Platform Default
+        return darkTheme;
     }
   }
+
+  // Getter Clean
 
   LegendSizing get sizing => sizingTheme.sizing;
 
-  FixedAppBarStyle get appBarStyle {
-    switch (themeType) {
-      case LegendColorThemeType.DARK:
-        return darkTheme.appBarStyle;
-      case LegendColorThemeType.LIGHT:
-        return lightTheme.appBarStyle;
-      default:
-        return darkTheme.appBarStyle;
-    }
-  }
+  FixedAppBarColors get appBarColors => colors.appBarColors;
 
-  BottomBarStyle get bottomBarStyle {
-    switch (themeType) {
-      case LegendColorThemeType.DARK:
-        return darkTheme.bottomBarStyle;
-      case LegendColorThemeType.LIGHT:
-        return lightTheme.bottomBarStyle;
-      default:
-        return darkTheme.bottomBarStyle;
-    }
-  }
+  FixedAppBarSizing get appBarSizing => sizing.appBarSizing;
+
+  BottomBarSizing? get bottomBarStyle => sizing.bottomBarSizing;
+
+  BottomBarColors get bottomBarColors => colors.bottomBarColors;
 
   void changeColorTheme(LegendColorThemeType type, BuildContext context) {
     this.themeType = type;

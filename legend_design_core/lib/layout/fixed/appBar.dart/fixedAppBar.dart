@@ -16,33 +16,42 @@ import 'package:provider/provider.dart';
 
 import '../fixedSider.dart';
 
-class FixedAppBarStyle {
+class FixedAppBarColors {
   final Color backgroundColor;
+
+  final Color? cardColor;
+
+  final Color? iconColor;
+  final Color? selectedColor;
+
+  FixedAppBarColors({
+    required this.backgroundColor,
+    this.cardColor,
+    this.iconColor,
+    this.selectedColor,
+  });
+}
+
+class FixedAppBarSizing {
   final Radius? borderRadius;
   final EdgeInsets contentPadding;
   final ShapeBorder? shape;
-  final Color? cardColor;
+
   late final bool pinned;
   late final bool floating;
   final double? spacing;
   final double appBarHeight;
   final double? iconSize;
-  final Color? iconColor;
-  final Color? selectedColor;
 
-  FixedAppBarStyle({
-    required this.backgroundColor,
+  FixedAppBarSizing({
     required this.appBarHeight,
     this.borderRadius,
     required this.contentPadding,
-    this.cardColor,
     this.shape,
     bool? pinned,
     bool? floating,
     this.iconSize,
     this.spacing,
-    this.iconColor,
-    this.selectedColor,
   }) {
     this.floating = floating ?? false;
 
@@ -60,7 +69,8 @@ class FixedAppBar extends StatelessWidget {
   final WidgetBuilder? builder;
   final Widget? leading;
   final Radius? bottomBorderRadius;
-  late FixedAppBarStyle? style;
+  FixedAppBarSizing? sizing;
+  FixedAppBarColors? colors;
   final BuildContext pcontext;
   final LayoutType? layoutType;
   FixedAppBar({
@@ -68,17 +78,17 @@ class FixedAppBar extends StatelessWidget {
     this.builder,
     this.leading,
     this.bottomBorderRadius,
-    this.style,
+    this.sizing,
     this.layoutType,
     required this.pcontext,
     this.onActionPressed,
   });
 
   BoxDecoration? getCard() {
-    return style?.cardColor != null
+    return colors?.cardColor != null
         ? BoxDecoration(
-            borderRadius: BorderRadius.all(style?.borderRadius ?? Radius.zero),
-            color: style?.cardColor,
+            borderRadius: BorderRadius.all(sizing?.borderRadius ?? Radius.zero),
+            color: colors?.cardColor,
             boxShadow: [
               BoxShadow(
                 color: Colors.black12,
@@ -93,11 +103,12 @@ class FixedAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
-    if (style == null) style = theme.appBarStyle;
+    if (sizing == null) sizing = theme.appBarSizing;
+    if (colors == null) colors = theme.appBarColors;
 
     return SliverAppBar(
-      backgroundColor: style?.backgroundColor,
-      shape: style?.shape,
+      backgroundColor: colors?.backgroundColor,
+      shape: sizing?.shape,
       leadingWidth: 0,
       leading: Container(
         width: 0,
@@ -108,13 +119,13 @@ class FixedAppBar extends StatelessWidget {
         )
       ],
       title: Container(
-        height: theme.appBarStyle.appBarHeight +
-            (style?.contentPadding.vertical ?? 0.0),
+        height: theme.appBarSizing.appBarHeight +
+            (sizing?.contentPadding.vertical ?? 0.0),
         padding: EdgeInsets.only(
-          left: style?.contentPadding.left ?? 0,
-          right: style?.contentPadding.right ?? 0,
-          top: style?.contentPadding.top ?? 0,
-          bottom: style?.contentPadding.bottom ?? 0,
+          left: sizing?.contentPadding.left ?? 0,
+          right: sizing?.contentPadding.right ?? 0,
+          top: sizing?.contentPadding.top ?? 0,
+          bottom: sizing?.contentPadding.bottom ?? 0,
         ),
         child: Hero(
           tag: ValueKey("appBar"),
@@ -127,11 +138,12 @@ class FixedAppBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      if (layoutType != LayoutType.FixedSider &&
-                          layoutType != LayoutType.FixedHeaderSider)
+                      if ((layoutType != LayoutType.FixedSider &&
+                              layoutType != LayoutType.FixedHeaderSider) ||
+                          SizeProvider.of(context).isMobile)
                         Container(
-                          height: (style?.appBarHeight ?? 80),
-                          width: style?.appBarHeight ?? 80,
+                          height: (sizing?.appBarHeight ?? 80),
+                          width: sizing?.appBarHeight ?? 80,
                           margin: EdgeInsets.only(right: 8.0),
                           padding:
                               EdgeInsets.symmetric(vertical: 6, horizontal: 6),
@@ -140,8 +152,9 @@ class FixedAppBar extends StatelessWidget {
                                 LayoutProvider.of(context)?.logo ?? Container(),
                           ),
                         ),
-                      if (layoutType != LayoutType.FixedSider &&
-                          layoutType != LayoutType.FixedHeaderSider)
+                      if ((layoutType != LayoutType.FixedSider &&
+                              layoutType != LayoutType.FixedHeaderSider) ||
+                          SizeProvider.of(context).isMobile)
                         LegendText(
                           text: "Legend Design",
                           textStyle: LegendTextStyle.h1().copyWith(
@@ -156,14 +169,14 @@ class FixedAppBar extends StatelessWidget {
                           !theme.isMobile
                       ? 84
                       : 16,
-                  height: style?.appBarHeight,
+                  height: sizing?.appBarHeight,
                   child: Container(
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         if (builder != null)
                           Container(
-                            height: theme.appBarStyle.appBarHeight,
+                            height: theme.appBarSizing.appBarHeight,
                             alignment: Alignment.center,
                             decoration: getCard(),
                             child: Builder(
@@ -187,16 +200,16 @@ class FixedAppBar extends StatelessWidget {
                 if (showMenu ?? true)
                   Container(
                     margin: EdgeInsets.only(
-                      right: (style?.contentPadding.horizontal ?? 0),
+                      right: (sizing?.contentPadding.horizontal ?? 0),
                     ),
                     decoration: getCard(),
                     padding: EdgeInsets.symmetric(
-                      horizontal: style?.borderRadius?.x ?? 0,
+                      horizontal: sizing?.borderRadius?.x ?? 0,
                     ),
                     child: FixedMenu(
                       context: context,
-                      iconColor: theme.appBarStyle.iconColor,
-                      selected: theme.appBarStyle.selectedColor,
+                      iconColor: theme.appBarColors.iconColor,
+                      selected: theme.appBarColors.selectedColor,
                     ),
                   ),
               ],
@@ -205,15 +218,15 @@ class FixedAppBar extends StatelessWidget {
         ),
       ),
       titleSpacing: 0,
-      toolbarHeight: theme.appBarStyle.appBarHeight +
-          (style?.contentPadding.vertical ?? 0.0),
-      expandedHeight: theme.appBarStyle.appBarHeight +
-          (style?.contentPadding.vertical ?? 0.0),
-      collapsedHeight: theme.appBarStyle.appBarHeight +
-          (style?.contentPadding.vertical ?? 0.0),
-      pinned: style?.pinned ?? false,
-      snap: style?.floating ?? false,
-      floating: style?.floating ?? false,
+      toolbarHeight: theme.appBarSizing.appBarHeight +
+          (sizing?.contentPadding.vertical ?? 0.0),
+      expandedHeight: theme.appBarSizing.appBarHeight +
+          (sizing?.contentPadding.vertical ?? 0.0),
+      collapsedHeight: theme.appBarSizing.appBarHeight +
+          (sizing?.contentPadding.vertical ?? 0.0),
+      pinned: sizing?.pinned ?? false,
+      snap: sizing?.floating ?? false,
+      floating: sizing?.floating ?? false,
       elevation: 12.0,
       automaticallyImplyLeading: false,
     );

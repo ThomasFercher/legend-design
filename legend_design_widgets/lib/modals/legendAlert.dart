@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/objects/assetInfo.dart';
+import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
 import 'package:legend_design_core/styles/theming/legendTheme.dart';
+import 'package:legend_design_core/styles/theming/themeProvider.dart';
 import 'package:legend_design_core/typography/legendText.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/legendButton/legendButton.dart';
@@ -42,7 +44,7 @@ class LegendAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = Provider.of<LegendTheme>(context);
+    ThemeProvider theme = Provider.of<ThemeProvider>(context);
     double height = 140.0;
 
     return Stack(

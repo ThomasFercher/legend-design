@@ -61,7 +61,7 @@ class _FixedMenuState extends State<FixedMenu> {
 
     return Container(
       //  margin: const EdgeInsets.only(left: 16.0),
-      height: theme.appBarStyle.appBarHeight,
+      height: theme.appBarSizing.appBarHeight,
       child: LayoutBuilder(
         builder: (context, constraints) {
           if (!SizeProvider.of(widget.context).isMenuCollapsed())
