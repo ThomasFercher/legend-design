@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:legend_design_core/styles/theming/legendTheme.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
-import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+
+import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 
 import 'package:provider/provider.dart';
@@ -82,23 +82,23 @@ class LegendCard extends StatelessWidget {
       ),
     ];
     if (children != null) content.addAll(children!);
-    return Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black87,
-          ),
-        ],
-        color: theme.colors.foreground[1],
+    return Card(
+      elevation: theme.colors.elevations?[1],
+      shape: RoundedRectangleBorder(
         borderRadius: theme.sizing.borderRadius[1],
       ),
-      padding: EdgeInsets.all(
-        18.0,
-      ),
-      child: Stack(
-        children: content,
+      color: theme.colors.cardBackgroundColor,
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: Padding(
+          padding: EdgeInsets.all(
+            18.0,
+          ),
+          child: Stack(
+            children: content,
+          ),
+        ),
       ),
     );
   }

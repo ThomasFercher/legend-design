@@ -1,4 +1,4 @@
-import 'package:legend_design_core/styles/layouts/layoutType.dart';
+import 'package:legend_design_core/styles/layouts/layout_type.dart';
 
 enum LegendGridSizeDirection {
   UP,

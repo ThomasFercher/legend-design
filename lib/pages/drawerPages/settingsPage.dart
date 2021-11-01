@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColors.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
-import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
+
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+
+import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
 import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';

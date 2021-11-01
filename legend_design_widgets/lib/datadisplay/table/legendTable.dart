@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
-import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTableCell.dart';

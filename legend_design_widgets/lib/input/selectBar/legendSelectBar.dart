@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
-import 'package:legend_design_core/styles/theming/legendTheme.dart';
-import 'package:legend_design_core/styles/theming/sizing/legendSizing.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+
 import 'package:legend_design_widgets/input/selectBar/selectProvider.dart';
 import 'package:provider/provider.dart';
 import 'legendSelectOption.dart';

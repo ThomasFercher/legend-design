@@ -1,18 +1,24 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:legend_design_core/icons/legendAnimatedIcon.dart';
-import 'package:legend_design_core/layout/fixed/fixedFooter.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
-import 'package:legend_design_core/typography/legendText.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
-import 'package:legend_design_core/utils/legendUtils.dart';
+import 'package:legend_design_core/utils/legend_utils.dart';
 import 'package:provider/provider.dart';
 
 class LayoutInfo {
-  static FixedFooter footer = FixedFooter(
+  static FixedFooterSizing sizing = FixedFooterSizing(
     height: 140,
-    builder: (context) {
+    maxWidth: 1200,
+    padding: EdgeInsets.all(32),
+  );
+
+  static FixedFooter footer = FixedFooter(
+    sizing: sizing,
+    builder: (context, sizing, colors) {
       ThemeProvider theme = Provider.of<ThemeProvider>(context);
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -41,8 +47,9 @@ class LayoutInfo {
                       icon: AntIcons.githubFilled,
                       iconSize: 32,
                       theme: LegendAnimtedIconTheme(
-                          disabled: theme.colors.foreground[2],
-                          enabled: theme.colors.selectionColor),
+                        disabled: theme.colors.fixedFooterColors.foreground,
+                        enabled: theme.colors.selectionColor,
+                      ),
                     ),
                   ],
                 ),
@@ -81,7 +88,7 @@ class LayoutInfo {
                       icon: AntIcons.mailFilled,
                       theme: LegendAnimtedIconTheme(
                         enabled: theme.colors.selectionColor,
-                        disabled: theme.colors.foreground[2],
+                        disabled: theme.colors.fixedFooterColors.foreground,
                       ),
                       onPressed: () => {},
                       iconSize: 32,
@@ -113,7 +120,7 @@ class LayoutInfo {
                       icon: AntIcons.instagramFilled,
                       theme: LegendAnimtedIconTheme(
                         enabled: theme.colors.selectionColor,
-                        disabled: theme.colors.foreground[2],
+                        disabled: theme.colors.fixedFooterColors.foreground,
                       ),
                       onPressed: () => {},
                       iconSize: 12,

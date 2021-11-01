@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:legend_design_core/styles/theming/colors/legendColors.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
 
 class LegendTypography {
   final TextStyle? h1;
@@ -22,13 +22,13 @@ class LegendTypography {
     this.h6,
     this.h7,
   }) {
-    this.h1 ?? LegendTextStyle.h1();
-    this.h2 ?? LegendTextStyle.h2();
-    this.h3 ?? LegendTextStyle.h3();
-    this.h4 ?? LegendTextStyle.h4();
-    this.h5 ?? LegendTextStyle.h5();
-    this.h6 ?? LegendTextStyle.h6();
-    this.h7 ?? LegendTextStyle.textInput();
+    h1 ?? LegendTextStyle.h1();
+    h2 ?? LegendTextStyle.h2();
+    h3 ?? LegendTextStyle.h3();
+    h4 ?? LegendTextStyle.h4();
+    h5 ?? LegendTextStyle.h5();
+    h6 ?? LegendTextStyle.h6();
+    h7 ?? LegendTextStyle.textInput();
   }
 }
 
@@ -97,7 +97,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 24,
       fontWeight: FontWeight.w500,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 
@@ -107,7 +107,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 14,
       fontWeight: FontWeight.w300,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 
@@ -117,7 +117,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 24,
       fontWeight: FontWeight.w300,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 
@@ -127,7 +127,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
       letterSpacing: 0.4,
       wordSpacing: 0.4,
     );
@@ -139,7 +139,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 24,
       fontWeight: FontWeight.w600,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 
@@ -148,7 +148,7 @@ class LegendTextStyle extends TextStyle {
       textColor: Colors.grey[100]!,
       fontSize: 14,
       fontWeight: FontWeight.w400,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
       backgroundColor: Colors.transparent,
     );
   }
@@ -159,7 +159,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.white,
       fontSize: 12.0,
       fontWeight: FontWeight.w400,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
   factory LegendTextStyle.tag() {
@@ -168,7 +168,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 
@@ -178,7 +178,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 12,
       fontWeight: FontWeight.w200,
-      fontFamily: "Roboto",
+      fontFamily: 'Roboto',
     );
   }
 
@@ -188,7 +188,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 10,
       fontWeight: FontWeight.w200,
-      fontFamily: "Roboto",
+      fontFamily: 'Roboto',
     );
   }
 
@@ -198,7 +198,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 15,
       fontWeight: FontWeight.w600,
-      fontFamily: "Roboto",
+      fontFamily: 'Roboto',
     );
   }
 
@@ -208,7 +208,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 24.0,
       fontWeight: FontWeight.w300,
-      fontFamily: "Roboto",
+      fontFamily: 'Roboto',
     );
   }
 
@@ -220,7 +220,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 18,
       fontWeight: FontWeight.w300,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 
@@ -230,7 +230,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 24.0,
       fontWeight: FontWeight.w400,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 
@@ -240,7 +240,7 @@ class LegendTextStyle extends TextStyle {
       backgroundColor: Colors.transparent,
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
-      fontFamily: "sans serif",
+      fontFamily: 'sans serif',
     );
   }
 }

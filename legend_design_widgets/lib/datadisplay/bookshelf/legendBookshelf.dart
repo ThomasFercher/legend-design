@@ -58,7 +58,6 @@ class _LegendBookshelfState extends State<LegendBookshelf> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, c) {
-      double w = c.maxWidth;
       return Container(
         height: widget.height,
         width: MediaQuery.of(context).size.width,

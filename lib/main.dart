@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:legend_design_core/legend_design_app.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
-import 'package:legend_design_core/styles/theming/legendTheme.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:webstore/styles/layoutInfo.dart';
 import 'styles/appStyles.dart';
 
@@ -23,7 +21,7 @@ void main() {
         darkTheme: AppConfig.darkColorTheme,
         lightTheme: AppConfig.lightColorTheme,
         sizingTheme: AppConfig.sizingTheme,
-        themeType: LegendColorThemeType.DARK,
+        themeType: LegendColorThemeType.LIGHT,
       ),
       globalFooter: LayoutInfo.footer,
     ),

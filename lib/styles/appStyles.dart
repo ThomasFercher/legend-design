@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/drawers/legendDrawerInfo.dart';
-import 'package:legend_design_core/layout/fixed/appBar.dart/fixedAppBar.dart';
-import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixedBottomBar.dart';
-import 'package:legend_design_core/objects/menuOption.dart';
-import 'package:legend_design_core/router/routes/routeInfo.dart';
-import 'package:legend_design_core/router/routes/sectionRouteInfo.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColors.dart';
-import 'package:legend_design_core/styles/theming/sizing/legendSizing.dart';
-import 'package:legend_design_core/styles/theming/sizing/legendSizingTheme.dart';
+import 'package:legend_design_core/layout/drawers/legend_drawer_info.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
+import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.dart';
+import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
+
+import 'package:legend_design_core/objects/menu_option.dart';
+import 'package:legend_design_core/router/routes/route_info.dart';
+
+import 'package:legend_design_core/router/routes/section_route_info.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
+import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
+import 'package:legend_design_core/styles/theming/sizing/legend_sizing_theme.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:webstore/pages/about.dart';
 import 'package:webstore/pages/drawerPages/settingsPage.dart';
@@ -45,10 +48,10 @@ class AppConfig {
       ],
       borderInset: [
         12,
-        12,
+        6,
       ],
       typography: LegendTypography(),
-      contentPadding: 8,
+      contentPadding: 16,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
         contentPadding: EdgeInsets.all(0),
@@ -135,22 +138,45 @@ class AppConfig {
       disabledColor: Colors.black26,
       backgroundColor: LegendColors.gray10,
     ),
-    primaryColor: Colors.teal,
-    secondaryColor: Colors.teal[50]!,
+    fixedFooterColors: FixedFooterColors(
+      backgroundColor: LegendColors.gray10,
+      foreground: LegendColors.gray4,
+    ),
+    cardBackgroundColor: Colors.white,
+    primaryColor: Colors.cyan,
+    secondaryColor: Colors.tealAccent[100]!,
     scaffoldBackgroundColor: LegendColors.gray2,
     foreground: [
-      LegendColors.gray4,
+      LegendColors.black12,
+      LegendColors.black20,
+      LegendColors.black40,
+      LegendColors.gray8,
+      LegendColors.gray10,
+    ],
+    background: [
+      LegendColors.black04,
+      LegendColors.black12,
+      LegendColors.black20,
       LegendColors.gray6,
       LegendColors.gray8,
       LegendColors.gray10,
     ],
-    selectionColor: Colors.tealAccent,
-    textColorDark: Colors.tealAccent,
-    textColorLight: Colors.tealAccent,
+    elevations: [
+      0,
+      0.5,
+      1,
+      2,
+      4,
+      8,
+    ],
+    selectionColor: Colors.cyanAccent,
+    textColorDark: Colors.cyan[900]!,
+    textColorLight: Colors.tealAccent[100]!,
     appBarColors: FixedAppBarColors(
-      backgroundColor: Colors.teal,
-      iconColor: Colors.tealAccent,
-      selectedColor: Colors.teal,
+      backgroundColor: Colors.cyan,
+      iconColor: Colors.tealAccent[100]!,
+      selectedColor: Colors.cyanAccent,
+      foreground: Colors.teal[50]!,
     ),
   );
   static LegendColorTheme darkColorTheme = LegendColorTheme(
@@ -159,6 +185,11 @@ class AppConfig {
       disabledColor: Colors.black26,
       backgroundColor: LegendColors.gray10,
     ),
+    fixedFooterColors: FixedFooterColors(
+      backgroundColor: LegendColors.gray8,
+      foreground: LegendColors.gray4,
+    ),
+    cardBackgroundColor: LegendColors.gray6,
     primaryColor: Colors.teal,
     secondaryColor: Color(0xFFb3dedb),
     scaffoldBackgroundColor: LegendColors.gray12,
@@ -168,13 +199,22 @@ class AppConfig {
       LegendColors.gray6,
       LegendColors.gray4,
     ],
+    background: [
+      LegendColors.gray10,
+      LegendColors.gray9,
+      LegendColors.gray8,
+      LegendColors.gray7,
+      LegendColors.gray6,
+      LegendColors.gray5,
+    ],
     selectionColor: Colors.tealAccent,
     textColorDark: LegendColors.gray6,
     textColorLight: LegendColors.gray4,
     appBarColors: FixedAppBarColors(
       backgroundColor: Colors.teal,
       iconColor: Colors.tealAccent,
-      selectedColor: Colors.teal,
+      selectedColor: Colors.tealAccent,
+      foreground: Colors.teal[50]!,
     ),
   );
 
@@ -200,6 +240,7 @@ class AppConfig {
       icon: Icons.info_outline_rounded,
     ),
   ];
+
   static List<LegendDrawerRoute> drawerRoutes = [
     LegendDrawerRoute(
       title: "Settings",

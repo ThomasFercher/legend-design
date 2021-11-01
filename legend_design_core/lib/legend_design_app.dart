@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/fixed/fixedFooter.dart';
-import 'package:legend_design_core/layout/layoutProvider.dart';
-import 'package:legend_design_core/router/routerProvider.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
+import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
+import 'package:legend_design_core/layout/layout_provider.dart';
+import 'package:legend_design_core/router/router_provider.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'layout/drawers/legendDrawerInfo.dart';
-import 'layout/drawers/legendDrawerProvider.dart';
-import 'layout/fixed/bottomBar.dart/bottomBarProvider.dart';
-import 'objects/menuOption.dart';
+import 'layout/drawers/legend_drawer_info.dart';
+import 'layout/drawers/legend_drawer_provider.dart';
+import 'layout/fixed/bottomBar.dart/bottom_bar_provider.dart';
+import 'objects/menu_option.dart';
 import 'router/delegate.dart';
 import 'router/parser.dart';
-import 'router/routes/routeInfo.dart';
-import 'styles/theming/colors/legendColors.dart';
-import 'styles/theming/legendTheme.dart';
+import 'router/routes/route_info.dart';
+import 'styles/theming/colors/legend_colors.dart';
 import 'utils/restart.dart';
 
 class LegendApp extends StatelessWidget {

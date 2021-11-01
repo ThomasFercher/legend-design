@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/styles/theming/colors/legendColorTheme.dart';
-import 'package:legend_design_core/styles/theming/legendTheme.dart';
-import 'package:legend_design_core/styles/theming/sizing/legendSizing.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+
 import 'package:legend_design_widgets/input/dropdown.dart/legendDropdownOption.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +75,6 @@ class _LegendDropdownState extends State<LegendDropdown>
   @override
   Widget build(BuildContext context) {
     LegendColorTheme colors = Provider.of<ThemeProvider>(context).colors;
-    LegendSizing sizes = Provider.of<ThemeProvider>(context).sizing;
 
     return Container(
       height: 40,

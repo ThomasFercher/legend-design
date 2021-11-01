@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
-import 'package:legend_design_core/icons/legendAnimatedIcon.dart';
-import 'package:legend_design_core/icons/legendGradientIcon.dart';
-import 'package:legend_design_core/layout/legendScaffold.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/icons/legend_gradient_icon.dart';
+import 'package:legend_design_core/layout/legend_scaffold.dart';
 import 'package:legend_design_core/layout/sections/section.dart';
-import 'package:legend_design_core/styles/layouts/layoutType.dart';
-import 'package:legend_design_core/styles/theming/legendTheme.dart';
-import 'package:legend_design_core/styles/theming/themeProvider.dart';
-import 'package:legend_design_core/typography/legendText.dart';
+
+import 'package:legend_design_core/styles/layouts/layout_type.dart';
+
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/datadisplay/carousel/legendCarousel.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
@@ -40,11 +41,12 @@ class WidgetComponents extends StatelessWidget {
     return LegendScaffold(
       showSiderMenu: false,
       showAppBarMenu: true,
+      verticalChildrenSpacing: 24,
       children: [
         Section(
           name: "/buttons",
-          verticalSpacing: 8,
           header: "Buttons",
+          isFirst: true,
           children: [
             LegendText(
               text:
@@ -103,11 +105,13 @@ class WidgetComponents extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: theme.colors.foreground[1],
+                color: theme.colors.background[1],
                 borderRadius: theme.sizing.borderRadius[1],
               ),
               margin: EdgeInsets.all(8.0),
-              padding: EdgeInsets.all(6.0),
+              padding: EdgeInsets.all(
+                theme.sizing.borderInset[1],
+              ),
               child: Container(
                 height: 180,
                 child: SyntaxView(
@@ -132,7 +136,6 @@ class WidgetComponents extends StatelessWidget {
         Section(
           header: "Modals",
           name: "/modals",
-          verticalSpacing: 12,
           children: [
             LegendText(
               text:
@@ -447,28 +450,11 @@ class WidgetComponents extends StatelessWidget {
           ],
           header: "Table",
         ),
-        Section(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                LegendTag(color: Colors.purpleAccent, text: "Test"),
-                LegendTag(color: Colors.redAccent, text: "Test"),
-                LegendTag(color: Colors.tealAccent, text: "Test"),
-                LegendTag(color: Colors.blueAccent, text: "Test"),
-                LegendTag(color: Colors.yellow, text: "Test"),
-              ],
-            )
-          ],
-          header: "Tags",
-          name: "/tags",
-        ),
         LegendGrid(
           children: [
             Section(
               header: "Icon Button",
               name: "/iconbutton",
-              verticalSpacing: 8,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -508,7 +494,6 @@ class WidgetComponents extends StatelessWidget {
             Section(
               header: "Gradient Icons",
               name: "/gradientIcon",
-              verticalSpacing: 8,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -552,7 +537,24 @@ class WidgetComponents extends StatelessWidget {
           sizes: LegendGridSize(
             medium: LegendGridSizeInfo(2, 200),
           ),
-        )
+        ),
+        Section(
+          isLast: true,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                LegendTag(color: Colors.purpleAccent, text: "Test"),
+                LegendTag(color: Colors.redAccent, text: "Test"),
+                LegendTag(color: Colors.tealAccent, text: "Test"),
+                LegendTag(color: Colors.blueAccent, text: "Test"),
+                LegendTag(color: Colors.yellow, text: "Test"),
+              ],
+            )
+          ],
+          header: "Tags",
+          name: "/tags",
+        ),
       ],
       pageName: "Widget Components",
       layoutType: LayoutType.FixedHeaderSider,

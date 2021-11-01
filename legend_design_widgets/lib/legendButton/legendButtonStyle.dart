@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 /*
 LegendButtonStyle has all the same Properties as ButtonStyle.

@@ -1,6 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/icons/legendAnimatedIcon.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_widgets/datadisplay/carousel/legendCarouselItem.dart';
 
 const Duration duration = const Duration(milliseconds: 360);

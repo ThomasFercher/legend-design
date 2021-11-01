@@ -8,7 +8,7 @@ class MyRouteInformationParser
   Future<List<RouteSettings>> parseRouteInformation(
       RouteInformation routeInformation) {
     final uri = Uri.parse(routeInformation.location!);
-    if (uri.pathSegments.isEmpty)
+    if (uri.pathSegments.isEmpty) {
       return Future.value(
         [
           RouteSettings(
@@ -16,6 +16,7 @@ class MyRouteInformationParser
           ),
         ],
       );
+    }
     final routeSettings = uri.pathSegments
         .map((pathSegment) => RouteSettings(
               name: '/$pathSegment',
@@ -32,11 +33,11 @@ class MyRouteInformationParser
     final String name;
     final String arguments;
     if (configuration.isNotEmpty) {
-      name = configuration.last.name ?? "";
+      name = configuration.last.name ?? '';
       arguments = _restoreArguments(configuration.last);
     } else {
-      name = "";
-      arguments = "";
+      name = '';
+      arguments = '';
     }
     return RouteInformation(location: '$name$arguments');
   }
