@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,30 +6,118 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
 
 class LegendTypography {
-  final TextStyle? h1;
-  final TextStyle? h2;
-  final TextStyle? h3;
-  final TextStyle? h4;
-  final TextStyle? h5;
-  final TextStyle? h6;
-  final TextStyle? h7;
+  final double baseSize;
+  final double maxSize;
+  late final TextStyle baseTextStyle;
+
+  late final TextStyle h0;
+  late final TextStyle h1;
+  late final TextStyle h2;
+  late final TextStyle h3;
+  late final TextStyle h4;
+  late final TextStyle h5;
+  late final TextStyle h6;
 
   LegendTypography({
-    this.h1,
-    this.h2,
-    this.h3,
-    this.h4,
-    this.h5,
-    this.h6,
-    this.h7,
+    required this.baseSize,
+    required this.maxSize,
+    TextStyle? base,
+    TextStyle? h0,
+    TextStyle? h1,
+    TextStyle? h2,
+    TextStyle? h3,
+    TextStyle? h4,
+    TextStyle? h5,
+    TextStyle? h6,
   }) {
-    h1 ?? LegendTextStyle.h1();
-    h2 ?? LegendTextStyle.h2();
-    h3 ?? LegendTextStyle.h3();
-    h4 ?? LegendTextStyle.h4();
-    h5 ?? LegendTextStyle.h5();
-    h6 ?? LegendTextStyle.h6();
-    h7 ?? LegendTextStyle.textInput();
+    List<double> sizes = generateSizes(baseSize, maxSize);
+    print(sizes);
+    this.baseTextStyle = base ?? TextStyle();
+
+    this.h0 = h0 ??
+        LegendTextStyle.generateFrom(
+          baseTextStyle,
+          sizes[0],
+          FontWeight.normal,
+        );
+
+    this.h1 = h1 ??
+        LegendTextStyle.generateFrom(
+          baseTextStyle,
+          sizes[1],
+          FontWeight.normal,
+        );
+
+    this.h2 = h2 ??
+        LegendTextStyle.generateFrom(
+          baseTextStyle,
+          sizes[2],
+          FontWeight.normal,
+        );
+
+    this.h3 = h3 ??
+        LegendTextStyle.generateFrom(
+          baseTextStyle,
+          sizes[3],
+          FontWeight.normal,
+        );
+
+    this.h4 = h4 ??
+        LegendTextStyle.generateFrom(
+          baseTextStyle,
+          sizes[4],
+          FontWeight.normal,
+        );
+
+    this.h5 = h5 ??
+        LegendTextStyle.generateFrom(
+          baseTextStyle,
+          sizes[5],
+          FontWeight.normal,
+        );
+
+    this.h6 = h6 ??
+        LegendTextStyle.generateFrom(
+          baseTextStyle,
+          sizes[6],
+          FontWeight.normal,
+        );
+  }
+
+  List<double> generateSizes(double baseSize, double maxSize) {
+    List<double> sizes = [];
+    double diff = 2;
+    double c;
+
+    int length = 6;
+
+    for (var i = -1; i < length; i++) {
+      if (i > 1 && i < 4) {
+        diff *= 1.1;
+      } else if (i >= 4) {
+        List<double> fill = fillRemaining(sizes[i], maxSize, length - i);
+        sizes.addAll(fill);
+        break;
+      }
+
+      c = i * diff;
+      sizes.add((baseSize + c).roundToDouble());
+    }
+
+    return sizes;
+  }
+
+  List<double> fillRemaining(double currentSize, double maxSize, int steps) {
+    List<double> sizes = [];
+    double diff = maxSize - currentSize;
+
+    double increment = diff / steps;
+
+    for (var i = 1; i <= steps; i++) {
+      sizes.add((currentSize + increment * i).roundToDouble());
+    }
+
+    return sizes;
   }
 }
 
@@ -65,7 +154,7 @@ class LegendTextStyle extends TextStyle {
           height: height,
         );
 
-  factory LegendTextStyle.fromGoogleFonts(TextStyle style) {
+  factory LegendTextStyle.copyFrom(TextStyle style) {
     return LegendTextStyle(
       textColor: style.color,
       backgroundColor: style.backgroundColor,
@@ -79,8 +168,39 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
+  factory LegendTextStyle.generateFrom(
+    TextStyle style,
+    double fontSize,
+    FontWeight fontWeight,
+  ) {
+    return LegendTextStyle(
+      textColor: style.color,
+      backgroundColor: Colors.transparent, //style.backgroundColor,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontFamily: style.fontFamily,
+      height: style.height,
+      letterSpacing: style.letterSpacing,
+      wordSpacing: style.wordSpacing,
+      textOverflow: style.overflow,
+    );
+  }
+/*
+  factory LegendTextStyle.h0() {
+    return LegendTextStyle.copyFrom(
+      GoogleFonts.lobsterTwo(
+        color: Colors.tealAccent[700]!,
+        backgroundColor: Colors.transparent,
+        fontSize: 32,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0,
+        wordSpacing: 0,
+      ),
+    );
+  }
+
   factory LegendTextStyle.h1() {
-    return LegendTextStyle.fromGoogleFonts(
+    return LegendTextStyle.copyFrom(
       GoogleFonts.lobsterTwo(
         color: Colors.tealAccent[700]!,
         backgroundColor: Colors.transparent,
@@ -242,5 +362,5 @@ class LegendTextStyle extends TextStyle {
       fontWeight: FontWeight.w400,
       fontFamily: 'sans serif',
     );
-  }
+  }*/
 }

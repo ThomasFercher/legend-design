@@ -75,7 +75,7 @@ class LegendAlert extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: LegendText(
                           text: message ?? "No Message",
-                          textStyle: LegendTextStyle.h5(),
+                          textStyle: theme.sizing.typography.h5,
                         ),
                       ),
                     ),
@@ -85,7 +85,7 @@ class LegendAlert extends StatelessWidget {
                     child: LegendButton(
                       text: LegendText(
                         text: buttonMessage ?? "OK",
-                        textStyle: LegendTextStyle.h5(),
+                        textStyle: theme.sizing.typography.h5,
                       ),
                       onPressed: () {
                         onConfirm?.call();

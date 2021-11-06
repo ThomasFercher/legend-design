@@ -13,13 +13,14 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
     return Container(
       padding: EdgeInsets.only(bottom: 4.0),
       child: LegendText(
         text: text,
         textStyle: textStyle ??
-            LegendTextStyle.sectionHeader().copyWith(
-              color: Provider.of<ThemeProvider>(context).colors.textColorDark,
+            theme.sizing.typography.h4.copyWith(
+              color: theme.colors.textColorDark,
             ),
       ),
     );

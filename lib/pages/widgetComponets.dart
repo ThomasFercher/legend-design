@@ -37,7 +37,7 @@ class WidgetComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = Provider.of<ThemeProvider>(context);
+    ThemeProvider theme = context.watch<ThemeProvider>();
     return LegendScaffold(
       showSiderMenu: false,
       showAppBarMenu: true,
@@ -51,7 +51,7 @@ class WidgetComponents extends StatelessWidget {
             LegendText(
               text:
                   "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. ",
-              textStyle: LegendTextStyle.p(),
+              textStyle: theme.sizing.typography.h4,
             ),
             LegendGrid(
               margin: EdgeInsets.symmetric(vertical: 12.0),
@@ -120,7 +120,7 @@ class WidgetComponents extends StatelessWidget {
                   syntax: Syntax.DART,
                   syntaxTheme: SyntaxTheme(
                     backgroundColor: Colors.transparent,
-                    baseStyle: LegendTextStyle.h5().copyWith(
+                    baseStyle: theme.sizing.typography.h5.copyWith(
                       color: Colors.white70,
                     ),
                   ),
@@ -140,7 +140,7 @@ class WidgetComponents extends StatelessWidget {
             LegendText(
               text:
                   "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. ",
-              textStyle: LegendTextStyle.p(),
+              textStyle: theme.sizing.typography.h0,
             ),
             LegendGrid(
               sizes: LegendGridSize(
@@ -178,7 +178,7 @@ class WidgetComponents extends StatelessWidget {
                           onConfirm: () {},
                           content: LegendText(
                             text: "Bitte aktzeptieren Sie unsere Cookies! LIT",
-                            textStyle: LegendTextStyle.h5(),
+                            textStyle: theme.sizing.typography.h4,
                           ),
                         );
                       },

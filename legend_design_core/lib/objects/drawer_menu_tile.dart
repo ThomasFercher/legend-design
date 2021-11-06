@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:legend_design_core/router/router_provider.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/typography.dart';
+import 'package:provider/src/provider.dart';
 
 import '../typography/legend_text.dart';
 
@@ -81,6 +83,8 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
+
     // TODO: implement build
     return Container(
       margin: EdgeInsets.only(
@@ -137,7 +141,7 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
                 margin: EdgeInsets.only(left: 24.0),
                 child: LegendText(
                   text: widget.title!,
-                  textStyle: LegendTextStyle.h5().copyWith(
+                  textStyle: theme.sizing.typography.h5.copyWith(
                     color: color,
                     fontSize: 16,
                   ),

@@ -54,7 +54,7 @@ class LegendTable extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: LegendText(
                 text: header!,
-                textStyle: LegendTextStyle.tableHeader(),
+                textStyle: LegendTextStyle(), // LegendTextStyle.tableHeader(),
               ),
             ),
           Table(
@@ -89,7 +89,7 @@ class LegendTable extends StatelessWidget {
         switch (type) {
           case LegendTableValueType.TEXT:
             cell = LegendTableCell.text(
-              typography: LegendTextStyle.h1(),
+              typography: LegendTextStyle(), // LegendTextStyle.h1(),
               text: val.toString(),
             );
             break;
@@ -115,7 +115,7 @@ class LegendTable extends StatelessWidget {
             break;
           default:
             cell = LegendTableCell.text(
-              typography: LegendTextStyle.h1(),
+              typography: LegendTextStyle(), // theme.sizing.typography.h1,
               text: val.toString(),
             );
             break;

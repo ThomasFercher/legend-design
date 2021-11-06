@@ -6,6 +6,14 @@ import 'package:webstore/styles/layoutInfo.dart';
 import 'styles/appStyles.dart';
 
 void main() {
+  /* TODO:
+
+  give ThemeProvider a basic typrography (fontFamily, Weight, Sacing, etc, Color and Size (overiides))
+  also create Typography Color System
+
+  if Color not specifed give Colors over theme ColorTheme; 
+ them same  TextStyle Sizing and the Sizing Themes
+*/
   runApp(
     LegendApp(
       drawerRoutes: AppConfig.drawerRoutes,

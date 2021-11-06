@@ -8,18 +8,22 @@ import 'package:legend_design_core/layout/legend_scaffold.dart';
 import 'package:legend_design_core/layout/sections/section.dart';
 
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
 import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
 import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
+import 'package:provider/src/provider.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage();
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
+
     return LegendScaffold(
       contentBuilder: (context) {
         return Container(
@@ -51,7 +55,7 @@ class ProductsPage extends StatelessWidget {
                           Align(
                             child: LegendText(
                               text: "We provide a whole ecosystem of packages.",
-                              textStyle: LegendTextStyle.p(),
+                              textStyle: theme.sizing.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),
@@ -77,7 +81,7 @@ class ProductsPage extends StatelessWidget {
                             child: LegendText(
                               text:
                                   "Using our Design Templates simple Apps can be created on demand. We have a whole cataloge to choose from.",
-                              textStyle: LegendTextStyle.p(),
+                              textStyle: theme.sizing.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),
@@ -103,7 +107,7 @@ class ProductsPage extends StatelessWidget {
                             child: LegendText(
                               text:
                                   "We offer building and supporting your custom Application. ",
-                              textStyle: LegendTextStyle.p(),
+                              textStyle: theme.sizing.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),
@@ -129,7 +133,7 @@ class ProductsPage extends StatelessWidget {
                             child: LegendText(
                               text:
                                   "We offer building and supporting your custom Application. ",
-                              textStyle: LegendTextStyle.p(),
+                              textStyle: theme.sizing.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),

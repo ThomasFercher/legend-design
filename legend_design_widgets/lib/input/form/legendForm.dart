@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/input/form/legendFormField.dart';
 import 'package:legend_design_widgets/input/switch/legendSwitch.dart';
 import 'package:legend_design_widgets/legendButton/legendButton.dart';
+import 'package:provider/src/provider.dart';
 
 class LegendForm extends StatefulWidget {
   final List<dynamic> children;
@@ -128,7 +130,7 @@ class _LegendFormState extends State<LegendForm> {
           if (field.title != null)
             LegendText(
               text: field.title!,
-              textStyle: LegendTextStyle.formHeader(),
+              textStyle: context.watch<ThemeProvider>().sizing.typography.h3,
             ),
           formField,
         ],

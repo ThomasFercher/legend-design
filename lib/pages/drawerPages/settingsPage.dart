@@ -47,7 +47,7 @@ class _SettingsPageState extends State<SettingsPage>
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = Provider.of<ThemeProvider>(context);
+    ThemeProvider theme = context.watch<ThemeProvider>();
     themeType = theme.themeType;
 
     return Container(
@@ -57,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage>
           LegendText(
             padding: EdgeInsets.only(top: 20),
             text: "Themes",
-            textStyle: LegendTextStyle.sectionHeader().copyWith(
+            textStyle: theme.sizing.typography.h2.copyWith(
               color: theme.colors.foreground[2],
               fontSize: 16,
             ),

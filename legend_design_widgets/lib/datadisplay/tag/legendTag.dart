@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
+import 'package:provider/src/provider.dart';
 
 class LegendTag extends StatelessWidget {
   final Color color;
@@ -16,6 +18,7 @@ class LegendTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
     return Container(
       height: 32,
       padding: EdgeInsets.symmetric(
@@ -35,7 +38,7 @@ class LegendTag extends StatelessWidget {
       alignment: Alignment.center,
       child: LegendText(
         text: text,
-        textStyle: LegendTextStyle.tag().copyWith(
+        textStyle: theme.sizing.typography.h1.copyWith(
           color: color,
           fontSize: 16,
         ),

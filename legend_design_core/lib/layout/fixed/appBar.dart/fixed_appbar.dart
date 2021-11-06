@@ -155,9 +155,7 @@ class FixedAppBar extends StatelessWidget {
                           SizeProvider.of(context).isMobile)
                         LegendText(
                           text: 'Legend Design',
-                          textStyle: LegendTextStyle.h1().copyWith(
-                            color: theme.colors.appBarColors.foreground,
-                          ),
+                          textStyle: theme.sizing.typography.h1,
                         ),
                     ],
                   ),

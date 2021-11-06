@@ -62,7 +62,7 @@ class MenuDrawer extends StatelessWidget {
                         right: 8,
                       ),
                       text: 'Legend Design',
-                      textStyle: LegendTextStyle.h2().copyWith(
+                      textStyle: theme.sizing.typography.h2.copyWith(
                         color: theme.colors.foreground[3],
                       ),
                     ),

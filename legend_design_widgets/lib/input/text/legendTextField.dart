@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/input/text/legendInputDecoration.dart';
+import 'package:provider/src/provider.dart';
 
 class LegendTextField extends StatefulWidget {
   final LegendInputDecoration decoration;
@@ -25,6 +27,8 @@ class _LegendTextFieldState extends State<LegendTextField> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
+
     return Container(
       child: TextField(
         controller: ctrl,
@@ -33,8 +37,9 @@ class _LegendTextFieldState extends State<LegendTextField> {
         textAlignVertical: TextAlignVertical.top,
         onSubmitted: (value) {},
         onChanged: (value) {},
-        style:
-            LegendTextStyle.textInput(textColor: widget.decoration.textColor),
+        style: theme.sizing.typography.h1.copyWith(
+          color: widget.decoration.textColor,
+        ),
         toolbarOptions:
             ToolbarOptions(copy: true, selectAll: true, paste: true, cut: true),
       ),

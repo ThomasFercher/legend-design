@@ -40,14 +40,14 @@ class LegendCard extends StatelessWidget {
                 Expanded(
                   child: LegendText(
                     text: title ?? "",
-                    textStyle: LegendTextStyle.h3().copyWith(
+                    textStyle: theme.sizing.typography.h3.copyWith(
                       color: theme.colors.foreground[3],
                     ),
                   ),
                 ),
                 LegendText(
                   text: subtitle ?? "",
-                  textStyle: LegendTextStyle.h3().copyWith(
+                  textStyle: theme.sizing.typography.h3.copyWith(
                     color: Colors.greenAccent[400],
                   ),
                 ),
@@ -68,7 +68,7 @@ class LegendCard extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: LegendText(
                       text: value ?? "",
-                      textStyle: LegendTextStyle.h2().copyWith(
+                      textStyle: theme.sizing.typography.h3.copyWith(
                         color: theme.colors.foreground[3],
                         fontSize: 26,
                       ),

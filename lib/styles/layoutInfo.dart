@@ -19,7 +19,7 @@ class LayoutInfo {
   static FixedFooter footer = FixedFooter(
     sizing: sizing,
     builder: (context, sizing, colors) {
-      ThemeProvider theme = Provider.of<ThemeProvider>(context);
+      ThemeProvider theme = context.watch<ThemeProvider>();
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.max,
@@ -33,7 +33,7 @@ class LayoutInfo {
               children: [
                 LegendText(
                   text: "Repository",
-                  textStyle: LegendTextStyle.h4(),
+                  textStyle: theme.sizing.typography.h4,
                 ),
                 Expanded(flex: 4, child: Container()),
                 Row(
@@ -65,7 +65,7 @@ class LayoutInfo {
               children: [
                 LegendText(
                   text: "Useful Links",
-                  textStyle: LegendTextStyle.h4(),
+                  textStyle: theme.sizing.typography.h4,
                 ),
                 Row()
               ],
@@ -79,7 +79,7 @@ class LayoutInfo {
               children: [
                 LegendText(
                   text: "Contact Us",
-                  textStyle: LegendTextStyle.h4(),
+                  textStyle: theme.sizing.typography.h4,
                 ),
                 Expanded(flex: 4, child: Container()),
                 Row(
@@ -109,7 +109,7 @@ class LayoutInfo {
                   child: LegendText(
                     textAlign: TextAlign.left,
                     text: "Social Media",
-                    textStyle: LegendTextStyle.h4(),
+                    textStyle: theme.sizing.typography.h4,
                   ),
                 ),
                 Expanded(flex: 4, child: Container()),

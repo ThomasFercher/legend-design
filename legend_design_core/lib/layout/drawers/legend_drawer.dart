@@ -175,7 +175,7 @@ class _LegendDrawerState extends State<LegendDrawer>
                                 right: 8,
                               ),
                               text: 'Settings',
-                              textStyle: LegendTextStyle.h2().copyWith(
+                              textStyle: theme.sizing.typography.h2.copyWith(
                                 color: theme.colors.foreground[3],
                               ),
                             ),

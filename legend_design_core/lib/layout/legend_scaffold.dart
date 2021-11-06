@@ -212,7 +212,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
     SizeProvider.of(context).titleWidth = SizeProvider.calcTextSize(
           'Legend Design',
-          LegendTextStyle.h1().copyWith(
+          theme.sizing.typography.h1.copyWith(
             color: theme.colors.secondaryColor,
             letterSpacing: 0.1,
           ),
@@ -351,7 +351,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                             alignment: Alignment.center,
                             child: LegendText(
                               text: 'Legend Design',
-                              textStyle: LegendTextStyle.h1().copyWith(
+                              textStyle: theme.sizing.typography.h1.copyWith(
                                 color: theme.colors.appBarColors.foreground,
                                 letterSpacing: 0.1,
                               ),

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/sectionNavigation/section_navigation.dart';
 import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/router/routes/section_route_info.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
+import 'package:provider/src/provider.dart';
 
 class SiderMenuVerticalTile extends StatefulWidget {
   final String path;
@@ -55,7 +57,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
     );
     banimation = ColorTween(
       begin: borderColor ?? Colors.transparent,
-      end: widget.activeColor ?? LegendTextStyle.sectionLink().color,
+      end: widget.activeColor ?? Colors.transparent, // TODO: Fix
     ).animate(controller);
 
     animation = ColorTween(
@@ -84,6 +86,8 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
+
     return Container(
       height: 48,
       margin: EdgeInsets.only(bottom: 16),
@@ -150,7 +154,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
                 child: LegendText(
                   textAlign: TextAlign.center,
                   text: widget.title ?? '',
-                  textStyle: LegendTextStyle.sectionLink().copyWith(
+                  textStyle: theme.sizing.typography.h2.copyWith(
                     color: color,
                     fontSize: widget.collapsed ? 14.0 : 16,
                     fontWeight:

@@ -50,7 +50,10 @@ class AppConfig {
         12,
         6,
       ],
-      typography: LegendTypography(),
+      typography: LegendTypography(
+        baseSize: 11,
+        maxSize: 32,
+      ),
       contentPadding: 16,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
@@ -73,7 +76,10 @@ class AppConfig {
         8,
         4,
       ],
-      typography: LegendTypography(),
+      typography: LegendTypography(
+        baseSize: 10,
+        maxSize: 28,
+      ),
       contentPadding: 4,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
@@ -97,7 +103,10 @@ class AppConfig {
         12,
         12,
       ],
-      typography: LegendTypography(),
+      typography: LegendTypography(
+        baseSize: 10,
+        maxSize: 32,
+      ),
       contentPadding: 8,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
@@ -120,7 +129,10 @@ class AppConfig {
         12,
         12,
       ],
-      typography: LegendTypography(),
+      typography: LegendTypography(
+        baseSize: 12,
+        maxSize: 36,
+      ),
       contentPadding: 8,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
