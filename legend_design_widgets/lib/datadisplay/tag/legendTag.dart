@@ -38,7 +38,7 @@ class LegendTag extends StatelessWidget {
       alignment: Alignment.center,
       child: LegendText(
         text: text,
-        textStyle: theme.sizing.typography.h1.copyWith(
+        textStyle: theme.typography.h1.copyWith(
           color: color,
           fontSize: 16,
         ),

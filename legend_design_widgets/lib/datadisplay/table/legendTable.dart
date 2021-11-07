@@ -115,7 +115,7 @@ class LegendTable extends StatelessWidget {
             break;
           default:
             cell = LegendTableCell.text(
-              typography: LegendTextStyle(), // theme.sizing.typography.h1,
+              typography: LegendTextStyle(), // theme.typography.h1,
               text: val.toString(),
             );
             break;

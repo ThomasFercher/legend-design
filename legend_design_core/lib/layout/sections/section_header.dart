@@ -19,7 +19,7 @@ class SectionHeader extends StatelessWidget {
       child: LegendText(
         text: text,
         textStyle: textStyle ??
-            theme.sizing.typography.h4.copyWith(
+            theme.typography.h4.copyWith(
               color: theme.colors.textColorDark,
             ),
       ),

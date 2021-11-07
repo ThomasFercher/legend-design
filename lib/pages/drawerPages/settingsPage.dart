@@ -57,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage>
           LegendText(
             padding: EdgeInsets.only(top: 20),
             text: "Themes",
-            textStyle: theme.sizing.typography.h2.copyWith(
+            textStyle: theme.typography.h2.copyWith(
               color: theme.colors.foreground[2],
               fontSize: 16,
             ),

@@ -37,7 +37,7 @@ class _LegendTextFieldState extends State<LegendTextField> {
         textAlignVertical: TextAlignVertical.top,
         onSubmitted: (value) {},
         onChanged: (value) {},
-        style: theme.sizing.typography.h1.copyWith(
+        style: theme.typography.h1.copyWith(
           color: widget.decoration.textColor,
         ),
         toolbarOptions:

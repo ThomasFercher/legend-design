@@ -141,7 +141,7 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
                 margin: EdgeInsets.only(left: 24.0),
                 child: LegendText(
                   text: widget.title!,
-                  textStyle: theme.sizing.typography.h5.copyWith(
+                  textStyle: theme.typography.h5.copyWith(
                     color: color,
                     fontSize: 16,
                   ),

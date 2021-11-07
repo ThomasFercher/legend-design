@@ -154,7 +154,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
                 child: LegendText(
                   textAlign: TextAlign.center,
                   text: widget.title ?? '',
-                  textStyle: theme.sizing.typography.h2.copyWith(
+                  textStyle: theme.typography.h2.copyWith(
                     color: color,
                     fontSize: widget.collapsed ? 14.0 : 16,
                     fontWeight:

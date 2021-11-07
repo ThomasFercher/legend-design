@@ -130,7 +130,7 @@ class _LegendFormState extends State<LegendForm> {
           if (field.title != null)
             LegendText(
               text: field.title!,
-              textStyle: context.watch<ThemeProvider>().sizing.typography.h3,
+              textStyle: context.watch<ThemeProvider>().typography.h3,
             ),
           formField,
         ],

@@ -84,7 +84,7 @@ class _BottomBarItemState extends State<BottomBarItem>
     ThemeProvider theme = context.watch<ThemeProvider>();
     return LegendText(
       text: widget.option.title!,
-      textStyle: theme.sizing.typography.h1.copyWith(
+      textStyle: theme.typography.h1.copyWith(
         color: _activeColor,
       ),
     );

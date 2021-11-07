@@ -36,7 +36,7 @@ class SectionTile extends StatelessWidget {
         child: LegendText(
           selectable: false,
           text: displayName,
-          textStyle: theme.sizing.typography.h2.copyWith(),
+          textStyle: theme.typography.h2.copyWith(),
         ),
       ),
       onTap: () {

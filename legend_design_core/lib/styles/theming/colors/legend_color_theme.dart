@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
 import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.dart';
 import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
+import 'package:legend_design_core/typography/typography.dart';
 
 class LegendColorTheme {
   final Color primaryColor;
@@ -19,6 +20,7 @@ class LegendColorTheme {
   final List<double>? elevations;
 
   final FixedFooterColors fixedFooterColors;
+  final LegendTypographyColors typographyColors;
 
   LegendColorTheme({
     required this.primaryColor,
@@ -33,6 +35,7 @@ class LegendColorTheme {
     required this.background,
     required this.fixedFooterColors,
     required this.cardBackgroundColor,
+    required this.typographyColors,
     this.elevations,
   });
 

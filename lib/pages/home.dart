@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
                   text: "Legend Design aims to provide all basic needs for developing  Cross-Plattform Applications. These include Routing, Colors, Layouts, Sizing and many other little things. " +
                       "Using the Legend Design package enables developers to write clean code without much boilerplate which is suited for every platform. " +
                       "On top of this Legend Design Custom Widgets on most of the functionality can be used on its own, so you dont get forced to use everything provided. ",
-                  textStyle: theme.sizing.typography.h0,
+                  textStyle: theme.typography.h0,
                 ),
               ],
             ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:legend_design_core/legend_design_app.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/typography/typography.dart';
 import 'package:webstore/styles/layoutInfo.dart';
 import 'styles/appStyles.dart';
 
@@ -30,6 +33,10 @@ void main() {
         lightTheme: AppConfig.lightColorTheme,
         sizingTheme: AppConfig.sizingTheme,
         themeType: LegendColorThemeType.LIGHT,
+        typography: LegendTypography(
+          //   base: GoogleFonts.nunito(),
+          h6: GoogleFonts.actor(),
+        ),
       ),
       globalFooter: LayoutInfo.footer,
     ),

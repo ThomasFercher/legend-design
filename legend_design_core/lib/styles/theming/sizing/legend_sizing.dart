@@ -13,17 +13,17 @@ enum LegendSizingType {
 class LegendSizing {
   final List<BorderRadius> borderRadius;
   final List<double> borderInset;
-  final LegendTypography typography;
   final double contentPadding;
   final FixedAppBarSizing appBarSizing;
   final BottomBarSizing? bottomBarSizing;
+  final LegendTypographySizing typographySizing;
 
   LegendSizing({
     required this.borderRadius,
-    required this.typography,
     required this.borderInset,
     required this.contentPadding,
     required this.appBarSizing,
+    required this.typographySizing,
     this.bottomBarSizing,
   });
 }

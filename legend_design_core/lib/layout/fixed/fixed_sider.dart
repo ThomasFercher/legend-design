@@ -213,7 +213,7 @@ class Sider extends StatelessWidget {
               LegendText(
                 padding: EdgeInsets.only(left: 32.0),
                 text: 'Widgets',
-                textStyle: theme.sizing.typography.h4.copyWith(
+                textStyle: theme.typography.h4.copyWith(
                   color: theme.appBarColors.selectedColor,
                 ),
               ),

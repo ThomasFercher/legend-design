@@ -55,7 +55,7 @@ class ProductsPage extends StatelessWidget {
                           Align(
                             child: LegendText(
                               text: "We provide a whole ecosystem of packages.",
-                              textStyle: theme.sizing.typography.h0,
+                              textStyle: theme.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),
@@ -81,7 +81,7 @@ class ProductsPage extends StatelessWidget {
                             child: LegendText(
                               text:
                                   "Using our Design Templates simple Apps can be created on demand. We have a whole cataloge to choose from.",
-                              textStyle: theme.sizing.typography.h0,
+                              textStyle: theme.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),
@@ -107,7 +107,7 @@ class ProductsPage extends StatelessWidget {
                             child: LegendText(
                               text:
                                   "We offer building and supporting your custom Application. ",
-                              textStyle: theme.sizing.typography.h0,
+                              textStyle: theme.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),
@@ -133,7 +133,7 @@ class ProductsPage extends StatelessWidget {
                             child: LegendText(
                               text:
                                   "We offer building and supporting your custom Application. ",
-                              textStyle: theme.sizing.typography.h0,
+                              textStyle: theme.typography.h0,
                             ),
                             alignment: Alignment.bottomLeft,
                           ),

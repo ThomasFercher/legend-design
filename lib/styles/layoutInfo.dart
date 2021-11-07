@@ -33,7 +33,7 @@ class LayoutInfo {
               children: [
                 LegendText(
                   text: "Repository",
-                  textStyle: theme.sizing.typography.h4,
+                  textStyle: theme.typography.h4,
                 ),
                 Expanded(flex: 4, child: Container()),
                 Row(
@@ -65,7 +65,7 @@ class LayoutInfo {
               children: [
                 LegendText(
                   text: "Useful Links",
-                  textStyle: theme.sizing.typography.h4,
+                  textStyle: theme.typography.h4,
                 ),
                 Row()
               ],
@@ -79,7 +79,7 @@ class LayoutInfo {
               children: [
                 LegendText(
                   text: "Contact Us",
-                  textStyle: theme.sizing.typography.h4,
+                  textStyle: theme.typography.h4,
                 ),
                 Expanded(flex: 4, child: Container()),
                 Row(
@@ -109,7 +109,7 @@ class LayoutInfo {
                   child: LegendText(
                     textAlign: TextAlign.left,
                     text: "Social Media",
-                    textStyle: theme.sizing.typography.h4,
+                    textStyle: theme.typography.h4,
                   ),
                 ),
                 Expanded(flex: 4, child: Container()),

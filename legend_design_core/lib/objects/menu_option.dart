@@ -158,7 +158,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
                   child: LegendText(
                     text: widget.option.title!,
                     selectable: false,
-                    textStyle: theme.sizing.typography.h2.copyWith(
+                    textStyle: theme.typography.h2.copyWith(
                       color: color,
                     ),
                   ),

@@ -5,83 +5,26 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
 
-class LegendTypography {
+class LegendTypographyColors {
+  final List<Color>? textColors;
+  final Color baseColor;
+
+  LegendTypographyColors({
+    this.textColors,
+    required this.baseColor,
+  });
+}
+
+class LegendTypographySizing {
   final double baseSize;
   final double maxSize;
-  late final TextStyle baseTextStyle;
+  late final List<double> sizes;
 
-  late final TextStyle h0;
-  late final TextStyle h1;
-  late final TextStyle h2;
-  late final TextStyle h3;
-  late final TextStyle h4;
-  late final TextStyle h5;
-  late final TextStyle h6;
-
-  LegendTypography({
+  LegendTypographySizing({
     required this.baseSize,
     required this.maxSize,
-    TextStyle? base,
-    TextStyle? h0,
-    TextStyle? h1,
-    TextStyle? h2,
-    TextStyle? h3,
-    TextStyle? h4,
-    TextStyle? h5,
-    TextStyle? h6,
   }) {
-    List<double> sizes = generateSizes(baseSize, maxSize);
-    print(sizes);
-    this.baseTextStyle = base ?? TextStyle();
-
-    this.h0 = h0 ??
-        LegendTextStyle.generateFrom(
-          baseTextStyle,
-          sizes[0],
-          FontWeight.normal,
-        );
-
-    this.h1 = h1 ??
-        LegendTextStyle.generateFrom(
-          baseTextStyle,
-          sizes[1],
-          FontWeight.normal,
-        );
-
-    this.h2 = h2 ??
-        LegendTextStyle.generateFrom(
-          baseTextStyle,
-          sizes[2],
-          FontWeight.normal,
-        );
-
-    this.h3 = h3 ??
-        LegendTextStyle.generateFrom(
-          baseTextStyle,
-          sizes[3],
-          FontWeight.normal,
-        );
-
-    this.h4 = h4 ??
-        LegendTextStyle.generateFrom(
-          baseTextStyle,
-          sizes[4],
-          FontWeight.normal,
-        );
-
-    this.h5 = h5 ??
-        LegendTextStyle.generateFrom(
-          baseTextStyle,
-          sizes[5],
-          FontWeight.normal,
-        );
-
-    this.h6 = h6 ??
-        LegendTextStyle.generateFrom(
-          baseTextStyle,
-          sizes[6],
-          FontWeight.normal,
-        );
+    sizes = generateSizes(baseSize, maxSize);
   }
 
   List<double> generateSizes(double baseSize, double maxSize) {
@@ -118,6 +61,79 @@ class LegendTypography {
     }
 
     return sizes;
+  }
+}
+
+class LegendTypography {
+  late final LegendTypographySizing? sizing;
+  late final LegendTypographyColors? colors;
+  late final TextStyle baseTextStyle;
+  late final TextStyle h0;
+  late final TextStyle h1;
+  late final TextStyle h2;
+  late final TextStyle h3;
+  late final TextStyle h4;
+  late final TextStyle h5;
+  late final TextStyle h6;
+
+  LegendTypography.applyStyles({
+    required LegendTypographySizing sizing,
+    required LegendTypographyColors colors,
+    required LegendTypography typography,
+  }) {
+    this.sizing = sizing;
+    this.colors = colors;
+
+    h0 = typography.h0.copyWith(
+      color: colors.baseColor,
+      fontSize: sizing.sizes[0],
+    );
+    h1 = typography.h1.copyWith(
+      color: colors.baseColor,
+      fontSize: sizing.sizes[1],
+    );
+    h2 = typography.h2.copyWith(
+      color: colors.baseColor,
+      fontSize: sizing.sizes[2],
+    );
+    h3 = typography.h3.copyWith(
+      color: colors.baseColor,
+      fontSize: sizing.sizes[3],
+    );
+    h4 = typography.h4.copyWith(
+      color: colors.baseColor,
+      fontSize: sizing.sizes[4],
+    );
+    h5 = typography.h5.copyWith(
+      color: colors.baseColor,
+      fontSize: sizing.sizes[5],
+    );
+    h6 = typography.h6.copyWith(
+      color: colors.baseColor,
+      fontSize: typography.h6.fontSize ?? sizing.sizes[6],
+    );
+  }
+
+  LegendTypography({
+    this.sizing,
+    this.colors,
+    TextStyle? base,
+    TextStyle? h0,
+    TextStyle? h1,
+    TextStyle? h2,
+    TextStyle? h3,
+    TextStyle? h4,
+    TextStyle? h5,
+    TextStyle? h6,
+  }) {
+    baseTextStyle = base ?? TextStyle();
+    this.h0 = h0 ?? LegendTextStyle.generateFrom(style: baseTextStyle);
+    this.h1 = h1 ?? LegendTextStyle.generateFrom(style: baseTextStyle);
+    this.h2 = h2 ?? LegendTextStyle.generateFrom(style: baseTextStyle);
+    this.h3 = h3 ?? LegendTextStyle.generateFrom(style: baseTextStyle);
+    this.h4 = h4 ?? LegendTextStyle.generateFrom(style: baseTextStyle);
+    this.h5 = h5 ?? LegendTextStyle.generateFrom(style: baseTextStyle);
+    this.h6 = h6 ?? LegendTextStyle.generateFrom(style: baseTextStyle);
   }
 }
 
@@ -168,16 +184,16 @@ class LegendTextStyle extends TextStyle {
     );
   }
 
-  factory LegendTextStyle.generateFrom(
-    TextStyle style,
-    double fontSize,
-    FontWeight fontWeight,
-  ) {
+  factory LegendTextStyle.generateFrom({
+    required TextStyle style,
+    double? fontSize,
+    FontWeight? fontWeight,
+  }) {
     return LegendTextStyle(
       textColor: style.color,
       backgroundColor: Colors.transparent, //style.backgroundColor,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
+      fontSize: fontSize ?? style.fontSize,
+      fontWeight: fontWeight ?? style.fontWeight,
       fontFamily: style.fontFamily,
       height: style.height,
       letterSpacing: style.letterSpacing,

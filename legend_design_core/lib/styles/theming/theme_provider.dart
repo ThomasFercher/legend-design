@@ -9,6 +9,7 @@ import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.
 import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing_theme.dart';
+import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_core/utils/restart.dart';
 
 enum LegendColorThemeType {
@@ -26,13 +27,21 @@ class ThemeProvider extends ChangeNotifier {
   final LegendColorTheme lightTheme;
   final LegendColorTheme darkTheme;
   final LegendSizingTheme sizingTheme;
+  late LegendTypography typography;
 
   ThemeProvider({
     required this.lightTheme,
     required this.darkTheme,
     required this.themeType,
     required this.sizingTheme,
+    required LegendTypography typography,
   }) {
+    this.typography = LegendTypography.applyStyles(
+      sizing: sizing.typographySizing,
+      colors: colors.typographyColors,
+      typography: typography,
+    );
+
     Color? _systemNavigationBarColor = bottomBarColors.backgroundColor;
 
     if (bottomBarStyle?.margin.bottom != 0) {
@@ -78,6 +87,12 @@ class ThemeProvider extends ChangeNotifier {
       colors: colors,
       appBarType: FixedAppBarType.ICONS,
     );*/
+
+    typography = LegendTypography.applyStyles(
+      sizing: sizing.typographySizing,
+      colors: colors.typographyColors,
+      typography: typography,
+    );
     notifyListeners();
     RestartWidget.restartApp(context);
   }

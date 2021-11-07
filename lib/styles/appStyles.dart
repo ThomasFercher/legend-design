@@ -38,6 +38,7 @@ class AppConfig {
 
   static LegendSizingTheme sizingTheme = LegendSizingTheme(
     desktop: LegendSizing(
+      typographySizing: LegendTypographySizing(baseSize: 16, maxSize: 32),
       borderRadius: [
         BorderRadius.all(
           Radius.circular(12),
@@ -50,10 +51,6 @@ class AppConfig {
         12,
         6,
       ],
-      typography: LegendTypography(
-        baseSize: 11,
-        maxSize: 32,
-      ),
       contentPadding: 16,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
@@ -64,6 +61,7 @@ class AppConfig {
       ),
     ),
     mobile: LegendSizing(
+      typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
       borderRadius: [
         BorderRadius.all(
           Radius.circular(8),
@@ -76,10 +74,6 @@ class AppConfig {
         8,
         4,
       ],
-      typography: LegendTypography(
-        baseSize: 10,
-        maxSize: 28,
-      ),
       contentPadding: 4,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
@@ -91,6 +85,7 @@ class AppConfig {
       bottomBarSizing: bottomBarSizing,
     ),
     tablet: LegendSizing(
+      typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
       borderRadius: [
         BorderRadius.all(
           Radius.circular(12),
@@ -103,10 +98,6 @@ class AppConfig {
         12,
         12,
       ],
-      typography: LegendTypography(
-        baseSize: 10,
-        maxSize: 32,
-      ),
       contentPadding: 8,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
@@ -117,6 +108,7 @@ class AppConfig {
       ),
     ),
     web: LegendSizing(
+      typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
       borderRadius: [
         BorderRadius.all(
           Radius.circular(12),
@@ -129,10 +121,6 @@ class AppConfig {
         12,
         12,
       ],
-      typography: LegendTypography(
-        baseSize: 12,
-        maxSize: 36,
-      ),
       contentPadding: 8,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
@@ -145,6 +133,9 @@ class AppConfig {
   );
 
   static LegendColorTheme lightColorTheme = LegendColorTheme(
+    typographyColors: LegendTypographyColors(
+      baseColor: Colors.black,
+    ),
     bottomBarColors: BottomBarColors(
       activeColor: Colors.teal,
       disabledColor: Colors.black26,
@@ -192,6 +183,9 @@ class AppConfig {
     ),
   );
   static LegendColorTheme darkColorTheme = LegendColorTheme(
+    typographyColors: LegendTypographyColors(
+      baseColor: Colors.white,
+    ),
     bottomBarColors: BottomBarColors(
       activeColor: Colors.teal,
       disabledColor: Colors.black26,
