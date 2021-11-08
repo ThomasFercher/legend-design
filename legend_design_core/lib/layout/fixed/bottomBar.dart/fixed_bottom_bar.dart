@@ -103,8 +103,10 @@ class FixedBottomBar extends StatelessWidget {
       child: Hero(
         tag: ValueKey('BottomBar'),
         child: Container(
-          color: colors.backgroundColor,
           padding: sizing?.margin,
+          decoration: sizing?.decoration.copyWith(
+            color: colors.backgroundColor,
+          ),
           child: Container(
             child: Container(
               child: Row(

@@ -157,6 +157,10 @@ class ProductsPage extends StatelessWidget {
                   )
                 ],
               ),
+              Section(
+                header: "Theme Editor",
+                children: [],
+              ),
             ],
           ),
         );

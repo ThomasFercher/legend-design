@@ -33,7 +33,7 @@ class FixedAppBarSizing {
   final Radius? borderRadius;
   final EdgeInsets contentPadding;
   final ShapeBorder? shape;
-
+  final double? titleSize;
   late final bool pinned;
   late final bool floating;
   final double? spacing;
@@ -49,6 +49,7 @@ class FixedAppBarSizing {
     bool? floating,
     this.iconSize,
     this.spacing,
+    this.titleSize,
   }) {
     this.floating = floating ?? false;
 
@@ -140,11 +141,11 @@ class FixedAppBar extends StatelessWidget {
                               layoutType != LayoutType.FixedHeaderSider) ||
                           SizeProvider.of(context).isMobile)
                         Container(
-                          height: (sizing?.appBarHeight ?? 80),
-                          width: sizing?.appBarHeight ?? 80,
-                          margin: EdgeInsets.only(right: 8.0),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                          height:
+                              sizing?.titleSize ?? sizing?.appBarHeight ?? 64,
+                          width:
+                              sizing?.titleSize ?? sizing?.appBarHeight ?? 64,
+                          margin: EdgeInsets.only(right: 12.0, left: 16.0),
                           child: Center(
                             child:
                                 LayoutProvider.of(context)?.logo ?? Container(),
@@ -153,10 +154,12 @@ class FixedAppBar extends StatelessWidget {
                       if ((layoutType != LayoutType.FixedSider &&
                               layoutType != LayoutType.FixedHeaderSider) ||
                           SizeProvider.of(context).isMobile)
-                        LegendText(
-                          text: 'Legend Design',
-                          textStyle: theme.typography.h6.copyWith(
-                            color: theme.appBarColors.foreground,
+                        Center(
+                          child: LegendText(
+                            text: 'Legend Design',
+                            textStyle: theme.typography.h6.copyWith(
+                              color: theme.appBarColors.foreground,
+                            ),
                           ),
                         ),
                     ],

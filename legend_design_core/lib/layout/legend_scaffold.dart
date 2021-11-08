@@ -237,9 +237,10 @@ class _LegendScaffoldState extends State<LegendScaffold> {
         },
       ),
     );
-
-    if (children.isNotEmpty) {
+    double? footerheight;
+    if (children.isNotEmpty && !context.watch<SizeProvider>().isMobile) {
       children.add(getFooter(120, context));
+      footerheight = 120;
     }
 
     return Stack(
@@ -274,9 +275,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                           SliverToBoxAdapter(
                             child:
                                 LayoutBuilder(builder: (context, constraints) {
-                              double footerheight = 120;
                               double space = maxHeight -
-                                  footerheight -
+                                  (footerheight ?? 0) -
                                   theme.sizing.contentPadding * 2;
 
                               if (SizeProvider.of(context).isMobile) {
@@ -301,7 +301,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                                       ),
                                     ),
                                   ),
-                                  getFooter(footerheight, context),
+                                  if (!SizeProvider.of(context).isMobile)
+                                    getFooter(footerheight!, context),
                                 ],
                               );
                             }),

@@ -21,16 +21,17 @@ import 'package:webstore/pages/widgetComponets.dart';
 
 class AppConfig {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
-    showText: false,
+    showText: true,
     textAtBottom: true,
-    height: 56,
+    iconSize: 30,
+    height: 72,
     margin: EdgeInsets.all(0),
     decoration: BoxDecoration(
       boxShadow: [
         BoxShadow(
           color: Colors.black12,
-          blurRadius: 2.0,
-          spreadRadius: 2.0,
+          blurRadius: 9.0,
+          spreadRadius: 3.0,
         ),
       ],
     ),
@@ -38,7 +39,7 @@ class AppConfig {
 
   static LegendSizingTheme sizingTheme = LegendSizingTheme(
     desktop: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 16, maxSize: 32),
+      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
       borderRadius: [
         BorderRadius.all(
           Radius.circular(12),
@@ -56,31 +57,31 @@ class AppConfig {
         appBarHeight: 80,
         contentPadding: EdgeInsets.all(0),
         borderRadius: Radius.circular(20),
-        iconSize: 24,
+        iconSize: 32,
         spacing: 20,
       ),
     ),
     mobile: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
+      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 30),
       borderRadius: [
         BorderRadius.all(
-          Radius.circular(8),
+          Radius.circular(16.0),
         ),
         BorderRadius.all(
-          Radius.circular(4),
+          Radius.circular(12.0),
         ),
       ],
       borderInset: [
-        8,
-        4,
+        16,
+        12,
       ],
-      contentPadding: 4,
+      contentPadding: 8,
       appBarSizing: FixedAppBarSizing(
-        appBarHeight: 80,
+        appBarHeight: 72,
         contentPadding: EdgeInsets.all(0),
-        borderRadius: Radius.circular(20),
-        iconSize: 24,
+        iconSize: 16,
         spacing: 20,
+        titleSize: 42,
       ),
       bottomBarSizing: bottomBarSizing,
     ),
@@ -137,9 +138,9 @@ class AppConfig {
       baseColor: Colors.black,
     ),
     bottomBarColors: BottomBarColors(
-      activeColor: Colors.teal,
-      disabledColor: Colors.black26,
-      backgroundColor: LegendColors.gray10,
+      activeColor: Colors.cyanAccent,
+      disabledColor: LegendColors.gray4,
+      backgroundColor: LegendColors.white100,
     ),
     fixedFooterColors: FixedFooterColors(
       backgroundColor: LegendColors.gray10,

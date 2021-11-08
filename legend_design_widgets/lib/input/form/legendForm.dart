@@ -117,7 +117,43 @@ class _LegendFormState extends State<LegendForm> {
               : null,
         );
         break;
-      case LegendFormFieldType.NUMBER:
+      case LegendFormFieldType.INT:
+        formField = FormField<int>(
+          initialValue: field.initalValue,
+          validator: (value) {
+            if (field.isRequired) {
+              if (field.validator != null) {
+                field.validator!(value);
+              } else {
+                if (value == null) {
+                  return 'Field required';
+                }
+              }
+            } else if (field.validator != null) {
+              field.validator!(value);
+            }
+          },
+          builder: (f) {
+            return SizedBox(
+              width: 120,
+              height: 80,
+              child: TextField(),
+            );
+          },
+          autovalidateMode: AutovalidateMode.disabled,
+          onSaved: field.onSave != null
+              ? (value) {
+                  field.onSave!(value);
+                }
+              : null,
+        );
+        break;
+
+      case LegendFormFieldType.FLOAT:
+        break;
+      case LegendFormFieldType.COLOR:
+        break;
+      default:
         break;
     }
 

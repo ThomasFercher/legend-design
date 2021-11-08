@@ -50,8 +50,8 @@ class ThemeProvider extends ChangeNotifier {
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: colors.primaryColor,
-        systemNavigationBarColor: _systemNavigationBarColor,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
       ),
     );
   }

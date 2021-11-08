@@ -127,9 +127,19 @@ class _LegendDrawerState extends State<LegendDrawer>
             child: Container(
               width: width,
               height: SizeProvider.of(context).height,
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.only(
+                left: theme.sizing.borderInset[0],
+                top: theme.sizing.borderInset[0] + 26,
+                bottom: theme.sizing.borderInset[0],
+                right: theme.sizing.borderInset[0],
+              ),
               decoration: BoxDecoration(
                 color: theme.colors.scaffoldBackgroundColor,
+                borderRadius: BorderRadius.horizontal(
+                  left: Radius.circular(
+                    theme.sizing.borderInset[0],
+                  ),
+                ),
               ),
               child: Column(
                 children: [
@@ -139,16 +149,16 @@ class _LegendDrawerState extends State<LegendDrawer>
                       maxHeight: 36,
                       minWidth: 0,
                       alignment: Alignment.centerLeft,
-                      maxWidth: widget.route.width - 32,
+                      maxWidth: width - theme.sizing.borderInset[0] * 2,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           LegendAnimatedIcon(
                             disableShadow: true,
                             icon: Icons.close,
+                            iconSize: 32,
                             theme: LegendAnimtedIconTheme(
                               enabled: theme.colors.selectionColor,
-                              disabled: theme.colors.foreground[1],
+                              disabled: theme.colors.foreground[2],
                               boxShadow: BoxShadow(
                                 blurRadius: 0,
                                 color: Colors.transparent,
@@ -169,15 +179,14 @@ class _LegendDrawerState extends State<LegendDrawer>
                               );
                             },
                           ),
-                          Flexible(
-                            child: LegendText(
-                              padding: EdgeInsets.only(
-                                right: 8,
-                              ),
-                              text: 'Settings',
-                              textStyle: theme.typography.h2.copyWith(
-                                color: theme.colors.foreground[3],
-                              ),
+                          Expanded(child: Container()),
+                          LegendText(
+                            padding: EdgeInsets.only(
+                              right: 8,
+                            ),
+                            text: 'Settings',
+                            textStyle: theme.typography.h2.copyWith(
+                              color: theme.colors.foreground[3],
                             ),
                           ),
                         ],

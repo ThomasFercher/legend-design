@@ -41,8 +41,8 @@ class LegendButton extends StatelessWidget {
             : constraints.maxWidth,
         constraints: height != null ? BoxConstraints(maxHeight: height) : null,
         padding: EdgeInsets.symmetric(
-          vertical: v ?? 8.0,
-          horizontal: w ?? 8.0,
+          vertical: v ?? 4.0,
+          horizontal: w ?? 4.0,
         ),
         child: TextButton(
           onPressed: () => onPressed(),
@@ -51,8 +51,8 @@ class LegendButton extends StatelessWidget {
             height: height,
             padding: padding ??
                 const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 16.0,
+                  vertical: 4.0,
+                  horizontal: 8.0,
                 ),
             alignment: Alignment.center,
             decoration: BoxDecoration(

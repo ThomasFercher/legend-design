@@ -15,7 +15,7 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeProvider theme = context.watch<ThemeProvider>();
     return Container(
-      padding: EdgeInsets.only(bottom: 4.0),
+      padding: EdgeInsets.only(bottom: 8.0),
       child: LegendText(
         text: text,
         textStyle: textStyle ??

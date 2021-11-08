@@ -11,6 +11,7 @@ import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
+import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
 import 'package:legend_design_widgets/datadisplay/carousel/legendCarousel.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTable.dart';
@@ -50,16 +51,16 @@ class WidgetComponents extends StatelessWidget {
           children: [
             LegendText(
               text:
-                  "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. ",
-              textStyle: theme.typography.h4,
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              textStyle: theme.typography.h1,
             ),
             LegendGrid(
               margin: EdgeInsets.symmetric(vertical: 12.0),
               sizes: LegendGridSize(
-                small: LegendGridSizeInfo(1, 64),
-                medium: LegendGridSizeInfo(3, 64),
-                large: LegendGridSizeInfo(4, 64),
-                xxl: LegendGridSizeInfo(4, 64),
+                small: LegendGridSizeInfo(1, 36),
+                medium: LegendGridSizeInfo(2, 36),
+                large: LegendGridSizeInfo(4, 36),
+                xxl: LegendGridSizeInfo(4, 36),
               ),
               children: [
                 LegendButton(
@@ -120,11 +121,11 @@ class WidgetComponents extends StatelessWidget {
                   syntax: Syntax.DART,
                   syntaxTheme: SyntaxTheme(
                     backgroundColor: Colors.transparent,
-                    baseStyle: theme.typography.h5.copyWith(
-                      color: Colors.white70,
+                    baseStyle: theme.typography.h0.copyWith(
+                      color: theme.colors.foreground[3],
                     ),
                   ),
-                  fontSize: 12.0,
+                  fontSize: theme.typography.h0.fontSize!,
                   withZoom: false,
                   withLinesCount: false,
                   expanded: true,
@@ -139,20 +140,22 @@ class WidgetComponents extends StatelessWidget {
           children: [
             LegendText(
               text:
-                  "Buttons sind sehr cool!. Im Legend Design Pack gibt es mehere Arten von Buttons. ",
-              textStyle: theme.typography.h0,
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              textStyle: theme.typography.h1,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 12.0),
             ),
             LegendGrid(
               sizes: LegendGridSize(
-                small: LegendGridSizeInfo(1, 64),
-                medium: LegendGridSizeInfo(3, 64),
-                large: LegendGridSizeInfo(4, 64),
-                xxl: LegendGridSizeInfo(4, 64),
+                small: LegendGridSizeInfo(1, 48),
+                medium: LegendGridSizeInfo(3, 48),
+                large: LegendGridSizeInfo(4, 48),
+                xxl: LegendGridSizeInfo(4, 48),
               ),
               children: [
                 LegendButton(
                   text: Text("Show Success Alert"),
-                  margin: EdgeInsets.all(16.0),
                   onPressed: () {
                     LegendPopups.showAlert(
                       context: context,
@@ -219,58 +222,75 @@ class WidgetComponents extends StatelessWidget {
         Section(
           name: "/selectbar",
           children: [
-            LegendGrid(
-              sizes: LegendGridSize(
-                small: LegendGridSizeInfo(1, 64),
-                large: LegendGridSizeInfo(2, 80),
-                layoutDirection: LegendGridSizeDirection.DOWN,
-              ),
-              children: [
-                LegendSelectBar(
-                  borderRadius: theme.sizing.borderRadius[1],
-                  options: [
-                    LegendSelectOption(
-                        color: Colors.teal, icon: Icons.credit_card, name: "1"),
-                    LegendSelectOption(
-                        color: Colors.teal,
-                        icon: Icons.wallet_giftcard,
-                        name: "2"),
-                    LegendSelectOption(
-                      color: Colors.teal,
-                      icon: Icons.money,
-                      name: "3",
-                    ),
-                  ],
-                  aligment: MainAxisAlignment.spaceAround,
-                  onSelected: (a) {},
-                  iconSize: 36,
+            LegendText(
+              text:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              textStyle: theme.typography.h1,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 18.0, left: 18, right: 18),
+              child: LegendGrid(
+                sizes: LegendGridSize(
+                  small: LegendGridSizeInfo(1, 64),
+                  large: LegendGridSizeInfo(2, 80),
+                  layoutDirection: LegendGridSizeDirection.DOWN,
                 ),
-                LegendSelectBar(
-                  color: theme.colors.foreground[1],
-                  borderRadius: theme.sizing.borderRadius[1],
-                  options: [
-                    LegendSelectOption(
-                        color: Colors.purpleAccent,
+                crossAxisSpacing: 48,
+                children: [
+                  LegendSelectBar(
+                    color: Colors.white,
+                    isCard: true,
+                    borderRadius: theme.sizing.borderRadius[0] * 4,
+                    options: [
+                      LegendSelectOption(
+                        color: Colors.greenAccent,
                         icon: Icons.credit_card,
-                        name: "1"),
-                    LegendSelectOption(
-                        color: Colors.purpleAccent,
+                        name: "1",
+                      ),
+                      LegendSelectOption(
+                        color: Colors.greenAccent,
                         icon: Icons.wallet_giftcard,
-                        name: "2"),
-                    LegendSelectOption(
-                      color: Colors.purpleAccent,
-                      icon: Icons.money,
-                      name: "3",
-                    ),
-                  ],
-                  aligment: MainAxisAlignment.spaceAround,
-                  onSelected: (a) {
-                    print(a);
-                  },
-                  isCard: true,
-                  iconSize: 36,
-                ),
-              ],
+                        name: "2",
+                      ),
+                      LegendSelectOption(
+                        color: Colors.greenAccent,
+                        icon: Icons.money,
+                        name: "3",
+                      ),
+                    ],
+                    aligment: MainAxisAlignment.spaceAround,
+                    onSelected: (a) {},
+                    iconSize: 32,
+                  ),
+                  LegendSelectBar(
+                    color: theme.colors.primaryColor,
+                    borderRadius: theme.sizing.borderRadius[0],
+                    options: [
+                      LegendSelectOption(
+                        color: theme.colors.secondaryColor,
+                        icon: Icons.credit_card,
+                        name: "1",
+                      ),
+                      LegendSelectOption(
+                        color: theme.colors.secondaryColor,
+                        icon: Icons.wallet_giftcard,
+                        name: "2",
+                      ),
+                      LegendSelectOption(
+                        color: theme.colors.secondaryColor,
+                        icon: Icons.money,
+                        name: "3",
+                      ),
+                    ],
+                    aligment: MainAxisAlignment.spaceAround,
+                    onSelected: (a) {
+                      print(a);
+                    },
+                    isCard: true,
+                    iconSize: 32,
+                  ),
+                ],
+              ),
             ),
           ],
           header: "Select Button Bar",
@@ -278,19 +298,48 @@ class WidgetComponents extends StatelessWidget {
         Section(
           name: "/cards",
           children: [
-            LegendGrid(
-              children: [
-                /* LegendCard(
-                  title: "Polkadot",
-                  subtitle: "+6.44% ",
-                  icon: Icons.money,
-                  value: "30.94\$",
-                ),*/
-                Container(),
-              ],
-              sizes: LegendGridSize(
-                medium: LegendGridSizeInfo(6, 164),
-                layoutDirection: LegendGridSizeDirection.DOWN,
+            LegendText(
+              text:
+                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              textStyle: theme.typography.h1,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: LegendGrid(
+                children: [
+                  LegendCard(
+                    title: "Polkadot",
+                    subtitle: "+6.44% ",
+                    icon: Icons.money,
+                    iconColor: Colors.redAccent,
+                    value: "30.94\$",
+                  ),
+                  LegendCard(
+                    title: "Kadena",
+                    subtitle: "+86.44% ",
+                    icon: Icons.keyboard_arrow_right_sharp,
+                    iconColor: Colors.purpleAccent,
+                    value: "14.94\$",
+                  ),
+                  LegendCard(
+                    title: "Tezos",
+                    subtitle: "+8.44% ",
+                    icon: Icons.drag_indicator_rounded,
+                    iconColor: Colors.blueAccent,
+                    value: " 5.36\$",
+                  ),
+                  LegendCard(
+                    title: "Bitcoin",
+                    subtitle: "+3.24% ",
+                    icon: Icons.code_off,
+                    iconColor: Colors.orangeAccent,
+                    value: "56506.21\$",
+                  ),
+                ],
+                sizes: LegendGridSize(
+                  medium: LegendGridSizeInfo(4, 164),
+                  layoutDirection: LegendGridSizeDirection.DOWN,
+                ),
               ),
             ),
           ],

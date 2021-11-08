@@ -5,7 +5,9 @@ import 'package:legend_design_widgets/input/text/legendTextField.dart';
 enum LegendFormFieldType {
   TEXT,
   BOOL,
-  NUMBER,
+  INT,
+  FLOAT,
+  COLOR,
 }
 
 class LegendFormRow {
@@ -48,6 +50,51 @@ class LegendFormField<T> {
   }) {
     return LegendFormField<T>(
       type: LegendFormFieldType.TEXT,
+      textField: text,
+      onChanged: onChanged,
+      onSave: onSave,
+      isRequired: isRequired,
+    );
+  }
+
+  factory LegendFormField.integer({
+    required LegendTextField text,
+    Function(T value)? onChanged,
+    Function(T value)? onSave,
+    bool? isRequired,
+  }) {
+    return LegendFormField<T>(
+      type: LegendFormFieldType.INT,
+      textField: text,
+      onChanged: onChanged,
+      onSave: onSave,
+      isRequired: isRequired,
+    );
+  }
+
+  factory LegendFormField.float({
+    required LegendTextField text,
+    Function(T value)? onChanged,
+    Function(T value)? onSave,
+    bool? isRequired,
+  }) {
+    return LegendFormField<T>(
+      type: LegendFormFieldType.FLOAT,
+      textField: text,
+      onChanged: onChanged,
+      onSave: onSave,
+      isRequired: isRequired,
+    );
+  }
+
+  factory LegendFormField.color({
+    required LegendTextField text,
+    Function(T value)? onChanged,
+    Function(T value)? onSave,
+    bool? isRequired,
+  }) {
+    return LegendFormField<T>(
+      type: LegendFormFieldType.COLOR,
       textField: text,
       onChanged: onChanged,
       onSave: onSave,

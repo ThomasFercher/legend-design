@@ -62,12 +62,14 @@ class _FixedFooterState extends State<FixedFooter> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
+
     return Hero(
       tag: ValueKey('footer'),
       child: Material(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          color: widget.colors?.backgroundColor,
+          color: theme.colors.fixedFooterColors.backgroundColor,
           height: widget.sizing?.height,
           alignment: Alignment.center,
           child: Container(
