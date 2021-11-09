@@ -64,7 +64,7 @@ class WidgetComponents extends StatelessWidget {
               ),
               children: [
                 LegendButton(
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(4),
                   text: LegendText(
                     text: "Alert",
                   ),
@@ -72,7 +72,7 @@ class WidgetComponents extends StatelessWidget {
                   style: LegendButtonStyle.danger(),
                 ),
                 LegendButton(
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(4),
                   text: LegendText(
                     text: "Sucess",
                   ),
@@ -80,7 +80,7 @@ class WidgetComponents extends StatelessWidget {
                   style: LegendButtonStyle.confirm(),
                 ),
                 LegendButton(
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(4),
                   text: LegendText(
                     text: "Info",
                   ),
@@ -91,7 +91,7 @@ class WidgetComponents extends StatelessWidget {
                       ),
                 ),
                 LegendButton(
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(4),
                   text: LegendText(text: "Gradient"),
                   onPressed: () => {},
                   style: LegendButtonStyle.gradient(
@@ -99,7 +99,6 @@ class WidgetComponents extends StatelessWidget {
                       Colors.red[200]!,
                       Colors.redAccent,
                     ],
-                    height: 48,
                   ),
                 ),
               ],

@@ -22,38 +22,30 @@ class LegendButton extends StatelessWidget {
     return LayoutBuilder(builder: (context, constraints) {
       double? height = style?.height;
       double? width = style?.width;
-      double? v;
-      double? w;
-      if (constraints.maxHeight == double.infinity) {
-        v = margin?.vertical ?? 8.0;
-      } else {
-        v = height != null ? (constraints.maxHeight - height) / 2 : null;
+
+      bool vertical = constraints.maxHeight == double.infinity;
+      bool horizontal = constraints.maxWidth == double.infinity;
+
+      if (style?.height == null ||
+          (style?.height ?? 0) > constraints.maxHeight) {
+        height = vertical ? 48 : constraints.maxHeight;
       }
 
-      w = width != null ? (constraints.maxWidth - width) / 2 : null;
+      if (style?.width == null || (style?.width ?? 0) > constraints.maxWidth) {
+        width = horizontal ? 64 : constraints.maxWidth;
+      }
 
       return Container(
-        height: constraints.maxHeight == double.infinity
-            ? null
-            : constraints.maxHeight,
-        width: constraints.maxWidth == double.infinity
-            ? null
-            : constraints.maxWidth,
-        constraints: height != null ? BoxConstraints(maxHeight: height) : null,
-        padding: EdgeInsets.symmetric(
-          vertical: v ?? 4.0,
-          horizontal: w ?? 4.0,
+        padding: margin,
+        constraints: BoxConstraints(
+          minHeight: height ?? 48,
         ),
         child: TextButton(
           onPressed: () => onPressed(),
           child: Container(
             width: width,
             height: height,
-            padding: padding ??
-                const EdgeInsets.symmetric(
-                  vertical: 4.0,
-                  horizontal: 8.0,
-                ),
+            padding: padding,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius:

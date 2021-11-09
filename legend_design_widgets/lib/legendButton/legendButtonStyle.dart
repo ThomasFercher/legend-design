@@ -119,6 +119,9 @@ class LegendButtonStyle extends ButtonStyle {
       boxShadow: legendBoxShadow,
       height: height,
       width: width,
+      padding: MaterialStateProperty.all(
+        EdgeInsets.all(0),
+      ),
     );
   }
 

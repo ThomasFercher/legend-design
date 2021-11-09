@@ -221,7 +221,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
         26.0 +
         48.0;
 
-    double maxHeight = SizeProvider.of(context).height - 100;
+    double maxHeight = SizeProvider.of(context).height -
+        theme.sizing.appBarSizing.appBarHeight;
 
     // TODO Improve
     List<Widget> a = getChildren(context);
