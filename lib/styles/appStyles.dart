@@ -52,13 +52,14 @@ class AppConfig {
         12,
         6,
       ],
-      contentPadding: 16,
+      contentPadding: 8,
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
-        contentPadding: EdgeInsets.all(0),
+        contentPadding: EdgeInsets.only(right: 6),
         borderRadius: Radius.circular(20),
-        iconSize: 32,
+        iconSize: 28,
         spacing: 20,
+        titleSize: 48,
       ),
     ),
     mobile: LegendSizing(

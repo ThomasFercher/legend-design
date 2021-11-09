@@ -35,7 +35,7 @@ void main() {
         themeType: LegendColorThemeType.LIGHT,
         typography: LegendTypography(
           //   base: GoogleFonts.nunito(),
-          h6: GoogleFonts.actor(),
+          h6: GoogleFonts.lobsterTwo(),
         ),
       ),
       globalFooter: LayoutInfo.footer,

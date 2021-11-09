@@ -130,22 +130,30 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
           );
         },
         child: Row(
+          mainAxisAlignment:
+              widget.left ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
-            Icon(
-              widget.icon,
-              color: color,
-              size: 28.0,
-            ),
+            if (!widget.left)
+              Icon(
+                widget.icon,
+                color: color,
+                size: 28.0,
+              ),
             if (widget.title != null)
               Container(
-                margin: EdgeInsets.only(left: 24.0),
+                margin: EdgeInsets.only(left: 12.0, right: 12.0),
                 child: LegendText(
                   text: widget.title!,
-                  textStyle: theme.typography.h5.copyWith(
+                  textStyle: theme.typography.h2.copyWith(
                     color: color,
-                    fontSize: 16,
                   ),
                 ),
+              ),
+            if (widget.left)
+              Icon(
+                widget.icon,
+                color: color,
+                size: 28.0,
               ),
           ],
         ),

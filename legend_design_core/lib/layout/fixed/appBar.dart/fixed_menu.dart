@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/theming/sizing/size_provider.dart';
@@ -32,16 +33,20 @@ class FixedMenu extends StatefulWidget {
 
 class _FixedMenuState extends State<FixedMenu> {
   Widget getCollapsedMenu(BuildContext context) {
+    ThemeProvider theme = context.watch<ThemeProvider>();
+
     return Container(
       alignment: Alignment.centerRight,
-      child: IconButton(
-        iconSize: 36,
+      child: LegendAnimatedIcon(
+        padding: EdgeInsets.all(0),
+        iconSize: theme.appBarSizing.iconSize ?? 32,
         onPressed: () {
           Scaffold.of(context).openEndDrawer();
         },
-        icon: Icon(
-          Icons.menu,
-          color: Colors.white,
+        icon: Icons.menu,
+        theme: LegendAnimtedIconTheme(
+          disabled: theme.colors.appBarColors.foreground,
+          enabled: theme.colors.selectionColor,
         ),
       ),
     );

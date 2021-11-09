@@ -207,10 +207,11 @@ class _LegendScaffoldState extends State<LegendScaffold> {
   }
 
   Widget materialLayout(BuildContext context) {
-    ScreenSize screenSize = SizeProvider.of(context).screenSize;
+    SizeProvider sizeProvider = SizeProvider.of(context);
+    ScreenSize screenSize = sizeProvider.screenSize;
 
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
-    SizeProvider.of(context).titleWidth = SizeProvider.calcTextSize(
+    sizeProvider.titleWidth = SizeProvider.calcTextSize(
           'Legend Design',
           theme.typography.h6.copyWith(
             color: theme.colors.secondaryColor,
@@ -238,7 +239,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
       ),
     );
     double? footerheight;
-    if (children.isNotEmpty && !context.watch<SizeProvider>().isMobile) {
+    if (children.isNotEmpty && !sizeProvider.isMobile) {
       children.add(getFooter(120, context));
       footerheight = 120;
     }
@@ -301,7 +302,8 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                                       ),
                                     ),
                                   ),
-                                  if (!SizeProvider.of(context).isMobile)
+                                  if (!SizeProvider.of(context).isMobile &&
+                                      children.isNotEmpty)
                                     getFooter(footerheight!, context),
                                 ],
                               );

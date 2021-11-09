@@ -15,6 +15,7 @@ dependencies:
   url_launcher: ^6.0.12
   animations: ^2.0.2
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage>
                   decoration: BoxDecoration(
                     border: themeType == LegendColorThemeType.DARK
                         ? Border.all(
-                            color: Colors.teal[400]!,
+                            color: theme.colors.primaryColor,
                             width: 2,
                           )
                         : null,
@@ -163,7 +163,7 @@ class _SettingsPageState extends State<SettingsPage>
                   decoration: BoxDecoration(
                     border: themeType == LegendColorThemeType.LIGHT
                         ? Border.all(
-                            color: Colors.teal[300]!,
+                            color: theme.colors.primaryColor,
                             width: 2,
                           )
                         : null,

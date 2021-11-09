@@ -93,7 +93,7 @@ class CollapsedSider extends StatelessWidget {
           path: option.name,
           isSection: true,
           collapsed: true,
-          activeColor: Colors.tealAccent,
+          activeColor: theme.colors.selectionColor,
           backgroundColor: theme.colors.primaryColor,
           color: theme.colors.textColorLight,
         ),
