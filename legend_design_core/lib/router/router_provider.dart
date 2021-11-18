@@ -42,14 +42,19 @@ class RouterProvider extends InheritedWidget {
       return RouteInfo(name: 'Not Found', page: NotFoundPage());
     }
 
-    RouteInfo? route = routes.singleWhere(
-      (r) => r.name == s.name,
-      orElse: () {
-        return RouteInfo(name: '/notfound', page: NotFoundPage());
-      },
-    );
+    for (RouteInfo routeinfo in routes) {
+      if (routeinfo.name == s.name) {
+        return routeinfo;
+      } else if (routeinfo.children != null) {
+        for (RouteInfo r in routeinfo.children!) {
+          if (r.name == s.name) {
+            return r;
+          }
+        }
+      }
+    }
 
-    return route;
+    return RouteInfo(name: '/notfound', page: NotFoundPage());
   }
 
   static Page createPage(RouteSettings s, RouteInfo route) {

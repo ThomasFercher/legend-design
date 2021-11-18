@@ -32,6 +32,7 @@ dependencies:
   flutter_svg: ^0.22.0
   url_launcher: ^6.0.12
   antdesign_icons: ^0.0.3
+  flutter_colorpicker: ^0.6.1
   google_fonts: ^2.1.0
   legend_design_widgets:
     path: ./legend_design_widgets

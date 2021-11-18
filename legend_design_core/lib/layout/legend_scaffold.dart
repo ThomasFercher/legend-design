@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/drawers/legend_drawer.dart';
 import 'package:legend_design_core/layout/drawers/legend_drawer_info.dart';
 import 'package:legend_design_core/layout/drawers/legend_drawer_provider.dart';
@@ -11,6 +12,7 @@ import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
 import 'package:legend_design_core/layout/layout_provider.dart';
 import 'package:legend_design_core/layout/sectionNavigation/section_navigation.dart';
 import 'package:legend_design_core/layout/sections/section.dart';
+import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/router/routes/section_provider.dart';
 import 'package:legend_design_core/router/routes/section_route_info.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
@@ -21,7 +23,7 @@ import 'fixed/appBar.dart/fixed_appbar.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'fixed/bottomBar.dart/fixed_bottom_bar.dart';
 import 'fixed/fixed_footer.dart';
-import 'fixed/fixed_sider.dart';
+import 'fixed/sider/fixed_sider.dart';
 import '../typography/legend_text.dart';
 import '../typography/typography.dart';
 
@@ -32,12 +34,14 @@ class LegendScaffold extends StatefulWidget {
   final WidgetBuilder? siderBuilder;
   final WidgetBuilder? appBarBuilder;
   final bool? showSiderMenu;
+  final bool? showSiderSubMenu;
   final bool? showAppBarMenu;
   late final bool singlePage;
   late final List<Widget> children;
   late final WidgetBuilder contentBuilder;
   late final FixedFooter? customFooter;
   final double? verticalChildrenSpacing;
+  late final bool isUnderlyingRoute;
 
   LegendScaffold({
     required this.pageName,
@@ -47,16 +51,19 @@ class LegendScaffold extends StatefulWidget {
     this.showSiderMenu,
     this.showAppBarMenu,
     this.appBarBuilder,
+    this.showSiderSubMenu,
     WidgetBuilder? contentBuilder,
     List<Widget>? children,
     bool? singlePage,
     Key? key,
     this.customFooter,
     this.verticalChildrenSpacing,
+    bool? isUnderlyingRoute,
   }) : super(key: key) {
     this.singlePage = singlePage ?? false;
     this.children = children ?? [];
     this.contentBuilder = contentBuilder ?? (f) => Container();
+    this.isUnderlyingRoute = isUnderlyingRoute ?? false;
   }
 
   @override
@@ -131,7 +138,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
     );
   }
 
-  Widget getSider(ScreenSize screenSize) {
+  Widget getSider(ScreenSize screenSize, BuildContext context) {
     if (widget.layoutType == LayoutType.FixedSider) {
       return FixedSider(
         showMenu: true,
@@ -142,6 +149,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
       return FixedSider(
         builder: widget.siderBuilder,
         showMenu: widget.showSiderMenu,
+        showSubMenu: widget.showSiderSubMenu,
         showSectionMenu: true,
       );
     } else {
@@ -240,8 +248,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
       ),
     );
     double? footerheight;
-    if (children.isNotEmpty && !sizeProvider.isMobile) {
-      children.add(getFooter(120, context));
+    if (!sizeProvider.isMobile) {
       footerheight = 120;
     }
 
@@ -267,7 +274,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
             children: [
               Row(
                 children: [
-                  getSider(screenSize),
+                  getSider(screenSize, context),
                   Expanded(
                     child: CustomScrollView(
                       controller: controller,
@@ -298,14 +305,42 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                                       constraints: BoxConstraints(
                                         minHeight: space,
                                       ),
-                                      child: Builder(
-                                        builder: widget.contentBuilder,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          if (widget.isUnderlyingRoute &&
+                                              widget.layoutType !=
+                                                  LayoutType.FixedHeaderSider &&
+                                              widget.layoutType !=
+                                                  LayoutType.FixedHeaderSider)
+                                            Container(
+                                              height: SizeProvider.of(context)
+                                                      .height -
+                                                  80,
+                                              width: 36,
+                                              alignment: Alignment.center,
+                                              child: LegendAnimatedIcon(
+                                                icon: Icons.arrow_left,
+                                                theme: LegendAnimtedIconTheme(
+                                                    enabled: Colors.black87,
+                                                    disabled: Colors.black26),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ),
+                                          Expanded(
+                                            child: Builder(
+                                              builder: widget.contentBuilder,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                  if (!SizeProvider.of(context).isMobile &&
-                                      children.isNotEmpty)
-                                    getFooter(footerheight!, context),
+                                  if (footerheight != null)
+                                    getFooter(footerheight, context),
                                 ],
                               );
                             }),
@@ -314,10 +349,44 @@ class _LegendScaffoldState extends State<LegendScaffold> {
                           SliverToBoxAdapter(
                             child: Container(
                               color: theme.colors.scaffoldBackgroundColor,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: children,
-                                ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      if (widget.isUnderlyingRoute &&
+                                          widget.layoutType !=
+                                              LayoutType.FixedHeaderSider &&
+                                          widget.layoutType !=
+                                              LayoutType.FixedHeaderSider)
+                                        Container(
+                                          height:
+                                              SizeProvider.of(context).height -
+                                                  80,
+                                          width: 36,
+                                          alignment: Alignment.center,
+                                          child: LegendAnimatedIcon(
+                                            icon: Icons.arrow_left,
+                                            theme: LegendAnimtedIconTheme(
+                                                enabled: Colors.black87,
+                                                disabled: Colors.black26),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ),
+                                      Expanded(
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: children,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  getFooter(120, context)
+                                ],
                               ),
                             ),
                           ),

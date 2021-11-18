@@ -21,7 +21,7 @@ class About extends StatelessWidget {
           children: [],
         );
       },
-      layoutType: LayoutType.FixedHeader,
+      layoutType: LayoutType.FixedSider,
       pageName: "Home",
       onActionButtonPressed: (context) {
         LegendPopups.showLegendModal(

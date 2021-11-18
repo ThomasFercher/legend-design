@@ -41,6 +41,7 @@ class WidgetComponents extends StatelessWidget {
     ThemeProvider theme = context.watch<ThemeProvider>();
     return LegendScaffold(
       showSiderMenu: false,
+      showSiderSubMenu: true,
       showAppBarMenu: true,
       verticalChildrenSpacing: 24,
       children: [

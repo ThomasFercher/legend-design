@@ -18,6 +18,7 @@ import 'package:webstore/pages/drawerPages/settingsPage.dart';
 import 'package:webstore/pages/home.dart';
 import 'package:webstore/pages/services.dart';
 import 'package:webstore/pages/widgetComponets.dart';
+import 'package:webstore/pages/widgets/buttons.dart';
 
 class AppConfig {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
@@ -227,22 +228,44 @@ class AppConfig {
   );
 
   static List<MenuOption> menuOptions = [
-    const MenuOption(
+    MenuOption(
       title: "Home",
       page: "/",
       icon: Icons.home,
     ),
-    const MenuOption(
+    MenuOption(
       title: "Products",
       page: "/products",
       icon: Icons.accessibility,
     ),
-    const MenuOption(
+    MenuOption(
       title: "Widgets",
       page: "/widgets",
       icon: Icons.widgets,
+      children: [
+        MenuOption(
+          title: "Buttons",
+          page: "/widgets/buttons",
+          icon: Icons.radio_button_off,
+        ),
+        MenuOption(
+          title: "Modals",
+          page: "/widgets/buttons",
+          icon: Icons.window,
+        ),
+        MenuOption(
+          title: "Layout",
+          page: "/widgets/buttons",
+          icon: Icons.layers_outlined,
+        ),
+        MenuOption(
+          title: "Typography",
+          page: "/widgets/buttons",
+          icon: Icons.text_format,
+        ),
+      ],
     ),
-    const MenuOption(
+    MenuOption(
       title: "About",
       page: "/about",
       icon: Icons.info_outline_rounded,
@@ -288,6 +311,51 @@ class AppConfig {
           SectionRouteInfo(name: "/form"),
           SectionRouteInfo(name: "/table"),
           SectionRouteInfo(name: "/tags"),
+        ],
+        growable: true,
+      ),
+      children: List.of(
+        [
+          RouteInfo(
+            name: "/widgets/buttons",
+            page: ButtonsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/modals",
+            page: ProductsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/selectbar",
+            page: ProductsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/carousel",
+            page: ProductsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/textfield",
+            page: ProductsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/form",
+            page: ProductsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/table",
+            page: ProductsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/tags",
+            page: ProductsPage(),
+            isUnderyling: true,
+          ),
         ],
         growable: true,
       ),

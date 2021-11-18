@@ -6,11 +6,15 @@ class RouteInfo {
   final Widget page;
   final Object? arguments;
   final List<SectionRouteInfo>? sections;
+  final List<RouteInfo>? children;
+  final bool? isUnderyling;
 
   const RouteInfo({
     required this.name,
     required this.page,
+    this.isUnderyling,
     this.arguments,
     this.sections,
+    this.children,
   });
 }

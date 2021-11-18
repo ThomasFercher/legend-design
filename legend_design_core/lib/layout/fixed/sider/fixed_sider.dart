@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/sidermenu_vertical_tile.dart';
+import 'package:legend_design_core/layout/fixed/sider/fixed_sider_menu.dart';
 import 'package:legend_design_core/objects/drawer_menu_tile.dart';
 import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/router/router_provider.dart';
@@ -16,14 +17,17 @@ import 'package:provider/provider.dart';
 class FixedSider extends StatelessWidget {
   late final bool showMenu;
   late final bool showSectionMenu;
+  late final bool showSubMenu;
   WidgetBuilder? builder;
 
   FixedSider({
     bool? showMenu,
     bool? showSectionMenu,
+    bool? showSubMenu,
     this.builder,
   }) {
     this.showMenu = showMenu ?? true;
+    this.showSubMenu = showSubMenu ?? true;
     this.showSectionMenu = showSectionMenu ?? false;
   }
 
@@ -43,11 +47,13 @@ class FixedSider extends StatelessWidget {
                 builder: builder,
                 context: context,
                 showSectionMenu: showSectionMenu,
+                showSubMenu: showSubMenu,
               )
             : CollapsedSider(
                 context: context,
                 showMenu: showMenu,
                 showSectionMenu: showSectionMenu,
+                showSubMenu: showSubMenu,
               ),
       ),
     );
@@ -57,12 +63,14 @@ class FixedSider extends StatelessWidget {
 class CollapsedSider extends StatelessWidget {
   final bool showMenu;
   final bool showSectionMenu;
+  final bool showSubMenu;
 
   const CollapsedSider({
     Key? key,
     required this.context,
     required this.showMenu,
     required this.showSectionMenu,
+    required this.showSubMenu,
   }) : super(key: key);
 
   final BuildContext context;
@@ -146,32 +154,18 @@ class Sider extends StatelessWidget {
     required this.builder,
     required this.context,
     required this.showSectionMenu,
+    required this.showSubMenu,
   }) : super(key: key);
 
   final bool? showMenu;
   final bool? showSectionMenu;
   final WidgetBuilder? builder;
   final BuildContext context;
+  final bool showSubMenu;
 
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
-
-    List<MenuOption> options = RouterProvider.of(context).menuOptions;
-    List<DrawerMenuTile> tiles = List.of(
-      options.map(
-        (option) => DrawerMenuTile(
-          icon: option.icon,
-          title: option.title,
-          path: option.page,
-          backgroundColor: theme.colors.primaryColor,
-          left: false,
-          activeColor: theme.colors.selectionColor,
-          color: theme.colors.secondaryColor,
-          collapsed: false,
-        ),
-      ),
-    );
 
     List<SectionRouteInfo> sections =
         SectionProvider.of(context)?.sections ?? [];
@@ -196,14 +190,7 @@ class Sider extends StatelessWidget {
         height: 1.0,
         thickness: 1.0,
       ),
-      if (showMenu ?? false)
-        ListView(
-          shrinkWrap: true,
-          children: tiles,
-          padding: EdgeInsets.only(
-            top: 32,
-          ),
-        ),
+      if (showMenu ?? false) FixedSiderMenu(),
       if (showSectionMenu ?? false)
         Padding(
           padding: const EdgeInsets.only(top: 16.0),

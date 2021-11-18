@@ -17,6 +17,8 @@ class DrawerMenuTile extends StatefulWidget {
   final Color color;
   final Color activeColor;
   final bool collapsed;
+  final double? height;
+  final double? textSize;
 
   DrawerMenuTile({
     required this.icon,
@@ -27,6 +29,8 @@ class DrawerMenuTile extends StatefulWidget {
     required this.color,
     required this.activeColor,
     required this.collapsed,
+    this.height,
+    this.textSize,
   });
 
   @override
@@ -84,12 +88,15 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = context.watch<ThemeProvider>();
-
+    double? iconSize = widget.textSize != null
+        ? widget.textSize! * 1.8
+        : theme.typography.h2.fontSize! * 1.8;
     // TODO: implement build
     return Container(
       margin: EdgeInsets.only(
         bottom: 24.0,
       ),
+      height: widget.height,
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
@@ -137,7 +144,7 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
               Icon(
                 widget.icon,
                 color: color,
-                size: 28.0,
+                size: iconSize,
               ),
             if (widget.title != null)
               Container(
@@ -146,6 +153,7 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
                   text: widget.title!,
                   textStyle: theme.typography.h2.copyWith(
                     color: color,
+                    fontSize: widget.textSize,
                   ),
                 ),
               ),
@@ -153,7 +161,7 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
               Icon(
                 widget.icon,
                 color: color,
-                size: 28.0,
+                size: iconSize,
               ),
           ],
         ),

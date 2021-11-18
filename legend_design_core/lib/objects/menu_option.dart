@@ -12,13 +12,19 @@ class MenuOption {
   final String page;
   final IconData icon;
   final void Function(String page)? onSelected;
+  late final bool isUnderlying;
+  final List<MenuOption>? children;
 
-  const MenuOption({
+  MenuOption({
     this.title,
     required this.page,
     required this.icon,
     this.onSelected,
-  });
+    bool? isUnderlying,
+    this.children,
+  }) {
+    this.isUnderlying = isUnderlying ?? false;
+  }
 }
 
 class MenuOptionHeader extends StatefulWidget {
