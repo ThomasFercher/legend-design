@@ -18,6 +18,7 @@ class DrawerMenuTile extends StatefulWidget {
   final Color activeColor;
   final bool collapsed;
   final double? height;
+  final void Function()? onClicked;
   final double? textSize;
 
   DrawerMenuTile({
@@ -29,6 +30,7 @@ class DrawerMenuTile extends StatefulWidget {
     required this.color,
     required this.activeColor,
     required this.collapsed,
+    this.onClicked,
     this.height,
     this.textSize,
   });
@@ -132,6 +134,7 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
         },
         onTap: () {
           _isClicked = !_isClicked;
+          if (widget.onClicked != null) widget.onClicked!();
           RouterProvider.of(context).pushPage(
             settings: RouteSettings(name: widget.path),
           );

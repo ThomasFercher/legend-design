@@ -242,6 +242,7 @@ class AppConfig {
       title: "Widgets",
       page: "/widgets",
       icon: Icons.widgets,
+      showSubMenu: true,
       children: [
         MenuOption(
           title: "Buttons",

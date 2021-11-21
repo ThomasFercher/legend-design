@@ -5,6 +5,7 @@ import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/icons/legend_gradient_icon.dart';
 import 'package:legend_design_core/layout/legend_scaffold.dart';
 import 'package:legend_design_core/layout/sections/section.dart';
+import 'package:legend_design_core/modals/legendPopups.dart';
 
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 
@@ -29,7 +30,6 @@ import 'package:legend_design_widgets/legendButton/legendButton.dart';
 import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
 import 'package:legend_design_widgets/modals/legendAlert.dart';
 import 'package:legend_design_widgets/modals/legendBottomSheet.dart';
-import 'package:legend_design_widgets/modals/legendPopups.dart';
 import 'package:legend_design_widgets/modals/modal.dart';
 import 'package:provider/provider.dart';
 

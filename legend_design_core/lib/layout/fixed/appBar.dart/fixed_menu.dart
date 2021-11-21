@@ -63,6 +63,7 @@ class _FixedMenuState extends State<FixedMenu> {
             activeColor: widget.selected,
             color: widget.foreground,
             backgroundColor: widget.backgroundColor,
+            showSubMenu: option.showSubMenu,
           ),
         )
         .toList();

@@ -1,8 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:legend_design_widgets/modals/legendAlert.dart';
-import 'package:legend_design_widgets/modals/modal.dart';
 
 class LegendPopups {
   static final ModalConfiguration _modalConfiguration =
@@ -22,7 +20,7 @@ class LegendPopups {
 
   static void showAlert({
     required BuildContext context,
-    required LegendAlert alert,
+    required Widget alert,
   }) {
     showModal(
       context: context,
@@ -35,14 +33,15 @@ class LegendPopups {
 
   static void showLegendModal({
     required BuildContext context,
-    required Modal modal,
+    required Widget modal,
+    ModalConfiguration? config,
   }) {
     showModal(
       context: context,
       builder: (context) {
         return modal;
       },
-      configuration: _modalConfiguration,
+      configuration: config ?? _modalConfiguration,
     );
   }
 }
