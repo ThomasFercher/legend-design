@@ -13,10 +13,12 @@ class FixedMenu extends StatefulWidget {
   final Color? selected;
   final Color? backgroundColor;
   final Color? foreground;
+  final bool showSubMenu;
 
   const FixedMenu({
     Key? key,
     required this.context,
+    required this.showSubMenu,
     this.onSelected,
     this.showIconsOnly,
     this.iconColor,
@@ -63,7 +65,7 @@ class _FixedMenuState extends State<FixedMenu> {
             activeColor: widget.selected,
             color: widget.foreground,
             backgroundColor: widget.backgroundColor,
-            showSubMenu: option.showSubMenu,
+            showSubMenu: widget.showSubMenu,
           ),
         )
         .toList();

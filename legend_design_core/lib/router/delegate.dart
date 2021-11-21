@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'routes/route_info.dart';
 import 'router_provider.dart';
 
+RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+
 class WebRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<List<RouteSettings>> {
   final List<Page> _pages = [];
@@ -25,6 +27,7 @@ class WebRouterDelegate extends RouterDelegate<List<RouteSettings>>
     return Navigator(
       pages: List.of(_pages),
       key: navigatorKey,
+      observers: [routeObserver],
       onPopPage: _onPopPage,
     );
   }

@@ -14,7 +14,7 @@ import '../router/router_provider.dart';
 class MenuOption {
   final String? title;
   final String page;
-  final IconData icon;
+  final IconData? icon;
   final void Function(String page)? onSelected;
   late final bool isUnderlying;
   final List<MenuOption>? children;
@@ -24,7 +24,7 @@ class MenuOption {
   MenuOption({
     this.title,
     required this.page,
-    required this.icon,
+    this.icon,
     this.onSelected,
     bool? isUnderlying,
     this.children,
@@ -209,9 +209,9 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               config: FadeScaleTransitionConfiguration(
                 barrierColor: Colors.transparent,
                 barrierDismissible: true,
-                transitionDuration: Duration(milliseconds: 40),
+                transitionDuration: Duration(milliseconds: 200),
                 barrierLabel: "",
-                reverseTransitionDuration: Duration(milliseconds: 40),
+                reverseTransitionDuration: Duration(milliseconds: 100),
               ),
               modal: ModalSheet(
                 child: Material(

@@ -44,6 +44,8 @@ class WidgetComponents extends StatelessWidget {
       showSiderSubMenu: true,
       showAppBarMenu: true,
       verticalChildrenSpacing: 24,
+      showSectionMenu: true,
+      showTopSubMenu: false,
       children: [
         Section(
           name: "/buttons",

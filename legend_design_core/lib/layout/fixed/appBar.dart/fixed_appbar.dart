@@ -63,7 +63,7 @@ class FixedAppBarSizing {
 
 class FixedAppBar extends StatelessWidget {
   final void Function(int i)? onActionPressed;
-
+  final bool showSubMenu;
   final bool? showMenu;
   final WidgetBuilder? builder;
   final Widget? leading;
@@ -81,6 +81,7 @@ class FixedAppBar extends StatelessWidget {
     this.layoutType,
     required this.pcontext,
     this.onActionPressed,
+    this.showSubMenu = true,
   });
 
   BoxDecoration? getCard() {
@@ -213,6 +214,7 @@ class FixedAppBar extends StatelessWidget {
                       selected: theme.appBarColors.selectedColor,
                       backgroundColor: theme.appBarColors.backgroundColor,
                       foreground: theme.appBarColors.foreground,
+                      showSubMenu: showSubMenu,
                     ),
                   ),
               ],

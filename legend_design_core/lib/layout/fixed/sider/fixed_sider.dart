@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/sidermenu_vertical_tile.dart';
 import 'package:legend_design_core/layout/fixed/sider/fixed_sider_menu.dart';
+
 import 'package:legend_design_core/objects/drawer_menu_tile.dart';
 import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/router/router_provider.dart';
@@ -18,6 +19,7 @@ class FixedSider extends StatelessWidget {
   late final bool showMenu;
   late final bool showSectionMenu;
   late final bool showSubMenu;
+
   WidgetBuilder? builder;
 
   FixedSider({
@@ -183,7 +185,23 @@ class Sider extends StatelessWidget {
         ),
       ),
     );
+    MenuOption? current = RouterProvider.of(context).current;
+    List<MenuOption> subMenu = current?.children ?? [];
 
+    List<DrawerMenuTile> subMenuTiles = List.of(
+      subMenu.map(
+        (option) => DrawerMenuTile(
+          icon: option.icon,
+          path: option.page,
+          title: option.title,
+          collapsed: false,
+          activeColor: theme.appBarColors.selectedColor,
+          backgroundColor: theme.colors.primaryColor,
+          color: theme.appBarColors.foreground,
+          left: false,
+        ),
+      ),
+    );
     List<Widget> children = [
       Divider(
         color: theme.colors.secondaryColor.withOpacity(0.2),
@@ -191,17 +209,20 @@ class Sider extends StatelessWidget {
         thickness: 1.0,
       ),
       if (showMenu ?? false) FixedSiderMenu(),
-      if (showSectionMenu ?? false)
+      if (showSubMenu && subMenuTiles.isNotEmpty)
         Padding(
-          padding: const EdgeInsets.only(top: 16.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              LegendText(
-                padding: EdgeInsets.only(left: 32.0),
-                text: 'Widgets',
-                textStyle: theme.typography.h4.copyWith(
-                  color: theme.appBarColors.selectedColor,
+              Padding(
+                padding: const EdgeInsets.only(left: 32),
+                child: LegendText(
+                  text: current?.title ?? "",
+                  textStyle: theme.typography.h4.copyWith(
+                    color: theme.colors.selectionColor,
+                  ),
                 ),
               ),
               Padding(
@@ -210,14 +231,54 @@ class Sider extends StatelessWidget {
                   vertical: 8.0,
                 ),
                 child: Divider(
-                  color: theme.appBarColors.selectedColor,
+                  color: theme.colors.selectionColor,
                   height: 1,
                   thickness: 1,
                 ),
               ),
-              ListView(
-                shrinkWrap: true,
-                children: sectionTiles,
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: ListView(
+                  children: subMenuTiles,
+                  shrinkWrap: true,
+                ),
+              ),
+            ],
+          ),
+        ),
+      if (showSectionMenu ?? false)
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 32),
+                child: LegendText(
+                  text: "Sections",
+                  textStyle: theme.typography.h4.copyWith(
+                    color: theme.colors.selectionColor,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32.0,
+                  vertical: 8.0,
+                ),
+                child: Divider(
+                  color: theme.colors.selectionColor,
+                  height: 1,
+                  thickness: 1,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: ListView(
+                  children: sectionTiles,
+                  shrinkWrap: true,
+                ),
               ),
             ],
           ),

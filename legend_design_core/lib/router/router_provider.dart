@@ -17,6 +17,14 @@ class RouterProvider extends InheritedWidget {
   final List<RouteInfo> routes;
   final List<MenuOption> menuOptions;
 
+  MenuOption? _current;
+
+  MenuOption? get current => _current;
+
+  void setMenuOption(MenuOption option) {
+    _current = option;
+  }
+
   RouterProvider({
     Key? key,
     required this.routerDelegate,
@@ -30,6 +38,10 @@ class RouterProvider extends InheritedWidget {
         context.dependOnInheritedWidgetOfExactType<RouterProvider>();
     assert(result != null, 'No RouterProvider found in context');
     return result!;
+  }
+
+  MenuOption getCurrentMenu() {
+    return menuOptions[0];
   }
 
   void pushPage({required RouteSettings settings}) {

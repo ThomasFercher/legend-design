@@ -12,7 +12,10 @@ import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
 import 'package:legend_design_core/layout/layout_provider.dart';
 import 'package:legend_design_core/layout/sectionNavigation/section_navigation.dart';
 import 'package:legend_design_core/layout/sections/section.dart';
+import 'package:legend_design_core/objects/menu_option.dart';
+import 'package:legend_design_core/router/delegate.dart';
 import 'package:legend_design_core/router/router_provider.dart';
+import 'package:legend_design_core/router/routes/route_info.dart';
 import 'package:legend_design_core/router/routes/section_provider.dart';
 import 'package:legend_design_core/router/routes/section_route_info.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
@@ -42,6 +45,8 @@ class LegendScaffold extends StatefulWidget {
   late final FixedFooter? customFooter;
   final double? verticalChildrenSpacing;
   late final bool isUnderlyingRoute;
+  final bool? showSectionMenu;
+  final bool? showTopSubMenu;
 
   LegendScaffold({
     required this.pageName,
@@ -59,6 +64,8 @@ class LegendScaffold extends StatefulWidget {
     this.customFooter,
     this.verticalChildrenSpacing,
     bool? isUnderlyingRoute,
+    this.showSectionMenu,
+    this.showTopSubMenu,
   }) : super(key: key) {
     this.singlePage = singlePage ?? false;
     this.children = children ?? [];
@@ -70,12 +77,61 @@ class LegendScaffold extends StatefulWidget {
   _LegendScaffoldState createState() => _LegendScaffoldState();
 }
 
-class _LegendScaffoldState extends State<LegendScaffold> {
+class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
   List<SectionRouteInfo>? sections;
 
   late ScrollController controller;
 
   late bool showSettings;
+  MenuOption? currentRoute;
+
+  // TODO: Move to Middleware https://medium.com/flutter-community/flutter-navigator-middleware-part1-9ebc47cea2f2
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPush() {
+    final route = ModalRoute.of(context)?.settings.name;
+
+    MenuOption? o = RouterProvider.of(context).menuOptions.singleWhere(
+          (element) => element.page == route,
+          orElse: () => MenuOption(page: "/"),
+        );
+
+    setState(() {
+      currentRoute = o;
+    });
+
+    RouterProvider.of(context).setMenuOption(o);
+    print('didPush route: $route');
+  }
+
+  @override
+  void didPopNext() {
+    final route = ModalRoute.of(context)?.settings.name;
+    print('didPopNext route: $route');
+  }
+
+  @override
+  void didPushNext() {
+    final route = ModalRoute.of(context)?.settings.name;
+    print('didPushNext route: $route');
+  }
+
+  @override
+  void didPop() {
+    final route = ModalRoute.of(context)?.settings.name;
+    print('didPop route: $route');
+  }
 
   @override
   void initState() {
@@ -141,8 +197,10 @@ class _LegendScaffoldState extends State<LegendScaffold> {
   Widget getSider(ScreenSize screenSize, BuildContext context) {
     if (widget.layoutType == LayoutType.FixedSider) {
       return FixedSider(
-        showMenu: true,
         builder: widget.siderBuilder,
+        showMenu: widget.showSiderMenu,
+        showSubMenu: widget.showSiderSubMenu,
+        showSectionMenu: widget.showSectionMenu,
       );
     } else if (widget.layoutType == LayoutType.FixedHeaderSider &&
         screenSize != ScreenSize.Small) {
@@ -150,7 +208,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
         builder: widget.siderBuilder,
         showMenu: widget.showSiderMenu,
         showSubMenu: widget.showSiderSubMenu,
-        showSectionMenu: true,
+        showSectionMenu: widget.showSectionMenu,
       );
     } else {
       return Container();
@@ -171,6 +229,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
           builder: widget.appBarBuilder,
           pcontext: context,
           layoutType: widget.layoutType,
+          showSubMenu: widget.showTopSubMenu ?? true,
           onActionPressed: (i) {
             switch (i) {
               case 0:
@@ -189,6 +248,7 @@ class _LegendScaffoldState extends State<LegendScaffold> {
               : false,
           pcontext: context,
           layoutType: widget.layoutType,
+          showSubMenu: widget.showTopSubMenu ?? true,
           onActionPressed: (i) {
             switch (i) {
               case 0:

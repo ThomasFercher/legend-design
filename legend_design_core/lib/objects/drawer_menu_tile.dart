@@ -9,7 +9,7 @@ import 'package:provider/src/provider.dart';
 import '../typography/legend_text.dart';
 
 class DrawerMenuTile extends StatefulWidget {
-  final IconData icon;
+  final IconData? icon;
   final String? title;
   final String path;
   final Color backgroundColor;
@@ -113,9 +113,6 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
           ),
         ),
       ),
-      padding: EdgeInsets.only(
-        left: widget.collapsed ? 0 : 26.0,
-      ),
       child: InkWell(
         hoverColor: Colors.transparent,
         enableFeedback: true,
@@ -139,34 +136,41 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
             settings: RouteSettings(name: widget.path),
           );
         },
-        child: Row(
-          mainAxisAlignment:
-              widget.left ? MainAxisAlignment.end : MainAxisAlignment.start,
-          children: [
-            if (!widget.left)
-              Icon(
-                widget.icon,
-                color: color,
-                size: iconSize,
-              ),
-            if (widget.title != null)
-              Container(
-                margin: EdgeInsets.only(left: 12.0, right: 12.0),
-                child: LegendText(
-                  text: widget.title!,
-                  textStyle: theme.typography.h2.copyWith(
-                    color: color,
-                    fontSize: widget.textSize,
+        child: Container(
+          padding: EdgeInsets.only(
+            left: widget.collapsed ? 0 : 26.0,
+            top: 2,
+            bottom: 2,
+          ),
+          child: Row(
+            mainAxisAlignment:
+                widget.left ? MainAxisAlignment.end : MainAxisAlignment.start,
+            children: [
+              if (!widget.left)
+                Icon(
+                  widget.icon,
+                  color: color,
+                  size: iconSize,
+                ),
+              if (widget.title != null)
+                Container(
+                  margin: EdgeInsets.only(left: 12.0, right: 12.0),
+                  child: LegendText(
+                    text: widget.title!,
+                    textStyle: theme.typography.h2.copyWith(
+                      color: color,
+                      fontSize: widget.textSize,
+                    ),
                   ),
                 ),
-              ),
-            if (widget.left)
-              Icon(
-                widget.icon,
-                color: color,
-                size: iconSize,
-              ),
-          ],
+              if (widget.left)
+                Icon(
+                  widget.icon,
+                  color: color,
+                  size: iconSize,
+                ),
+            ],
+          ),
         ),
       ),
     );
