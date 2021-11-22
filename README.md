@@ -1,8 +1,7 @@
 # Legend Design Template
+© 2021-2021 Thomas Fercher
 
 A sample Project using the Legend Design Kit. This aims to be a Template for every Platform. 
-
-
 
 ## Layouts
 The LegendScaffold which is the base for each page can be used with three different Layout Types.
