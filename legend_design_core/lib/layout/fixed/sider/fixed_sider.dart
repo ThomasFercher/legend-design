@@ -213,32 +213,6 @@ class Sider extends StatelessWidget {
     );
 
     List<Widget> children = [
-      if (layoutType == LayoutType.FixedSider)
-        Container(
-          color: theme.colors.siderColorTheme.background,
-          padding: const EdgeInsets.symmetric(
-            vertical: 20.0,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              LegendText(
-                text: 'Legend Design',
-                textStyle: theme.typography.h6.copyWith(
-                  color: theme.appBarColors.foreground,
-                ),
-              ),
-              Container(
-                height: 42,
-                width: 42,
-                margin: const EdgeInsets.only(top: 10.0),
-                child: Center(
-                  child: LayoutProvider.of(context)?.logo ?? Container(),
-                ),
-              ),
-            ],
-          ),
-        ),
       if (showMenu ?? false) FixedSiderMenu(),
       if (showSubMenu && subMenuTiles.isNotEmpty)
         Padding(
@@ -331,6 +305,32 @@ class Sider extends StatelessWidget {
           : EdgeInsets.all(0),
       child: Column(
         children: [
+          if (layoutType == LayoutType.FixedSider)
+            Container(
+              color: theme.colors.siderColorTheme.background,
+              padding: const EdgeInsets.symmetric(
+                vertical: 12.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  LegendText(
+                    text: 'Legend Design',
+                    textStyle: theme.typography.h6.copyWith(
+                      color: theme.appBarColors.foreground,
+                    ),
+                  ),
+                  Container(
+                    height: 42,
+                    width: 42,
+                    margin: const EdgeInsets.only(top: 6.0),
+                    child: Center(
+                      child: LayoutProvider.of(context)?.logo ?? Container(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           Expanded(
             child: Scrollbar(
               controller: controller,
@@ -342,7 +342,7 @@ class Sider extends StatelessWidget {
           ),
           if (layoutType == LayoutType.FixedSider)
             Container(
-              padding: EdgeInsets.all(32),
+              padding: EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

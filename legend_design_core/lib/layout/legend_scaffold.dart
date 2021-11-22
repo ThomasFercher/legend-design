@@ -101,11 +101,22 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
   @override
   void didPush() {
     final route = ModalRoute.of(context)?.settings.name;
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
+    MenuOption o = MenuOption(page: "");
 
-    MenuOption? o = RouterProvider.of(context).menuOptions.singleWhere(
-          (element) => element.page == route,
-          orElse: () => MenuOption(page: "/"),
-        );
+    for (MenuOption op in options) {
+      if (op.page == route) {
+        o = op;
+        break;
+      }
+      if (op.children != null)
+        for (MenuOption sub in op.children!) {
+          if (sub.page == route) {
+            o = sub;
+            break;
+          }
+        }
+    }
 
     setState(() {
       currentRoute = o;
@@ -118,6 +129,16 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
   @override
   void didPopNext() {
     final route = ModalRoute.of(context)?.settings.name;
+
+    MenuOption? o = RouterProvider.of(context).menuOptions.singleWhere(
+          (element) => element.page == route,
+          orElse: () => MenuOption(page: "/"),
+        );
+
+    setState(() {
+      currentRoute = o;
+    });
+    RouterProvider.of(context).setMenuOption(o);
     print('didPopNext route: $route');
   }
 

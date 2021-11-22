@@ -193,8 +193,8 @@ class AppConfig {
   );
   static LegendColorTheme darkColorTheme = LegendColorTheme(
     siderColorTheme: SiderColorTheme(
-      background: Colors.cyan[900]!,
-      backgroundMenu: Colors.cyan,
+      background: Colors.teal,
+      backgroundMenu: Colors.teal[600]!,
       foreground: Colors.teal[50]!,
     ),
     typographyColors: LegendTypographyColors(
