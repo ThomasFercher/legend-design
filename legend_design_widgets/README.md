@@ -1,4 +1,4 @@
-#Custom Widgets
+# Custom Widgets
 These Widgets can be fully implemented in the Legend Design ecosystem. But you can also use them without depending on anything.
 There are a few different categories of widgets.
 
