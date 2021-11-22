@@ -57,6 +57,7 @@ class _FixedMenuState extends State<FixedMenu> {
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
+    MenuOption? sel = RouterProvider.of(context).current;
     List<MenuOptionHeader> options = RouterProvider.of(context)
         .menuOptions
         .map(
@@ -66,6 +67,7 @@ class _FixedMenuState extends State<FixedMenu> {
             color: widget.foreground,
             backgroundColor: widget.backgroundColor,
             showSubMenu: widget.showSubMenu,
+            forceColor: option == sel,
           ),
         )
         .toList();

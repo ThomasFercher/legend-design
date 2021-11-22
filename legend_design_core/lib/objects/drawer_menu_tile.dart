@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:legend_design_core/objects/drawer.dart';
 import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/typography.dart';
@@ -14,12 +15,14 @@ class DrawerMenuTile extends StatefulWidget {
   final String path;
   final Color backgroundColor;
   final bool left;
-  final Color color;
+  Color color;
   final Color activeColor;
   final bool collapsed;
   final double? height;
   final void Function()? onClicked;
   final double? textSize;
+  final bool rectangleIndicator;
+  final bool forceColor;
 
   DrawerMenuTile({
     required this.icon,
@@ -33,8 +36,13 @@ class DrawerMenuTile extends StatefulWidget {
     this.onClicked,
     this.height,
     this.textSize,
-  });
-
+    this.rectangleIndicator = false,
+    this.forceColor = false,
+  }) {
+    if (forceColor) {
+      color = activeColor;
+    }
+  }
   @override
   _DrawerMenuTileState createState() => _DrawerMenuTileState();
 }
@@ -99,20 +107,22 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
         bottom: 24.0,
       ),
       height: widget.height,
-      decoration: BoxDecoration(
-        border: Border(
-          left: BorderSide(
-            color: borderColor ?? Colors.red,
-            width: 4,
-            style: widget.left ? BorderStyle.solid : BorderStyle.none,
-          ),
-          right: BorderSide(
-            color: borderColor ?? Colors.red,
-            width: 4,
-            style: widget.left ? BorderStyle.none : BorderStyle.solid,
-          ),
-        ),
-      ),
+      decoration: !widget.rectangleIndicator
+          ? BoxDecoration(
+              border: Border(
+                left: BorderSide(
+                  color: borderColor ?? Colors.transparent,
+                  width: 4,
+                  style: widget.left ? BorderStyle.solid : BorderStyle.none,
+                ),
+                right: BorderSide(
+                  color: borderColor ?? Colors.transparent,
+                  width: 4,
+                  style: widget.left ? BorderStyle.none : BorderStyle.solid,
+                ),
+              ),
+            )
+          : null,
       child: InkWell(
         hoverColor: Colors.transparent,
         enableFeedback: true,
@@ -169,6 +179,13 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
                   color: color,
                   size: iconSize,
                 ),
+              Expanded(child: Container()),
+              if (widget.rectangleIndicator)
+                Triangle(
+                  color: borderColor ?? Colors.transparent,
+                  height: 18,
+                  width: 9,
+                )
             ],
           ),
         ),

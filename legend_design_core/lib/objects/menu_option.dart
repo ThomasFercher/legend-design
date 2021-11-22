@@ -36,10 +36,10 @@ class MenuOption {
 
 class MenuOptionHeader extends StatefulWidget {
   final MenuOption option;
-  final Color? color;
+  Color? color;
   final Color? activeColor;
   final Color? backgroundColor;
-
+  final bool forceColor;
   late final bool showSubMenu;
 
   MenuOptionHeader({
@@ -48,11 +48,16 @@ class MenuOptionHeader extends StatefulWidget {
     this.activeColor,
     this.backgroundColor,
     bool? showSubMenu,
+    this.forceColor = false,
   }) {
     if (option.children != null) {
       this.showSubMenu = showSubMenu ?? false;
     } else {
       this.showSubMenu = false;
+    }
+
+    if (forceColor) {
+      color = activeColor;
     }
   }
 
@@ -159,6 +164,8 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
 
     double left_q = (subMenuWidth - width) / 2;
 
+    MenuOption? sel = RouterProvider.of(context).current;
+
     List<Widget>? tiles;
     if (widget.showSubMenu) {
       tiles = widget.option.children!
@@ -175,6 +182,7 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               onClicked: () {
                 poppedFromtTop = true;
               },
+              forceColor: option == sel,
             ),
           )
           .toList();

@@ -19,6 +19,7 @@ class FixedSiderMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeProvider theme = context.watch<ThemeProvider>();
     options = RouterProvider.of(context).menuOptions;
+    MenuOption? sel = RouterProvider.of(context).current;
 
     for (MenuOption option in options!) {
       if (option.children == null) {
@@ -27,11 +28,12 @@ class FixedSiderMenu extends StatelessWidget {
             icon: option.icon,
             title: option.title,
             path: option.page,
-            backgroundColor: theme.colors.primaryColor,
+            backgroundColor: theme.colors.siderColorTheme.backgroundMenu,
             left: false,
             activeColor: theme.colors.selectionColor,
-            color: theme.colors.secondaryColor,
+            color: theme.colors.siderColorTheme.foreground,
             collapsed: false,
+            forceColor: option == sel,
           ),
         );
       } else {
@@ -43,10 +45,16 @@ class FixedSiderMenu extends StatelessWidget {
       }
     }
 
-    return ListView(
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      children: tiles,
+    return Container(
+      color: theme.colors.siderColorTheme.backgroundMenu,
+      padding: const EdgeInsets.only(
+        top: 24.0,
+      ),
+      child: ListView(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        children: tiles,
+      ),
     );
   }
 }

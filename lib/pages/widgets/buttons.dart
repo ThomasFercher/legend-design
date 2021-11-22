@@ -20,7 +20,7 @@ class ButtonsPage extends StatelessWidget {
     ThemeProvider theme = context.watch<ThemeProvider>();
     return LegendScaffold(
       pageName: 'Buttons',
-      layoutType: LayoutType.FixedHeaderSider,
+      layoutType: LayoutType.FixedHeader,
       showSiderMenu: false,
       isUnderlyingRoute: true,
       contentBuilder: (context) {

@@ -36,12 +36,18 @@ class LegendPopups {
     required Widget modal,
     ModalConfiguration? config,
   }) {
-    showModal(
+    /*  showModal(
       context: context,
       builder: (context) {
         return modal;
       },
       configuration: config ?? _modalConfiguration,
+    );*/
+
+    showDialog(
+      context: context,
+      builder: (context) => modal,
+      barrierColor: Colors.transparent,
     );
   }
 }

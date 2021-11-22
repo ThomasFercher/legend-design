@@ -201,6 +201,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
         showMenu: widget.showSiderMenu,
         showSubMenu: widget.showSiderSubMenu,
         showSectionMenu: widget.showSectionMenu,
+        layoutType: widget.layoutType,
       );
     } else if (widget.layoutType == LayoutType.FixedHeaderSider &&
         screenSize != ScreenSize.Small) {
@@ -209,6 +210,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
         showMenu: widget.showSiderMenu,
         showSubMenu: widget.showSiderSubMenu,
         showSectionMenu: widget.showSectionMenu,
+        layoutType: widget.layoutType,
       );
     } else {
       return Container();
@@ -274,6 +276,23 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
     );
   }
 
+  double calculateMinContentHeight() {
+    ThemeProvider theme = context.watch<ThemeProvider>();
+    double height = MediaQuery.of(context).size.height;
+    double footerHeight =
+        LayoutProvider.of(context)?.globalFooter?.sizing?.height ?? 0;
+
+    height -= footerHeight;
+
+    if (widget.layoutType == LayoutType.FixedSider ||
+        widget.layoutType == LayoutType.Content) {
+    } else {
+      height -= theme.appBarSizing.appBarHeight;
+    }
+
+    return height;
+  }
+
   Widget materialLayout(BuildContext context) {
     SizeProvider sizeProvider = SizeProvider.of(context);
     ScreenSize screenSize = sizeProvider.screenSize;
@@ -289,8 +308,11 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
         26.0 +
         48.0;
 
-    double maxHeight = SizeProvider.of(context).height -
-        theme.sizing.appBarSizing.appBarHeight;
+    double? footerheight;
+    if (!sizeProvider.isMobile) {
+      footerheight = 120;
+    }
+    double maxHeight = calculateMinContentHeight();
 
     // TODO Improve
     List<Widget> a = getChildren(context);
@@ -307,10 +329,6 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
         },
       ),
     );
-    double? footerheight;
-    if (!sizeProvider.isMobile) {
-      footerheight = 120;
-    }
 
     return Stack(
       children: [
@@ -342,68 +360,81 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                         getHeader(context),
                         if (widget.children.isEmpty)
                           SliverToBoxAdapter(
-                            child:
-                                LayoutBuilder(builder: (context, constraints) {
-                              double space = maxHeight -
-                                  (footerheight ?? 0) -
-                                  theme.sizing.contentPadding * 2;
-
-                              if (SizeProvider.of(context).isMobile) {
-                                space -= (theme.bottomBarStyle?.height ?? 0) +
-                                    (theme.bottomBarStyle?.margin.vertical ??
-                                        0);
-                              }
-
-                              return Column(
-                                children: [
-                                  Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
                                     color: theme.colors.scaffoldBackgroundColor,
-                                    padding: EdgeInsets.all(
-                                      theme.sizing.contentPadding,
+                                  ),
+                                  child: Container(
+                                    constraints: BoxConstraints(
+                                      minHeight: maxHeight,
                                     ),
-                                    child: Container(
-                                      constraints: BoxConstraints(
-                                        minHeight: space,
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          if (widget.isUnderlyingRoute &&
-                                              widget.layoutType !=
-                                                  LayoutType.FixedHeaderSider &&
-                                              widget.layoutType !=
-                                                  LayoutType.FixedHeaderSider)
-                                            Container(
-                                              height: SizeProvider.of(context)
-                                                      .height -
-                                                  80,
-                                              width: 36,
-                                              alignment: Alignment.center,
-                                              child: LegendAnimatedIcon(
-                                                icon: Icons.arrow_left,
-                                                theme: LegendAnimtedIconTheme(
-                                                    enabled: Colors.black87,
-                                                    disabled: Colors.black26),
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        if (widget.layoutType ==
+                                                LayoutType.FixedSider ||
+                                            widget.layoutType ==
+                                                LayoutType.FixedHeaderSider)
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 3.0,
+                                            ),
+                                            child: Container(
+                                              height: maxHeight,
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black12,
+                                                    spreadRadius: 3,
+                                                    blurRadius: 6,
+                                                    offset: Offset(0, -6),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          Expanded(
+                                          ),
+                                        if (widget.isUnderlyingRoute &&
+                                            widget.layoutType !=
+                                                LayoutType.FixedHeaderSider &&
+                                            widget.layoutType !=
+                                                LayoutType.FixedHeaderSider)
+                                          Container(
+                                            height: SizeProvider.of(context)
+                                                    .height -
+                                                80,
+                                            width: 36,
+                                            alignment: Alignment.center,
+                                            child: LegendAnimatedIcon(
+                                              icon: Icons.arrow_left,
+                                              theme: LegendAnimtedIconTheme(
+                                                  enabled: Colors.black87,
+                                                  disabled: Colors.black26),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                          ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(
+                                              theme.sizing.contentPadding,
+                                            ),
                                             child: Builder(
                                               builder: widget.contentBuilder,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  if (footerheight != null)
-                                    getFooter(footerheight, context),
-                                ],
-                              );
-                            }),
+                                ),
+                                if (footerheight != null)
+                                  getFooter(footerheight, context),
+                              ],
+                            ),
                           )
                         else
                           SliverToBoxAdapter(
@@ -455,8 +486,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                   ),
                 ],
               ),
-              if ((widget.layoutType == LayoutType.FixedSider ||
-                      widget.layoutType == LayoutType.FixedHeaderSider) &&
+              if ((widget.layoutType == LayoutType.FixedHeaderSider) &&
                   !theme.isMobile)
                 Positioned(
                   left: theme.appBarSizing.contentPadding.horizontal,

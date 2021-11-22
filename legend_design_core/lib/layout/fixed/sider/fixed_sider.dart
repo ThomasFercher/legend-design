@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/drawers/legend_drawer_provider.dart';
 import 'package:legend_design_core/layout/drawers/sidermenu_vertical_tile.dart';
 import 'package:legend_design_core/layout/fixed/sider/fixed_sider_menu.dart';
+import 'package:legend_design_core/layout/layout_provider.dart';
 
 import 'package:legend_design_core/objects/drawer_menu_tile.dart';
 import 'package:legend_design_core/objects/menu_option.dart';
@@ -19,6 +22,7 @@ class FixedSider extends StatelessWidget {
   late final bool showMenu;
   late final bool showSectionMenu;
   late final bool showSubMenu;
+  late final LayoutType layoutType;
 
   WidgetBuilder? builder;
 
@@ -27,10 +31,12 @@ class FixedSider extends StatelessWidget {
     bool? showSectionMenu,
     bool? showSubMenu,
     this.builder,
+    LayoutType? layoutType,
   }) {
     this.showMenu = showMenu ?? true;
     this.showSubMenu = showSubMenu ?? true;
     this.showSectionMenu = showSectionMenu ?? false;
+    this.layoutType = layoutType ?? LayoutType.FixedHeader;
   }
 
   @override
@@ -42,7 +48,7 @@ class FixedSider extends StatelessWidget {
     return Hero(
       tag: ValueKey('sider'),
       child: Material(
-        elevation: 20,
+        elevation: 0,
         child: showSider
             ? Sider(
                 showMenu: showMenu,
@@ -50,6 +56,7 @@ class FixedSider extends StatelessWidget {
                 context: context,
                 showSectionMenu: showSectionMenu,
                 showSubMenu: showSubMenu,
+                layoutType: layoutType,
               )
             : CollapsedSider(
                 context: context,
@@ -157,6 +164,7 @@ class Sider extends StatelessWidget {
     required this.context,
     required this.showSectionMenu,
     required this.showSubMenu,
+    required this.layoutType,
   }) : super(key: key);
 
   final bool? showMenu;
@@ -164,6 +172,7 @@ class Sider extends StatelessWidget {
   final WidgetBuilder? builder;
   final BuildContext context;
   final bool showSubMenu;
+  final LayoutType layoutType;
 
   @override
   Widget build(BuildContext context) {
@@ -186,8 +195,8 @@ class Sider extends StatelessWidget {
       ),
     );
     MenuOption? current = RouterProvider.of(context).current;
-    List<MenuOption> subMenu = current?.children ?? [];
 
+    List<MenuOption> subMenu = current?.children ?? [];
     List<DrawerMenuTile> subMenuTiles = List.of(
       subMenu.map(
         (option) => DrawerMenuTile(
@@ -202,12 +211,34 @@ class Sider extends StatelessWidget {
         ),
       ),
     );
+
     List<Widget> children = [
-      Divider(
-        color: theme.colors.secondaryColor.withOpacity(0.2),
-        height: 1.0,
-        thickness: 1.0,
-      ),
+      if (layoutType == LayoutType.FixedSider)
+        Container(
+          color: theme.colors.siderColorTheme.background,
+          padding: const EdgeInsets.symmetric(
+            vertical: 20.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              LegendText(
+                text: 'Legend Design',
+                textStyle: theme.typography.h6.copyWith(
+                  color: theme.appBarColors.foreground,
+                ),
+              ),
+              Container(
+                height: 42,
+                width: 42,
+                margin: const EdgeInsets.only(top: 10.0),
+                child: Center(
+                  child: LayoutProvider.of(context)?.logo ?? Container(),
+                ),
+              ),
+            ],
+          ),
+        ),
       if (showMenu ?? false) FixedSiderMenu(),
       if (showSubMenu && subMenuTiles.isNotEmpty)
         Padding(
@@ -286,29 +317,51 @@ class Sider extends StatelessWidget {
       if (builder != null)
         Builder(
           builder: (context) => builder!(context),
-        )
+        ),
     ];
-
-    for (var i = 1; i < children.length; i += 2) {
-      children.insert(i, Padding(padding: EdgeInsets.only(top: 16)));
-    }
 
     ScrollController controller = ScrollController();
 
     return Container(
-      width: 180,
+      width: layoutType == LayoutType.FixedSider ? 220 : 180,
       height: MediaQuery.of(context).size.height,
-      color: theme.appBarColors.backgroundColor,
-      padding: EdgeInsets.only(
-          top: theme.appBarSizing.appBarHeight +
-              theme.appBarSizing.contentPadding.vertical),
-      child: Scrollbar(
-        controller: controller,
-        child: ListView(
-          controller: controller,
-          children: children,
-          shrinkWrap: true,
-        ),
+      color: theme.colors.siderColorTheme.background,
+      padding: layoutType == LayoutType.FixedHeaderSider
+          ? EdgeInsets.only(top: theme.sizing.appBarSizing.appBarHeight)
+          : EdgeInsets.all(0),
+      child: Column(
+        children: [
+          Expanded(
+            child: Scrollbar(
+              controller: controller,
+              child: ListView(
+                controller: controller,
+                children: children,
+              ),
+            ),
+          ),
+          if (layoutType == LayoutType.FixedSider)
+            Container(
+              padding: EdgeInsets.all(32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LegendAnimatedIcon(
+                    icon: Icons.settings,
+                    iconSize: 28,
+                    theme: LegendAnimtedIconTheme(
+                      enabled: theme.colors.selectionColor,
+                      disabled: theme.appBarColors.foreground,
+                    ),
+                    onPressed: () {
+                      Provider.of<LegendDrawerProvider>(context, listen: false)
+                          .showDrawer('/settings');
+                    },
+                  ),
+                ],
+              ),
+            ),
+        ],
       ),
     );
   }

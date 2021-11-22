@@ -3,6 +3,7 @@ import 'package:legend_design_core/layout/drawers/legend_drawer_info.dart';
 import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
 import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.dart';
 import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
+import 'package:legend_design_core/layout/fixed/sider/siderTheme.dart';
 
 import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/router/routes/route_info.dart';
@@ -184,8 +185,18 @@ class AppConfig {
       selectedColor: Colors.cyanAccent,
       foreground: Colors.teal[50]!,
     ),
+    siderColorTheme: SiderColorTheme(
+      background: Colors.cyan,
+      backgroundMenu: Colors.cyan[400]!,
+      foreground: Colors.teal[50]!,
+    ),
   );
   static LegendColorTheme darkColorTheme = LegendColorTheme(
+    siderColorTheme: SiderColorTheme(
+      background: Colors.cyan[900]!,
+      backgroundMenu: Colors.cyan,
+      foreground: Colors.teal[50]!,
+    ),
     typographyColors: LegendTypographyColors(
       baseColor: Colors.white,
     ),

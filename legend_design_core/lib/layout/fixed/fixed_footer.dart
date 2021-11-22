@@ -69,8 +69,18 @@ class _FixedFooterState extends State<FixedFooter> {
       child: Material(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          color: theme.colors.fixedFooterColors.backgroundColor,
           height: widget.sizing?.height,
+          decoration: BoxDecoration(
+            color: theme.colors.fixedFooterColors.backgroundColor,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                spreadRadius: 3,
+                blurRadius: 6,
+                offset: Offset(6, 0),
+              )
+            ],
+          ),
           alignment: Alignment.center,
           child: Container(
             constraints: BoxConstraints(
