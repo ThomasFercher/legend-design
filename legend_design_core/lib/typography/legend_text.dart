@@ -21,7 +21,7 @@ class LegendText extends StatelessWidget {
     return Container(
       padding: padding ?? EdgeInsets.zero,
       height: textStyle?.height,
-      child: kIsWeb && (selectable ?? true) ? webText() : normalText(),
+      child: kIsWeb && (selectable ?? false) ? webText() : normalText(),
     );
   }
 

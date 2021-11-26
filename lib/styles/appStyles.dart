@@ -112,7 +112,7 @@ class AppConfig {
       ),
     ),
     web: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
+      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
       borderRadius: [
         BorderRadius.all(
           Radius.circular(12),

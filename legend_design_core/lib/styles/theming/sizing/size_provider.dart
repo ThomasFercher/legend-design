@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:provider/src/provider.dart';
 import '../../layouts/layout_type.dart';
 
 class SizeProvider extends InheritedWidget {
@@ -10,6 +13,7 @@ class SizeProvider extends InheritedWidget {
   late final ScreenSize screenSize;
   final double height;
   late final bool _isMobile;
+  final BuildContext context;
 
   double? titleWidth;
 
@@ -25,9 +29,11 @@ class SizeProvider extends InheritedWidget {
     required this.child,
     required this.width,
     required this.height,
+    required this.context,
   }) : super(child: child) {
     screenSize = getScreenSizeFromWidth(width);
     _isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
+    context.watch<ThemeProvider>().setSizing(LegendSizingType.MOBILE);
   }
 
   bool get isMobile => _isMobile;

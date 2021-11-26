@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -73,7 +74,20 @@ class RouterProvider extends InheritedWidget {
     String now = DateTime.now().millisecondsSinceEpoch.toString();
 
     // create full screen Page
-    if (Platform.isIOS || Platform.isMacOS) {
+    if (kIsWeb) {
+      return MaterialPage(
+        child: Material(
+          color: Colors.transparent,
+          child: SectionProvider(
+            sections: route.sections,
+            child: route.page,
+          ),
+        ),
+        key: ValueKey(s.name! + now),
+        name: s.name,
+        arguments: s.arguments,
+      );
+    } else if (Platform.isIOS || Platform.isMacOS) {
       return CupertinoPage(
         child: route.page,
         key: ValueKey(s.name! + now),

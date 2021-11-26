@@ -159,7 +159,8 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
                 .width +
             theme.appBarSizing.contentPadding.horizontal +
             (theme.appBarSizing.iconSize ?? 24) * 2.22 +
-            8;
+            8 +
+            12 * 2;
     double subMenuWidth = 200;
 
     double left_q = (subMenuWidth - width) / 2;

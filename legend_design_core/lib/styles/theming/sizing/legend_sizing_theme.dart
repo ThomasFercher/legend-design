@@ -8,7 +8,7 @@ class LegendSizingTheme {
   final LegendSizing tablet;
   final LegendSizing web;
   final LegendSizing desktop;
-  late final LegendSizingType sizingType;
+  late LegendSizingType sizingType;
 
   LegendSizingTheme({
     required this.mobile,

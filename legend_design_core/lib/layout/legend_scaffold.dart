@@ -171,6 +171,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
     return SizeProvider(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
+      context: context,
       child: SectionNavigation(
         sections: sections,
         onNavigate: (section) {

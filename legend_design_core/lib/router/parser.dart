@@ -18,12 +18,14 @@ class MyRouteInformationParser
       );
     }
     final routeSettings = uri.pathSegments
-        .map((pathSegment) => RouteSettings(
-              name: '/$pathSegment',
-              arguments: pathSegment == uri.pathSegments.last
-                  ? uri.queryParameters
-                  : null,
-            ))
+        .map(
+          (pathSegment) => RouteSettings(
+            name: '/$pathSegment',
+            arguments: pathSegment == uri.pathSegments.last
+                ? uri.queryParameters
+                : null,
+          ),
+        )
         .toList();
     return Future.value(routeSettings);
   }

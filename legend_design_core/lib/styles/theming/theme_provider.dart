@@ -26,7 +26,7 @@ class ThemeProvider extends ChangeNotifier {
 
   final LegendColorTheme lightTheme;
   final LegendColorTheme darkTheme;
-  final LegendSizingTheme sizingTheme;
+  LegendSizingTheme sizingTheme;
   late LegendTypography typography;
 
   ThemeProvider({
@@ -54,6 +54,10 @@ class ThemeProvider extends ChangeNotifier {
         systemNavigationBarColor: Colors.transparent,
       ),
     );
+  }
+
+  void setSizing(LegendSizingType type) {
+    sizingTheme.sizingType = type;
   }
 
   LegendColorTheme get colors {
