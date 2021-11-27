@@ -14,6 +14,7 @@ import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
 import 'package:legend_design_widgets/datadisplay/carousel/legendCarousel.dart';
+import 'package:legend_design_widgets/datadisplay/stars/legend_stars.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTable.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTableCell.dart';
@@ -590,7 +591,6 @@ class WidgetComponents extends StatelessWidget {
           ),
         ),
         Section(
-          isLast: true,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -605,6 +605,43 @@ class WidgetComponents extends StatelessWidget {
           ],
           header: "Tags",
           name: "/tags",
+        ),
+        Section(
+          isLast: true,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                StarRating(
+                  onRatingChanged: (i) => print(i),
+                  amount: 5,
+                  color: theme.colors.primaryColor,
+                  size: 35,
+                  spacing: 4,
+                ),
+                StarRating(
+                  onRatingChanged: (i) => print(i),
+                  amount: 3,
+                  color: Colors.amber,
+                  size: 35,
+                  spacing: 10,
+                ),
+                LegendCard(
+                  children: [
+                    StarRating(
+                      onRatingChanged: (i) => print(i),
+                      amount: 10,
+                      color: Colors.red,
+                      size: 35,
+                      spacing: 4,
+                    )
+                  ],
+                )
+              ],
+            )
+          ],
+          header: "Star",
+          name: "/stars",
         ),
       ],
       pageName: "Widget Components",

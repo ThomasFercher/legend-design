@@ -323,6 +323,7 @@ class AppConfig {
           SectionRouteInfo(name: "/form"),
           SectionRouteInfo(name: "/table"),
           SectionRouteInfo(name: "/tags"),
+          SectionRouteInfo(name: "/stars")
         ],
         growable: true,
       ),
