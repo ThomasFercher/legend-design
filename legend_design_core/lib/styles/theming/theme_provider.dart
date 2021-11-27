@@ -20,9 +20,7 @@ enum LegendColorThemeType {
 
 class ThemeProvider extends ChangeNotifier {
   LegendColorThemeType themeType;
-
-  // Platform INfo
-  final bool isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
+  late LegendSizingType sizingType;
 
   final LegendColorTheme lightTheme;
   final LegendColorTheme darkTheme;
@@ -42,6 +40,7 @@ class ThemeProvider extends ChangeNotifier {
       typography: typography,
     );
 
+    sizingType = sizingTheme.sizingType;
     Color? _systemNavigationBarColor = bottomBarColors.backgroundColor;
 
     if (bottomBarStyle?.margin.bottom != 0) {

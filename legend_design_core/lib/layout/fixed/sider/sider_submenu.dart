@@ -9,13 +9,23 @@ import 'package:provider/src/provider.dart';
 
 class SiderSubMenu extends StatelessWidget {
   final MenuOption option;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
   const SiderSubMenu({
     Key? key,
     required this.option,
+    this.backgroundColor,
+    this.foregroundColor,
   }) : super(key: key);
 
   List<Widget> getWidgets(BuildContext context) {
-    List<Widget> widgets = [SiderSubMenuLeadTile(option: option)];
+    List<Widget> widgets = [
+      SiderSubMenuLeadTile(
+        option: option,
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+      )
+    ];
     ThemeProvider theme = context.watch<ThemeProvider>();
     MenuOption? sel = RouterProvider.of(context).current;
     for (MenuOption op in option.children!) {
@@ -26,11 +36,12 @@ class SiderSubMenu extends StatelessWidget {
             icon: op.icon,
             title: op.title,
             path: op.page,
-            backgroundColor: theme.colors.siderColorTheme.backgroundMenu,
+            backgroundColor:
+                backgroundColor ?? theme.colors.siderColorTheme.backgroundMenu,
             left: false,
             activeColor: theme.colors.selectionColor,
             color: LegendColorTheme.lighten(
-              theme.colors.siderColorTheme.foreground,
+              foregroundColor ?? theme.colors.siderColorTheme.foreground,
               0.04,
             ),
             collapsed: false,
@@ -60,9 +71,13 @@ class SiderSubMenu extends StatelessWidget {
 
 class SiderSubMenuLeadTile extends StatelessWidget {
   final MenuOption option;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
   const SiderSubMenuLeadTile({
     Key? key,
     required this.option,
+    this.backgroundColor,
+    this.foregroundColor,
   }) : super(key: key);
 
   @override
@@ -72,10 +87,11 @@ class SiderSubMenuLeadTile extends StatelessWidget {
       icon: option.icon,
       title: option.title,
       path: option.page,
-      backgroundColor: theme.colors.siderColorTheme.backgroundMenu,
+      backgroundColor:
+          backgroundColor ?? theme.colors.siderColorTheme.backgroundMenu,
       left: false,
       activeColor: theme.colors.selectionColor,
-      color: theme.colors.siderColorTheme.foreground,
+      color: foregroundColor ?? theme.colors.siderColorTheme.foreground,
       collapsed: false,
     );
   }

@@ -10,11 +10,11 @@ import '../../layouts/layout_type.dart';
 class SizeProvider extends InheritedWidget {
   final Widget child;
   final double width;
+  final bool useMobilDesign;
   late final ScreenSize screenSize;
   final double height;
-  late final bool _isMobile;
+  late bool _isMobile;
   final BuildContext context;
-
   double? titleWidth;
 
   // AppBar Menu Width
@@ -30,10 +30,21 @@ class SizeProvider extends InheritedWidget {
     required this.width,
     required this.height,
     required this.context,
+    required this.useMobilDesign,
   }) : super(child: child) {
     screenSize = getScreenSizeFromWidth(width);
+    ThemeProvider theme = context.watch<ThemeProvider>();
     _isMobile = !kIsWeb ? Platform.isIOS || Platform.isAndroid : false;
-    context.watch<ThemeProvider>().setSizing(LegendSizingType.MOBILE);
+
+    if (useMobilDesign) {
+      if (width <= 480) {
+        theme.setSizing(LegendSizingType.MOBILE);
+        _isMobile = true;
+      } else {
+        theme.setSizing(theme.sizingType);
+        _isMobile = false;
+      }
+    }
   }
 
   bool get isMobile => _isMobile;
@@ -73,7 +84,7 @@ class SizeProvider extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant SizeProvider old) {
-    return old.width != width;
+    return old != this;
   }
 
   static Size calcTextSize(String text, TextStyle style) {

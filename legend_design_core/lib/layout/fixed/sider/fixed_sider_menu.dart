@@ -10,9 +10,14 @@ class FixedSiderMenu extends StatelessWidget {
   List<Widget> tiles = [];
   List<MenuOption>? options;
 
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+
   FixedSiderMenu({
     Key? key,
     this.options,
+    this.backgroundColor,
+    this.foregroundColor,
   }) : super(key: key);
 
   @override
@@ -28,10 +33,11 @@ class FixedSiderMenu extends StatelessWidget {
             icon: option.icon,
             title: option.title,
             path: option.page,
-            backgroundColor: theme.colors.siderColorTheme.backgroundMenu,
+            backgroundColor:
+                backgroundColor ?? theme.colors.siderColorTheme.backgroundMenu,
             left: false,
             activeColor: theme.colors.selectionColor,
-            color: theme.colors.siderColorTheme.foreground,
+            color: foregroundColor ?? theme.colors.siderColorTheme.foreground,
             collapsed: false,
             forceColor: option == sel,
           ),
@@ -40,13 +46,15 @@ class FixedSiderMenu extends StatelessWidget {
         tiles.add(
           SiderSubMenu(
             option: option,
+            backgroundColor: backgroundColor,
+            foregroundColor: foregroundColor,
           ),
         );
       }
     }
 
     return Container(
-      color: theme.colors.siderColorTheme.backgroundMenu,
+      color: backgroundColor ?? theme.colors.siderColorTheme.backgroundMenu,
       padding: const EdgeInsets.only(
         top: 24.0,
       ),

@@ -171,6 +171,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
     return SizeProvider(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
+      useMobilDesign: true,
       context: context,
       child: SectionNavigation(
         sections: sections,
@@ -316,24 +317,32 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
   }
 
   Widget materialLayout(BuildContext context) {
-    SizeProvider sizeProvider = SizeProvider.of(context);
-    ScreenSize screenSize = sizeProvider.screenSize;
-
     ThemeProvider theme = Provider.of<ThemeProvider>(context);
-    sizeProvider.titleWidth = SizeProvider.calcTextSize(
-          'Legend Design',
-          theme.typography.h6.copyWith(
-            color: theme.colors.secondaryColor,
-            letterSpacing: 0.1,
-          ),
-        ).width +
-        26.0 +
-        48.0;
-
     double? footerheight;
-    if (!sizeProvider.isMobile) {
-      footerheight = 120;
+    ScreenSize? screenSize;
+    SizeProvider? sizeProvider;
+
+    try {
+      sizeProvider = SizeProvider.of(context);
+      screenSize = sizeProvider.screenSize;
+
+      sizeProvider.titleWidth = SizeProvider.calcTextSize(
+            'Legend Design',
+            theme.typography.h6.copyWith(
+              color: theme.colors.secondaryColor,
+              letterSpacing: 0.1,
+            ),
+          ).width +
+          26.0 +
+          48.0;
+
+      if (!sizeProvider.isMobile) {
+        footerheight = 120;
+      }
+    } catch (e) {
+      print(e);
     }
+
     double maxHeight = calculateMinContentHeight();
 
     // TODO Improve
@@ -356,7 +365,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
       children: [
         Scaffold(
           endDrawer: MenuDrawer(),
-          bottomNavigationBar: SizeProvider.of(context).isMobile
+          bottomNavigationBar: sizeProvider?.isMobile ?? false
               ? FixedBottomBar(
                   colors: theme.bottomBarColors,
                   sizing: theme.bottomBarStyle,
@@ -374,7 +383,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
             children: [
               Row(
                 children: [
-                  getSider(screenSize, context),
+                  getSider(screenSize ?? ScreenSize.Medium, context),
                   Expanded(
                     child: CustomScrollView(
                       controller: controller,
@@ -509,7 +518,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                 ],
               ),
               if ((widget.layoutType == LayoutType.FixedHeaderSider) &&
-                  !theme.isMobile)
+                  (sizeProvider?.isMobile == false))
                 Positioned(
                   left: theme.appBarSizing.contentPadding.horizontal,
                   top: theme.appBarSizing.contentPadding.top,
@@ -522,14 +531,15 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            height: theme.appBarSizing.appBarHeight,
-                            width: theme.appBarSizing.appBarHeight - 12,
-                            margin: EdgeInsets.only(
-                              right: 16.0,
-                              left: 8,
+                            height: theme.appBarSizing.titleSize ??
+                                theme.appBarSizing.appBarHeight / 3 * 2,
+                            width: theme.appBarSizing.titleSize ??
+                                theme.appBarSizing.appBarHeight / 3 * 2,
+                            margin: EdgeInsets.only(right: 12.0, left: 16.0),
+                            child: Center(
+                              child: LayoutProvider.of(context)?.logo ??
+                                  Container(),
                             ),
-                            child:
-                                LayoutProvider.of(context)?.logo ?? Container(),
                           ),
                           Container(
                             height: theme.appBarSizing.appBarHeight,
