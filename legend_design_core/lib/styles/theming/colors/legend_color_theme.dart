@@ -19,11 +19,13 @@ class LegendColorTheme {
   final FixedAppBarColors appBarColors;
   final BottomBarColors bottomBarColors;
   final List<double>? elevations;
+  final Color textContrast;
 
   final FixedFooterColors fixedFooterColors;
   final LegendTypographyColors typographyColors;
 
   LegendColorTheme({
+    required this.textContrast,
     required this.primaryColor,
     required this.secondaryColor,
     required this.scaffoldBackgroundColor,

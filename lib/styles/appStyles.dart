@@ -20,6 +20,14 @@ import 'package:webstore/pages/home.dart';
 import 'package:webstore/pages/services.dart';
 import 'package:webstore/pages/widgetComponets.dart';
 import 'package:webstore/pages/widgets/buttons.dart';
+import 'package:webstore/pages/widgets/carousel.dart';
+import 'package:webstore/pages/widgets/form.dart';
+import 'package:webstore/pages/widgets/modals.dart';
+import 'package:webstore/pages/widgets/rating.dart';
+import 'package:webstore/pages/widgets/selectButtonBar.dart';
+import 'package:webstore/pages/widgets/table.dart';
+import 'package:webstore/pages/widgets/tags.dart';
+import 'package:webstore/pages/widgets/textfield.dart';
 
 class AppConfig {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
@@ -54,7 +62,11 @@ class AppConfig {
         12,
         6,
       ],
-      contentPadding: 8,
+      padding: [
+        8,
+        18,
+        24,
+      ],
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
         contentPadding: EdgeInsets.only(right: 6),
@@ -78,7 +90,11 @@ class AppConfig {
         16,
         12,
       ],
-      contentPadding: 8,
+      padding: [
+        12,
+        16,
+        24,
+      ],
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 72,
         contentPadding: EdgeInsets.all(0),
@@ -102,7 +118,11 @@ class AppConfig {
         12,
         12,
       ],
-      contentPadding: 8,
+      padding: [
+        12,
+        16,
+        24,
+      ],
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
         contentPadding: EdgeInsets.all(0),
@@ -125,7 +145,11 @@ class AppConfig {
         12,
         12,
       ],
-      contentPadding: 8,
+      padding: [
+        12,
+        16,
+        24,
+      ],
       appBarSizing: FixedAppBarSizing(
         appBarHeight: 80,
         contentPadding: EdgeInsets.all(0),
@@ -137,6 +161,7 @@ class AppConfig {
   );
 
   static LegendColorTheme lightColorTheme = LegendColorTheme(
+    textContrast: Colors.cyan,
     typographyColors: LegendTypographyColors(
       baseColor: Colors.black,
     ),
@@ -192,6 +217,7 @@ class AppConfig {
     ),
   );
   static LegendColorTheme darkColorTheme = LegendColorTheme(
+    textContrast: Color(0xFFb3dedb),
     siderColorTheme: SiderColorTheme(
       background: Colors.teal,
       backgroundMenu: Colors.teal[600]!,
@@ -209,10 +235,10 @@ class AppConfig {
       backgroundColor: LegendColors.gray8,
       foreground: LegendColors.gray4,
     ),
-    cardBackgroundColor: LegendColors.gray6,
+    cardBackgroundColor: LegendColors.gray9,
     primaryColor: Colors.teal,
     secondaryColor: Color(0xFFb3dedb),
-    scaffoldBackgroundColor: LegendColors.gray12,
+    scaffoldBackgroundColor: LegendColors.gray11,
     foreground: [
       LegendColors.gray10,
       LegendColors.gray8,
@@ -259,21 +285,67 @@ class AppConfig {
           title: "Buttons",
           page: "/widgets/buttons",
           icon: Icons.radio_button_off,
+          isUnderlying: true,
         ),
         MenuOption(
           title: "Modals",
-          page: "/widgets/buttons",
-          icon: Icons.window,
+          page: "/widgets/modals",
+          icon: Icons.sensor_window,
+          isUnderlying: true,
         ),
         MenuOption(
           title: "Layout",
           page: "/widgets/buttons",
-          icon: Icons.layers_outlined,
+          icon: Icons.grid_4x4_outlined,
+          isUnderlying: true,
         ),
         MenuOption(
           title: "Typography",
           page: "/widgets/buttons",
           icon: Icons.text_format,
+          isUnderlying: true,
+        ),
+        MenuOption(
+          page: "/widgets/selectbar",
+          title: "SelectBar",
+          isUnderlying: true,
+          icon: Icons.select_all,
+        ),
+        MenuOption(
+          page: "/widgets/carousel",
+          title: "Carousel",
+          isUnderlying: true,
+          icon: Icons.view_carousel,
+        ),
+        MenuOption(
+          page: "/widgets/textfield",
+          title: "Textfield",
+          isUnderlying: true,
+          icon: Icons.text_fields,
+        ),
+        MenuOption(
+          page: "/widgets/form",
+          title: "Form",
+          isUnderlying: true,
+          icon: Icons.input,
+        ),
+        MenuOption(
+          page: "/widgets/table",
+          title: "Table",
+          isUnderlying: true,
+          icon: Icons.table_chart,
+        ),
+        MenuOption(
+          page: "/widgets/tags",
+          title: "Tags",
+          isUnderlying: true,
+          icon: Icons.tag,
+        ),
+        MenuOption(
+          page: "/widgets/rating",
+          isUnderlying: true,
+          title: "Rating",
+          icon: Icons.star,
         ),
       ],
     ),
@@ -313,20 +385,6 @@ class AppConfig {
     RouteInfo(
       name: "/widgets",
       page: WidgetComponents(),
-      sections: List.of(
-        [
-          SectionRouteInfo(name: "/buttons"),
-          SectionRouteInfo(name: "/modals"),
-          SectionRouteInfo(name: "/selectbar"),
-          SectionRouteInfo(name: "/carousel"),
-          SectionRouteInfo(name: "/textfield"),
-          SectionRouteInfo(name: "/form"),
-          SectionRouteInfo(name: "/table"),
-          SectionRouteInfo(name: "/tags"),
-          SectionRouteInfo(name: "/stars")
-        ],
-        growable: true,
-      ),
       children: List.of(
         [
           RouteInfo(
@@ -336,37 +394,42 @@ class AppConfig {
           ),
           RouteInfo(
             name: "/widgets/modals",
-            page: ProductsPage(),
+            page: ModalsPage(),
             isUnderyling: true,
           ),
           RouteInfo(
             name: "/widgets/selectbar",
-            page: ProductsPage(),
+            page: SelectButtonBarPage(),
             isUnderyling: true,
           ),
           RouteInfo(
             name: "/widgets/carousel",
-            page: ProductsPage(),
+            page: CarouselPage(),
             isUnderyling: true,
           ),
           RouteInfo(
             name: "/widgets/textfield",
-            page: ProductsPage(),
+            page: TextfieldPage(),
             isUnderyling: true,
           ),
           RouteInfo(
             name: "/widgets/form",
-            page: ProductsPage(),
+            page: FormPage(),
             isUnderyling: true,
           ),
           RouteInfo(
             name: "/widgets/table",
-            page: ProductsPage(),
+            page: TablePage(),
             isUnderyling: true,
           ),
           RouteInfo(
             name: "/widgets/tags",
-            page: ProductsPage(),
+            page: TagsPage(),
+            isUnderyling: true,
+          ),
+          RouteInfo(
+            name: "/widgets/rating",
+            page: RatingPage(),
             isUnderyling: true,
           ),
         ],

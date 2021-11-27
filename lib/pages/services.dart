@@ -29,137 +29,128 @@ class ProductsPage extends StatelessWidget {
         return Container(
           child: Column(
             children: [
-              Section(
-                header: "Services",
+              LegendGrid(
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
                 children: [
-                  LegendGrid(
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
+                  LegendCard(
+                    title: "Packages",
                     children: [
-                      LegendCard(
-                        title: "Packages",
-                        children: [
-                          Positioned(
-                            child: GradientIcon(
-                              Icons.drive_file_move_rounded,
-                              48,
-                              LinearGradient(
-                                colors: [
-                                  Colors.orange[300]!,
-                                  Colors.orangeAccent,
-                                ],
-                              ),
-                            ),
-                            right: 0,
+                      Positioned(
+                        child: GradientIcon(
+                          Icons.drive_file_move_rounded,
+                          48,
+                          LinearGradient(
+                            colors: [
+                              Colors.orange[300]!,
+                              Colors.orangeAccent,
+                            ],
                           ),
-                          Align(
-                            child: LegendText(
-                              text: "We provide a whole ecosystem of packages.",
-                              textStyle: theme.typography.h0,
-                            ),
-                            alignment: Alignment.bottomLeft,
-                          ),
-                        ],
+                        ),
+                        right: 0,
                       ),
-                      LegendCard(
-                        title: "Prebuilt Apps",
-                        children: [
-                          Positioned(
-                            child: GradientIcon(
-                              Icons.web_stories,
-                              48,
-                              LinearGradient(
-                                colors: [
-                                  Colors.purple[300]!,
-                                  Colors.deepPurple,
-                                ],
-                              ),
-                            ),
-                            right: 0,
-                          ),
-                          Align(
-                            child: LegendText(
-                              text:
-                                  "Using our Design Templates simple Apps can be created on demand. We have a whole cataloge to choose from.",
-                              textStyle: theme.typography.h0,
-                            ),
-                            alignment: Alignment.bottomLeft,
-                          ),
-                        ],
-                      ),
-                      LegendCard(
-                        title: "Custom Apps",
-                        children: [
-                          Positioned(
-                            child: GradientIcon(
-                              Icons.laptop,
-                              48,
-                              LinearGradient(
-                                colors: [
-                                  Colors.green[300]!,
-                                  Colors.greenAccent,
-                                ],
-                              ),
-                            ),
-                            right: 0,
-                          ),
-                          Align(
-                            child: LegendText(
-                              text:
-                                  "We offer building and supporting your custom Application. ",
-                              textStyle: theme.typography.h0,
-                            ),
-                            alignment: Alignment.bottomLeft,
-                          ),
-                        ],
-                      ),
-                      LegendCard(
-                        title: "Consultation & Guidance",
-                        children: [
-                          Positioned(
-                            child: GradientIcon(
-                              Icons.help,
-                              48,
-                              LinearGradient(
-                                colors: [
-                                  Colors.red[300]!,
-                                  Colors.red,
-                                ],
-                              ),
-                            ),
-                            right: 0,
-                          ),
-                          Align(
-                            child: LegendText(
-                              text:
-                                  "We offer building and supporting your custom Application. ",
-                              textStyle: theme.typography.h0,
-                            ),
-                            alignment: Alignment.bottomLeft,
-                          ),
-                        ],
+                      Align(
+                        child: LegendText(
+                          text: "We provide a whole ecosystem of packages.",
+                          textStyle: theme.typography.h0,
+                        ),
+                        alignment: Alignment.bottomLeft,
                       ),
                     ],
-                    sizes: LegendGridSize(
-                      medium: LegendGridSizeInfo(
-                        2,
-                        140,
+                  ),
+                  LegendCard(
+                    title: "Prebuilt Apps",
+                    children: [
+                      Positioned(
+                        child: GradientIcon(
+                          Icons.web_stories,
+                          48,
+                          LinearGradient(
+                            colors: [
+                              Colors.purple[300]!,
+                              Colors.deepPurple,
+                            ],
+                          ),
+                        ),
+                        right: 0,
                       ),
-                      small: LegendGridSizeInfo(
-                        1,
-                        140,
+                      Align(
+                        child: LegendText(
+                          text:
+                              "Using our Design Templates simple Apps can be created on demand. We have a whole cataloge to choose from.",
+                          textStyle: theme.typography.h0,
+                        ),
+                        alignment: Alignment.bottomLeft,
                       ),
-                      xxl: LegendGridSizeInfo(
-                        4,
-                        140,
+                    ],
+                  ),
+                  LegendCard(
+                    title: "Custom Apps",
+                    children: [
+                      Positioned(
+                        child: GradientIcon(
+                          Icons.laptop,
+                          48,
+                          LinearGradient(
+                            colors: [
+                              Colors.green[300]!,
+                              Colors.greenAccent,
+                            ],
+                          ),
+                        ),
+                        right: 0,
                       ),
-                    ),
-                  )
+                      Align(
+                        child: LegendText(
+                          text:
+                              "We offer building and supporting your custom Application. ",
+                          textStyle: theme.typography.h0,
+                        ),
+                        alignment: Alignment.bottomLeft,
+                      ),
+                    ],
+                  ),
+                  LegendCard(
+                    title: "Consultation & Guidance",
+                    children: [
+                      Positioned(
+                        child: GradientIcon(
+                          Icons.help,
+                          48,
+                          LinearGradient(
+                            colors: [
+                              Colors.red[300]!,
+                              Colors.red,
+                            ],
+                          ),
+                        ),
+                        right: 0,
+                      ),
+                      Align(
+                        child: LegendText(
+                          text:
+                              "We offer building and supporting your custom Application. ",
+                          textStyle: theme.typography.h0,
+                        ),
+                        alignment: Alignment.bottomLeft,
+                      ),
+                    ],
+                  ),
                 ],
-              ),
-              Section(
-                header: "Theme Editor",
-                children: [],
+                sizes: LegendGridSize(
+                  medium: LegendGridSizeInfo(
+                    2,
+                    140,
+                  ),
+                  small: LegendGridSizeInfo(
+                    1,
+                    140,
+                  ),
+                  xxl: LegendGridSizeInfo(
+                    4,
+                    140,
+                  ),
+                ),
               ),
             ],
           ),

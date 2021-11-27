@@ -251,7 +251,7 @@ class Sider extends StatelessWidget {
             ],
           ),
         ),
-      if (showSectionMenu ?? false)
+      if ((showSectionMenu ?? false) && sectionTiles.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(

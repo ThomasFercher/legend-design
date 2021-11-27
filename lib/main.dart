@@ -32,7 +32,7 @@ void main() {
         darkTheme: AppConfig.darkColorTheme,
         lightTheme: AppConfig.lightColorTheme,
         sizingTheme: AppConfig.sizingTheme,
-        themeType: LegendColorThemeType.LIGHT,
+        themeType: LegendColorThemeType.DARK,
         typography: LegendTypography(
           //   base: GoogleFonts.nunito(),
           h6: GoogleFonts.lobsterTwo(),

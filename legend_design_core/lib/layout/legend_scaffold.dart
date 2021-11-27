@@ -130,10 +130,21 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
   void didPopNext() {
     final route = ModalRoute.of(context)?.settings.name;
 
-    MenuOption? o = RouterProvider.of(context).menuOptions.singleWhere(
-          (element) => element.page == route,
-          orElse: () => MenuOption(page: "/"),
-        );
+    List<MenuOption> options = RouterProvider.of(context).menuOptions;
+    MenuOption o = MenuOption(page: "");
+    for (MenuOption op in options) {
+      if (op.page == route) {
+        o = op;
+        break;
+      }
+      if (op.children != null)
+        for (MenuOption sub in op.children!) {
+          if (sub.page == route) {
+            o = sub;
+            break;
+          }
+        }
+    }
 
     setState(() {
       currentRoute = o;
@@ -326,16 +337,6 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
       sizeProvider = SizeProvider.of(context);
       screenSize = sizeProvider.screenSize;
 
-      sizeProvider.titleWidth = SizeProvider.calcTextSize(
-            'Legend Design',
-            theme.typography.h6.copyWith(
-              color: theme.colors.secondaryColor,
-              letterSpacing: 0.1,
-            ),
-          ).width +
-          26.0 +
-          48.0;
-
       if (!sizeProvider.isMobile) {
         footerheight = 120;
       }
@@ -352,7 +353,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
         (c) {
           return Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: theme.sizing.contentPadding,
+              horizontal: theme.sizing.padding[0],
               vertical: widget.verticalChildrenSpacing ?? 0 / 2,
             ),
             child: c,
@@ -394,69 +395,69 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                             child: Column(
                               children: [
                                 Container(
-                                  decoration: BoxDecoration(
-                                    color: theme.colors.scaffoldBackgroundColor,
+                                  constraints: BoxConstraints(
+                                    minHeight: maxHeight,
+                                  ),
+                                  color: theme.colors.scaffoldBackgroundColor,
+                                  padding: EdgeInsets.all(
+                                    theme.sizing.padding[0],
                                   ),
                                   child: Container(
-                                    constraints: BoxConstraints(
-                                      minHeight: maxHeight,
+                                    decoration: BoxDecoration(
+                                      color: theme.colors.background[0],
+                                      borderRadius:
+                                          theme.sizing.borderRadius[0],
                                     ),
-                                    child: Row(
+                                    padding: EdgeInsets.all(
+                                      theme.sizing.padding[1],
+                                    ),
+                                    child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        if (widget.layoutType ==
-                                                LayoutType.FixedSider ||
-                                            widget.layoutType ==
-                                                LayoutType.FixedHeaderSider)
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                              left: 3.0,
+                                        if (currentRoute?.isUnderlying ?? false)
+                                          LegendText(
+                                            padding: EdgeInsets.only(
+                                              bottom: 8,
                                             ),
-                                            child: Container(
-                                              height: maxHeight,
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black12,
-                                                    spreadRadius: 3,
-                                                    blurRadius: 6,
-                                                    offset: Offset(0, -6),
+                                            text: currentRoute?.title ?? "",
+                                            textStyle:
+                                                theme.typography.h5.copyWith(
+                                              color: theme.colors.textContrast,
+                                            ),
+                                          ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            if (widget.layoutType ==
+                                                    LayoutType.FixedSider ||
+                                                widget.layoutType ==
+                                                    LayoutType.FixedHeaderSider)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 3.0,
+                                                ),
+                                                child: Container(
+                                                  height: maxHeight,
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black12,
+                                                        spreadRadius: 3,
+                                                        blurRadius: 6,
+                                                        offset: Offset(0, -6),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
+                                                ),
+                                              ),
+                                            Expanded(
+                                              child: Builder(
+                                                builder: widget.contentBuilder,
                                               ),
                                             ),
-                                          ),
-                                        if (widget.isUnderlyingRoute &&
-                                            widget.layoutType !=
-                                                LayoutType.FixedHeaderSider &&
-                                            widget.layoutType !=
-                                                LayoutType.FixedHeaderSider)
-                                          Container(
-                                            height: SizeProvider.of(context)
-                                                    .height -
-                                                80,
-                                            width: 36,
-                                            alignment: Alignment.center,
-                                            child: LegendAnimatedIcon(
-                                              icon: Icons.arrow_left,
-                                              theme: LegendAnimtedIconTheme(
-                                                  enabled: Colors.black87,
-                                                  disabled: Colors.black26),
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(
-                                              theme.sizing.contentPadding,
-                                            ),
-                                            child: Builder(
-                                              builder: widget.contentBuilder,
-                                            ),
-                                          ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -473,39 +474,15 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                               color: theme.colors.scaffoldBackgroundColor,
                               child: Column(
                                 children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      if (widget.isUnderlyingRoute &&
-                                          widget.layoutType !=
-                                              LayoutType.FixedHeaderSider &&
-                                          widget.layoutType !=
-                                              LayoutType.FixedHeaderSider)
-                                        Container(
-                                          height:
-                                              SizeProvider.of(context).height -
-                                                  80,
-                                          width: 36,
-                                          alignment: Alignment.center,
-                                          child: LegendAnimatedIcon(
-                                            icon: Icons.arrow_left,
-                                            theme: LegendAnimtedIconTheme(
-                                                enabled: Colors.black87,
-                                                disabled: Colors.black26),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                        ),
-                                      Expanded(
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            children: children,
-                                          ),
-                                        ),
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      minHeight: maxHeight,
+                                    ),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: children,
                                       ),
-                                    ],
+                                    ),
                                   ),
                                   getFooter(120, context)
                                 ],
@@ -548,7 +525,6 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                               text: 'Legend Design',
                               textStyle: theme.typography.h6.copyWith(
                                 color: theme.colors.appBarColors.foreground,
-                                letterSpacing: 0.1,
                               ),
                             ),
                           ),

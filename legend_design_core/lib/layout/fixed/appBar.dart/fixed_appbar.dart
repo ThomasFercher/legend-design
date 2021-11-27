@@ -167,7 +167,8 @@ class FixedAppBar extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  right: SizeProvider.of(context).isMenuCollapsed() &&
+                  right: SizeProvider.of(context)
+                              .isMenuCollapsed(theme.menuWidth, theme) &&
                           !SizeProvider.of(context).isMobile
                       ? 96
                       : 16,

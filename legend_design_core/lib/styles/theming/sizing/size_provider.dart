@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:provider/src/provider.dart';
@@ -15,15 +16,6 @@ class SizeProvider extends InheritedWidget {
   final double height;
   late bool _isMobile;
   final BuildContext context;
-  double? titleWidth;
-
-  // AppBar Menu Width
-  late double _menuWidth;
-  void setMenuWidth(double width) {
-    _menuWidth = width;
-  }
-
-  double get menuWidth => _menuWidth;
 
   SizeProvider({
     required this.child,
@@ -49,12 +41,25 @@ class SizeProvider extends InheritedWidget {
 
   bool get isMobile => _isMobile;
 
-  double getTitleIndent() {
-    return titleWidth ?? 0;
+  double getTitleIndent(TextStyle style) {
+    return calcTextSize(
+          'Legend Design',
+          style,
+        ).width +
+        26.0;
   }
 
-  bool isMenuCollapsed() {
-    return width - getTitleIndent() <= 820;
+  List<MenuOption> options = [];
+
+  bool isMenuCollapsed(double menuWidth, ThemeProvider theme) {
+    return width -
+            (getTitleIndent(theme.typography.h6) +
+                    (theme.appBarSizing.titleSize ??
+                        theme.appBarSizing.appBarHeight / 3 * 2)) *
+                2 -
+            8 - //
+            menuWidth <
+        0;
   }
 
   static ScreenSize getScreenSizeFromWidth(double width) {

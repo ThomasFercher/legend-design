@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
 import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.dart';
+import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing_theme.dart';
@@ -53,6 +54,16 @@ class ThemeProvider extends ChangeNotifier {
         systemNavigationBarColor: Colors.transparent,
       ),
     );
+  }
+
+  final List<MenuOption> options = [];
+  double menuWidth = 0;
+
+  void setMenuOptionWidth(double w, MenuOption o) {
+    if (!options.contains(o)) {
+      options.add(o);
+      menuWidth += w;
+    }
   }
 
   void setSizing(LegendSizingType type) {

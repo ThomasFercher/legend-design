@@ -23,6 +23,7 @@ class DrawerMenuTile extends StatefulWidget {
   final double? textSize;
   final bool rectangleIndicator;
   final bool forceColor;
+  final double? bottomSpacing;
 
   DrawerMenuTile({
     required this.icon,
@@ -33,6 +34,7 @@ class DrawerMenuTile extends StatefulWidget {
     required this.color,
     required this.activeColor,
     required this.collapsed,
+    this.bottomSpacing,
     this.onClicked,
     this.height,
     this.textSize,
@@ -104,7 +106,7 @@ class _DrawerMenuTileState extends State<DrawerMenuTile>
     // TODO: implement build
     return Container(
       margin: EdgeInsets.only(
-        bottom: 24.0,
+        bottom: widget.bottomSpacing ?? 24.0,
       ),
       height: widget.height,
       decoration: !widget.rectangleIndicator

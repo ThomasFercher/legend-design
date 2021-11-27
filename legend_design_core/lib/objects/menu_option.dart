@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/modals/legendPopups.dart';
 import 'package:legend_design_core/modals/modalSheet.dart';
 import 'package:legend_design_core/objects/drawer_menu_tile.dart';
+import 'package:legend_design_core/styles/theming/sizing/size_provider.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
@@ -41,6 +42,7 @@ class MenuOptionHeader extends StatefulWidget {
   final Color? backgroundColor;
   final bool forceColor;
   late final bool showSubMenu;
+  final double maxHeight = 360;
 
   MenuOptionHeader({
     required this.option,
@@ -163,6 +165,8 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
             12 * 2;
     double subMenuWidth = 200;
 
+    theme.setMenuOptionWidth(width, widget.option);
+
     double left_q = (subMenuWidth - width) / 2;
 
     MenuOption? sel = RouterProvider.of(context).current;
@@ -178,12 +182,13 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
               left: false,
               backgroundColor: theme.colors.cardBackgroundColor,
               activeColor: theme.colors.selectionColor,
-              color: theme.colors.primaryColor,
+              color: theme.colors.textContrast,
               collapsed: false,
               onClicked: () {
                 poppedFromtTop = true;
               },
               forceColor: option == sel,
+              bottomSpacing: 16,
             ),
           )
           .toList();
@@ -260,8 +265,11 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
                             color: Colors.transparent,
                           ),
                         ),
-                        SizedBox(
+                        Container(
                           width: subMenuWidth,
+                          constraints: BoxConstraints(
+                            maxHeight: widget.maxHeight,
+                          ),
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
@@ -273,7 +281,10 @@ class _MenuOptionHeaderState extends State<MenuOptionHeader>
                             color: theme.colors.cardBackgroundColor,
                             margin: const EdgeInsets.all(0),
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 24.0),
+                              padding: EdgeInsets.only(
+                                top: theme.sizing.borderInset[0],
+                                bottom: theme.sizing.borderInset[0],
+                              ),
                               child: ListView(
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,

@@ -38,18 +38,6 @@ class About extends StatelessWidget {
       },
       layoutType: LayoutType.FixedSider,
       pageName: "Home",
-      onActionButtonPressed: (context) {
-        LegendPopups.showLegendModal(
-          context: context,
-          modal: Modal(
-            content: Text("test"),
-            onConfirm: () => {},
-            onCancle: () => {},
-            height: 400,
-            width: 400,
-          ),
-        );
-      },
     );
   }
 }

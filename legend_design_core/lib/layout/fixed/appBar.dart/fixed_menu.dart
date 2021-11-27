@@ -77,7 +77,8 @@ class _FixedMenuState extends State<FixedMenu> {
       height: theme.appBarSizing.appBarHeight,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          if (!SizeProvider.of(widget.context).isMenuCollapsed()) {
+          if (!SizeProvider.of(widget.context)
+              .isMenuCollapsed(theme.menuWidth, theme)) {
             return Center(
               child: ListView.separated(
                 itemBuilder: (context, index) {

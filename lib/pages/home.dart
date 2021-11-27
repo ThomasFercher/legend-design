@@ -21,34 +21,17 @@ class Home extends StatelessWidget {
       contentBuilder: (context) {
         return Column(
           children: [
-            Section(
-              header: "What is Legend Design?",
-              children: [
-                LegendText(
-                  text: "Legend Design aims to provide all basic needs for developing  Cross-Plattform Applications. These include Routing, Colors, Layouts, Sizing and many other little things. " +
-                      "Using the Legend Design package enables developers to write clean code without much boilerplate which is suited for every platform. " +
-                      "On top of this Legend Design Custom Widgets on most of the functionality can be used on its own, so you dont get forced to use everything provided. ",
-                  textStyle: theme.typography.h0,
-                ),
-              ],
+            LegendText(
+              text: "Legend Design aims to provide all basic needs for developing  Cross-Plattform Applications. These include Routing, Colors, Layouts, Sizing and many other little things. " +
+                  "Using the Legend Design package enables developers to write clean code without much boilerplate which is suited for every platform. " +
+                  "On top of this Legend Design Custom Widgets on most of the functionality can be used on its own, so you dont get forced to use everything provided. ",
+              textStyle: theme.typography.h0,
             ),
           ],
         );
       },
       layoutType: LayoutType.FixedHeader,
       pageName: "Home",
-      onActionButtonPressed: (context) {
-        LegendPopups.showLegendModal(
-          context: context,
-          modal: Modal(
-            content: Text("test"),
-            onConfirm: () => {},
-            onCancle: () => {},
-            height: 400,
-            width: 400,
-          ),
-        );
-      },
     );
   }
 }
