@@ -17,14 +17,20 @@ class SiderMenuVerticalTile extends StatefulWidget {
   final Color? activeColor;
   final Color? color;
   final bool collapsed;
+  final double? fontSize;
+  final double? iconSize;
+  final double? bottomMargin;
 
   SiderMenuVerticalTile({
     required this.path,
     required this.collapsed,
+    this.fontSize,
+    this.iconSize,
     this.backgroundColor,
     this.activeColor,
     this.color,
     this.icon,
+    this.bottomMargin,
     this.title,
     bool? isSection,
   }) {
@@ -90,7 +96,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
 
     return Container(
       height: 48,
-      margin: EdgeInsets.only(bottom: 16),
+      margin: EdgeInsets.only(bottom: widget.bottomMargin ?? 24),
       padding: EdgeInsets.only(left: widget.collapsed ? 0 : 32.0),
       decoration: BoxDecoration(
         border: Border(
@@ -133,7 +139,7 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
           }
         },
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (widget.icon != null)
@@ -143,20 +149,21 @@ class _SiderMenuVerticalTileState extends State<SiderMenuVerticalTile>
                   child: Icon(
                     widget.icon,
                     color: color,
+                    size: widget.iconSize ?? 28,
                   ),
                 ),
               ),
             if (widget.title != null)
               Container(
-                padding: EdgeInsets.only(
-                  left: widget.collapsed ? 8.0 : 0,
+                padding: const EdgeInsets.only(
+                  top: 4,
                 ),
                 child: LegendText(
                   textAlign: TextAlign.center,
                   text: widget.title ?? '',
-                  textStyle: theme.typography.h2.copyWith(
+                  textStyle: theme.typography.h1.copyWith(
                     color: color,
-                    fontSize: widget.collapsed ? 14.0 : 16,
+                    fontSize: widget.fontSize,
                     fontWeight:
                         widget.collapsed ? FontWeight.w400 : FontWeight.normal,
                   ),

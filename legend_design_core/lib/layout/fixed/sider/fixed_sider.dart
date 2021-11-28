@@ -11,12 +11,15 @@ import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/router/routes/section_provider.dart';
 import 'package:legend_design_core/router/routes/section_route_info.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
 import 'package:legend_design_core/styles/theming/sizing/size_provider.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
 import 'package:provider/provider.dart';
+
+import 'collapsed/collapsedSider.dart';
 
 class FixedSider extends StatelessWidget {
   late final bool showMenu;
@@ -63,94 +66,8 @@ class FixedSider extends StatelessWidget {
                 showMenu: showMenu,
                 showSectionMenu: showSectionMenu,
                 showSubMenu: showSubMenu,
+                layoutType: layoutType,
               ),
-      ),
-    );
-  }
-}
-
-class CollapsedSider extends StatelessWidget {
-  final bool showMenu;
-  final bool showSectionMenu;
-  final bool showSubMenu;
-
-  const CollapsedSider({
-    Key? key,
-    required this.context,
-    required this.showMenu,
-    required this.showSectionMenu,
-    required this.showSubMenu,
-  }) : super(key: key);
-
-  final BuildContext context;
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeProvider theme = Provider.of<ThemeProvider>(context);
-    List<MenuOption> options = RouterProvider.of(context).menuOptions;
-    List<SiderMenuVerticalTile> tiles = List.of(
-      options.map(
-        (option) => SiderMenuVerticalTile(
-          icon: option.icon,
-          path: option.page,
-          collapsed: true,
-          activeColor: Colors.tealAccent,
-          backgroundColor: theme.colors.primaryColor,
-          color: theme.colors.textColorLight,
-        ),
-      ),
-    );
-
-    List<SectionRouteInfo> sections =
-        SectionProvider.of(context)?.sections ?? [];
-    List<SiderMenuVerticalTile> sectionTiles = List.of(
-      sections.map(
-        (option) => SiderMenuVerticalTile(
-          title: LegendUtils.capitalite(option.name.replaceAll('/', '')),
-          path: option.name,
-          isSection: true,
-          collapsed: true,
-          activeColor: theme.colors.selectionColor,
-          backgroundColor: theme.colors.primaryColor,
-          color: theme.colors.textColorLight,
-        ),
-      ),
-    );
-
-    return Container(
-      width: 80,
-      height: MediaQuery.of(context).size.height,
-      padding: EdgeInsets.only(
-          top: theme.appBarSizing.appBarHeight +
-              theme.appBarSizing.contentPadding.vertical),
-      color: theme.appBarColors.backgroundColor,
-      child: Column(
-        children: [
-          Divider(
-            color: theme.colors.secondaryColor.withOpacity(0.2),
-            height: 1.0,
-            thickness: 1.0,
-          ),
-          if (showMenu)
-            Padding(
-              padding: EdgeInsets.only(bottom: 24.0),
-              child: ListView(
-                shrinkWrap: true,
-                children: tiles,
-                padding: EdgeInsets.only(
-                  top: 32,
-                ),
-              ),
-            ),
-          if (showSectionMenu)
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: ListView(
-                children: sectionTiles,
-                shrinkWrap: true,
-              ),
-            )
-        ],
       ),
     );
   }
@@ -213,7 +130,17 @@ class Sider extends StatelessWidget {
     );
 
     List<Widget> children = [
-      if (showMenu ?? false) FixedSiderMenu(),
+      if (showMenu ?? false)
+        FixedSiderMenu(
+          backgroundColorSub: LegendColorTheme.darken(
+            theme.colors.siderColorTheme.background,
+            0.05,
+          ),
+          foregroundColor: LegendColorTheme.darken(
+            theme.colors.siderColorTheme.foreground,
+            0.05,
+          ),
+        ),
       if (showSubMenu && subMenuTiles.isNotEmpty)
         Padding(
           padding: const EdgeInsets.only(top: 8.0),

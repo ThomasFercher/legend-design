@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/drawers/sidermenu_vertical_tile.dart';
 import 'package:legend_design_core/layout/fixed/sider/sider_submenu.dart';
 import 'package:legend_design_core/objects/drawer_menu_tile.dart';
 import 'package:legend_design_core/objects/menu_option.dart';
@@ -12,12 +13,18 @@ class FixedSiderMenu extends StatelessWidget {
 
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final Color? backgroundColorSub;
+  final Color? foregroundColorSub;
+  final bool isCollapsed;
 
   FixedSiderMenu({
     Key? key,
     this.options,
     this.backgroundColor,
     this.foregroundColor,
+    this.backgroundColorSub,
+    this.foregroundColorSub,
+    this.isCollapsed = false,
   }) : super(key: key);
 
   @override
@@ -29,25 +36,38 @@ class FixedSiderMenu extends StatelessWidget {
     for (MenuOption option in options!) {
       if (option.children == null) {
         tiles.add(
-          DrawerMenuTile(
-            icon: option.icon,
-            title: option.title,
-            path: option.page,
-            backgroundColor:
-                backgroundColor ?? theme.colors.siderColorTheme.backgroundMenu,
-            left: false,
-            activeColor: theme.colors.selectionColor,
-            color: foregroundColor ?? theme.colors.siderColorTheme.foreground,
-            collapsed: false,
-            forceColor: option == sel,
-          ),
+          !isCollapsed
+              ? DrawerMenuTile(
+                  icon: option.icon,
+                  title: option.title,
+                  path: option.page,
+                  backgroundColor: backgroundColor ??
+                      theme.colors.siderColorTheme.backgroundMenu,
+                  left: false,
+                  activeColor: theme.colors.selectionColor,
+                  color: foregroundColor ??
+                      theme.colors.siderColorTheme.foreground,
+                  collapsed: false,
+                  forceColor: option == sel,
+                )
+              : SiderMenuVerticalTile(
+                  icon: option.icon,
+                  path: option.page,
+                  title: option.title,
+                  collapsed: true,
+                  iconSize: 30,
+                  activeColor: Colors.tealAccent,
+                  backgroundColor: theme.colors.primaryColor,
+                  color: theme.colors.textColorLight,
+                ),
         );
       } else {
         tiles.add(
           SiderSubMenu(
             option: option,
-            backgroundColor: backgroundColor,
-            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColorSub,
+            foregroundColor: foregroundColorSub,
+            collapsed: isCollapsed,
           ),
         );
       }
