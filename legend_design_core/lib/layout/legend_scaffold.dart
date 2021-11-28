@@ -19,6 +19,7 @@ import 'package:legend_design_core/router/routes/route_info.dart';
 import 'package:legend_design_core/router/routes/section_provider.dart';
 import 'package:legend_design_core/router/routes/section_route_info.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
+import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
 import 'package:legend_design_core/styles/theming/sizing/size_provider.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -316,10 +317,14 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
     double footerHeight =
         LayoutProvider.of(context)?.globalFooter?.sizing?.height ?? 0;
 
-    height -= footerHeight;
-
+    if (theme.sizingTheme.sizingType != LegendSizingType.MOBILE) {
+      height -= footerHeight;
+    } else {
+      height -= theme.bottomBarStyle?.height ?? 0;
+    }
     if (widget.layoutType == LayoutType.FixedSider ||
         widget.layoutType == LayoutType.Content) {
+      height -= theme.sizing.padding[0] * 4;
     } else {
       height -= theme.appBarSizing.appBarHeight;
     }
@@ -338,7 +343,8 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
       screenSize = sizeProvider.screenSize;
 
       if (!sizeProvider.isMobile) {
-        footerheight = 120;
+        footerheight =
+            LayoutProvider.of(context)?.globalFooter?.sizing?.height ?? 0;
       }
     } catch (e) {
       print(e);
@@ -354,7 +360,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
           return Padding(
             padding: EdgeInsets.symmetric(
               horizontal: theme.sizing.padding[0],
-              vertical: widget.verticalChildrenSpacing ?? 0 / 2,
+              //  vertical: widget.verticalChildrenSpacing ?? 0 / 2,
             ),
             child: c,
           );
@@ -409,7 +415,7 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                                           theme.sizing.borderRadius[0],
                                     ),
                                     padding: EdgeInsets.all(
-                                      theme.sizing.padding[1],
+                                      theme.sizing.padding[0],
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -484,7 +490,8 @@ class _LegendScaffoldState extends State<LegendScaffold> with RouteAware {
                                       ),
                                     ),
                                   ),
-                                  getFooter(120, context)
+                                  if (footerheight != null)
+                                    getFooter(footerheight, context)
                                 ],
                               ),
                             ),

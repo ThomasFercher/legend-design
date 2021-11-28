@@ -68,7 +68,7 @@ class CollapsedSider extends StatelessWidget {
       width: 80,
       height: MediaQuery.of(context).size.height,
       color: theme.appBarColors.backgroundColor,
-      child: Column(
+      child: ListView(
         children: [
           if (layoutType == LayoutType.FixedSider)
             Container(
