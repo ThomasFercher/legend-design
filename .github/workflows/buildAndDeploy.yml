@@ -1,0 +1,32 @@
+name: Build and Deploy
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+    # Set up Flutter.
+    - name: Clone Flutter repository with master channel
+      uses: subosito/flutter-action@4389e6cbc6cb8a4b18c628ff96ff90be0e926aa8
+      with:
+        channel: master
+    #- run: flutter doctor -v
+
+    # Checkout gallery code and get packages.
+    - name: Checkout Legend code
+      uses: actions/checkout@v2
+    - run: flutter pub get
+
+    # Build and deploy (by default, to staging).
+    - run: flutter build -v web --release
+    
+    - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: master # The branch the action should deploy to.
+          folder: ./ # The folder the action should deploy. 
+
+
+     
