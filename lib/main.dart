@@ -39,6 +39,19 @@ void main() {
         ),
       ),
       globalFooter: LayoutInfo.footer,
+      future: Future.delayed(Duration(seconds: 2), () => true),
+      splashScreen: Container(
+        color: AppConfig.darkColorTheme.scaffoldBackgroundColor,
+        child: Center(
+          child: SizedBox(
+            height: 64,
+            width: 64,
+            child: CircularProgressIndicator(
+              color: AppConfig.darkColorTheme.primaryColor,
+            ),
+          ),
+        ),
+      ),
     ),
   );
 }
