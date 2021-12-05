@@ -35,9 +35,11 @@ dependencies:
   flutter_colorpicker: ^0.6.1
   google_fonts: ^2.1.0
   legend_design_widgets:
-    path: ./legend_design_widgets
+    git: https://github.com/ThomasFercher/Legend-Design-Widgets
   legend_design_core:
-    path: ./legend_design_core
+    git: https://github.com/ThomasFercher/Legend-Design-Core
+  legend_design_platform:
+    git: https://github.com/ThomasFercher/Legend-Design-Cross
 
 dev_dependencies:
   flutter_test:
