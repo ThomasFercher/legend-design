@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:legend_design_core/layout/legend_scaffold.dart';
+import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_widgets/input/form/legendForm.dart';
 import 'package:legend_design_widgets/input/form/legendFormField.dart';
-import 'package:legend_design_widgets/legendButton/legendButton.dart';
+import 'package:legend_design_widgets/input/text/legendInputDecoration.dart';
+import 'package:legend_design_widgets/input/text/legendTextField.dart';
 
 class ThemeEditor extends StatelessWidget {
   const ThemeEditor({Key? key}) : super(key: key);
@@ -12,32 +13,28 @@ class ThemeEditor extends StatelessWidget {
   Widget build(BuildContext context) {
     return LegendScaffold(
       pageName: 'Theme Editor',
-      children: [
-        LegendForm(
-          children: [
-            LegendColorPicker(),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class LegendColorPicker extends StatefulWidget {
-  LegendColorPicker({Key? key}) : super(key: key);
-
-  @override
-  _LegendColorPickerState createState() => _LegendColorPickerState();
-}
-
-class _LegendColorPickerState extends State<LegendColorPicker> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ColorPicker(
-        onColorChanged: (Color value) {},
-        pickerColor: Colors.red,
-      ),
+      layoutType: LayoutType.FixedHeader,
+      contentBuilder: (context, size) {
+        return SizedBox(
+          width: size.width,
+          child: LegendForm(
+            onChanged: (values) {
+              print(values);
+            },
+            height: 400,
+            children: [
+              LegendFormField.color(
+                text: LegendTextField(
+                  decoration: LegendInputDecoration.rounded(
+                    textColor: Colors.white,
+                  ),
+                ),
+                title: "Primary Color",
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/drawers/legend_drawer_info.dart';
-import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar.dart';
+import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar_colors.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar_sizing.dart';
 import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.dart';
 import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
 import 'package:legend_design_core/layout/fixed/sider/siderTheme.dart';
-
 import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/router/routes/route_info.dart';
-
-import 'package:legend_design_core/router/routes/section_route_info.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
+import 'package:legend_design_core/styles/theming/colors/legend_color_palette.dart';
 import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
 import 'package:legend_design_core/styles/theming/sizing/legend_sizing_theme.dart';
@@ -18,6 +16,7 @@ import 'package:webstore/pages/about.dart';
 import 'package:webstore/pages/drawerPages/settingsPage.dart';
 import 'package:webstore/pages/home.dart';
 import 'package:webstore/pages/services.dart';
+import 'package:webstore/pages/themeEditor/themeEditor.dart';
 import 'package:webstore/pages/widgetComponets.dart';
 import 'package:webstore/pages/widgets/buttons.dart';
 import 'package:webstore/pages/widgets/carousel.dart';
@@ -48,119 +47,141 @@ class AppConfig {
   );
 
   static LegendSizingTheme sizingTheme = LegendSizingTheme(
-    desktop: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
-      borderRadius: [
-        BorderRadius.all(
-          Radius.circular(12),
+    splits: [
+      420,
+      720,
+      1080,
+      1920,
+    ],
+    sizings: [
+      LegendSizing(
+        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 22),
+        borderRadius: [
+          BorderRadius.all(
+            Radius.circular(12),
+          ),
+          BorderRadius.all(
+            Radius.circular(6),
+          ),
+        ],
+        borderInset: [
+          12,
+          6,
+        ],
+        padding: [
+          8,
+          18,
+          24,
+        ],
+        bottomBarSizing: bottomBarSizing,
+        appBarSizing: FixedAppBarSizing(
+          appBarHeight: 72,
+          contentPadding: EdgeInsets.only(
+            right: 8,
+            left: 8,
+          ),
+          borderRadius: Radius.circular(20),
+          iconSize: 28,
+          spacing: 8,
+          titleSize: 42,
         ),
-        BorderRadius.all(
-          Radius.circular(6),
-        ),
-      ],
-      borderInset: [
-        12,
-        6,
-      ],
-      padding: [
-        8,
-        18,
-        24,
-      ],
-      appBarSizing: FixedAppBarSizing(
-        appBarHeight: 80,
-        contentPadding: EdgeInsets.only(right: 6),
-        borderRadius: Radius.circular(20),
-        iconSize: 28,
-        spacing: 20,
-        titleSize: 48,
       ),
-    ),
-    mobile: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 30),
-      borderRadius: [
-        BorderRadius.all(
-          Radius.circular(16.0),
+      LegendSizing(
+        typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 30),
+        borderRadius: [
+          BorderRadius.all(
+            Radius.circular(16.0),
+          ),
+          BorderRadius.all(
+            Radius.circular(12.0),
+          ),
+        ],
+        borderInset: [
+          16,
+          12,
+        ],
+        padding: [
+          12,
+          16,
+          24,
+        ],
+        appBarSizing: FixedAppBarSizing(
+          appBarHeight: 80,
+          contentPadding: EdgeInsets.only(
+            right: 16,
+            left: 16,
+          ),
+          iconSize: 22,
+          spacing: 12,
+          titleSize: 48,
         ),
-        BorderRadius.all(
-          Radius.circular(12.0),
-        ),
-      ],
-      borderInset: [
-        16,
-        12,
-      ],
-      padding: [
-        12,
-        16,
-        24,
-      ],
-      appBarSizing: FixedAppBarSizing(
-        appBarHeight: 72,
-        contentPadding: EdgeInsets.all(0),
-        iconSize: 16,
-        spacing: 20,
-        titleSize: 42,
       ),
-      bottomBarSizing: bottomBarSizing,
-    ),
-    tablet: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
-      borderRadius: [
-        BorderRadius.all(
-          Radius.circular(12),
+      LegendSizing(
+        typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
+        borderRadius: [
+          BorderRadius.all(
+            Radius.circular(12),
+          ),
+          BorderRadius.all(
+            Radius.circular(6),
+          ),
+        ],
+        borderInset: [
+          12,
+          12,
+        ],
+        padding: [
+          12,
+          16,
+          24,
+        ],
+        appBarSizing: FixedAppBarSizing(
+          appBarHeight: 80,
+          contentPadding: EdgeInsets.only(
+            right: 16,
+            left: 16,
+          ),
+          borderRadius: Radius.circular(20),
+          iconSize: 24,
+          spacing: 16,
+          titleSize: 56,
         ),
-        BorderRadius.all(
-          Radius.circular(6),
-        ),
-      ],
-      borderInset: [
-        12,
-        12,
-      ],
-      padding: [
-        12,
-        16,
-        24,
-      ],
-      appBarSizing: FixedAppBarSizing(
-        appBarHeight: 80,
-        contentPadding: EdgeInsets.all(0),
-        borderRadius: Radius.circular(20),
-        iconSize: 24,
-        spacing: 20,
       ),
-    ),
-    web: LegendSizing(
-      typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
-      borderRadius: [
-        BorderRadius.all(
-          Radius.circular(12),
+      LegendSizing(
+        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 36),
+        borderRadius: [
+          BorderRadius.all(
+            Radius.circular(12),
+          ),
+          BorderRadius.all(
+            Radius.circular(6),
+          ),
+        ],
+        borderInset: [
+          12,
+          12,
+        ],
+        padding: [
+          12,
+          16,
+          24,
+        ],
+        appBarSizing: FixedAppBarSizing(
+          appBarHeight: 80,
+          contentPadding: EdgeInsets.only(
+            right: 16,
+            left: 16,
+          ),
+          borderRadius: Radius.circular(20),
+          iconSize: 28,
+          spacing: 16,
+          titleSize: 64,
         ),
-        BorderRadius.all(
-          Radius.circular(6),
-        ),
-      ],
-      borderInset: [
-        12,
-        12,
-      ],
-      padding: [
-        12,
-        16,
-        24,
-      ],
-      appBarSizing: FixedAppBarSizing(
-        appBarHeight: 80,
-        contentPadding: EdgeInsets.all(0),
-        borderRadius: Radius.circular(20),
-        iconSize: 24,
-        spacing: 20,
       ),
-    ),
+    ],
   );
 
-  static LegendColorTheme lightColorTheme = LegendColorTheme(
+  static LegendColorPalette lightColorTheme = LegendColorPalette(
     textContrast: Colors.cyan,
     typographyColors: LegendTypographyColors(
       baseColor: Colors.black,
@@ -215,8 +236,9 @@ class AppConfig {
       backgroundMenu: Colors.cyan[400]!,
       foreground: Colors.teal[50]!,
     ),
+    disabledColor: Colors.black12,
   );
-  static LegendColorTheme darkColorTheme = LegendColorTheme(
+  static LegendColorPalette darkColorTheme = LegendColorPalette(
     textContrast: Color(0xFFb3dedb),
     siderColorTheme: SiderColorTheme(
       background: Colors.teal,
@@ -262,6 +284,7 @@ class AppConfig {
       selectedColor: Colors.tealAccent,
       foreground: Colors.teal[50]!,
     ),
+    disabledColor: Colors.black12,
   );
 
   static List<MenuOption> menuOptions = [
@@ -274,6 +297,11 @@ class AppConfig {
       title: "Products",
       page: "/products",
       icon: Icons.accessibility,
+    ),
+    MenuOption(
+      title: "Theming",
+      page: "/theme",
+      icon: Icons.color_lens,
     ),
     MenuOption(
       title: "Widgets",
@@ -356,81 +384,80 @@ class AppConfig {
     ),
   ];
 
-  static List<LegendDrawerRoute> drawerRoutes = [
-    LegendDrawerRoute(
-      title: "Settings",
-      name: "/settings",
-      contentBuilder: (context) {
-        return SettingsPage();
-      },
-      actions: [],
-      width: 400,
-      mobileWidth: 320,
-    ),
-  ];
-
   static List<RouteInfo> routes = [
-    RouteInfo(
+    PageRouteInfo(
       name: "/",
       page: Home(),
     ),
-    RouteInfo(
+    PageRouteInfo(
       name: "/about",
       page: About(),
     ),
-    RouteInfo(
+    PageRouteInfo(
       name: "/products",
       page: ProductsPage(),
     ),
-    RouteInfo(
+    PageRouteInfo(
+      name: "/theme",
+      page: ThemeEditor(),
+    ),
+    ModalRouteInfo(
+      name: "/siderMenu",
+      body: MenuDrawer(),
+    ),
+    ModalRouteInfo(
+      name: "/settings",
+      body: SettingsPage(),
+    ),
+    PageRouteInfo(
       name: "/widgets",
       page: WidgetComponents(),
       children: List.of(
         [
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/buttons",
             page: ButtonsPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/modals",
             page: ModalsPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/selectbar",
             page: SelectButtonBarPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/carousel",
             page: CarouselPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/textfield",
             page: TextfieldPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/form",
             page: FormPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/table",
             page: TablePage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/tags",
             page: TagsPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
-          RouteInfo(
+          PageRouteInfo(
             name: "/widgets/rating",
             page: RatingPage(),
-            isUnderyling: true,
+            isUnderlying: true,
           ),
         ],
         growable: true,

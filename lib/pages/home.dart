@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:legend_design_core/layout/legend_scaffold.dart';
-import 'package:legend_design_core/layout/sections/section.dart';
-import 'package:legend_design_core/modals/legendPopups.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/router/router_provider.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
-
-import 'package:legend_design_widgets/modals/modal.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
@@ -17,8 +14,9 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     ThemeProvider theme = context.watch<ThemeProvider>();
+
     return LegendScaffold(
-      contentBuilder: (context) {
+      contentBuilder: (context, s) {
         return Column(
           children: [
             LegendText(
@@ -27,11 +25,32 @@ class Home extends StatelessWidget {
                   "On top of this Legend Design Custom Widgets on most of the functionality can be used on its own, so you dont get forced to use everything provided. ",
               textStyle: theme.typography.h0,
             ),
+            Container(
+              height: 40,
+              width: 592,
+              color: Colors.red,
+            )
           ],
+        );
+      },
+      appBarBuilder: (context) {
+        return LegendAnimatedIcon(
+          icon: Icons.color_lens,
+          theme: LegendAnimtedIconTheme(
+            enabled: theme.colors.selectionColor,
+            disabled: theme.colors.appBarColors.foreground,
+          ),
+          iconSize: theme.appBarSizing.iconSize ?? 32,
+          disableShadow: true,
+          onPressed: () {
+            RouterProvider.of(context)
+                .pushPage(settings: RouteSettings(name: "/settings"));
+          },
         );
       },
       layoutType: LayoutType.FixedHeader,
       pageName: "Home",
+      enableDefaultSettings: true,
     );
   }
 }

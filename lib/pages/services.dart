@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:legend_design_core/icons/legend_gradient_icon.dart';
-import 'package:legend_design_core/layout/legend_scaffold.dart';
-
-import 'package:legend_design_core/layout/sections/section.dart';
-
+import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
-
 import 'package:legend_design_core/typography/legend_text.dart';
-import 'package:legend_design_core/typography/typography.dart';
 import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
 import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
 import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
@@ -25,7 +17,7 @@ class ProductsPage extends StatelessWidget {
     ThemeProvider theme = context.watch<ThemeProvider>();
 
     return LegendScaffold(
-      contentBuilder: (context) {
+      contentBuilder: (context, s) {
         return Container(
           child: Column(
             children: [
