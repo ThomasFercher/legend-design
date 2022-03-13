@@ -236,7 +236,7 @@ class AppConfig {
       backgroundMenu: Colors.cyan[400]!,
       foreground: Colors.teal[50]!,
     ),
-    disabledColor: Colors.black12,
+    disabledColor: Colors.white60,
   );
   static LegendColorPalette darkColorTheme = LegendColorPalette(
     textContrast: Color(0xFFb3dedb),
@@ -284,7 +284,7 @@ class AppConfig {
       selectedColor: Colors.tealAccent,
       foreground: Colors.teal[50]!,
     ),
-    disabledColor: Colors.black12,
+    disabledColor: Colors.white60,
   );
 
   static List<MenuOption> menuOptions = [

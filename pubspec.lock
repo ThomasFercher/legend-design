@@ -118,6 +118,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1"
+  flutter_highlight:
+    dependency: "direct main"
+    description:
+      path: "../packages/highlight.dart/flutter_highlight"
+      relative: true
+    source: path
+    version: "0.7.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -132,13 +139,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.22.0"
-  flutter_syntax_view:
-    dependency: "direct main"
-    description:
-      name: flutter_syntax_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -156,13 +156,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.1"
-  graphs:
+  highlight:
     dependency: transitive
     description:
-      name: graphs
+      name: highlight
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "0.7.0"
   http:
     dependency: transitive
     description:
@@ -354,13 +354,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.2"
-  rive:
-    dependency: transitive
-    description:
-      name: rive
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.1"
   sky_engine:
     dependency: transitive
     description: flutter

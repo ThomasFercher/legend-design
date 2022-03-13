@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/theming/theme_provider.dart';
@@ -18,10 +17,8 @@ class ButtonsPage extends StatelessWidget {
     ThemeProvider theme = context.watch<ThemeProvider>();
     return LegendScaffold(
       pageName: 'Buttons',
-      layoutType: LayoutType.FixedSider,
-      showSiderMenu: true,
-      isUnderlyingRoute: true,
-      showSiderSubMenu: true,
+      layoutType: LayoutType.FixedHeaderSider,
+      shareParentSiderMenu: true,
       singlePage: false,
       contentBuilder: (context, s) {
         return Container(
@@ -92,24 +89,6 @@ class ButtonsPage extends StatelessWidget {
                 margin: EdgeInsets.all(8.0),
                 padding: EdgeInsets.all(
                   theme.sizing.borderInset[1],
-                ),
-                child: Container(
-                  height: 180,
-                  child: SyntaxView(
-                    code:
-                        "LegendButton(\n margin: EdgeInsets.all(16),\n text: LegendText(text: \"Gradient\"),\n onPressed: () => {},\n style: LegendButtonStyle.gradient(\n  [\n   Colors.red[200]!,\n   Colors.redAccent \n  ] \n);  ",
-                    syntax: Syntax.DART,
-                    syntaxTheme: SyntaxTheme(
-                      backgroundColor: Colors.transparent,
-                      baseStyle: theme.typography.h0.copyWith(
-                        color: theme.colors.foreground[3],
-                      ),
-                    ),
-                    fontSize: theme.typography.h0.fontSize!,
-                    withZoom: false,
-                    withLinesCount: false,
-                    expanded: true,
-                  ),
                 ),
               ),
             ],
