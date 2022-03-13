@@ -1,20 +1,11 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/router/router_provider.dart';
+import 'package:legend_design_core/styles/layouts/layout_type.dart';
+import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:provider/provider.dart';
-import 'package:webstore/customwidgets/input/selectBar/legendSelectBar.dart';
-import 'package:webstore/customwidgets/input/selectBar/legendSelectOption.dart';
-import 'package:webstore/customwidgets/legendButton/legendButtonStyle.dart';
-import 'package:webstore/customwidgets/modals/legendAlert.dart';
-import 'package:webstore/customwidgets/modals/legendPopups.dart';
-import 'package:webstore/styles/theming/legendTheme.dart';
-import '../customwidgets/modals/legendBottomSheet.dart';
-import '../customwidgets/legendButton/legendButton.dart';
-import '../customwidgets/layout/legendScaffold.dart';
-import '../customwidgets/modals/modal.dart';
-import '../customwidgets/typography/legendText.dart';
-import '../styles/layoutType.dart';
-import '../customwidgets/typography/typography.dart';
 
 class Home extends StatelessWidget {
   const Home();
@@ -22,62 +13,44 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    LegendTheme theme = Provider.of<LegendTheme>(context);
+    ThemeProvider theme = context.watch<ThemeProvider>();
+
     return LegendScaffold(
-      contentBuilder: (context) {
+      contentBuilder: (context, s) {
         return Column(
           children: [
-            Text("Home"),
-            LegendButton(
-              text: Text("Show Success Alert"),
-              onPressed: () {
-                LegendPopups.showAlert(
-                  context: context,
-                  alert: LegendAlert.success(
-                    message: "Ja geschafft du verdammta Trottlwichsa!",
-                  ),
-                );
-              },
-              style: LegendButtonStyle.confirm(),
+            LegendText(
+              text: "Legend Design aims to provide all basic needs for developing  Cross-Plattform Applications. These include Routing, Colors, Layouts, Sizing and many other little things. " +
+                  "Using the Legend Design package enables developers to write clean code without much boilerplate which is suited for every platform. " +
+                  "On top of this Legend Design Custom Widgets on most of the functionality can be used on its own, so you dont get forced to use everything provided. ",
+              textStyle: theme.typography.h0,
             ),
-            LegendButton(
-              text: Text("Show Modal Bottom"),
-              onPressed: () => {
-                Scaffold.of(context).showBottomSheet(
-                  (context) {
-                    return LegendBottomSheet(
-                      title: "Cookies",
-                      onCancel: () {},
-                      onConfirm: () {},
-                      content: LegendText(
-                        text: "Bitte aktzeptieren Sie unsere Cookies! LIT",
-                        textStyle: LegendTextStyle.h5(),
-                      ),
-                    );
-                  },
-                  backgroundColor: Colors.transparent,
-                  clipBehavior: Clip.antiAlias,
-                ),
-              },
-              style: LegendButtonStyle.confirm(height: 100),
-            ),
+            Container(
+              height: 40,
+              width: 592,
+              color: Colors.red,
+            )
           ],
+        );
+      },
+      appBarBuilder: (context) {
+        return LegendAnimatedIcon(
+          icon: Icons.color_lens,
+          theme: LegendAnimtedIconTheme(
+            enabled: theme.colors.selectionColor,
+            disabled: theme.colors.appBarColors.foreground,
+          ),
+          iconSize: theme.appBarSizing.iconSize ?? 32,
+          disableShadow: true,
+          onPressed: () {
+            RouterProvider.of(context)
+                .pushPage(settings: RouteSettings(name: "/settings"));
+          },
         );
       },
       layoutType: LayoutType.FixedHeader,
       pageName: "Home",
-      onActionButtonPressed: (context) {
-        LegendPopups.showLegendModal(
-          context: context,
-          modal: Modal(
-            content: Text("test"),
-            onConfirm: () => {},
-            onCancle: () => {},
-            height: 400,
-            width: 400,
-          ),
-        );
-      },
+      enableDefaultSettings: true,
     );
   }
 }
