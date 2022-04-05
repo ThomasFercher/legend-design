@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_color_palette.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/styles/colors/legend_color_theme.dart' as ct;
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
-import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
-import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -23,7 +19,7 @@ class _SettingsPageState extends State<SettingsPage>
   late Animation<Color?> border;
   late AnimationController controller;
   Color borderColor = Colors.transparent;
-  LegendColorThemeType? themeType;
+  ct.PaletteType? themeType;
 
   @override
   void initState() {
@@ -47,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage>
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = context.watch<ThemeProvider>();
+    LegendTheme theme = context.watch<LegendTheme>();
 
     return Container(
       height: MediaQuery.of(context).size.height,
@@ -66,14 +62,14 @@ class _SettingsPageState extends State<SettingsPage>
                 LegendText(
                   text: "Themes",
                   textStyle: theme.typography.h5.copyWith(
-                    color: theme.colors.textColorLight,
+                    color: theme.colors.textOnDark,
                   ),
                 ),
                 LegendAnimatedIcon(
                   icon: Icons.close,
                   disableShadow: true,
                   theme: LegendAnimtedIconTheme(
-                    enabled: theme.colors.selectionColor,
+                    enabled: theme.colors.selection,
                     disabled: theme.colors.foreground[1],
                   ),
                   onPressed: () {
@@ -86,21 +82,21 @@ class _SettingsPageState extends State<SettingsPage>
           Divider(
             color: theme.colors.background[2],
           ),
-          LegendGrid(
+          /*  LegendGrid(
             margin: EdgeInsets.only(top: 8),
             width: 400,
             children: [
               InkWell(
                 onTap: () {
-                  theme.changeColorTheme(PaletteType.dark(), context);
+                  theme.changeColorTheme(ct.PaletteType.dark(), context);
                 },
                 child: Container(
                   margin: EdgeInsets.all(8.0),
                   padding: EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    border: themeType == LegendColorThemeType.DARK
+                    border: themeType == ct.PaletteType.dark()
                         ? Border.all(
-                            color: theme.colors.primaryColor,
+                            color: theme.colors.primary,
                             width: 2,
                           )
                         : null,
@@ -177,15 +173,15 @@ class _SettingsPageState extends State<SettingsPage>
               ),
               InkWell(
                 onTap: () {
-                  theme.changeColorTheme(PaletteType.light(), context);
+                  theme.changeColorTheme(ct.PaletteType.light(), context);
                 },
                 child: Container(
                   margin: EdgeInsets.all(8.0),
                   padding: EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    border: themeType == LegendColorThemeType.LIGHT
+                    border: themeType == ct.PaletteType.light()
                         ? Border.all(
-                            color: theme.colors.primaryColor,
+                            color: theme.colors.primary,
                             width: 2,
                           )
                         : null,
@@ -262,9 +258,9 @@ class _SettingsPageState extends State<SettingsPage>
               ),
               InkWell(
                 onTap: () {
-                  Provider.of<ThemeProvider>(context, listen: false)
+                  Provider.of<LegendTheme>(context, listen: false)
                       .changeColorTheme(
-                    PaletteType.custom(
+                    ct.PaletteType.custom(
                       i: 2,
                     ),
                     context,
@@ -274,9 +270,9 @@ class _SettingsPageState extends State<SettingsPage>
                   margin: EdgeInsets.all(8.0),
                   padding: EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    border: themeType == LegendColorThemeType.LIGHT
+                    border: themeType == ct.PaletteType.custom(i: 0)
                         ? Border.all(
-                            color: theme.colors.primaryColor,
+                            color: theme.colors.primary,
                             width: 2,
                           )
                         : null,
@@ -356,7 +352,7 @@ class _SettingsPageState extends State<SettingsPage>
               medium: LegendGridSizeInfo(2, 200),
               layoutDirection: LegendGridSizeDirection.DOWN,
             ),
-          ),
+          ),*/
         ],
       ),
     );

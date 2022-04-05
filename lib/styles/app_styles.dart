@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
-import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar_colors.dart';
-import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar_sizing.dart';
-import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.dart';
-import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
-import 'package:legend_design_core/layout/fixed/sider/siderTheme.dart';
 import 'package:legend_design_core/objects/menu_option.dart';
 import 'package:legend_design_core/router/routes/route_info.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_color_palette.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
-import 'package:legend_design_core/styles/theming/sizing/legend_sizing.dart';
-import 'package:legend_design_core/styles/theming/sizing/legend_sizing_theme.dart';
-import 'package:legend_design_core/typography/typography.dart';
-import 'package:webstore/pages/about.dart';
-import 'package:webstore/pages/drawerPages/settingsPage.dart';
-import 'package:webstore/pages/home.dart';
-import 'package:webstore/pages/services.dart';
-import 'package:webstore/pages/themeEditor/themeEditor.dart';
-import 'package:webstore/pages/widgetComponets.dart';
-import 'package:webstore/pages/widgets/buttons.dart';
-import 'package:webstore/pages/widgets/carousel.dart';
-import 'package:webstore/pages/widgets/form.dart';
-import 'package:webstore/pages/widgets/modals.dart';
-import 'package:webstore/pages/widgets/rating.dart';
-import 'package:webstore/pages/widgets/selectButtonBar.dart';
-import 'package:webstore/pages/widgets/table.dart';
-import 'package:webstore/pages/widgets/tags.dart';
-import 'package:webstore/pages/widgets/textfield.dart';
+import 'package:legend_design_core/styles/colors/legend_colors.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
+
+import '../pages/about.dart';
+import '../pages/drawerPages/settingsPage.dart';
+import '../pages/home.dart';
+import '../pages/services.dart';
+import '../pages/themeEditor/themeEditor.dart';
+import '../pages/widgetComponets.dart';
+import '../pages/widgets/buttons.dart';
+import '../pages/widgets/carousel.dart';
+import '../pages/widgets/form.dart';
+import '../pages/widgets/icons.dart';
+import '../pages/widgets/modals.dart';
+import '../pages/widgets/rating.dart';
+import '../pages/widgets/selectButtonBar.dart';
+import '../pages/widgets/table.dart';
+import '../pages/widgets/tags.dart';
+import '../pages/widgets/textfield.dart';
 
 class AppConfig {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
@@ -55,6 +49,7 @@ class AppConfig {
     ],
     sizings: [
       LegendSizing(
+        elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 22),
         borderRadius: [
           BorderRadius.all(
@@ -85,8 +80,10 @@ class AppConfig {
           spacing: 8,
           titleSize: 42,
         ),
+        hideSider: true,
       ),
       LegendSizing(
+        elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 30),
         borderRadius: [
           BorderRadius.all(
@@ -115,8 +112,10 @@ class AppConfig {
           spacing: 12,
           titleSize: 48,
         ),
+        collapsedSider: true,
       ),
       LegendSizing(
+        elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
         borderRadius: [
           BorderRadius.all(
@@ -148,6 +147,7 @@ class AppConfig {
         ),
       ),
       LegendSizing(
+        elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 36),
         borderRadius: [
           BorderRadius.all(
@@ -181,86 +181,10 @@ class AppConfig {
     ],
   );
 
-  static LegendColorPalette lightColorTheme = LegendColorPalette(
-    textContrast: Colors.cyan,
-    typographyColors: LegendTypographyColors(
-      baseColor: Colors.black,
-    ),
-    bottomBarColors: BottomBarColors(
-      activeColor: Colors.cyanAccent,
-      disabledColor: LegendColors.gray4,
-      backgroundColor: LegendColors.white100,
-    ),
-    fixedFooterColors: FixedFooterColors(
-      backgroundColor: LegendColors.gray10,
-      foreground: LegendColors.gray4,
-    ),
-    cardBackgroundColor: Colors.white,
-    primaryColor: Colors.cyan,
-    secondaryColor: Colors.tealAccent[100]!,
-    scaffoldBackgroundColor: LegendColors.gray2,
-    foreground: [
-      LegendColors.black12,
-      LegendColors.black20,
-      LegendColors.black40,
-      LegendColors.gray8,
-      LegendColors.gray10,
-    ],
-    background: [
-      LegendColors.black04,
-      LegendColors.black12,
-      LegendColors.black20,
-      LegendColors.gray6,
-      LegendColors.gray8,
-      LegendColors.gray10,
-    ],
-    elevations: [
-      0,
-      0.5,
-      1,
-      2,
-      4,
-      8,
-    ],
-    selectionColor: Colors.cyanAccent,
-    textColorDark: Colors.cyan[900]!,
-    textColorLight: Colors.tealAccent[100]!,
-    appBarColors: FixedAppBarColors(
-      backgroundColor: Colors.cyan,
-      iconColor: Colors.tealAccent[100]!,
-      selectedColor: Colors.cyanAccent,
-      foreground: Colors.teal[50]!,
-    ),
-    siderColorTheme: SiderColorTheme(
-      background: Colors.cyan,
-      backgroundMenu: Colors.cyan[400]!,
-      foreground: Colors.teal[50]!,
-    ),
-    disabledColor: Colors.white60,
-  );
-  static LegendColorPalette darkColorTheme = LegendColorPalette(
-    textContrast: Color(0xFFb3dedb),
-    siderColorTheme: SiderColorTheme(
-      background: Colors.teal,
-      backgroundMenu: Colors.teal[600]!,
-      foreground: Colors.teal[50]!,
-    ),
-    typographyColors: LegendTypographyColors(
-      baseColor: Colors.white,
-    ),
-    bottomBarColors: BottomBarColors(
-      activeColor: Colors.teal,
-      disabledColor: Colors.black26,
-      backgroundColor: LegendColors.gray10,
-    ),
-    fixedFooterColors: FixedFooterColors(
-      backgroundColor: LegendColors.gray8,
-      foreground: LegendColors.gray4,
-    ),
-    cardBackgroundColor: LegendColors.gray9,
-    primaryColor: Colors.teal,
-    secondaryColor: Color(0xFFb3dedb),
-    scaffoldBackgroundColor: LegendColors.gray11,
+  static LegendPalette lightColorTheme = LegendPalette(
+    primary: Colors.indigo,
+    secondary: Colors.teal,
+    tertiary: Colors.teal,
     foreground: [
       LegendColors.gray10,
       LegendColors.gray8,
@@ -275,16 +199,43 @@ class AppConfig {
       LegendColors.gray6,
       LegendColors.gray5,
     ],
-    selectionColor: Colors.tealAccent,
-    textColorDark: LegendColors.gray6,
-    textColorLight: LegendColors.gray4,
-    appBarColors: FixedAppBarColors(
-      backgroundColor: Colors.teal,
-      iconColor: Colors.tealAccent,
-      selectedColor: Colors.tealAccent,
-      foreground: Colors.teal[50]!,
-    ),
-    disabledColor: Colors.white60,
+    error: Colors.red,
+    disabled: LegendColors.gray7,
+    shadow: Colors.black.withOpacity(0.5),
+    selection: Colors.tealAccent[400]!,
+    textOnDark: LegendColors.gray6,
+    textOnLight: LegendColors.gray4,
+    onPrimary: Colors.indigo[200]!,
+    onSecondary: Colors.teal[200]!,
+    onTertiary: Colors.teal[200]!,
+  );
+  static LegendPalette darkColorTheme = LegendPalette(
+    primary: Colors.indigo,
+    secondary: Colors.teal,
+    tertiary: Colors.teal,
+    foreground: [
+      LegendColors.gray10,
+      LegendColors.gray8,
+      LegendColors.gray6,
+      LegendColors.gray4,
+    ],
+    background: [
+      LegendColors.gray10,
+      LegendColors.gray9,
+      LegendColors.gray8,
+      LegendColors.gray7,
+      LegendColors.gray6,
+      LegendColors.gray5,
+    ],
+    error: Colors.red,
+    disabled: LegendColors.gray7,
+    shadow: Colors.black.withOpacity(0.5),
+    selection: Colors.tealAccent[400]!,
+    textOnDark: LegendColors.gray6,
+    textOnLight: LegendColors.gray4,
+    onPrimary: Colors.indigo[200]!,
+    onSecondary: Colors.teal[200]!,
+    onTertiary: Colors.teal[200]!,
   );
 
   static List<MenuOption> menuOptions = [
@@ -313,6 +264,12 @@ class AppConfig {
           title: "Buttons",
           page: "/widgets/buttons",
           icon: Icons.radio_button_off,
+          isUnderlying: true,
+        ),
+        MenuOption(
+          title: "Icons",
+          page: "/widgets/icons",
+          icon: Icons.collections,
           isUnderlying: true,
         ),
         MenuOption(
@@ -417,6 +374,11 @@ class AppConfig {
           PageRouteInfo(
             name: "/widgets/buttons",
             page: ButtonsPage(),
+            isUnderlying: true,
+          ),
+          PageRouteInfo(
+            name: "/widgets/icons",
+            page: IconsPage(),
             isUnderlying: true,
           ),
           PageRouteInfo(

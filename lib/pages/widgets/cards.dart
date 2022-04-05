@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
-import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
-import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
-import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
 import 'package:provider/src/provider.dart';
 
 class CardsPage extends StatelessWidget {
@@ -14,7 +10,7 @@ class CardsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = context.watch<ThemeProvider>();
+    LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
       pageName: 'Cards',
       layoutType: LayoutType.FixedHeader,
@@ -28,7 +24,8 @@ class CardsPage extends StatelessWidget {
                   "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
               textStyle: theme.typography.h1,
             ),
-            Padding(
+
+            /* Padding(
               padding: const EdgeInsets.only(top: 12.0),
               child: LegendGrid(
                 children: [
@@ -66,7 +63,7 @@ class CardsPage extends StatelessWidget {
                   layoutDirection: LegendGridSizeDirection.DOWN,
                 ),
               ),
-            ),
+            ),*/
           ],
         );
       },

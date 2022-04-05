@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
-import 'package:legend_design_widgets/datadisplay/card/legendCard.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_widgets/datadisplay/card/legend_card.dart';
 import 'package:legend_design_widgets/datadisplay/stars/legend_stars.dart';
 import 'package:provider/src/provider.dart';
 
@@ -12,7 +11,7 @@ class RatingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = context.watch<ThemeProvider>();
+    LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
       pageName: 'Rating',
       layoutType: LayoutType.FixedHeader,
@@ -27,7 +26,7 @@ class RatingPage extends StatelessWidget {
                 StarRating(
                   onRatingChanged: (i) => print(i),
                   amount: 5,
-                  color: theme.colors.primaryColor,
+                  color: theme.colors.primary,
                   size: 35,
                   spacing: 4,
                 ),

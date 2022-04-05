@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_color_palette.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
-import 'package:legend_design_widgets/datadisplay/carousel/legendCarousel.dart';
-import 'package:legend_design_widgets/datadisplay/header/legendHeader.dart';
+import 'package:legend_design_core/utils/extensions.dart';
+import 'package:legend_design_widgets/datadisplay/carousel/legend_carousel.dart';
+import 'package:legend_design_widgets/datadisplay/header/legend_header.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTable.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTableCell.dart';
@@ -20,7 +20,7 @@ class CarouselPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = context.watch<ThemeProvider>();
+    LegendTheme theme = context.watch<LegendTheme>();
     ParagraphType heading =
         ParagraphType(textStyle: theme.typography.h5, bottom: 8);
     ParagraphType heading2 =
@@ -102,17 +102,13 @@ class CarouselPage extends StatelessWidget {
                       showHeader: true,
                       style: LegendTableStyle(
                         backgroundColor: theme.colors.foreground[1],
-                        selectionColor: LegendColorPalette.lighten(
-                          theme.colors.foreground[1],
-                        ),
+                        selectionColor: theme.colors.foreground[1].lighten(),
                         borderRadiusGeometry: theme.sizing.borderRadius[1],
                         textStyle: theme.typography.h1,
                         rowPadding: EdgeInsets.symmetric(
                           horizontal: 12,
                         ),
-                        headerColor: LegendColorPalette.lighten(
-                          theme.colors.foreground[1],
-                        ),
+                        headerColor: theme.colors.foreground[1].lighten(),
                         headerTextStyle: theme.typography.h0,
                       ),
                       rowHeight: 56,

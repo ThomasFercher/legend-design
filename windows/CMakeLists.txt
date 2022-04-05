@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.15)
-project(webstore LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.14)
+project(legend_design LANGUAGES CXX)
 
-set(BINARY_NAME "webstore")
+set(BINARY_NAME "legend_design")
 
 cmake_policy(SET CMP0063 NEW)
 

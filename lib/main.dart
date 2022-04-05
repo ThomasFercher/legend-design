@@ -1,29 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:legend_design_core/layout/fixed/appBar.dart/fixed_appbar_colors.dart';
-import 'package:legend_design_core/layout/fixed/bottomBar.dart/fixed_bottom_bar.dart';
-import 'package:legend_design_core/layout/fixed/fixed_footer.dart';
-import 'package:legend_design_core/layout/fixed/sider/siderTheme.dart';
 import 'package:legend_design_core/legend_design_app.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_color_palette.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_color_theme.dart';
-import 'package:legend_design_core/styles/theming/colors/legend_colors.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
-import 'package:legend_design_core/typography/typography.dart';
-import 'package:webstore/styles/layoutInfo.dart';
+import 'package:legend_design_core/styles/colors/legend_colors.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 
-import 'styles/appStyles.dart';
+import 'styles/app_styles.dart';
+import 'styles/layout_info.dart';
 
 void main() {
-  /* TODO:
-
-  give ThemeProvider a basic typrography (fontFamily, Weight, Sacing, etc, Color and Size (overiides))
-  also create Typography Color System
-
-  if Color not specifed give Colors over theme ColorTheme; 
- them same  TextStyle Sizing and the Sizing Themes
-*/
   runApp(
     LegendApp(
       menuOptions: AppConfig.menuOptions,
@@ -34,34 +19,15 @@ void main() {
         height: 48,
       ),
       title: "Legend Design",
-      theme: ThemeProvider(
+      theme: LegendTheme(
         colorTheme: LegendColorTheme(
           themes: [
             AppConfig.lightColorTheme,
             AppConfig.darkColorTheme,
-            LegendColorPalette(
-              textContrast: Color(0xFFb3dedb),
-              siderColorTheme: SiderColorTheme(
-                background: Colors.indigo[400]!,
-                backgroundMenu: Colors.indigo[400]!,
-                foreground: Colors.indigo[200]!,
-              ),
-              typographyColors: LegendTypographyColors(
-                baseColor: Colors.white,
-              ),
-              bottomBarColors: BottomBarColors(
-                activeColor: Colors.white,
-                disabledColor: Colors.black26,
-                backgroundColor: LegendColors.gray10,
-              ),
-              fixedFooterColors: FixedFooterColors(
-                backgroundColor: LegendColors.gray8,
-                foreground: LegendColors.gray4,
-              ),
-              cardBackgroundColor: LegendColors.gray9,
-              primaryColor: Colors.indigo,
-              secondaryColor: Colors.teal,
-              scaffoldBackgroundColor: LegendColors.gray11,
+            LegendPalette(
+              primary: Colors.indigo,
+              secondary: Colors.teal,
+              tertiary: Colors.teal,
               foreground: [
                 LegendColors.gray10,
                 LegendColors.gray8,
@@ -76,16 +42,15 @@ void main() {
                 LegendColors.gray6,
                 LegendColors.gray5,
               ],
-              selectionColor: Colors.tealAccent[400]!,
-              textColorDark: LegendColors.gray6,
-              textColorLight: LegendColors.gray4,
-              appBarColors: FixedAppBarColors(
-                backgroundColor: Colors.indigo[400]!,
-                iconColor: Colors.indigo[200]!,
-                selectedColor: Colors.tealAccent[400]!,
-                foreground: Colors.indigo[200]!,
-              ),
-              disabledColor: LegendColors.gray7,
+              error: Colors.red,
+              disabled: LegendColors.gray7,
+              shadow: Colors.black.withOpacity(0.5),
+              selection: Colors.tealAccent[400]!,
+              textOnDark: LegendColors.gray6,
+              textOnLight: LegendColors.gray4,
+              onPrimary: Colors.indigo[200]!,
+              onSecondary: Colors.teal[200]!,
+              onTertiary: Colors.teal[200]!,
             ),
           ],
         ),
@@ -98,13 +63,13 @@ void main() {
       globalFooter: LayoutInfo.footer,
       future: Future.delayed(Duration(seconds: 2), () => true),
       splashScreen: Container(
-        color: AppConfig.darkColorTheme.scaffoldBackgroundColor,
+        color: AppConfig.darkColorTheme.background[0],
         child: Center(
           child: SizedBox(
             height: 64,
             width: 64,
             child: CircularProgressIndicator(
-              color: AppConfig.darkColorTheme.primaryColor,
+              color: AppConfig.darkColorTheme.primary,
             ),
           ),
         ),

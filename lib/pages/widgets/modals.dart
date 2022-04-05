@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
-import 'package:legend_design_core/modals/legendPopups.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
-import 'package:legend_design_widgets/layout/grid/legendGrid.dart';
-import 'package:legend_design_widgets/layout/grid/legendGridSize.dart';
-import 'package:legend_design_widgets/legendButton/legendButton.dart';
-import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
-import 'package:legend_design_widgets/modals/legendAlert.dart';
-import 'package:legend_design_widgets/modals/legendBottomSheet.dart';
-import 'package:legend_design_widgets/modals/modal.dart';
+import 'package:legend_design_widgets/layout/dynamic/custom/legend_widget_layout.dart';
 import 'package:provider/src/provider.dart';
 
 class ModalsPage extends StatelessWidget {
@@ -19,12 +11,13 @@ class ModalsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = context.watch<ThemeProvider>();
+    LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
       pageName: 'Modals',
-      layoutType: LayoutType.FixedHeader,
-      showSiderMenu: false,
+      layoutType: LayoutType.FixedSider,
+      showSiderMenu: true,
       isUnderlyingRoute: true,
+      shareParentSiderMenu: true,
       contentBuilder: (context, s) {
         return Column(
           children: [
@@ -36,7 +29,225 @@ class ModalsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 12.0),
             ),
-            LegendGrid(
+            Container(
+              child: LegendWidgetLayout.dyn(
+                layouts: {
+                  400: LegendCustomRow(
+                    children: [
+                      LegendCustomColumn(
+                        children: [
+                          LegendCustomWidget(0),
+                        ],
+                      ),
+                      LegendCustomColumn(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          LegendCustomWidget(1),
+                          LegendCustomWidget(2),
+                          LegendCustomWidget(3),
+                        ],
+                      ),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 12,
+                  ),
+                  /*1000: LegendCustomRow(
+                    [
+                      LegendCustomWidget(0),
+                      LegendCustomWidget(1),
+                      LegendCustomWidget(2),
+                      LegendCustomWidget(3),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 12,
+                  ),
+                  1400: LegendCustomRow(
+                    [
+                      LegendCustomWidget(0),
+                      LegendCustomWidget(1),
+                      LegendCustomColumn(
+                        [
+                          LegendCustomWidget(2),
+                          LegendCustomWidget(3),
+                        ],
+                        spacing: 12,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                      ),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 12,
+                  ),*/
+                },
+                width: s.width,
+                children: [
+                  Container(
+                    width: 200,
+                    child: LegendText(
+                      text:
+                          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                      textStyle: theme.typography.h1,
+                    ),
+                  ),
+                  Container(
+                    height: 20,
+                    color: Colors.blue,
+                    width: 40,
+                  ),
+                  Container(
+                    height: 100,
+                    width: 200,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            /*  Container(
+              child: LegendWidgetLayout(
+                layout: LegendCustomColumn(
+                  [
+                    LegendCustomWidget(0),
+                    LegendCustomWidget(1),
+                    LegendCustomWidget(2),
+                    LegendCustomWidget(3),
+                  ],
+                  spacing: 12,
+                  flex: 2,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                ),
+                children: [
+                  Container(
+                    //   width: 200,
+                    child: LegendText(
+                      text:
+                          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                      textStyle: theme.typography.h1,
+                    ),
+                  ),
+                  Container(
+                    height: 20,
+                    color: Colors.blue,
+                    width: 40,
+                  ),
+                  Container(
+                    height: 100,
+                    // width: 100,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Container(
+              child: LegendWidgetLayout(
+                layout: LegendCustomColumn(
+                  [
+                    LegendCustomWidget(0),
+                    LegendCustomRow(
+                      [
+                        LegendCustomWidget(
+                          1,
+                          flex: 1,
+                        ),
+                        LegendCustomWidget(
+                          2,
+                          flex: 4,
+                        ),
+                        LegendCustomWidget(3),
+                      ],
+                      spacing: 12,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+
+                      // crossAxisAlignment: CrossAxisAlignment.end,
+                    ),
+                  ],
+                  spacing: 12,
+                ),
+                children: [
+                  Container(
+                    height: 40,
+                    color: Colors.green,
+                  ),
+                  Container(
+                    height: 50,
+                    color: Colors.brown,
+                  ),
+                  Container(
+                    height: 100,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    height: 120,
+                    width: 100,
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Container(
+              child: LegendWidgetLayout(
+                layout: LegendCustomColumn(
+                  [
+                    LegendCustomWidget(0),
+                    LegendCustomRow(
+                      [
+                        LegendCustomWidget(
+                          1,
+                        ),
+                        LegendCustomWidget(2),
+                        LegendCustomWidget(3),
+                      ],
+                      spacing: 4,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      expandCrossAxis: true,
+                      // crossAxisAlignment: CrossAxisAlignment.end,
+                    ),
+                  ],
+                  spacing: 4,
+                ),
+                children: [
+                  Container(
+                    height: 40,
+                    color: Colors.green,
+                  ),
+                  Container(
+                    // height: 50,
+                    width: 20,
+                    color: Colors.brown,
+                  ),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    color: Colors.yellow,
+                  ),
+                  Container(
+                    height: 120,
+                    width: 100,
+                    color: Colors.green,
+                  ),
+                ],
+              ),
+            ),*/
+            /*  LegendGrid(
               sizes: LegendGridSize(
                 small: LegendGridSizeInfo(1, 48),
                 medium: LegendGridSizeInfo(3, 48),
@@ -106,7 +317,7 @@ class ModalsPage extends StatelessWidget {
                   ),
                 )
               ],
-            ),
+            ),*/
           ],
         );
       },

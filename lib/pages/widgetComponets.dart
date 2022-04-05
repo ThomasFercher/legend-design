@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/layout/sections/section.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:provider/provider.dart';
 
 class WidgetComponents extends StatelessWidget {
@@ -11,11 +11,10 @@ class WidgetComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider theme = context.watch<ThemeProvider>();
+    LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      showAppBarMenu: true,
+      showSiderMenu: true,
       verticalChildrenSpacing: 24,
-      showTopSubMenu: false,
       showSiderChildMenu: true,
       contentBuilder: (context, size) {
         return Container(

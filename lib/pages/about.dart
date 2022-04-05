@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/layout/sections/section.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    ThemeProvider theme = Provider.of<ThemeProvider>(context);
+    LegendTheme theme = Provider.of<LegendTheme>(context);
     return LegendScaffold(
       contentBuilder: (context, s) {
         return Container(

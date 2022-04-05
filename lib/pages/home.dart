@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
-import 'package:legend_design_core/router/router_provider.dart';
+import 'package:legend_design_core/router/legend_router.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
-import 'package:legend_design_core/styles/theming/theme_provider.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:provider/provider.dart';
 
@@ -13,9 +13,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    ThemeProvider theme = context.watch<ThemeProvider>();
+    LegendTheme theme = context.watch<LegendTheme>();
 
     return LegendScaffold(
+      showAppBarMenu: true,
       contentBuilder: (context, s) {
         return Column(
           children: [
@@ -37,13 +38,13 @@ class Home extends StatelessWidget {
         return LegendAnimatedIcon(
           icon: Icons.color_lens,
           theme: LegendAnimtedIconTheme(
-            enabled: theme.colors.selectionColor,
-            disabled: theme.colors.appBarColors.foreground,
+            enabled: theme.colors.selection,
+            disabled: theme.colors.appBarPalette.foreground,
           ),
           iconSize: theme.appBarSizing.iconSize ?? 32,
           disableShadow: true,
           onPressed: () {
-            RouterProvider.of(context)
+            LegendRouter.of(context)
                 .pushPage(settings: RouteSettings(name: "/settings"));
           },
         );
