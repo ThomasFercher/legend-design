@@ -26,8 +26,8 @@ class AppConfig {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
     showText: true,
     textAtBottom: true,
-    iconSize: 30,
-    height: 72,
+    iconSize: 28,
+    height: 80,
     margin: EdgeInsets.all(0),
     decoration: BoxDecoration(
       boxShadow: [
@@ -50,7 +50,7 @@ class AppConfig {
     sizings: [
       LegendSizing(
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 22),
+        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(12),
@@ -58,33 +58,37 @@ class AppConfig {
           BorderRadius.all(
             Radius.circular(6),
           ),
+          BorderRadius.all(
+            Radius.circular(3),
+          ),
         ],
         borderInset: [
           12,
           6,
+          3,
         ],
         padding: [
           8,
+          12,
           18,
-          24,
         ],
-        bottomBarSizing: bottomBarSizing,
+        //   bottomBarSizing: bottomBarSizing,
         appBarSizing: FixedAppBarSizing(
           appBarHeight: 72,
           contentPadding: EdgeInsets.only(
-            right: 8,
-            left: 8,
+            right: 16,
+            left: 16,
           ),
           borderRadius: Radius.circular(20),
           iconSize: 28,
-          spacing: 8,
+          spacing: 12,
           titleSize: 42,
         ),
         hideSider: true,
       ),
       LegendSizing(
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 30),
+        typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 36),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(16.0),
@@ -116,7 +120,7 @@ class AppConfig {
       ),
       LegendSizing(
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 32),
+        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 38),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(12),
@@ -124,15 +128,19 @@ class AppConfig {
           BorderRadius.all(
             Radius.circular(6),
           ),
+          BorderRadius.all(
+            Radius.circular(3),
+          ),
         ],
         borderInset: [
           12,
-          12,
+          6,
+          3,
         ],
         padding: [
-          12,
           16,
-          24,
+          22,
+          28,
         ],
         appBarSizing: FixedAppBarSizing(
           appBarHeight: 80,
@@ -148,7 +156,7 @@ class AppConfig {
       ),
       LegendSizing(
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 36),
+        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 40),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(12),
@@ -156,21 +164,25 @@ class AppConfig {
           BorderRadius.all(
             Radius.circular(6),
           ),
+          BorderRadius.all(
+            Radius.circular(3),
+          ),
         ],
         borderInset: [
           12,
-          12,
+          6,
+          3,
         ],
         padding: [
-          12,
-          16,
+          18,
           24,
+          32,
         ],
         appBarSizing: FixedAppBarSizing(
           appBarHeight: 80,
           contentPadding: EdgeInsets.only(
-            right: 16,
-            left: 16,
+            right: 18,
+            left: 18,
           ),
           borderRadius: Radius.circular(20),
           iconSize: 28,
@@ -186,28 +198,39 @@ class AppConfig {
     secondary: Colors.teal,
     tertiary: Colors.teal,
     foreground: [
-      LegendColors.gray10,
       LegendColors.gray8,
-      LegendColors.gray6,
-      LegendColors.gray4,
+      LegendColors.gray9,
+      LegendColors.gray10,
+      LegendColors.gray11,
+      LegendColors.gray12,
+      LegendColors.gray13,
     ],
     background: [
-      LegendColors.gray10,
-      LegendColors.gray9,
-      LegendColors.gray8,
-      LegendColors.gray7,
-      LegendColors.gray6,
+      LegendColors.gray2,
+      LegendColors.gray4,
       LegendColors.gray5,
+      LegendColors.gray8,
+      LegendColors.gray9,
+      LegendColors.gray10,
     ],
     error: Colors.red,
     disabled: LegendColors.gray7,
     shadow: Colors.black.withOpacity(0.5),
     selection: Colors.tealAccent[400]!,
-    textOnDark: LegendColors.gray6,
+    textOnDark: LegendColors.gray9,
     textOnLight: LegendColors.gray4,
     onPrimary: Colors.indigo[200]!,
     onSecondary: Colors.teal[200]!,
     onTertiary: Colors.teal[200]!,
+    footerPalette: FooterPalette(
+      background: LegendColors.gray9,
+      foreground: LegendColors.gray2,
+    ),
+    bottomBarPalette: BottomBarPalette(
+      backgroundColor: LegendColors.gray2,
+      disabledColor: LegendColors.gray6,
+      activeColor: Colors.indigoAccent,
+    ),
   );
   static LegendPalette darkColorTheme = LegendPalette(
     primary: Colors.indigo,
@@ -236,6 +259,10 @@ class AppConfig {
     onPrimary: Colors.indigo[200]!,
     onSecondary: Colors.teal[200]!,
     onTertiary: Colors.teal[200]!,
+    footerPalette: FooterPalette(
+      background: LegendColors.gray8,
+      foreground: LegendColors.gray2,
+    ),
   );
 
   static List<MenuOption> menuOptions = [
