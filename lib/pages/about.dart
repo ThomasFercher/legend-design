@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
-import 'package:legend_design_core/layout/sections/section.dart';
+import 'package:legend_design_core/layout/sectionNavigation/sections/section.dart';
+
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
@@ -34,7 +35,7 @@ class About extends StatelessWidget {
         );
       },
       showSiderMenu: true,
-      layoutType: LayoutType.FixedSider,
+      layoutType: LayoutType.FixedHeader,
       pageName: "Home",
     );
   }

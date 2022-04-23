@@ -118,13 +118,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1"
-  flutter_highlight:
-    dependency: "direct main"
-    description:
-      name: flutter_highlight
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -156,13 +149,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.1"
-  highlight:
-    dependency: transitive
-    description:
-      name: highlight
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.0"
   http:
     dependency: transitive
     description:
@@ -197,6 +183,15 @@ packages:
       path: "../legend_design_core"
       relative: true
     source: path
+    version: "0.0.1"
+  legend_design_platform:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "7596b1564c7338d0c5367eea91271fcdcf0a6c0f"
+      url: "https://github.com/ThomasFercher/Legend-Design-Cross.git"
+    source: git
     version: "0.0.1"
   legend_design_widgets:
     dependency: "direct main"

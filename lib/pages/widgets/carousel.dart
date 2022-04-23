@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
-import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
-import 'package:legend_design_core/styles/colors/legend_colors.dart';
+
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
@@ -179,7 +177,7 @@ class CarouselPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  LegendHeader(
+                  /*  LegendHeader(
                     margin: EdgeInsets.only(
                       bottom: 32,
                     ),
@@ -221,7 +219,7 @@ class CarouselPage extends StatelessWidget {
                         theme: atomOneDarkTheme,
                       ),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
@@ -13,14 +14,40 @@ class ProductsPage extends StatelessWidget {
 
     return LegendScaffold(
       contentBuilder: (context, s) {
+        print(s.height);
         return Container(
+          //height: s.height,
           child: Column(
-            children: [],
+            children: [
+              Container(
+                height: 20,
+                width: 20,
+              ),
+            ],
           ),
         );
       },
       pageName: "Products",
-      layoutType: LayoutType.FixedHeader,
+      showSiderMenu: true,
+      singlePage: true,
+      siderBuilder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Row(
+            children: [
+              LegendAnimatedIcon(
+                icon: Icons.palette,
+                theme: LegendAnimtedIconTheme(
+                  disabled: theme.siderPalette.foreground,
+                  enabled: theme.siderPalette.selection,
+                ),
+                onPressed: () {},
+              )
+            ],
+          ),
+        );
+      },
+      layoutType: LayoutType.FixedSider,
     );
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
-import 'package:legend_design_core/objects/menu_option.dart';
+import 'package:legend_design_core/layout/fixed/menu/tiles/menu_option.dart';
 import 'package:legend_design_core/router/routes/route_info.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/styles/sizing/sub_sizing/sider_sizing.dart';
 
 import '../pages/about.dart';
 import '../pages/drawerPages/settingsPage.dart';
@@ -41,14 +42,8 @@ class AppConfig {
   );
 
   static LegendSizingTheme sizingTheme = LegendSizingTheme(
-    splits: [
-      420,
-      720,
-      1080,
-      1920,
-    ],
-    sizings: [
-      LegendSizing(
+    sizings: {
+      420: LegendSizing(
         elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
         borderRadius: [
@@ -72,6 +67,7 @@ class AppConfig {
           12,
           18,
         ],
+        siderSizing: SiderSizing(width: 120),
         //   bottomBarSizing: bottomBarSizing,
         appBarSizing: FixedAppBarSizing(
           appBarHeight: 72,
@@ -82,11 +78,12 @@ class AppConfig {
           borderRadius: Radius.circular(20),
           iconSize: 28,
           spacing: 12,
-          titleSize: 42,
+          logoSize: 42,
         ),
         hideSider: true,
       ),
-      LegendSizing(
+      720: LegendSizing(
+        siderSizing: SiderSizing(width: 120),
         elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 36),
         borderRadius: [
@@ -114,11 +111,12 @@ class AppConfig {
           ),
           iconSize: 22,
           spacing: 12,
-          titleSize: 48,
+          logoSize: 48,
         ),
         collapsedSider: true,
       ),
-      LegendSizing(
+      1080: LegendSizing(
+        siderSizing: SiderSizing(width: 200),
         elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 38),
         borderRadius: [
@@ -151,10 +149,11 @@ class AppConfig {
           borderRadius: Radius.circular(20),
           iconSize: 24,
           spacing: 16,
-          titleSize: 56,
+          logoSize: 56,
         ),
       ),
-      LegendSizing(
+      1920: LegendSizing(
+        siderSizing: SiderSizing(width: 260),
         elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 40),
         borderRadius: [
@@ -187,10 +186,10 @@ class AppConfig {
           borderRadius: Radius.circular(20),
           iconSize: 28,
           spacing: 16,
-          titleSize: 64,
+          logoSize: 64,
         ),
       ),
-    ],
+    },
   );
 
   static LegendPalette lightColorTheme = LegendPalette(
@@ -205,6 +204,12 @@ class AppConfig {
       LegendColors.gray12,
       LegendColors.gray13,
     ],
+    siderPalette: SiderPalette(
+      foreground: Colors.indigo[50],
+    ),
+    appBarPalette: AppBarPalette(
+      foreground: Colors.indigo[50],
+    ),
     background: [
       LegendColors.gray2,
       LegendColors.gray4,
@@ -237,24 +242,32 @@ class AppConfig {
     secondary: Colors.teal,
     tertiary: Colors.teal,
     foreground: [
-      LegendColors.gray10,
-      LegendColors.gray8,
-      LegendColors.gray6,
+      LegendColors.gray3,
       LegendColors.gray4,
+      LegendColors.gray5,
+      LegendColors.gray8,
+      LegendColors.gray9,
+      LegendColors.gray10,
     ],
     background: [
-      LegendColors.gray10,
       LegendColors.gray9,
       LegendColors.gray8,
       LegendColors.gray7,
       LegendColors.gray6,
       LegendColors.gray5,
+      LegendColors.gray4,
     ],
+    siderPalette: SiderPalette(
+      foreground: Colors.indigo[50],
+    ),
+    appBarPalette: AppBarPalette(
+      foreground: Colors.indigo[50],
+    ),
     error: Colors.red,
     disabled: LegendColors.gray7,
     shadow: Colors.black.withOpacity(0.5),
     selection: Colors.tealAccent[400]!,
-    textOnDark: LegendColors.gray6,
+    textOnDark: LegendColors.gray3,
     textOnLight: LegendColors.gray4,
     onPrimary: Colors.indigo[200]!,
     onSecondary: Colors.teal[200]!,

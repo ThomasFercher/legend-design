@@ -1,22 +1,41 @@
 {
-
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Legend Design Debug",
+            "name": "Debug IOS",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-            "program": "lib/main.dart"
-
+            "program": "lib/main.dart",
+            "deviceId": "iPhone 13 Pro"
+        },{
+            "name": "Debug MacOS",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "deviceId": "macOS"
+        },
+        {
+            "name": "Debug Web",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "deviceId": "Chrome"
         },
         {
             "name": "Legend Design Profile",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
-           "program": "lib/main.dart"
-            
+            "program": "lib/main.dart"
+        },
+
+    ] ,"compounds": [
+        {
+          "name": "All Devices",
+          "configurations": ["Debug IOS", "Debug Web", ]
         }
-    ]
+      ]
 }
