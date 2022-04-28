@@ -5,6 +5,7 @@ import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/router/legend_router.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_core/typography/rich/legend_rich_text.dart';
 import 'package:legend_design_core/utils/legend_utils.dart';
@@ -21,9 +22,11 @@ class Home extends StatelessWidget {
     LegendTheme theme = context.watch<LegendTheme>();
 
     return LegendScaffold(
-      showAppBarMenu: true,
-      appBarForceElevate: true,
-      showTopSubMenu: true,
+      whether: ScaffoldWhether(
+        showAppBarMenu: true,
+        appBarForceElevate: true,
+        showTopSubMenu: true,
+      ),
       contentBuilder: (context, size) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -482,24 +485,8 @@ class Home extends StatelessWidget {
           ],
         );
       },
-      appBarActions: [
-        LegendAnimatedIcon(
-          icon: Icons.color_lens,
-          theme: LegendAnimtedIconTheme(
-            enabled: theme.colors.selection,
-            disabled: theme.colors.appBarPalette.foreground,
-          ),
-          iconSize: theme.appBarSizing.iconSize ?? 32,
-          disableShadow: true,
-          onPressed: () {
-            LegendRouter.of(context)
-                .pushPage(settings: RouteSettings(name: "/settings"));
-          },
-        )
-      ],
       layoutType: LayoutType.FixedHeader,
       pageName: "Home",
-      enableDefaultSettings: false,
     );
   }
 }

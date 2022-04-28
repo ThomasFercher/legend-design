@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
@@ -14,8 +15,10 @@ class CardsPage extends StatelessWidget {
     return LegendScaffold(
       pageName: 'Cards',
       layoutType: LayoutType.FixedHeader,
-      showSiderMenu: false,
-      isUnderlyingRoute: true,
+      whether: ScaffoldWhether(
+        showSiderMenu: false,
+        isUnderlyingRoute: true,
+      ),
       contentBuilder: (context, s) {
         return Column(
           children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_widgets/layout/dynamic/custom/legend_widget_layout.dart';
 import 'package:provider/src/provider.dart';
@@ -15,9 +16,11 @@ class ModalsPage extends StatelessWidget {
     return LegendScaffold(
       pageName: 'Modals',
       layoutType: LayoutType.FixedSider,
-      showSiderMenu: true,
-      isUnderlyingRoute: true,
-      shareParentSiderMenu: true,
+      whether: ScaffoldWhether(
+        showSiderMenu: false,
+        isUnderlyingRoute: true,
+        shareParentSiderMenu: true,
+      ),
       contentBuilder: (context, s) {
         return Column(
           children: [

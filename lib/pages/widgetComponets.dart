@@ -4,6 +4,7 @@ import 'package:legend_design/pages/home.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +15,11 @@ class WidgetComponents extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      showAppBarMenu: true,
-      showTopSubMenu: false,
-      showSiderChildMenu: true,
+      whether: ScaffoldWhether(
+        showAppBarMenu: true,
+        showTopSubMenu: false,
+        showSiderChildMenu: true,
+      ),
       contentBuilder: (context, size) {
         return Container(
           width: size.width,

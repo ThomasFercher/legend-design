@@ -3,7 +3,9 @@ import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
 import 'package:legend_design_core/layout/fixed/menu/tiles/menu_option.dart';
 import 'package:legend_design_core/router/routes/route_info.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
+import 'package:legend_design_core/styles/colors/sub_palettes/menu_drawer_palette.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/styles/sizing/sub_sizing/menu_drawer_sizing.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/sider_sizing.dart';
 
 import '../pages/about.dart';
@@ -63,11 +65,11 @@ class AppConfig {
           3,
         ],
         padding: [
-          8,
-          12,
+          16,
+          16,
           18,
         ],
-        siderSizing: SiderSizing(width: 120),
+
         //   bottomBarSizing: bottomBarSizing,
         appBarSizing: FixedAppBarSizing(
           appBarHeight: 72,
@@ -77,13 +79,20 @@ class AppConfig {
           ),
           borderRadius: Radius.circular(20),
           iconSize: 28,
-          spacing: 12,
+          spacing: 24,
           logoSize: 42,
         ),
         hideSider: true,
+        iconSizes: [28, 24, 22, 18],
       ),
       720: LegendSizing(
-        siderSizing: SiderSizing(width: 120),
+        siderSizing: SiderSizing(
+          width: 180,
+          iconSize: 24,
+          itemHeight: 48,
+          spacing: 6,
+          subMenuHeaderHeight: 48,
+        ),
         elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 36),
         borderRadius: [
@@ -114,9 +123,22 @@ class AppConfig {
           logoSize: 48,
         ),
         collapsedSider: true,
+        iconSizes: [28, 24, 22, 18],
       ),
       1080: LegendSizing(
-        siderSizing: SiderSizing(width: 200),
+        siderSizing: SiderSizing(
+          width: 220,
+          iconSize: 24,
+          itemHeight: 56,
+          spacing: 8,
+          subMenuHeaderHeight: 56,
+        ),
+        menuDrawerSizing: MenuDrawerSizing(
+          iconSize: 24,
+          width: 360,
+          itemHeight: 48,
+          spacing: 8,
+        ),
         elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 38),
         borderRadius: [
@@ -151,9 +173,16 @@ class AppConfig {
           spacing: 16,
           logoSize: 56,
         ),
+        iconSizes: [28, 24, 22, 18],
       ),
       1920: LegendSizing(
-        siderSizing: SiderSizing(width: 260),
+        siderSizing: SiderSizing(
+          width: 260,
+          iconSize: 28,
+          itemHeight: 64,
+          spacing: 12,
+          subMenuHeaderHeight: 64,
+        ),
         elevations: [0, 1, 2, 4],
         typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 40),
         borderRadius: [
@@ -188,6 +217,7 @@ class AppConfig {
           spacing: 16,
           logoSize: 64,
         ),
+        iconSizes: [28, 24, 22, 18],
       ),
     },
   );
@@ -223,7 +253,7 @@ class AppConfig {
     shadow: Colors.black.withOpacity(0.5),
     selection: Colors.tealAccent[400]!,
     textOnDark: LegendColors.gray9,
-    textOnLight: LegendColors.gray4,
+    textOnLight: LegendColors.gray8,
     onPrimary: Colors.indigo[200]!,
     onSecondary: Colors.teal[200]!,
     onTertiary: Colors.teal[200]!,
@@ -235,6 +265,13 @@ class AppConfig {
       backgroundColor: LegendColors.gray2,
       disabledColor: LegendColors.gray6,
       activeColor: Colors.indigoAccent,
+    ),
+    menuDrawerPalette: MenuDrawerPalette(
+      background: Colors.indigo,
+      background_selection: Colors.indigo[700],
+      backgroundMenu: Colors.indigo[700],
+      background_menu_selection: Colors.indigo[900],
+      foreground: Colors.indigo[50],
     ),
   );
   static LegendPalette darkColorTheme = LegendPalette(

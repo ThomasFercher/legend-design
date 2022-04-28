@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
@@ -14,8 +15,10 @@ class ButtonsPage extends StatelessWidget {
     return LegendScaffold(
       pageName: 'Buttons',
       layoutType: LayoutType.FixedHeaderSider,
-      shareParentSiderMenu: true,
-      singlePage: false,
+      whether: ScaffoldWhether(
+        singlePage: true,
+        shareParentSiderMenu: true,
+      ),
       contentBuilder: (context, s) {
         return Container(
           child: Column(

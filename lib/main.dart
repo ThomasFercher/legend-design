@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/scaffold/config/builders.dart';
+import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/legend_design_app.dart';
+import 'package:legend_design_core/router/legend_router.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-
 import 'styles/app_styles.dart';
 import 'styles/layout_info.dart';
 
@@ -20,6 +23,27 @@ void main() {
       ),
       title: "Legend Design",
       theme: LegendTheme(
+        buildConfig: (theme) {
+          return ScaffoldConfig(
+            builders: ScaffoldBuilders(
+              appBarActions: (c) {
+                return LegendAnimatedIcon(
+                  icon: Icons.color_lens,
+                  theme: LegendAnimtedIconTheme(
+                    enabled: theme.colors.selection,
+                    disabled: theme.colors.appBarPalette.foreground,
+                  ),
+                  iconSize: theme.appBarSizing.iconSize,
+                  disableShadow: true,
+                  onPressed: () {
+                    LegendRouter.of(c)
+                        .pushPage(settings: RouteSettings(name: "/settings"));
+                  },
+                );
+              },
+            ),
+          );
+        },
         colorTheme: LegendColorTheme(
           themes: [
             AppConfig.lightColorTheme,

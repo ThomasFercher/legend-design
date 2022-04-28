@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:provider/src/provider.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -28,25 +30,29 @@ class ProductsPage extends StatelessWidget {
         );
       },
       pageName: "Products",
-      showSiderMenu: true,
-      singlePage: true,
-      siderBuilder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Row(
-            children: [
-              LegendAnimatedIcon(
-                icon: Icons.palette,
-                theme: LegendAnimtedIconTheme(
-                  disabled: theme.siderPalette.foreground,
-                  enabled: theme.siderPalette.selection,
-                ),
-                onPressed: () {},
-              )
-            ],
-          ),
-        );
-      },
+      whether: ScaffoldWhether(
+        showSiderMenu: true,
+        singlePage: true,
+      ),
+      builders: ScaffoldBuilders(
+        siderBuilder: (context) {
+          return Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Row(
+              children: [
+                LegendAnimatedIcon(
+                  icon: Icons.palette,
+                  theme: LegendAnimtedIconTheme(
+                    disabled: theme.siderPalette.foreground,
+                    enabled: theme.siderPalette.selection,
+                  ),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          );
+        },
+      ),
       layoutType: LayoutType.FixedSider,
     );
   }

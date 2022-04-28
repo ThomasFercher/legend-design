@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/dynamic_flex_layout.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/items/legendFlexItem.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/items/legendLayoutItem.dart';
@@ -53,8 +54,10 @@ class IconsPage extends StatelessWidget {
     return LegendScaffold(
       pageName: 'Icons',
       layoutType: LayoutType.FixedHeader,
-      showSiderMenu: false,
-      isUnderlyingRoute: true,
+      whether: ScaffoldWhether(
+        showSiderMenu: false,
+        isUnderlyingRoute: true,
+      ),
       contentBuilder: (context, s) {
         return Column(
           children: [

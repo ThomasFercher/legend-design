@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTable.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTableCell.dart';
@@ -16,8 +17,10 @@ class TablePage extends StatelessWidget {
     return LegendScaffold(
       pageName: 'Table',
       layoutType: LayoutType.FixedHeader,
-      showSiderMenu: false,
-      isUnderlyingRoute: true,
+      whether: ScaffoldWhether(
+        showSiderMenu: false,
+        isUnderlyingRoute: true,
+      ),
       contentBuilder: (context, s) {
         return Column(
           children: [
