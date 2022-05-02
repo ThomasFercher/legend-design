@@ -3,6 +3,7 @@ import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/layout/scaffold/config/whether.dart';
+import 'package:legend_design_core/styles/sizing/size_info.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/dynamic_flex_layout.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/items/legendFlexItem.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/items/legendLayoutItem.dart';
@@ -51,6 +52,7 @@ class IconsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
+    double width = SizeInfo.of(context).width;
     return LegendScaffold(
       pageName: 'Icons',
       layoutType: LayoutType.FixedHeader,
@@ -58,97 +60,96 @@ class IconsPage extends StatelessWidget {
         showSiderMenu: false,
         isUnderlyingRoute: true,
       ),
-      contentBuilder: (context, s) {
-        return Column(
-          children: [
-            LegendDynamicFlexLayout(
-              heights: [
+      child: Column(
+        children: [
+          LegendDynamicFlexLayout(
+            heights: [
+              1200,
+              800,
+            ],
+            dynamicLayout: DynamicFlexLayout(
+              width: width,
+              splits: [
+                600,
                 1200,
-                800,
               ],
-              dynamicLayout: DynamicFlexLayout(
-                width: s.width,
-                splits: [
-                  600,
-                  1200,
-                ],
-                items: [
-                  LegendLayoutColumn(
-                    children: [
-                      LegendLayoutWidget(0),
-                      LegendLayoutWidget(1),
-                      LegendLayoutWidget(2),
-                      LegendLayoutWidget(3),
-                      LegendLayoutWidget(4),
-                      LegendLayoutWidget(5),
-                    ],
-                  ),
-                  LegendLayoutRow(
-                    spacing: 12,
-                    children: [
-                      LegendLayoutWidget(0),
-                      LegendLayoutColumn(
-                        spacing: 12,
-                        children: [
-                          LegendLayoutWidget(1),
-                          LegendLayoutColumn(
-                            spacing: 12,
-                            children: [
-                              LegendLayoutWidget(2),
-                              LegendLayoutWidget(3),
-                              LegendLayoutColumn(
-                                childrenFlex: [
-                                  ChildrenFlexValue(1),
-                                  ChildrenFlexValue(3),
-                                ],
-                                spacing: 12,
-                                children: [
-                                  LegendLayoutWidget(4),
-                                  LegendLayoutWidget(
-                                    5,
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                        childrenFlex: [
-                          ChildrenFlexValue(1),
-                          ChildrenFlexWidth(200),
-                        ],
-                      )
-                    ],
-                    childrenFlex: [
-                      ChildrenFlexValue(1),
-                      ChildrenFlexWidth(300),
-                    ],
-                  ),
-                ],
-              ),
-              layout: LegendCustomFlexLayout.dyna(
-                children: [
-                  Container(
-                    color: Colors.red,
-                  ),
-                  Container(
-                    color: Colors.green,
-                  ),
-                  Container(
-                    color: Colors.yellow,
-                  ),
-                  Container(
-                    color: Colors.blue,
-                  ),
-                  Container(
-                    color: Colors.yellow,
-                  ),
-                  Container(
-                    color: Colors.blue,
-                  ),
-                ],
-              ),
+              items: [
+                LegendLayoutColumn(
+                  children: [
+                    LegendLayoutWidget(0),
+                    LegendLayoutWidget(1),
+                    LegendLayoutWidget(2),
+                    LegendLayoutWidget(3),
+                    LegendLayoutWidget(4),
+                    LegendLayoutWidget(5),
+                  ],
+                ),
+                LegendLayoutRow(
+                  spacing: 12,
+                  children: [
+                    LegendLayoutWidget(0),
+                    LegendLayoutColumn(
+                      spacing: 12,
+                      children: [
+                        LegendLayoutWidget(1),
+                        LegendLayoutColumn(
+                          spacing: 12,
+                          children: [
+                            LegendLayoutWidget(2),
+                            LegendLayoutWidget(3),
+                            LegendLayoutColumn(
+                              childrenFlex: [
+                                ChildrenFlexValue(1),
+                                ChildrenFlexValue(3),
+                              ],
+                              spacing: 12,
+                              children: [
+                                LegendLayoutWidget(4),
+                                LegendLayoutWidget(
+                                  5,
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                      childrenFlex: [
+                        ChildrenFlexValue(1),
+                        ChildrenFlexWidth(200),
+                      ],
+                    )
+                  ],
+                  childrenFlex: [
+                    ChildrenFlexValue(1),
+                    ChildrenFlexWidth(300),
+                  ],
+                ),
+              ],
             ),
-            /*    LegendGrid.fixedCrossAxisCount(
+            layout: LegendCustomFlexLayout.dyna(
+              children: [
+                Container(
+                  color: Colors.red,
+                ),
+                Container(
+                  color: Colors.green,
+                ),
+                Container(
+                  color: Colors.yellow,
+                ),
+                Container(
+                  color: Colors.blue,
+                ),
+                Container(
+                  color: Colors.yellow,
+                ),
+                Container(
+                  color: Colors.blue,
+                ),
+              ],
+            ),
+          ),
+          /*    LegendGrid.fixedCrossAxisCount(
               crossAxisCount: 4,
               verticalSpacing: 16,
               horizontalSpacing: 32,
@@ -262,9 +263,8 @@ class IconsPage extends StatelessWidget {
                 ),
               ],
             ),*/
-          ],
-        );
-      },
+        ],
+      ),
     );
   }
 }

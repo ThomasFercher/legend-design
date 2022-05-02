@@ -13,14 +13,13 @@ class IconButtonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      pageName: 'Icon Button',
-      layoutType: LayoutType.FixedHeader,
-      whether: ScaffoldWhether(
-        showSiderMenu: false,
-        isUnderlyingRoute: true,
-      ),
-      contentBuilder: (context, s) {
-        return Column(
+        pageName: 'Icon Button',
+        layoutType: LayoutType.FixedHeader,
+        whether: ScaffoldWhether(
+          showSiderMenu: false,
+          isUnderlyingRoute: true,
+        ),
+        child: Column(
           children: [
             Row(
               mainAxisSize: MainAxisSize.max,
@@ -56,8 +55,6 @@ class IconButtonPage extends StatelessWidget {
               ],
             ),
           ],
-        );
-      },
-    );
+        ));
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
 import 'package:legend_design_core/layout/fixed/menu/tiles/menu_option.dart';
+import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/router/routes/route_info.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/colors/sub_palettes/menu_drawer_palette.dart';
+import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/menu_drawer_sizing.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/sider_sizing.dart';
@@ -24,20 +26,18 @@ import '../pages/widgets/selectButtonBar.dart';
 import '../pages/widgets/table.dart';
 import '../pages/widgets/tags.dart';
 import '../pages/widgets/textfield.dart';
+import 'package:legend_design_widgets/legend_design_widgets.dart';
 
 class AppConfig {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
-    showText: true,
-    textAtBottom: true,
     iconSize: 28,
-    height: 80,
-    margin: EdgeInsets.all(0),
+    height: 72,
     decoration: BoxDecoration(
       boxShadow: [
         BoxShadow(
           color: Colors.black12,
-          blurRadius: 9.0,
-          spreadRadius: 3.0,
+          blurRadius: 6.0,
+          spreadRadius: 2.0,
         ),
       ],
     ),
@@ -47,7 +47,7 @@ class AppConfig {
     sizings: {
       420: LegendSizing(
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 32),
+        typographySizing: TypographySizing(baseSize: 14, maxSize: 32),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(12),
@@ -69,9 +69,9 @@ class AppConfig {
           16,
           18,
         ],
-
-        //   bottomBarSizing: bottomBarSizing,
-        appBarSizing: FixedAppBarSizing(
+        showBottomBar: true,
+        bottomBarSizing: bottomBarSizing,
+        appBarSizing: AppBarSizing(
           appBarHeight: 72,
           contentPadding: EdgeInsets.only(
             right: 16,
@@ -94,7 +94,7 @@ class AppConfig {
           subMenuHeaderHeight: 48,
         ),
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 12, maxSize: 36),
+        typographySizing: TypographySizing(baseSize: 12, maxSize: 36),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(16.0),
@@ -112,7 +112,7 @@ class AppConfig {
           16,
           24,
         ],
-        appBarSizing: FixedAppBarSizing(
+        appBarSizing: AppBarSizing(
           appBarHeight: 80,
           contentPadding: EdgeInsets.only(
             right: 16,
@@ -140,7 +140,7 @@ class AppConfig {
           spacing: 8,
         ),
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 38),
+        typographySizing: TypographySizing(baseSize: 14, maxSize: 38),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(12),
@@ -162,7 +162,7 @@ class AppConfig {
           22,
           28,
         ],
-        appBarSizing: FixedAppBarSizing(
+        appBarSizing: AppBarSizing(
           appBarHeight: 80,
           contentPadding: EdgeInsets.only(
             right: 16,
@@ -184,7 +184,7 @@ class AppConfig {
           subMenuHeaderHeight: 64,
         ),
         elevations: [0, 1, 2, 4],
-        typographySizing: LegendTypographySizing(baseSize: 14, maxSize: 40),
+        typographySizing: TypographySizing(baseSize: 14, maxSize: 40),
         borderRadius: [
           BorderRadius.all(
             Radius.circular(12),
@@ -206,7 +206,7 @@ class AppConfig {
           24,
           32,
         ],
-        appBarSizing: FixedAppBarSizing(
+        appBarSizing: AppBarSizing(
           appBarHeight: 80,
           contentPadding: EdgeInsets.only(
             right: 18,
@@ -421,81 +421,144 @@ class AppConfig {
   static List<RouteInfo> routes = [
     PageRouteInfo(
       name: "/",
-      page: Home(),
+      info: ScaffoldRouteInfo(
+        layoutType: LayoutType.FixedHeader,
+        pageName: "pageName",
+      ),
+      child: Home(),
     ),
     PageRouteInfo(
       name: "/about",
-      page: About(),
+      info: ScaffoldRouteInfo(
+        layoutType: LayoutType.FixedHeader,
+        pageName: "pageName",
+      ),
+      child: About(),
     ),
     PageRouteInfo(
       name: "/products",
-      page: ProductsPage(),
+      info: ScaffoldRouteInfo(
+        layoutType: LayoutType.FixedSider,
+        whether: ScaffoldWhether(
+          showSiderMenu: true,
+        ),
+        pageName: "pageName",
+      ),
+      child: ProductsPage(),
     ),
     PageRouteInfo(
       name: "/theme",
-      page: ThemeEditor(),
-    ),
-    ModalRouteInfo(
-      name: "/siderMenu",
-      body: MenuDrawer(),
+      info: ScaffoldRouteInfo(
+        layoutType: LayoutType.FixedHeader,
+        pageName: "pageName",
+      ),
+      child: ThemeEditor(),
     ),
     ModalRouteInfo(
       name: "/settings",
-      body: SettingsPage(),
+      child: SettingsPage(),
     ),
     PageRouteInfo(
       name: "/widgets",
-      page: WidgetComponents(),
+      info: ScaffoldRouteInfo(
+        layoutType: LayoutType.FixedHeaderSider,
+        pageName: "pageName",
+        whether: ScaffoldWhether(
+          showSiderMenu: true,
+          showSiderSubMenu: true,
+        ),
+      ),
+      child: WidgetComponents(),
       children: List.of(
         [
           PageRouteInfo(
             name: "/widgets/buttons",
-            page: ButtonsPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
             isUnderlying: true,
+            child: ButtonsPage(),
           ),
           PageRouteInfo(
             name: "/widgets/icons",
-            page: IconsPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
             isUnderlying: true,
+            child: IconsPage(),
           ),
           PageRouteInfo(
             name: "/widgets/modals",
-            page: ModalsPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
             isUnderlying: true,
+            child: ModalsPage(),
           ),
           PageRouteInfo(
             name: "/widgets/selectbar",
-            page: SelectButtonBarPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
+            child: SelectButtonBarPage(),
             isUnderlying: true,
           ),
           PageRouteInfo(
             name: "/widgets/carousel",
-            page: CarouselPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
+            child: CarouselPage(),
             isUnderlying: true,
           ),
           PageRouteInfo(
             name: "/widgets/textfield",
-            page: TextfieldPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
+            child: TextfieldPage(),
             isUnderlying: true,
           ),
           PageRouteInfo(
             name: "/widgets/form",
-            page: FormPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
+            child: FormPage(),
             isUnderlying: true,
           ),
           PageRouteInfo(
             name: "/widgets/table",
-            page: TablePage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
+            child: TablePage(),
             isUnderlying: true,
           ),
           PageRouteInfo(
             name: "/widgets/tags",
-            page: TagsPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
+            child: TagsPage(),
             isUnderlying: true,
           ),
           PageRouteInfo(
             name: "/widgets/rating",
-            page: RatingPage(),
+            info: ScaffoldRouteInfo(
+              layoutType: LayoutType.FixedHeader,
+              pageName: "pageName",
+            ),
+            child: RatingPage(),
             isUnderlying: true,
           ),
         ],

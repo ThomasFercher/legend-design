@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
@@ -12,6 +13,13 @@ import 'styles/app_styles.dart';
 import 'styles/layout_info.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.yellow,
+      systemNavigationBarContrastEnforced: true,
+    ),
+  );
   runApp(
     LegendApp(
       menuOptions: AppConfig.menuOptions,

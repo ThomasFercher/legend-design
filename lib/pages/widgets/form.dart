@@ -16,14 +16,13 @@ class FormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      pageName: 'Form',
-      layoutType: LayoutType.FixedHeader,
-      whether: ScaffoldWhether(
-        showSiderMenu: false,
-        isUnderlyingRoute: true,
-      ),
-      contentBuilder: (context, s) {
-        return Container(
+        pageName: 'Form',
+        layoutType: LayoutType.FixedHeader,
+        whether: ScaffoldWhether(
+          showSiderMenu: false,
+          isUnderlyingRoute: true,
+        ),
+        child: Container(
           child: Column(
             children: [
               LegendForm(
@@ -87,8 +86,6 @@ class FormPage extends StatelessWidget {
               )
             ],
           ),
-        );
-      },
-    );
+        ));
   }
 }

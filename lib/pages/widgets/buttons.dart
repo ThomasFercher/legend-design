@@ -13,14 +13,13 @@ class ButtonsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      pageName: 'Buttons',
-      layoutType: LayoutType.FixedHeaderSider,
-      whether: ScaffoldWhether(
-        singlePage: true,
-        shareParentSiderMenu: true,
-      ),
-      contentBuilder: (context, s) {
-        return Container(
+        pageName: 'Buttons',
+        layoutType: LayoutType.FixedHeaderSider,
+        whether: ScaffoldWhether(
+          singlePage: true,
+          shareParentSiderMenu: true,
+        ),
+        child: Container(
           child: Column(
             children: [
               LegendText(
@@ -92,8 +91,6 @@ class ButtonsPage extends StatelessWidget {
               ),*/
             ],
           ),
-        );
-      },
-    );
+        ));
   }
 }

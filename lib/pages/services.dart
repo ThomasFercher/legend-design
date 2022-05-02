@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
+import 'package:legend_design_core/layout/scaffold/legend_route_body.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
@@ -14,46 +15,15 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
 
-    return LegendScaffold(
-      contentBuilder: (context, s) {
-        print(s.height);
+    return LegendRouteBody(
+      singlePage: true,
+      builder: (context, s) {
         return Container(
-          //height: s.height,
-          child: Column(
-            children: [
-              Container(
-                height: 20,
-                width: 20,
-              ),
-            ],
-          ),
+          height: 20,
+          width: 20,
+          color: Colors.red,
         );
       },
-      pageName: "Products",
-      whether: ScaffoldWhether(
-        showSiderMenu: true,
-        singlePage: true,
-      ),
-      builders: ScaffoldBuilders(
-        siderBuilder: (context) {
-          return Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Row(
-              children: [
-                LegendAnimatedIcon(
-                  icon: Icons.palette,
-                  theme: LegendAnimtedIconTheme(
-                    disabled: theme.siderPalette.foreground,
-                    enabled: theme.siderPalette.selection,
-                  ),
-                  onPressed: () {},
-                )
-              ],
-            ),
-          );
-        },
-      ),
-      layoutType: LayoutType.FixedSider,
     );
   }
 }

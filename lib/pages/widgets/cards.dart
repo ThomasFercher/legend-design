@@ -13,14 +13,13 @@ class CardsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      pageName: 'Cards',
-      layoutType: LayoutType.FixedHeader,
-      whether: ScaffoldWhether(
-        showSiderMenu: false,
-        isUnderlyingRoute: true,
-      ),
-      contentBuilder: (context, s) {
-        return Column(
+        pageName: 'Cards',
+        layoutType: LayoutType.FixedHeader,
+        whether: ScaffoldWhether(
+          showSiderMenu: false,
+          isUnderlyingRoute: true,
+        ),
+        child: Column(
           children: [
             LegendText(
               text:
@@ -68,8 +67,6 @@ class CardsPage extends StatelessWidget {
               ),
             ),*/
           ],
-        );
-      },
-    );
+        ));
   }
 }

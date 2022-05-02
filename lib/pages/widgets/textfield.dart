@@ -14,14 +14,13 @@ class TextfieldPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      pageName: 'Textfield',
-      layoutType: LayoutType.FixedHeader,
-      whether: ScaffoldWhether(
-        showSiderMenu: false,
-        isUnderlyingRoute: true,
-      ),
-      contentBuilder: (context, s) {
-        return Column(
+        pageName: 'Textfield',
+        layoutType: LayoutType.FixedHeader,
+        whether: ScaffoldWhether(
+          showSiderMenu: false,
+          isUnderlyingRoute: true,
+        ),
+        child: Column(
           children: [
             LegendTextField(
               decoration: LegendInputDecoration.rounded(
@@ -33,8 +32,6 @@ class TextfieldPage extends StatelessWidget {
               ),
             ),
           ],
-        );
-      },
-    );
+        ));
   }
 }

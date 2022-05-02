@@ -3,6 +3,7 @@ import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/layout/scaffold/config/whether.dart';
+import 'package:legend_design_core/styles/sizing/size_info.dart';
 import 'package:legend_design_core/typography/legend_text.dart';
 import 'package:legend_design_widgets/layout/dynamic/custom/legend_widget_layout.dart';
 import 'package:provider/src/provider.dart';
@@ -13,16 +14,16 @@ class ModalsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
+    double width = SizeInfo.of(context).width;
     return LegendScaffold(
-      pageName: 'Modals',
-      layoutType: LayoutType.FixedSider,
-      whether: ScaffoldWhether(
-        showSiderMenu: false,
-        isUnderlyingRoute: true,
-        shareParentSiderMenu: true,
-      ),
-      contentBuilder: (context, s) {
-        return Column(
+        pageName: 'Modals',
+        layoutType: LayoutType.FixedSider,
+        whether: ScaffoldWhether(
+          showSiderMenu: false,
+          isUnderlyingRoute: true,
+          shareParentSiderMenu: true,
+        ),
+        child: Column(
           children: [
             LegendText(
               text:
@@ -82,7 +83,7 @@ class ModalsPage extends StatelessWidget {
                     spacing: 12,
                   ),*/
                 },
-                width: s.width,
+                width: width,
                 children: [
                   Container(
                     width: 200,
@@ -322,8 +323,6 @@ class ModalsPage extends StatelessWidget {
               ],
             ),*/
           ],
-        );
-      },
-    );
+        ));
   }
 }

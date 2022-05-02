@@ -13,14 +13,13 @@ class TagsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendScaffold(
-      pageName: 'Tags',
-      layoutType: LayoutType.FixedHeader,
-      whether: ScaffoldWhether(
-        showSiderMenu: false,
-        isUnderlyingRoute: true,
-      ),
-      contentBuilder: (context, s) {
-        return Column(
+        pageName: 'Tags',
+        layoutType: LayoutType.FixedHeader,
+        whether: ScaffoldWhether(
+          showSiderMenu: false,
+          isUnderlyingRoute: true,
+        ),
+        child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -33,8 +32,6 @@ class TagsPage extends StatelessWidget {
               ],
             )
           ],
-        );
-      },
-    );
+        ));
   }
 }
