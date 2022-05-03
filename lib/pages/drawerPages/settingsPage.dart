@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/gestures/detector.dart';
 import 'package:legend_design_core/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/styles/colors/legend_color_theme.dart' as ct;
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
@@ -86,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage>
           Expanded(
             child: Column(
               children: [
-                InkWell(
+                LegendDetector(
                   onTap: () {
                     theme.changeColorTheme(ct.PaletteType.dark(), context);
                   },
@@ -172,7 +173,7 @@ class _SettingsPageState extends State<SettingsPage>
                     ),
                   ),
                 ),
-                InkWell(
+                LegendDetector(
                   onTap: () {
                     theme.changeColorTheme(ct.PaletteType.light(), context);
                   },
@@ -258,7 +259,7 @@ class _SettingsPageState extends State<SettingsPage>
                     ),
                   ),
                 ),
-                InkWell(
+                LegendDetector(
                   onTap: () {
                     Provider.of<LegendTheme>(context, listen: false)
                         .changeColorTheme(
