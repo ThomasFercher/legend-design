@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/appbar_config.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/layout/appbar_layout.dart';
+import 'package:legend_design_core/layout/fixed/appBar.dart/legend_appbar.dart';
 import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
-import 'package:legend_design_core/layout/scaffold/legend_route_body.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
@@ -17,13 +20,7 @@ class ProductsPage extends StatelessWidget {
 
     return LegendRouteBody(
       singlePage: true,
-      builder: (context, s) {
-        return Container(
-          height: 20,
-          width: 20,
-          color: Colors.red,
-        );
-      },
+      slivers: [Container()],
     );
   }
 }

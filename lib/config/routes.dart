@@ -1,181 +1,171 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design/pages/about.dart';
+import 'package:legend_design/pages/drawerPages/settingsPage.dart';
+import 'package:legend_design/pages/home.dart';
+import 'package:legend_design/pages/services.dart';
+import 'package:legend_design/pages/themeEditor/themeEditor.dart';
 import 'package:legend_design/pages/widgetComponets.dart';
 import 'package:legend_design/pages/widgets/buttons.dart';
-import 'package:legend_design/pages/widgets/carousel.dart';
-import 'package:legend_design/pages/widgets/form.dart';
-import 'package:legend_design/pages/widgets/icons.dart';
-import 'package:legend_design/pages/widgets/modals.dart';
-import 'package:legend_design/pages/widgets/rating.dart';
-import 'package:legend_design/pages/widgets/selectButtonBar.dart';
-import 'package:legend_design/pages/widgets/table.dart';
-import 'package:legend_design/pages/widgets/tags.dart';
 import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
 import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
-import 'package:legend_design_core/router/legend_router.dart';
+
+import 'package:legend_design_core/router/scaffold_route_info.dart';
+import 'package:legend_router/router/legend_router.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_router/router/routes/route_display.dart';
 
-import '../pages/about.dart';
-import '../pages/drawerPages/settingsPage.dart';
-import '../pages/home.dart';
-import '../pages/services.dart';
-import '../pages/themeEditor/themeEditor.dart';
+import '../pages/widgets/carousel.dart';
+import '../pages/widgets/form.dart';
+import '../pages/widgets/icons.dart';
+import '../pages/widgets/modals.dart';
+import '../pages/widgets/rating.dart';
+import '../pages/widgets/selectButtonBar.dart';
+import '../pages/widgets/table.dart';
+import '../pages/widgets/tags.dart';
 import '../pages/widgets/textfield.dart';
 
 class RoutesTheme {
-  static List<MenuOption> menuOptions = [
-    MenuOption(
+  static List<SimpleRouteDisplay> menuOptions = [
+    SimpleRouteDisplay(
       title: "Home",
-      page: "/",
+      route: "/",
       icon: Icons.home,
     ),
-    MenuOption(
+    SimpleRouteDisplay(
       title: "Products",
-      page: "/products",
+      route: "/products",
       icon: Icons.accessibility,
     ),
-    MenuOption(
+    SimpleRouteDisplay(
       title: "Theming",
-      page: "/theme",
+      route: "/theme",
       icon: Icons.color_lens,
     ),
-    MenuOption(
+    SimpleRouteDisplay(
       title: "Widgets",
-      page: "/widgets",
+      route: "/widgets",
       icon: Icons.widgets,
-      showSubMenu: true,
       children: [
-        MenuOption(
+        SimpleRouteDisplay(
           title: "Buttons",
-          page: "/widgets/buttons",
+          route: "/widgets/buttons",
           icon: Icons.radio_button_off,
-          isUnderlying: true,
         ),
-        MenuOption(
+        SimpleRouteDisplay(
           title: "Icons",
-          page: "/widgets/icons",
+          route: "/widgets/icons",
           icon: Icons.collections,
-          isUnderlying: true,
         ),
-        MenuOption(
+        SimpleRouteDisplay(
           title: "Modals",
-          page: "/widgets/modals",
+          route: "/widgets/modals",
           icon: Icons.sensor_window,
-          isUnderlying: true,
         ),
-        MenuOption(
+        SimpleRouteDisplay(
           title: "Layout",
-          page: "/widgets/buttons",
+          route: "/widgets/buttons",
           icon: Icons.grid_4x4_outlined,
-          isUnderlying: true,
         ),
-        MenuOption(
+        SimpleRouteDisplay(
           title: "Typography",
-          page: "/widgets/buttons",
+          route: "/widgets/buttons",
           icon: Icons.text_format,
-          isUnderlying: true,
         ),
-        MenuOption(
-          page: "/widgets/selectbar",
+        SimpleRouteDisplay(
+          route: "/widgets/selectbar",
           title: "SelectBar",
-          isUnderlying: true,
           icon: Icons.select_all,
         ),
-        MenuOption(
-          page: "/widgets/carousel",
+        SimpleRouteDisplay(
+          route: "/widgets/carousel",
           title: "Carousel",
-          isUnderlying: true,
           icon: Icons.view_carousel,
         ),
-        MenuOption(
-          page: "/widgets/textfield",
+        SimpleRouteDisplay(
+          route: "/widgets/textfield",
           title: "Textfield",
-          isUnderlying: true,
           icon: Icons.text_fields,
         ),
-        MenuOption(
-          page: "/widgets/form",
+        SimpleRouteDisplay(
+          route: "/widgets/form",
           title: "Form",
-          isUnderlying: true,
           icon: Icons.input,
         ),
-        MenuOption(
-          page: "/widgets/table",
+        SimpleRouteDisplay(
+          route: "/widgets/table",
           title: "Table",
-          isUnderlying: true,
           icon: Icons.table_chart,
         ),
-        MenuOption(
-          page: "/widgets/tags",
+        SimpleRouteDisplay(
+          route: "/widgets/tags",
           title: "Tags",
-          isUnderlying: true,
           icon: Icons.tag,
         ),
-        MenuOption(
-          page: "/widgets/rating",
-          isUnderlying: true,
+        SimpleRouteDisplay(
+          route: "/widgets/rating",
           title: "Rating",
           icon: Icons.star,
         ),
       ],
     ),
-    MenuOption(
+    SimpleRouteDisplay(
       title: "About",
-      page: "/about",
-      icon: Icons.info_outline_rounded,
+      route: "/about",
+      icon: Icons.confirmation_num,
     ),
   ];
 
   static List<RouteInfo> buildRoutes(LegendTheme theme) {
     return [
-      PageRouteInfo(
+      ScaffoldRouteInfo(
         name: "/",
-        info: ScaffoldRouteInfo(
+        config: ScaffoldRouteConfig(
           layoutType: LayoutType.FixedHeader,
           pageName: "pageName",
         ),
-        child: Home(),
+        page: Home(),
       ),
-      PageRouteInfo(
+      ScaffoldRouteInfo(
         name: "/about",
-        info: ScaffoldRouteInfo(
+        config: ScaffoldRouteConfig(
           layoutType: LayoutType.FixedHeader,
           pageName: "pageName",
         ),
-        child: About(),
+        page: About(),
       ),
-      PageRouteInfo(
+      ScaffoldRouteInfo(
         name: "/products",
-        info: ScaffoldRouteInfo(
+        config: ScaffoldRouteConfig(
           layoutType: LayoutType.FixedSider,
           whether: ScaffoldWhether(
             showSiderMenu: true,
           ),
           pageName: "pageName",
         ),
-        child: ProductsPage(),
+        page: ProductsPage(),
       ),
-      PageRouteInfo(
+      ScaffoldRouteInfo(
         name: "/theme",
-        info: ScaffoldRouteInfo(
+        config: ScaffoldRouteConfig(
           layoutType: LayoutType.FixedHeader,
           pageName: "pageName",
         ),
-        child: ThemeEditor(),
+        page: ThemeEditor(),
       ),
       ModalRouteInfo(
         name: "/settings",
-        child: SettingsPage(),
+        page: SettingsPage(),
         width: 300,
       ),
       ModalRouteInfo(
         name: "/menudrawer",
-        child: MenuDrawer(),
+        page: MenuDrawer(),
         width: theme.menuDrawerSizing.width,
       ),
-      PageRouteInfo(
+      ScaffoldRouteInfo(
         name: "/widgets",
-        info: ScaffoldRouteInfo(
+        config: ScaffoldRouteConfig(
           layoutType: LayoutType.FixedHeaderSider,
           pageName: "pageName",
           whether: ScaffoldWhether(
@@ -183,98 +173,88 @@ class RoutesTheme {
             showSiderSubMenu: true,
           ),
         ),
-        child: WidgetComponents(),
+        page: WidgetComponents(),
         children: List.of(
           [
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/buttons",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              isUnderlying: true,
-              child: ButtonsPage(),
+              page: ButtonsPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/icons",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              isUnderlying: true,
-              child: IconsPage(),
+              page: IconsPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/modals",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              isUnderlying: true,
-              child: ModalsPage(),
+              page: ModalsPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/selectbar",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              child: SelectButtonBarPage(),
-              isUnderlying: true,
+              page: SelectButtonBarPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/carousel",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              child: CarouselPage(),
-              isUnderlying: true,
+              page: CarouselPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/textfield",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              child: TextfieldPage(),
-              isUnderlying: true,
+              page: TextfieldPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/form",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              child: FormPage(),
-              isUnderlying: true,
+              page: FormPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/table",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              child: TablePage(),
-              isUnderlying: true,
+              page: TablePage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/tags",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              child: TagsPage(),
-              isUnderlying: true,
+              page: TagsPage(),
             ),
-            PageRouteInfo(
+            ScaffoldRouteInfo(
               name: "/widgets/rating",
-              info: ScaffoldRouteInfo(
+              config: ScaffoldRouteConfig(
                 layoutType: LayoutType.FixedHeader,
                 pageName: "pageName",
               ),
-              child: RatingPage(),
-              isUnderlying: true,
+              page: RatingPage(),
             ),
           ],
           growable: true,

@@ -1,16 +1,12 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/icons/legend_animated_icon.dart';
-import 'package:legend_design_core/layout/fixed/appBar.dart/layout/appbar_layout.dart';
-import 'package:legend_design_core/layout/scaffold/legend_route_body.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
-import 'package:legend_design_core/router/legend_router.dart';
-import 'package:legend_design_core/styles/layouts/layout_type.dart';
+import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
+import 'package:legend_router/router/legend_router.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/layout/scaffold/config/whether.dart';
-import 'package:legend_design_core/typography/legend_text.dart';
-import 'package:legend_design_core/typography/rich/legend_rich_text.dart';
-import 'package:legend_design_core/utils/legend_utils.dart';
+import 'package:legend_design_core/styles/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/rich/legend_rich_text.dart';
+import 'package:legend_utils/functions/functions.dart';
 import 'package:legend_design_widgets/legend_design_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -623,7 +619,7 @@ class PackageCard extends StatelessWidget {
                 disabled: theme.colors.foreground[3],
               ),
               onPressed: () {
-                if (url != null) LegendUtils.launchInBrowser(url!);
+                if (url != null) LegendFunctions.launchInBrowser(url!);
               },
             )
           ],

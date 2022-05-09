@@ -35,7 +35,7 @@ For providing information on size the inherted Widget *SizeProvider* is used. Th
 
 
 ## Routing
-Custom Routing using the Navigator 2.0 API which supports Web. *RouterProvider* provides static Methods for pushing Pages. It gets initalized with your List of prefered Routes (*RouteInfo* Object) and MenuOptions (*MenuOptionHeader* Object). The Layout components *FixedSider* and *FixedHeader* will display these MenuOptions accordingly to your selected Layout.
+Custom Routing using the Navigator 2.0 API which supports Web. *RouterProvider* provides static Methods for pushing Pages. It gets initalized with your List of prefered Routes (*RouteInfo* Object) and RouteDisplays (*RouteDisplayHeader* Object). The Layout components *FixedSider* and *FixedHeader* will display these RouteDisplays accordingly to your selected Layout.
 
 ### Pages
 

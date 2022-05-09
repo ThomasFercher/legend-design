@@ -1,12 +1,12 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design/pages/home.dart';
-import 'package:legend_design_core/layout/scaffold/legend_route_body.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/layout/scaffold/config/whether.dart';
-import 'package:legend_design_core/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/legend_text.dart';
 import 'package:provider/provider.dart';
 
 class WidgetComponents extends StatelessWidget {

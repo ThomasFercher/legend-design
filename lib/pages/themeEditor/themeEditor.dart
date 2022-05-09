@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/colors/legend_palette.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/size_info.dart';
-import 'package:legend_design_core/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/legend_text.dart';
 import 'package:legend_design_widgets/input/form/legendForm.dart';
 import 'package:legend_design_widgets/input/form/legendFormField.dart';
 import 'package:legend_design_widgets/input/text/legendInputDecoration.dart';
@@ -38,10 +39,8 @@ class _ThemeEditorState extends State<ThemeEditor> {
     _colorPalette = theme.colors;
 
     double width = SizeInfo.of(context).width;
-    return LegendScaffold(
-      pageName: 'Theme Editor',
-      layoutType: LayoutType.FixedHeader,
-      child: Column(
+    return LegendRouteBody(builder: (context, size) {
+      return Column(
         children: [
           SizedBox(
             child: LegendForm(
@@ -272,7 +271,7 @@ class _ThemeEditorState extends State<ThemeEditor> {
             width: width,
           ),
         ],
-      ),
-    );
+      );
+    });
   }
 }

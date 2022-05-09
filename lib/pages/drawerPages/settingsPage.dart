@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/gestures/detector.dart';
-import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/widgets/gestures/detector.dart';
+import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/styles/colors/legend_color_theme.dart' as ct;
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/legend_text.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {

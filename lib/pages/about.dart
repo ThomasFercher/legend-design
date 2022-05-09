@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/scaffold/legend_route_body.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:provider/provider.dart';
 

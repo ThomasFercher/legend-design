@@ -4,12 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:legend_design/config/routes.dart';
 import 'package:legend_design/config/sizing.dart';
-import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
-import 'package:legend_design_core/legend_design_app.dart';
-import 'package:legend_design_core/router/legend_router.dart';
+import 'package:legend_design_core/legend_app.dart';
+
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:legend_design_core/styles/typography/typography.dart';
+import 'package:legend_router/router/legend_router.dart';
 import 'config/colors.dart';
 import 'config/layout_info.dart';
 
@@ -81,7 +83,7 @@ void main() {
 
   runApp(
     LegendApp(
-      menuOptions: RoutesTheme.menuOptions,
+      routeDisplays: RoutesTheme.menuOptions,
       buildRoutes: RoutesTheme.buildRoutes,
       logo: SvgPicture.asset(
         "assets/photos/larrylegend.svg",

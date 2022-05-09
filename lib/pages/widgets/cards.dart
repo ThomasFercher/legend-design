@@ -3,7 +3,7 @@ import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/legend_text.dart';
 import 'package:provider/src/provider.dart';
 
 class CardsPage extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/menu_drawer_sizing.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/sider_sizing.dart';
+import 'package:legend_design_core/styles/typography/typography.dart';
 
 class SizingTheme {
   static BottomBarSizing bottomBarSizing = BottomBarSizing(
@@ -22,10 +23,20 @@ class SizingTheme {
     sizings: {
       420: LegendSizing(
         menuDrawerSizing: MenuDrawerSizing(
-          iconSize: 32,
+          iconSize: 24,
           width: 300,
-          itemHeight: 64,
-          spacing: 8,
+          itemHeight: 48,
+          subMenuHeaderHeight: 64,
+          spacing: 12,
+          itemPadding: EdgeInsets.symmetric(
+            horizontal: 6,
+            vertical: 6,
+          ),
+          subItemPadding: EdgeInsets.symmetric(
+            horizontal: 6,
+            vertical: 6,
+          ),
+          subMenuIconSize: 18,
         ),
         elevations: [0, 1, 2, 4],
         typographySizing: TypographySizing(baseSize: 14, maxSize: 32),
@@ -68,11 +79,19 @@ class SizingTheme {
       ),
       720: LegendSizing(
         siderSizing: SiderSizing(
-          width: 180,
+          width: 200,
           iconSize: 24,
           itemHeight: 48,
-          spacing: 6,
+          spacing: 8,
+          itemPadding: EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 2,
+          ),
           subMenuHeaderHeight: 48,
+          subItemPadding: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 2,
+          ),
         ),
         elevations: [0, 1, 2, 4],
         typographySizing: TypographySizing(baseSize: 12, maxSize: 36),
@@ -106,25 +125,49 @@ class SizingTheme {
         collapsedSider: true,
         iconSizes: [28, 24, 22, 18],
         menuDrawerSizing: MenuDrawerSizing(
+          width: 200,
           iconSize: 24,
-          width: 360,
-          itemHeight: 64,
+          itemHeight: 48,
           spacing: 8,
+          itemPadding: EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 2,
+          ),
+          subMenuHeaderHeight: 48,
+          subItemPadding: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 2,
+          ),
         ),
       ),
       1080: LegendSizing(
         siderSizing: SiderSizing(
           width: 220,
-          iconSize: 24,
+          iconSize: 26,
           itemHeight: 56,
           spacing: 8,
-          subMenuHeaderHeight: 56,
+          itemPadding: EdgeInsets.symmetric(
+            horizontal: 8,
+          ),
+          subMenuHeaderHeight: 64,
+          subItemPadding: EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
         ),
         menuDrawerSizing: MenuDrawerSizing(
-          iconSize: 24,
           width: 360,
-          itemHeight: 64,
+          iconSize: 24,
+          itemHeight: 48,
           spacing: 8,
+          itemPadding: EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 2,
+          ),
+          subMenuHeaderHeight: 48,
+          subItemPadding: EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 2,
+          ),
         ),
         elevations: [0, 1, 2, 4],
         typographySizing: TypographySizing(baseSize: 14, maxSize: 38),
@@ -168,7 +211,15 @@ class SizingTheme {
           iconSize: 28,
           itemHeight: 64,
           spacing: 12,
+          itemPadding: EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 4,
+          ),
           subMenuHeaderHeight: 64,
+          subItemPadding: EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 4,
+          ),
         ),
         elevations: [0, 1, 2, 4],
         typographySizing: TypographySizing(baseSize: 14, maxSize: 40),

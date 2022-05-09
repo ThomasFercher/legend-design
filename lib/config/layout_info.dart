@@ -1,12 +1,12 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:legend_design_core/icons/legend_animated_icon.dart';
+import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/fixed/footer/fixed_footer.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/footer_sizing.dart';
-import 'package:legend_design_core/typography/legend_text.dart';
-import 'package:legend_design_core/utils/legend_utils.dart';
+import 'package:legend_design_core/styles/typography/legend_text.dart';
+import 'package:legend_utils/functions/functions.dart';
 import 'package:provider/provider.dart';
 
 class LayoutInfo {
@@ -44,7 +44,7 @@ class LayoutInfo {
                     children: [
                       LegendAnimatedIcon(
                         onPressed: () {
-                          LegendUtils.launchInBrowser(
+                          LegendFunctions.launchInBrowser(
                             "https://github.com/ThomasFercher/Legend-Design",
                           );
                         },
