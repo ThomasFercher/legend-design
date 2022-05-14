@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
@@ -27,158 +28,153 @@ class CarouselPage extends StatelessWidget {
     ParagraphType content =
         ParagraphType(textStyle: theme.typography.h1, bottom: 32);
 
-    return LegendScaffold(
-      pageName: 'Carousel',
-      layoutType: LayoutType.FixedHeader,
-      whether: ScaffoldWhether(
-        showSiderMenu: false,
-        isUnderlyingRoute: true,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LegendCarousel(
-            height: 640,
-            intervall: Duration(seconds: 20),
-            items: [
-              Container(
-                color: Colors.red,
-              ),
-              Container(
-                color: Colors.teal,
-              ),
-              Container(
-                color: Colors.orange,
-              ),
-              Container(
-                color: Colors.green,
-              ),
-              Image.network(
-                "http://wallup.net/wp-content/uploads/2016/01/291399-California-landscape-mountain.jpg",
-                fit: BoxFit.cover,
-              ),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.all(theme.sizing.padding[0] * 2),
-            padding: EdgeInsets.all(theme.sizing.padding[0] * 1.5),
-            decoration: BoxDecoration(
-              color: theme.colors.foreground[0],
-              borderRadius: theme.sizing.borderRadius[0],
+    return LegendRouteBody(
+      builder: (context, s) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LegendCarousel(
+              height: 640,
+              intervall: Duration(seconds: 20),
+              items: [
+                Container(
+                  color: Colors.red,
+                ),
+                Container(
+                  color: Colors.teal,
+                ),
+                Container(
+                  color: Colors.orange,
+                ),
+                Container(
+                  color: Colors.green,
+                ),
+                Image.network(
+                  "http://wallup.net/wp-content/uploads/2016/01/291399-California-landscape-mountain.jpg",
+                  fit: BoxFit.cover,
+                ),
+              ],
             ),
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                LegendParagraph(
-                  margin: EdgeInsets.only(
-                    bottom: 8,
-                  ),
-                  values: {
-                    heading: "Carousel",
-                    content:
-                        "Carousel is a widget that displays a set of items in a carousel. It is a special type of scrollable list that can be used to display a series of elements. The user can swipe left and right on the carousel to scroll through the list of items. The carousel can be controlled using a controller that can be used to control the carousel programmatically. ",
-                    heading2: "When to use",
-                    content.withId:
-                        "Carousel is a widget that displays a set of items in a carousel. It is a special type of scrollable list that can be used to display a series of elements. The user can swipe left and right on the carousel to scroll through the list of items. The carousel can be controlled using a controller that can be used to control the carousel programmatically. ",
-                  },
-                ),
-                LegendHeader(
-                  margin: EdgeInsets.only(
-                    bottom: 32,
-                  ),
-                  spacing: 8,
-                  header: LegendText(
-                    text: "Api",
-                    textStyle: theme.typography.h4,
-                  ),
-                  child: LegendTable(
-                    columnNames: [
-                      "Parameter",
-                      "Description",
-                      "Type",
-                    ],
-                    showHeader: true,
-                    style: LegendTableStyle(
-                      backgroundColor: theme.colors.foreground[1],
-                      selectionColor: theme.colors.foreground[1].lighten(),
-                      borderRadiusGeometry: theme.sizing.borderRadius[1],
-                      textStyle: theme.typography.h1,
-                      rowPadding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                      ),
-                      headerColor: theme.colors.foreground[1].lighten(),
-                      headerTextStyle: theme.typography.h0,
+            Container(
+              margin: EdgeInsets.all(theme.sizing.padding[0] * 2),
+              padding: EdgeInsets.all(theme.sizing.padding[0] * 1.5),
+              decoration: BoxDecoration(
+                color: theme.colors.foreground[0],
+                borderRadius: theme.sizing.borderRadius[0],
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  LegendParagraph(
+                    margin: EdgeInsets.only(
+                      bottom: 8,
                     ),
-                    rowHeight: 56,
-                    columnTypes: [
-                      LegendTableValueType.TEXT,
-                      LegendTableValueType.TEXT,
-                      LegendTableValueType.TAG,
-                    ],
-                    flexValues: [
-                      1,
-                      4,
-                      2,
-                    ],
-                    values: [
-                      LegendRowValue(
-                        fields: [
-                          "items",
-                          "List of Widgets which will be displayed in the carousel.",
-                          [
-                            ["List<Widget>", Colors.teal],
-                            ["required", Colors.red],
-                          ],
-                        ],
-                      ),
-                      LegendRowValue(
-                        fields: [
-                          "height",
-                          "This controlls the height of the carousel.",
-                          [
-                            ["double", Colors.deepPurple],
-                            ["nullable", Colors.pink],
-                          ],
-                        ],
-                      ),
-                      LegendRowValue(
-                        fields: [
-                          "width",
-                          "This controlls the width of the carousel.",
-                          [
-                            ["double", Colors.deepPurple],
-                            ["nullable", Colors.pink],
-                          ],
-                        ],
-                      ),
-                      LegendRowValue(
-                        fields: [
-                          "intervall",
-                          "If specified the carousel will automatically scroll to the next item after the given duration.",
-                          [
-                            ["Duration", Colors.orange],
-                            ["nullable", Colors.pink],
-                          ],
-                        ],
-                      ),
-                      LegendRowValue(
-                        fields: [
-                          "padding",
-                          "Padding which will be applied to all items.",
-                          [
-                            [
-                              "EdgeInsetGeometry",
-                              Colors.grey,
-                            ],
-                            ["nullable", Colors.pink],
-                          ],
-                        ],
-                      )
-                    ],
+                    values: {
+                      heading: "Carousel",
+                      content:
+                          "Carousel is a widget that displays a set of items in a carousel. It is a special type of scrollable list that can be used to display a series of elements. The user can swipe left and right on the carousel to scroll through the list of items. The carousel can be controlled using a controller that can be used to control the carousel programmatically. ",
+                      heading2: "When to use",
+                      content.withId:
+                          "Carousel is a widget that displays a set of items in a carousel. It is a special type of scrollable list that can be used to display a series of elements. The user can swipe left and right on the carousel to scroll through the list of items. The carousel can be controlled using a controller that can be used to control the carousel programmatically. ",
+                    },
                   ),
-                ),
-                /*  LegendHeader(
+                  LegendHeader(
+                    margin: EdgeInsets.only(
+                      bottom: 32,
+                    ),
+                    spacing: 8,
+                    header: LegendText(
+                      text: "Api",
+                      textStyle: theme.typography.h4,
+                    ),
+                    child: LegendTable(
+                      columnNames: [
+                        "Parameter",
+                        "Description",
+                        "Type",
+                      ],
+                      showHeader: true,
+                      style: LegendTableStyle(
+                        backgroundColor: theme.colors.foreground[1],
+                        selectionColor: theme.colors.foreground[1].lighten(),
+                        borderRadiusGeometry: theme.sizing.borderRadius[1],
+                        textStyle: theme.typography.h1,
+                        rowPadding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                        ),
+                        headerColor: theme.colors.foreground[1].lighten(),
+                        headerTextStyle: theme.typography.h0,
+                      ),
+                      rowHeight: 56,
+                      columnTypes: [
+                        LegendTableValueType.TEXT,
+                        LegendTableValueType.TEXT,
+                        LegendTableValueType.TAG,
+                      ],
+                      flexValues: [
+                        1,
+                        4,
+                        2,
+                      ],
+                      values: [
+                        LegendRowValue(
+                          fields: [
+                            "items",
+                            "List of Widgets which will be displayed in the carousel.",
+                            [
+                              ["List<Widget>", Colors.teal],
+                              ["required", Colors.red],
+                            ],
+                          ],
+                        ),
+                        LegendRowValue(
+                          fields: [
+                            "height",
+                            "This controlls the height of the carousel.",
+                            [
+                              ["double", Colors.deepPurple],
+                              ["nullable", Colors.pink],
+                            ],
+                          ],
+                        ),
+                        LegendRowValue(
+                          fields: [
+                            "width",
+                            "This controlls the width of the carousel.",
+                            [
+                              ["double", Colors.deepPurple],
+                              ["nullable", Colors.pink],
+                            ],
+                          ],
+                        ),
+                        LegendRowValue(
+                          fields: [
+                            "intervall",
+                            "If specified the carousel will automatically scroll to the next item after the given duration.",
+                            [
+                              ["Duration", Colors.orange],
+                              ["nullable", Colors.pink],
+                            ],
+                          ],
+                        ),
+                        LegendRowValue(
+                          fields: [
+                            "padding",
+                            "Padding which will be applied to all items.",
+                            [
+                              [
+                                "EdgeInsetGeometry",
+                                Colors.grey,
+                              ],
+                              ["nullable", Colors.pink],
+                            ],
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  /*  LegendHeader(
                     margin: EdgeInsets.only(
                       bottom: 32,
                     ),
@@ -221,11 +217,12 @@ class CarouselPage extends StatelessWidget {
                       ),
                     ),
                   ),*/
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }

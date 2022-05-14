@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/layout/scaffold/config/whether.dart';
+import 'package:legend_design_core/styles/typography/legend_text.dart';
 import 'package:legend_design_widgets/input/text/legendInputDecoration.dart';
 import 'package:legend_design_widgets/input/text/legendTextField.dart';
 import 'package:provider/src/provider.dart';
@@ -13,25 +15,20 @@ class TextfieldPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
-    return LegendScaffold(
-        pageName: 'Textfield',
-        layoutType: LayoutType.FixedHeader,
-        whether: ScaffoldWhether(
-          showSiderMenu: false,
-          isUnderlyingRoute: true,
-        ),
-        child: Column(
-          children: [
-            LegendTextField(
-              decoration: LegendInputDecoration.rounded(
-                focusColor: Colors.teal,
-                textColor: Colors.grey[800],
-                radius: BorderRadius.all(
-                  Radius.circular(2),
-                ),
+    return LegendRouteBody(
+      builder: ((context, s) {
+        return Container(
+          child: Column(
+            children: [
+              LegendText(
+                text:
+                    "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                textStyle: theme.typography.h1,
               ),
-            ),
-          ],
-        ));
+            ],
+          ),
+        );
+      }),
+    );
   }
 }

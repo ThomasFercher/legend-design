@@ -1,8 +1,8 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:legend_design_core/layout/footer/fixed_footer.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
-import 'package:legend_design_core/layout/fixed/footer/fixed_footer.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/footer_sizing.dart';
 import 'package:legend_design_core/styles/typography/legend_text.dart';

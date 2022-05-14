@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/layout/scaffold/config/whether.dart';
@@ -13,14 +14,9 @@ class RatingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
-    return LegendScaffold(
-        pageName: 'Rating',
-        layoutType: LayoutType.FixedHeader,
-        whether: ScaffoldWhether(
-          showSiderMenu: false,
-          isUnderlyingRoute: true,
-        ),
-        child: Column(
+    return LegendRouteBody(
+      builder: (context, s) {
+        return Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,6 +49,8 @@ class RatingPage extends StatelessWidget {
               ],
             )
           ],
-        ));
+        );
+      },
+    );
   }
 }
