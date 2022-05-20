@@ -161,7 +161,6 @@ class AppTheme extends ThemeInterface {
             16,
             18,
           ],
-          showBottomBar: true,
           bottomBarSizing: BottomBarSizing(
             iconSize: 28,
             height: 72,
@@ -186,7 +185,6 @@ class AppTheme extends ThemeInterface {
             spacing: 24,
             logoSize: 42,
           ),
-          hideSider: true,
           iconSizes: [28, 24, 22, 18],
         ),
         720: LegendSizing(
@@ -234,7 +232,6 @@ class AppTheme extends ThemeInterface {
             spacing: 12,
             logoSize: 48,
           ),
-          collapsedSider: true,
           iconSizes: [28, 24, 22, 18],
           menuDrawerSizing: MenuDrawerSizing(
             width: 200,
