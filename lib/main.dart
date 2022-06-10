@@ -5,6 +5,7 @@ import 'package:legend_design_core/legend_app.dart';
 import 'config/theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     LegendApp(
       routesDelegate: const RoutesTheme(),
@@ -15,7 +16,6 @@ void main() {
         height: 48,
       ),
       title: "Legend Design",
-      future: Future.delayed(Duration(seconds: 2), () => true),
       buildSplashscreen: (context, theme) {
         return Container(
           color: theme.colors.primary,

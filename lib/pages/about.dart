@@ -11,11 +11,7 @@ class About extends StatelessWidget {
     return LegendRouteBody(
       singlePage: true,
       builder: (context, s) {
-        return Container(
-          color: Colors.red,
-          height: s.height,
-          width: s.width,
-        );
+        return Image.asset("assets/photos/larrylegend.png");
       },
     );
   }

@@ -7,8 +7,11 @@ import 'package:legend_design/pages/themeEditor/themeEditor.dart';
 import 'package:legend_design/pages/widgetComponets.dart';
 import 'package:legend_design/pages/widgets/buttons.dart';
 import 'package:legend_design_core/interfaces/route_inferface.dart';
+import 'package:legend_design_core/layout/appBar.dart/layout/appbar_layout.dart';
+import 'package:legend_design_core/layout/config/appbar_layout.dart';
 import 'package:legend_design_core/layout/config/layout_config.dart';
 import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
+import 'package:legend_design_core/layout/navigation/tabbar/legend_tabbar.dart';
 import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/router/scaffold_route_info.dart';
 import 'package:legend_router/router/legend_router.dart';
@@ -42,13 +45,19 @@ class RoutesTheme extends RouteInterface<PageLayout> {
         splits,
         [
           RouteLayout(
-            appBarLayout: AppbarLayout.FixedAbove,
+            appBarLayout: AppBarLayout(
+              AppBarLayoutConfig.fixedAbove,
+              AppBarLayoutType.TiMeAc,
+            ),
             bottomBarLayout: BottomBarLayout.Show,
             footerLayout: FooterLayout.None,
             siderLayout: SiderLayout.None,
           ),
           RouteLayout(
-            appBarLayout: AppbarLayout.FixedAbove,
+            appBarLayout: AppBarLayout(
+              AppBarLayoutConfig.fixedAbove,
+              AppBarLayoutType.TiMeAc,
+            ),
             bottomBarLayout: BottomBarLayout.None,
             footerLayout: FooterLayout.Show,
             siderLayout: SiderLayout.None,
@@ -59,13 +68,19 @@ class RoutesTheme extends RouteInterface<PageLayout> {
         splits,
         [
           RouteLayout(
-            appBarLayout: AppbarLayout.FixedAbove,
+            appBarLayout: AppBarLayout(
+              AppBarLayoutConfig.fixedAbove,
+              AppBarLayoutType.TiMeAc,
+            ),
             bottomBarLayout: BottomBarLayout.Show,
             footerLayout: FooterLayout.None,
             siderLayout: SiderLayout.None,
           ),
           RouteLayout(
-            appBarLayout: AppbarLayout.FixedAbove,
+            appBarLayout: AppBarLayout(
+              AppBarLayoutConfig.fixedAbove,
+              AppBarLayoutType.TiMeAc,
+            ),
             bottomBarLayout: BottomBarLayout.None,
             footerLayout: FooterLayout.Show,
             siderLayout: SiderLayout.Left,
@@ -76,13 +91,19 @@ class RoutesTheme extends RouteInterface<PageLayout> {
         splits,
         [
           RouteLayout(
-            appBarLayout: AppbarLayout.FixedAbove,
+            appBarLayout: AppBarLayout(
+              AppBarLayoutConfig.body,
+              AppBarLayoutType.TiMeAc,
+            ),
             bottomBarLayout: BottomBarLayout.Show,
             footerLayout: FooterLayout.None,
             siderLayout: SiderLayout.None,
           ),
           RouteLayout(
-            appBarLayout: AppbarLayout.None,
+            appBarLayout: AppBarLayout(
+              AppBarLayoutConfig.body,
+              AppBarLayoutType.TiMeAc,
+            ),
             bottomBarLayout: BottomBarLayout.None,
             footerLayout: FooterLayout.Show,
             siderLayout: SiderLayout.Left,
@@ -94,9 +115,11 @@ class RoutesTheme extends RouteInterface<PageLayout> {
 
   @override
   List<RouteInfo> buildRoutes(
-      Map<PageLayout, DynamicRouteLayout> layouts, LegendTheme theme) {
+    Map<PageLayout, DynamicRouteLayout> layouts,
+    LegendTheme theme,
+  ) {
     return [
-      ScaffoldRouteInfo(
+      PageInfo(
         name: "/",
         config: ScaffoldRouteConfig(
           pageName: "pageName",
@@ -104,7 +127,7 @@ class RoutesTheme extends RouteInterface<PageLayout> {
         ),
         page: Home(),
       ),
-      ScaffoldRouteInfo(
+      PageInfo(
         name: "/about",
         config: ScaffoldRouteConfig(
           pageName: "pageName",
@@ -112,18 +135,58 @@ class RoutesTheme extends RouteInterface<PageLayout> {
         ),
         page: About(),
       ),
-      ScaffoldRouteInfo(
+      TabviewPageInfo(
         name: "/products",
+        style: TabBarStyle(
+          alignment: MainAxisAlignment.center,
+          background: theme.colors.background[0],
+          height: 56,
+        ),
         config: ScaffoldRouteConfig(
-          layout: layouts[PageLayout.Sider]!,
+          layout: layouts[PageLayout.Header]!,
           whether: ScaffoldWhether(
             showSiderMenu: true,
           ),
           pageName: "pageName",
         ),
         page: ProductsPage(),
+        children: [
+          TabviewChildPageInfo(
+            name: "/products/development",
+            page: CarouselPage(),
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              whether: ScaffoldWhether(
+                showSiderMenu: true,
+              ),
+              pageName: "pageName",
+            ),
+          ),
+          TabviewChildPageInfo(
+            name: "/products/prebuiltapps",
+            page: About(),
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              whether: ScaffoldWhether(
+                showSiderMenu: true,
+              ),
+              pageName: "pageName",
+            ),
+          ),
+          TabviewChildPageInfo(
+            name: "/products/counseling",
+            page: About(),
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              whether: ScaffoldWhether(
+                showSiderMenu: true,
+              ),
+              pageName: "pageName",
+            ),
+          ),
+        ],
       ),
-      ScaffoldRouteInfo(
+      PageInfo(
         name: "/theme",
         config: ScaffoldRouteConfig(
           layout: layouts[PageLayout.Header]!,
@@ -134,14 +197,14 @@ class RoutesTheme extends RouteInterface<PageLayout> {
       ModalRouteInfo(
         name: "/settings",
         page: SettingsPage(),
-        width: 300,
+        width: 360,
       ),
       ModalRouteInfo(
         name: "/menudrawer",
         page: MenuDrawer(),
         width: theme.menuDrawerSizing.width,
       ),
-      ScaffoldRouteInfo(
+      PageInfo(
         name: "/widgets",
         config: ScaffoldRouteConfig(
           layout: layouts[PageLayout.HeaderSider]!,
@@ -152,107 +215,121 @@ class RoutesTheme extends RouteInterface<PageLayout> {
           ),
         ),
         page: WidgetComponents(),
-        children: List.of(
-          [
-            ScaffoldRouteInfo(
-              name: "/widgets/buttons",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: ButtonsPage(),
+        children: [
+          PageInfo(
+            name: "/widgets/buttons",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/icons",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: IconsPage(),
+            page: ButtonsPage(),
+          ),
+          PageInfo(
+            name: "/widgets/icons",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/modals",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: ModalsPage(),
+            page: IconsPage(),
+          ),
+          PageInfo(
+            name: "/widgets/modals",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/selectbar",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: SelectButtonBarPage(),
+            page: ModalsPage(),
+          ),
+          PageInfo(
+            name: "/widgets/selectbar",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/carousel",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: CarouselPage(),
+            page: SelectButtonBarPage(),
+          ),
+          PageInfo(
+            name: "/widgets/carousel",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/textfield",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: TextfieldPage(),
+            page: CarouselPage(),
+          ),
+          PageInfo(
+            name: "/widgets/textfield",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/form",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: FormPage(),
+            page: TextfieldPage(),
+          ),
+          PageInfo(
+            name: "/widgets/form",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/table",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: TablePage(),
+            page: FormPage(),
+          ),
+          PageInfo(
+            name: "/widgets/table",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/tags",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: TagsPage(),
+            page: TablePage(),
+          ),
+          PageInfo(
+            name: "/widgets/tags",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-            ScaffoldRouteInfo(
-              name: "/widgets/rating",
-              config: ScaffoldRouteConfig(
-                layout: layouts[PageLayout.Header]!,
-                pageName: "pageName",
-              ),
-              page: RatingPage(),
+            page: TagsPage(),
+          ),
+          PageInfo(
+            name: "/widgets/rating",
+            config: ScaffoldRouteConfig(
+              layout: layouts[PageLayout.Header]!,
+              pageName: "pageName",
             ),
-          ],
-          growable: true,
-        ),
+            page: RatingPage(),
+          ),
+        ],
       ),
     ];
   }
 
   @override
-  List<SimpleRouteDisplay> buildDisplays() {
+  List<RouteDisplay> buildDisplays() {
     return [
       SimpleRouteDisplay(
         title: "Home",
         route: "/",
         icon: Icons.home,
       ),
-      SimpleRouteDisplay(
+      TabRouteDisplay(
         title: "Products",
         route: "/products",
         icon: Icons.accessibility,
+        children: [
+          SimpleRouteDisplay(
+            title: "Development",
+            route: "/products/development",
+            icon: Icons.yard_sharp,
+          ),
+          SimpleRouteDisplay(
+            title: "Prebuilt Apps",
+            route: "/products/prebuiltapps",
+            icon: Icons.abc_rounded,
+          ),
+          SimpleRouteDisplay(
+            title: "Counseling",
+            route: "/products/counseling",
+            icon: Icons.abc_rounded,
+          ),
+        ],
       ),
       SimpleRouteDisplay(
         title: "Theming",

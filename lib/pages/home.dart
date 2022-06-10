@@ -1,5 +1,6 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_router/router/legend_router.dart';
@@ -18,6 +19,7 @@ class Home extends StatelessWidget {
     const double verticalSpacing = 24;
     var width = MediaQuery.of(context).size.width;
     LegendTheme theme = context.watch<LegendTheme>();
+    ScaffoldInfo info = ScaffoldInfo.of(context);
 
     return LegendRouteBody(
       slivers: [

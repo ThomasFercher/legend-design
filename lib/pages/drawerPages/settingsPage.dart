@@ -7,51 +7,25 @@ import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/typography/legend_text.dart';
 import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage>
-    with SingleTickerProviderStateMixin {
-  late Animation<Color?> border;
-  late AnimationController controller;
-  Color borderColor = Colors.transparent;
-  ct.PaletteType? themeType;
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 200),
-    );
-
-    border = ColorTween(
-      begin: Colors.transparent,
-      end: Colors.tealAccent,
-    ).animate(new CurvedAnimation(parent: controller, curve: Curves.easeIn))
-      ..addListener(() {
-        setState(() {
-          borderColor = border.value ?? Colors.transparent;
-        });
-      });
-  }
-
-  @override
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
-
+    PaletteType? themeType = theme.colorTheme.type;
     return Container(
       height: MediaQuery.of(context).size.height,
-      color: theme.colors.background[1],
-      width: 360,
-      padding: EdgeInsets.all(24),
+      color: theme.colors.background[0],
+      width: theme.sizing.menuDrawerSizing.width,
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top,
+        left: 24,
+        right: 24,
+        bottom: 24,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -72,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage>
                   disableShadow: true,
                   theme: LegendAnimtedIconTheme(
                     enabled: theme.colors.selection,
-                    disabled: theme.colors.foreground[1],
+                    disabled: theme.colors.foreground[0],
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
