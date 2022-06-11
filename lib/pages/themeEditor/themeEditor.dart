@@ -265,7 +265,7 @@ class _ThemeEditorState extends State<ThemeEditor> {
             height: 400,
             child: Container(),
             decoration: BoxDecoration(
-              color: theme.colors.background[1],
+              color: theme.colors.background2,
               borderRadius: theme.sizing.borderRadius[1],
             ),
             width: width,

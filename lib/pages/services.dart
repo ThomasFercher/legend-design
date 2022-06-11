@@ -36,7 +36,7 @@ class ProductsPage extends StatelessWidget {
 
       /*  sliverPersistentHeader: PersistentHeader(
         maxHeight: 40,
-        backgroundColor: theme.appBarPalette.background,
+        backgroundColor: theme.appBar.background,
         child: Container(),
         minHeight: 40,
       ),*/

@@ -59,7 +59,7 @@ class CarouselPage extends StatelessWidget {
               margin: EdgeInsets.all(theme.sizing.padding[0] * 2),
               padding: EdgeInsets.all(theme.sizing.padding[0] * 1.5),
               decoration: BoxDecoration(
-                color: theme.colors.foreground[0],
+                color: theme.colors.foreground1,
                 borderRadius: theme.sizing.borderRadius[0],
               ),
               width: MediaQuery.of(context).size.width,
@@ -96,14 +96,14 @@ class CarouselPage extends StatelessWidget {
                       ],
                       showHeader: true,
                       style: LegendTableStyle(
-                        backgroundColor: theme.colors.foreground[1],
-                        selectionColor: theme.colors.foreground[1].lighten(),
+                        backgroundColor: theme.colors.foreground1,
+                        selectionColor: theme.colors.foreground1.lighten(),
                         borderRadiusGeometry: theme.sizing.borderRadius[1],
                         textStyle: theme.typography.h1,
                         rowPadding: EdgeInsets.symmetric(
                           horizontal: 12,
                         ),
-                        headerColor: theme.colors.foreground[1].lighten(),
+                        headerColor: theme.colors.foreground1.lighten(),
                         headerTextStyle: theme.typography.h0,
                       ),
                       rowHeight: 56,

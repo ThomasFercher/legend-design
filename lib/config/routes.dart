@@ -139,7 +139,7 @@ class RoutesTheme extends RouteInterface<PageLayout> {
         name: "/products",
         style: TabBarStyle(
           alignment: MainAxisAlignment.center,
-          background: theme.colors.background[0],
+          background: theme.colors.background1,
           height: 56,
         ),
         config: ScaffoldRouteConfig(

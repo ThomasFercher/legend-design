@@ -18,7 +18,7 @@ class SettingsPage extends StatelessWidget {
     PaletteType? themeType = theme.colorTheme.type;
     return Container(
       height: MediaQuery.of(context).size.height,
-      color: theme.colors.background[0],
+      color: theme.colors.background1,
       width: theme.sizing.menuDrawerSizing.width,
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top,
@@ -38,7 +38,7 @@ class SettingsPage extends StatelessWidget {
                 LegendText(
                   text: "Themes",
                   textStyle: theme.typography.h5.copyWith(
-                    color: theme.colors.textOnDark,
+                    color: theme.colors.foreground1,
                   ),
                 ),
                 LegendAnimatedIcon(
@@ -46,7 +46,7 @@ class SettingsPage extends StatelessWidget {
                   disableShadow: true,
                   theme: LegendAnimtedIconTheme(
                     enabled: theme.colors.selection,
-                    disabled: theme.colors.foreground[0],
+                    disabled: theme.colors.foreground1,
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -56,7 +56,7 @@ class SettingsPage extends StatelessWidget {
             ),
           ),
           Divider(
-            color: theme.colors.background[2],
+            color: theme.colors.background3,
           ),
           Expanded(
             child: Column(

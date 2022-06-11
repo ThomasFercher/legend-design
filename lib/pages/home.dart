@@ -255,7 +255,7 @@ class Home extends StatelessWidget {
           height: 48,
           //width: s.width,
           decoration: BoxDecoration(
-            color: theme.colors.background[2],
+            color: theme.colors.background3,
             borderRadius: theme.sizing.borderRadius[1],
           ),
           alignment: Alignment.centerLeft,
@@ -287,7 +287,7 @@ class Home extends StatelessWidget {
         Container(
           height: 120,
           decoration: BoxDecoration(
-            color: theme.colors.background[2],
+            color: theme.colors.background3,
             borderRadius: theme.sizing.borderRadius[1],
           ),
           alignment: Alignment.centerLeft,
@@ -364,7 +364,7 @@ class Home extends StatelessWidget {
             Container(
               height: 100,
               decoration: BoxDecoration(
-                color: theme.colors.background[2],
+                color: theme.colors.background3,
                 borderRadius: theme.sizing.borderRadius[1],
               ),
               alignment: Alignment.centerLeft,
@@ -581,7 +581,7 @@ class PackageCard extends StatelessWidget {
       child: Container(
         height: 64,
         width: width,
-        color: theme.colors.background[2],
+        color: theme.colors.background3,
         padding: EdgeInsets.symmetric(
           horizontal: theme.sizing.padding[1],
         ),
@@ -618,7 +618,7 @@ class PackageCard extends StatelessWidget {
               iconSize: 32,
               theme: LegendAnimtedIconTheme(
                 enabled: theme.colors.selection,
-                disabled: theme.colors.foreground[3],
+                disabled: theme.colors.foreground4,
               ),
               onPressed: () {
                 if (url != null) LegendFunctions.launchInBrowser(url!);
@@ -651,7 +651,7 @@ class LegendListItem extends StatelessWidget {
         children: [
           Icon(
             Icons.circle_outlined,
-            color: theme.colors.foreground[2],
+            color: theme.colors.foreground3,
             size: 8,
           ),
           const SizedBox(

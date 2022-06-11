@@ -20,7 +20,7 @@ class LayoutInfo {
     sizing: sizing,
     builder: (context, sizing, colors) {
       LegendTheme theme = context.watch<LegendTheme>();
-      FooterPalette colors = theme.colors.footerPalette;
+      FooterColors colors = theme.colors.footer;
       return Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,7 +51,7 @@ class LayoutInfo {
                         icon: AntIcons.githubFilled,
                         iconSize: 32,
                         theme: LegendAnimtedIconTheme(
-                          disabled: theme.colors.footerPalette.foreground,
+                          disabled: theme.colors.footer.foreground,
                           enabled: theme.colors.selection,
                         ),
                       ),
@@ -95,7 +95,7 @@ class LayoutInfo {
                         icon: AntIcons.mailFilled,
                         theme: LegendAnimtedIconTheme(
                           enabled: theme.colors.selection,
-                          disabled: theme.colors.footerPalette.foreground,
+                          disabled: theme.colors.footer.foreground,
                         ),
                         onPressed: () => {},
                         iconSize: 32,
@@ -129,7 +129,7 @@ class LayoutInfo {
                         icon: AntIcons.instagramFilled,
                         theme: LegendAnimtedIconTheme(
                           enabled: theme.colors.selection,
-                          disabled: theme.colors.footerPalette.foreground,
+                          disabled: theme.colors.footer.foreground,
                         ),
                         onPressed: () => {},
                         iconSize: 32,
