@@ -16,6 +16,7 @@ import 'package:legend_design_widgets/layout/dynamic/flex/form/legendDynamicForm
 import 'package:legend_design_widgets/layout/dynamic/flex/items/legendLayoutItem.dart';
 import 'package:legend_design_widgets/legendButton/legendButton.dart';
 import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
+import 'package:legend_utils/legend_utils.dart';
 import 'package:provider/provider.dart';
 
 class ThemeEditor extends StatefulWidget {
@@ -266,7 +267,7 @@ class _ThemeEditorState extends State<ThemeEditor> {
             child: Container(),
             decoration: BoxDecoration(
               color: theme.colors.background2,
-              borderRadius: theme.sizing.borderRadius[1],
+              borderRadius: theme.sizing.radius2.asRadius(),
             ),
             width: width,
           ),

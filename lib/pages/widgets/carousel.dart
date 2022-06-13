@@ -56,11 +56,11 @@ class CarouselPage extends StatelessWidget {
               ],
             ),
             Container(
-              margin: EdgeInsets.all(theme.sizing.padding[0] * 2),
-              padding: EdgeInsets.all(theme.sizing.padding[0] * 1.5),
+              margin: EdgeInsets.all(theme.sizing.spacing1 * 2),
+              padding: EdgeInsets.all(theme.sizing.spacing1 * 1.5),
               decoration: BoxDecoration(
                 color: theme.colors.foreground1,
-                borderRadius: theme.sizing.borderRadius[0],
+                borderRadius: theme.sizing.radius1.asRadius(),
               ),
               width: MediaQuery.of(context).size.width,
               child: Column(
@@ -98,7 +98,7 @@ class CarouselPage extends StatelessWidget {
                       style: LegendTableStyle(
                         backgroundColor: theme.colors.foreground1,
                         selectionColor: theme.colors.foreground1.lighten(),
-                        borderRadiusGeometry: theme.sizing.borderRadius[1],
+                        borderRadiusGeometry: theme.sizing.radius2.asRadius(),
                         textStyle: theme.typography.h1,
                         rowPadding: EdgeInsets.symmetric(
                           horizontal: 12,
@@ -184,7 +184,7 @@ class CarouselPage extends StatelessWidget {
                       textStyle: theme.typography.h4,
                     ),
                     child: ClipRRect(
-                      borderRadius: theme.sizing.borderRadius[0],
+                      borderRadius: theme.sizing.radius1.asRadius(),
                       child: HighlightView(
                         "LegendCarousel(\n"
                         "  height: 640,\n"

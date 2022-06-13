@@ -5,6 +5,7 @@ import 'package:legend_design_core/styles/colors/legend_color_theme.dart' as ct;
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/typography/legend_text.dart';
+import 'package:legend_utils/legend_utils.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -76,15 +77,15 @@ class SettingsPage extends StatelessWidget {
                               width: 2,
                             )
                           : null,
-                      borderRadius: theme.sizing.borderRadius[0],
+                      borderRadius: theme.sizing.radius1.asRadius(),
                     ),
                     child: Container(
                       padding: EdgeInsets.all(
-                        theme.sizing.borderInset[1],
+                        theme.sizing.radius2,
                       ),
                       decoration: BoxDecoration(
                         color: LegendColors.gray8,
-                        borderRadius: theme.sizing.borderRadius[1],
+                        borderRadius: theme.sizing.radius2.asRadius(),
                       ),
                       child: Stack(
                         children: [
@@ -162,15 +163,15 @@ class SettingsPage extends StatelessWidget {
                               width: 2,
                             )
                           : null,
-                      borderRadius: theme.sizing.borderRadius[0],
+                      borderRadius: theme.sizing.radius1.asRadius(),
                     ),
                     child: Container(
                       padding: EdgeInsets.all(
-                        theme.sizing.borderInset[1],
+                        theme.sizing.radius2,
                       ),
                       decoration: BoxDecoration(
                         color: LegendColors.gray2,
-                        borderRadius: theme.sizing.borderRadius[1],
+                        borderRadius: theme.sizing.radius2.asRadius(),
                       ),
                       child: Stack(
                         children: [
@@ -254,15 +255,15 @@ class SettingsPage extends StatelessWidget {
                               width: 2,
                             )
                           : null,
-                      borderRadius: theme.sizing.borderRadius[0],
+                      borderRadius: theme.sizing.radius1.asRadius(),
                     ),
                     child: Container(
                       padding: EdgeInsets.all(
-                        theme.sizing.borderInset[1],
+                        theme.sizing.radius2,
                       ),
                       decoration: BoxDecoration(
                         color: LegendColors.gray2,
-                        borderRadius: theme.sizing.borderRadius[1],
+                        borderRadius: theme.sizing.radius2.asRadius(),
                       ),
                       child: Stack(
                         children: [

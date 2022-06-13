@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:legend_design_core/interfaces/theme_interface.dart';
 import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
+import 'package:legend_design_core/styles/colors/subcolors/menu_drawer_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/sub_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/footer_sizing.dart';
@@ -41,11 +42,21 @@ class AppTheme extends ThemeInterface {
           onPrimary: Colors.indigo[200]!,
           onSecondary: Colors.teal[200]!,
           onTertiary: Colors.teal[200]!,
+          custom: {
+            "test": Colors.red,
+          },
           subcolors: (colors) {
             return LegendSubColors(
               appBar: AppBarColorsOverride(
                 background: colors.primary,
                 foreground: Colors.indigo[50],
+              ),
+              menuDrawer: MenuDrawerColorOverride(
+                background: Colors.white,
+                backgroundMenu: colors.onPrimary,
+                foreground: colors.primary,
+                background_selection: colors.primary,
+                background_menu_selection: colors.primary,
               ),
             );
           },
@@ -70,6 +81,9 @@ class AppTheme extends ThemeInterface {
           onPrimary: Colors.indigo[200]!,
           onSecondary: Colors.teal[200]!,
           onTertiary: Colors.teal[200]!,
+          custom: {
+            "test": Colors.red,
+          },
           subcolors: (colors) {
             return LegendSubColors(
               appBar: AppBarColorsOverride(
@@ -87,7 +101,26 @@ class AppTheme extends ThemeInterface {
   LegendSizingTheme buildSizingTheme() {
     return LegendSizingTheme(
       defaultSizing: LegendSizing(
+        custom: {
+          'test': 20,
+        },
         key: 720,
+        elevation1: 0,
+        elevation2: 1,
+        elevation3: 2,
+        elevation4: 4,
+        iconSize1: 14,
+        iconSize2: 20,
+        iconSize3: 26,
+        iconSize4: 32,
+        radius1: 4,
+        radius2: 8,
+        radius3: 12,
+        radius4: 16,
+        spacing1: 8,
+        spacing2: 16,
+        spacing3: 24,
+        spacing4: 32,
         footerSizing: FixedFooterSizing(
           height: 100,
           maxWidth: 1000,
@@ -109,25 +142,7 @@ class AppTheme extends ThemeInterface {
           ),
           horizontalPadding: 12,
         ),
-        elevations: [0, 1, 2, 4],
         typographySizing: TypographySizing(baseSize: 12, maxSize: 36),
-        borderRadius: [
-          BorderRadius.all(
-            Radius.circular(16.0),
-          ),
-          BorderRadius.all(
-            Radius.circular(12.0),
-          ),
-        ],
-        borderInset: [
-          16,
-          12,
-        ],
-        padding: [
-          12,
-          16,
-          24,
-        ],
         appBarSizing: AppBarSizing(
           appBarHeight: 80,
           contentPadding: EdgeInsets.only(
@@ -138,9 +153,8 @@ class AppTheme extends ThemeInterface {
           spacing: 12,
           logoSize: 48,
         ),
-        iconSizes: [28, 24, 22, 18],
         menuDrawerSizing: MenuDrawerSizing(
-          width: 200,
+          width: 320,
           iconSize: 24,
           itemHeight: 48,
           spacing: 8,
@@ -180,12 +194,16 @@ class AppTheme extends ThemeInterface {
       overrides: [
         LegendSizingOverride(
           key: 480,
+          spacing1: 8,
+          spacing2: 12,
           sider: SiderSizingOverride(
             width: 200,
           ),
         ),
         LegendSizingOverride(
           key: 720,
+          spacing1: 12,
+          spacing2: 16,
           sider: SiderSizingOverride(
             width: 160,
           ),
@@ -195,12 +213,16 @@ class AppTheme extends ThemeInterface {
         ),
         LegendSizingOverride(
           key: 1080,
+          spacing1: 16,
+          spacing2: 22,
           sider: SiderSizingOverride(
             width: 200,
           ),
         ),
         LegendSizingOverride(
           key: 1600,
+          spacing1: 18,
+          spacing2: 26,
           sider: SiderSizingOverride(
             width: 240,
           ),

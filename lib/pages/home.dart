@@ -9,6 +9,7 @@ import 'package:legend_design_core/styles/typography/legend_text.dart';
 import 'package:legend_design_core/styles/typography/rich/legend_rich_text.dart';
 import 'package:legend_utils/functions/functions.dart';
 import 'package:legend_design_widgets/legend_design_widgets.dart';
+import 'package:legend_utils/legend_utils.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
@@ -256,11 +257,11 @@ class Home extends StatelessWidget {
           //width: s.width,
           decoration: BoxDecoration(
             color: theme.colors.background3,
-            borderRadius: theme.sizing.borderRadius[1],
+            borderRadius: theme.sizing.radius2.asRadius(),
           ),
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.symmetric(
-            horizontal: theme.sizing.borderInset[1],
+            horizontal: theme.sizing.radius2,
           ),
           child: LegendRichText(
             text: [
@@ -288,11 +289,11 @@ class Home extends StatelessWidget {
           height: 120,
           decoration: BoxDecoration(
             color: theme.colors.background3,
-            borderRadius: theme.sizing.borderRadius[1],
+            borderRadius: theme.sizing.radius2.asRadius(),
           ),
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.symmetric(
-            horizontal: theme.sizing.borderInset[1],
+            horizontal: theme.sizing.radius2,
           ),
           child: LegendRichText(
             text: [
@@ -365,11 +366,11 @@ class Home extends StatelessWidget {
               height: 100,
               decoration: BoxDecoration(
                 color: theme.colors.background3,
-                borderRadius: theme.sizing.borderRadius[1],
+                borderRadius: theme.sizing.radius2.asRadius(),
               ),
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(
-                horizontal: theme.sizing.borderInset[1],
+                horizontal: theme.sizing.radius2,
               ),
               child: LegendRichText(
                 text: [
@@ -576,14 +577,14 @@ class PackageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendHoverHighlight(
-      borderRadius: theme.sizing.borderRadius[1],
+      borderRadius: theme.sizing.radius2.asRadius(),
       selectedColor: theme.colors.selection,
       child: Container(
         height: 64,
         width: width,
         color: theme.colors.background3,
         padding: EdgeInsets.symmetric(
-          horizontal: theme.sizing.padding[1],
+          horizontal: theme.sizing.spacing1,
         ),
         child: Row(
           children: [
@@ -601,7 +602,7 @@ class PackageCard extends StatelessWidget {
               width: 48,
               decoration: BoxDecoration(
                 color: theme.colors.secondary,
-                borderRadius: theme.sizing.borderRadius[1],
+                borderRadius: theme.sizing.radius2.asRadius(),
               ),
               alignment: Alignment.center,
               child: LegendText(

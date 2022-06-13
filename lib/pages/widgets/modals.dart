@@ -266,7 +266,7 @@ class ModalsPage extends StatelessWidget {
                   },
                   style: LegendButtonStyle.normal(
                     borderRadius: Radius.circular(
-                      theme.sizing.borderInset[1],
+                      theme.sizing.radius2.asRadius(),
                     ),
                   ),
                 ),
@@ -291,7 +291,7 @@ class ModalsPage extends StatelessWidget {
                   },
                   style: LegendButtonStyle.normal(
                     borderRadius: Radius.circular(
-                      theme.sizing.borderInset[1],
+                      theme.sizing.radius2.asRadius(),
                     ),
                   ),
                 ),
@@ -311,7 +311,7 @@ class ModalsPage extends StatelessWidget {
                   },
                   style: LegendButtonStyle.normal(
                     borderRadius: Radius.circular(
-                      theme.sizing.borderInset[1],
+                      theme.sizing.radius2.asRadius(),
                     ),
                   ),
                 )
