@@ -1,16 +1,15 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
+import 'package:legend_design_core/libraries/scaffold.dart';
+import 'package:legend_design_core/widgets/elevation/animated_card.dart';
+import 'package:legend_design_core/widgets/elevation/elevated_card.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
-import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 import 'package:legend_router/router/legend_router.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/styles/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 import 'package:legend_design_core/styles/typography/rich/legend_rich_text.dart';
-import 'package:legend_utils/functions/functions.dart';
 import 'package:legend_design_widgets/legend_design_widgets.dart';
 import 'package:legend_utils/legend_utils.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   const Home();
@@ -23,17 +22,16 @@ class Home extends StatelessWidget {
     ScaffoldInfo info = ScaffoldInfo.of(context);
 
     return LegendRouteBody(
-      slivers: [
+      children: [
         LegendText(
-          text: "Legend Design",
-          textStyle: theme.typography.h6,
+          "Legend Design",
+          textStyle: theme.typography.h5,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
           ),
         ),
         LegendText(
-          text:
-              "Legend Design is developed to be a all around Library for Flutter, which provides UI Components, Layouts, Routing, Dynamic Sizing and Theming for Cross Platform Applications.",
+          "Legend Design is developed to be a all around Library for Flutter, which provides UI Components, Layouts, Routing, Dynamic Sizing and Theming for Cross Platform Applications.",
           textStyle: theme.typography.h1,
         ),
         const SizedBox(
@@ -54,7 +52,7 @@ class Home extends StatelessWidget {
                     width: 8,
                   ),
                   LegendText(
-                    text: "Features",
+                    "Features",
                     textStyle: theme.typography.h5,
                   ),
                 ],
@@ -67,7 +65,7 @@ class Home extends StatelessWidget {
                 size: 22,
               ),
               text: LegendText(
-                text: "UI Components designed for cross platform Applications.",
+                "UI Components designed for cross platform Applications.",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -78,7 +76,7 @@ class Home extends StatelessWidget {
                 size: 22,
               ),
               text: LegendText(
-                text: "Devoloper friendly",
+                "Devoloper friendly",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -89,8 +87,7 @@ class Home extends StatelessWidget {
                 size: 22,
               ),
               text: LegendText(
-                text:
-                    "Devloped completely standalone, without any third party dependencies.",
+                "Devloped completely standalone, without any third party dependencies.",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -101,7 +98,7 @@ class Home extends StatelessWidget {
                 size: 22,
               ),
               text: LegendText(
-                text: "Powerful Sizing and Theming for every Platform",
+                "Powerful Sizing and Theming for every Platform",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -112,8 +109,7 @@ class Home extends StatelessWidget {
                 size: 22,
               ),
               text: LegendText(
-                text:
-                    "Native Functionalites in Kotlyn, Swift, C++ and Javascript.",
+                "Native Functionalites in Kotlyn, Swift, C++ and Javascript.",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -128,7 +124,7 @@ class Home extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: verticalSpacing / 1.5),
               child: LegendText(
-                text: "Packages",
+                "Packages",
                 textStyle: theme.typography.h5,
               ),
             ),
@@ -239,14 +235,14 @@ class Home extends StatelessWidget {
           height: verticalSpacing,
         ),
         LegendText(
-          text: "Installation",
+          "Installation",
           textStyle: theme.typography.h5,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
           ),
         ),
         LegendText(
-          text: "With Command",
+          "With Command",
           textStyle: theme.typography.h1,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
@@ -278,7 +274,7 @@ class Home extends StatelessWidget {
           ),
         ),
         LegendText(
-          text: "Or you can manually add these to your pubspec.yaml.",
+          "Or you can manually add these to your pubspec.yaml.",
           textStyle: theme.typography.h1,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
@@ -348,15 +344,14 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LegendText(
-              text: "Usage",
+              "Usage",
               textStyle: theme.typography.h5,
               padding: const EdgeInsets.only(
                 bottom: verticalSpacing / 1.5,
               ),
             ),
             LegendText(
-              text:
-                  "In your Flutter project you can use the following imports.",
+              "In your Flutter project you can use the following imports.",
               textStyle: theme.typography.h1,
               padding: const EdgeInsets.only(
                 bottom: verticalSpacing / 1.5,
@@ -423,7 +418,7 @@ class Home extends StatelessWidget {
           height: verticalSpacing,
         ),
         LegendText(
-          text: "Get Started",
+          "Get Started",
           textStyle: theme.typography.h5,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
@@ -475,88 +470,6 @@ class Home extends StatelessWidget {
   }
 }
 
-class LegendHoverHighlight extends StatefulWidget {
-  final Widget child;
-  final BorderRadius? borderRadius;
-  late final Color disabledColor;
-  late final Color selectedColor;
-
-  LegendHoverHighlight({
-    Key? key,
-    required this.child,
-    this.borderRadius,
-    Color? disabledColor,
-    required Color selectedColor,
-  }) {
-    this.disabledColor = disabledColor ?? Colors.black.withOpacity(0.1);
-    this.selectedColor = selectedColor.withOpacity(0.4);
-  }
-
-  @override
-  State<LegendHoverHighlight> createState() => _LegendHoverHighlightState();
-}
-
-class _LegendHoverHighlightState extends State<LegendHoverHighlight>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController animationController;
-  late final Animation<Color?> animation;
-  late Color color;
-
-  @override
-  void initState() {
-    color = widget.disabledColor;
-    animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-
-    animation = ColorTween(
-      begin: widget.disabledColor,
-      end: widget.selectedColor,
-    ).animate(animationController)
-      ..addListener(() {
-        if (animation.value != null)
-          setState(() {
-            color = animation.value!;
-          });
-      });
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (e) {
-        animationController.forward();
-      },
-      onExit: (e) {
-        animationController.reverse();
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: color,
-              blurRadius: 4,
-              spreadRadius: 2,
-              offset: Offset(0, 1),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          child: widget.child,
-          borderRadius: widget.borderRadius,
-        ),
-      ),
-    );
-  }
-}
-
 class PackageCard extends StatelessWidget {
   final String name;
   final String version;
@@ -576,9 +489,10 @@ class PackageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
-    return LegendHoverHighlight(
+    return AnimatedCard(
       borderRadius: theme.sizing.radius2.asRadius(),
-      selectedColor: theme.colors.selection,
+      elevation: 1,
+      padding: EdgeInsets.all(4),
       child: Container(
         height: 64,
         width: width,
@@ -590,7 +504,7 @@ class PackageCard extends StatelessWidget {
           children: [
             Expanded(
               child: LegendText(
-                text: name,
+                name,
                 textStyle: theme.typography.h4,
                 dynamicSizing: true,
               ),
@@ -606,7 +520,7 @@ class PackageCard extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: LegendText(
-                text: version,
+                version,
                 textStyle: theme.typography.h0.copyWith(color: Colors.white),
               ),
               height: 20,

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
-import 'package:legend_design_core/styles/colors/legend_palette.dart';
-import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/styles/sizing/size_info.dart';
-import 'package:legend_design_core/styles/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
+import 'package:legend_design_core/widgets/size_info.dart';
 import 'package:legend_design_widgets/input/form/legendForm.dart';
 import 'package:legend_design_widgets/input/form/legendFormField.dart';
 import 'package:legend_design_widgets/input/text/legendInputDecoration.dart';
@@ -15,9 +12,7 @@ import 'package:legend_design_widgets/layout/dynamic/flex/form/legendCustomFormL
 import 'package:legend_design_widgets/layout/dynamic/flex/form/legendDynamicFormLayout.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/items/legendLayoutItem.dart';
 import 'package:legend_design_widgets/legendButton/legendButton.dart';
-import 'package:legend_design_widgets/legendButton/legendButtonStyle.dart';
 import 'package:legend_utils/legend_utils.dart';
-import 'package:provider/provider.dart';
 
 class ThemeEditor extends StatefulWidget {
   const ThemeEditor({Key? key}) : super(key: key);
@@ -60,7 +55,7 @@ class _ThemeEditorState extends State<ThemeEditor> {
                     onPressed: () {},
                     text: LegendText(
                       textStyle: theme.typography.h2,
-                      text: "Save",
+                      "Save",
                     ),
                   ),
                 );

@@ -5,7 +5,7 @@ import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.d
 import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/layout/scaffold/config/whether.dart';
-import 'package:legend_design_core/styles/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 import 'package:legend_utils/extensions/extensions.dart';
 import 'package:legend_design_widgets/datadisplay/carousel/legend_carousel.dart';
 import 'package:legend_design_widgets/datadisplay/header/legend_header.dart';
@@ -85,7 +85,7 @@ class CarouselPage extends StatelessWidget {
                     ),
                     spacing: 8,
                     header: LegendText(
-                      text: "Api",
+                      "Api",
                       textStyle: theme.typography.h4,
                     ),
                     child: LegendTable(
@@ -180,7 +180,7 @@ class CarouselPage extends StatelessWidget {
                     ),
                     spacing: 8,
                     header: LegendText(
-                      text: "Example",
+                      "Example",
                       textStyle: theme.typography.h4,
                     ),
                     child: ClipRRect(

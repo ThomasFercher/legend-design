@@ -410,4 +410,9 @@ class RoutesTheme extends RouteInterface<PageLayout> {
       ),
     ];
   }
+
+  @override
+  ScaffoldConfig buildConfig(LegendTheme theme) {
+    return ScaffoldConfig();
+  }
 }

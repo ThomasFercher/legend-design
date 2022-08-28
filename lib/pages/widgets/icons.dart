@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
-import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/layout/scaffold/config/whether.dart';
-import 'package:legend_design_core/styles/sizing/size_info.dart';
-import 'package:legend_design_widgets/layout/dynamic/flex/dynamic_flex_layout.dart';
+import 'package:legend_design_core/widgets/size_info.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/items/legendFlexItem.dart';
-import 'package:legend_design_widgets/layout/dynamic/flex/items/legendLayoutItem.dart';
-import 'package:legend_design_widgets/layout/dynamic/flex/legend_custom_flex_layout.dart';
 import 'package:legend_design_widgets/layout/dynamic/flex/legend_dynamic_flex_layout.dart';
-import 'package:provider/src/provider.dart';
 
 class IconsPage extends StatelessWidget {
   const IconsPage({Key? key}) : super(key: key);

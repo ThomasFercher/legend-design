@@ -2,12 +2,8 @@ import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design/pages/home.dart';
 import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
-import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/layout/scaffold/config/whether.dart';
-import 'package:legend_design_core/styles/typography/legend_text.dart';
-import 'package:provider/provider.dart';
+import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 
 class WidgetComponents extends StatelessWidget {
   const WidgetComponents();
@@ -16,14 +12,13 @@ class WidgetComponents extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = context.watch<LegendTheme>();
     return LegendRouteBody(
-      slivers: [
-        LegendText(text: "Components", textStyle: theme.typography.h5),
+      children: [
+        LegendText("Components", textStyle: theme.typography.h5),
         const SizedBox(
           height: 12,
         ),
         LegendText(
-          text:
-              "Legend Design provides Components/Widgets for every occasion. ",
+          "Legend Design provides Components/Widgets for every occasion. ",
           textStyle: theme.typography.h1,
         ),
         const SizedBox(
@@ -33,7 +28,7 @@ class WidgetComponents extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LegendText(
-              text: "Principles",
+              "Principles",
               textStyle: theme.typography.h4,
             ),
             const SizedBox(
@@ -46,7 +41,7 @@ class WidgetComponents extends StatelessWidget {
                 size: 24,
               ),
               text: LegendText(
-                text: "Reusability",
+                "Reusability",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -57,7 +52,7 @@ class WidgetComponents extends StatelessWidget {
                 size: 24,
               ),
               text: LegendText(
-                text: "Dynamic Sizing",
+                "Dynamic Sizing",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -68,7 +63,7 @@ class WidgetComponents extends StatelessWidget {
                 size: 24,
               ),
               text: LegendText(
-                text: "Customization",
+                "Customization",
                 textStyle: theme.typography.h1,
               ),
             ),
@@ -78,28 +73,28 @@ class WidgetComponents extends StatelessWidget {
           height: 24,
         ),
         LegendText(
-          text: "Data Display",
+          "Data Display",
           textStyle: theme.typography.h4,
         ),
         const SizedBox(
           height: 24,
         ),
         LegendText(
-          text: "Data Input",
+          "Data Input",
           textStyle: theme.typography.h4,
         ),
         const SizedBox(
           height: 24,
         ),
         LegendText(
-          text: "Modals",
+          "Modals",
           textStyle: theme.typography.h4,
         ),
         const SizedBox(
           height: 24,
         ),
         LegendText(
-          text: "Layout",
+          "Layout",
           textStyle: theme.typography.h4,
         ),
         const SizedBox(

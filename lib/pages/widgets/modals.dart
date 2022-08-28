@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
-import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/layout/scaffold/config/whether.dart';
-import 'package:legend_design_core/styles/sizing/size_info.dart';
-import 'package:legend_design_core/styles/typography/legend_text.dart';
+import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
+import 'package:legend_design_core/widgets/size_info.dart';
 import 'package:legend_design_widgets/layout/dynamic/custom/legend_widget_layout.dart';
-import 'package:provider/src/provider.dart';
 
 class ModalsPage extends StatelessWidget {
   const ModalsPage({Key? key}) : super(key: key);
@@ -21,8 +17,7 @@ class ModalsPage extends StatelessWidget {
         return Column(
           children: [
             LegendText(
-              text:
-                  "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
               textStyle: theme.typography.h1,
             ),
             Padding(
@@ -83,8 +78,7 @@ class ModalsPage extends StatelessWidget {
                   Container(
                     width: 200,
                     child: LegendText(
-                      text:
-                          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                       textStyle: theme.typography.h1,
                     ),
                   ),
@@ -255,10 +249,10 @@ class ModalsPage extends StatelessWidget {
               ),
               children: [
                 LegendButton(
-                  text: Text("Show Success Alert"),
+                  Text("Show Success Alert"),
                   onPressed: () {
                     LegendPopups.showAlert(
-                      context: context,
+                      concontext,
                       alert: LegendAlert.success(
                         message: "Ja geschafft du verdammta Trottlwichsa!",
                       ),
@@ -271,7 +265,7 @@ class ModalsPage extends StatelessWidget {
                   ),
                 ),
                 LegendButton(
-                  text: Text("Show Modal Bottom"),
+                  Text("Show Modal Bottom"),
                   onPressed: () => {
                     Scaffold.of(context).showBottomSheet(
                       (context) {
@@ -280,7 +274,7 @@ class ModalsPage extends StatelessWidget {
                           onCancel: () {},
                           onConfirm: () {},
                           content: LegendText(
-                            text: "Bitte aktzeptieren Sie unsere Cookies! LIT",
+                            "Bitte aktzeptieren Sie unsere Cookies! LIT",
                             textStyle: theme.typography.h4,
                           ),
                         );
@@ -296,10 +290,10 @@ class ModalsPage extends StatelessWidget {
                   ),
                 ),
                 LegendButton(
-                  text: Text("Show Modal"),
+                  Text("Show Modal"),
                   onPressed: () => {
                     LegendPopups.showLegendModal(
-                      context: context,
+                      concontext,
                       modal: Modal(
                         content: Text("test"),
                         onConfirm: () => {},
