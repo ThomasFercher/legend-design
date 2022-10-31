@@ -13,7 +13,8 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
+
     ScaffoldInfo info = ScaffoldInfo.of(context);
     return LegendRouteBody(
       singlePage: false,

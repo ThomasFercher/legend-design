@@ -10,7 +10,7 @@ class ModalsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
     double width = SizeInfo.of(context).width;
     return LegendRouteBody(
       builder: (context, s) {

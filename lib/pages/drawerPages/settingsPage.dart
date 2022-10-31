@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/styles/theme_provider.dart';
 import 'package:legend_design_core/widgets/gestures/detector.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
 import 'package:legend_design_core/styles/colors/legend_color_theme.dart' as ct;
@@ -6,6 +7,7 @@ import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 import 'package:legend_utils/legend_utils.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({
@@ -14,8 +16,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
-    PaletteType? themeType = theme.colorTheme.type;
+    LegendTheme theme = LegendTheme.of(context);
+    PaletteType? themeType = context.watch<ThemeProvider>().colorTheme.type;
     return Container(
       height: MediaQuery.of(context).size.height,
       color: theme.colors.background1,
@@ -63,7 +65,9 @@ class SettingsPage extends StatelessWidget {
               children: [
                 LegendDetector(
                   onTap: () {
-                    theme.changeColorTheme(ct.PaletteType.dark(), context);
+                    context
+                        .read<ThemeProvider>()
+                        .changeColorTheme(PaletteType.dark());
                   },
                   child: Container(
                     height: 180,
@@ -149,7 +153,9 @@ class SettingsPage extends StatelessWidget {
                 ),
                 LegendDetector(
                   onTap: () {
-                    theme.changeColorTheme(ct.PaletteType.light(), context);
+                    context
+                        .read<ThemeProvider>()
+                        .changeColorTheme(PaletteType.light());
                   },
                   child: Container(
                     height: 180,
@@ -235,13 +241,9 @@ class SettingsPage extends StatelessWidget {
                 ),
                 LegendDetector(
                   onTap: () {
-                    Provider.of<LegendTheme>(context, listen: false)
-                        .changeColorTheme(
-                      ct.PaletteType.custom(
-                        i: 2,
-                      ),
-                      context,
-                    );
+                    context
+                        .read<ThemeProvider>()
+                        .changeColorTheme(PaletteType.custom(i: 2));
                   },
                   child: Container(
                     height: 180,

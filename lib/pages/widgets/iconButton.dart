@@ -8,7 +8,7 @@ class IconButtonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
     return LegendRouteBody(
       builder: ((context, s) {
         return Container(

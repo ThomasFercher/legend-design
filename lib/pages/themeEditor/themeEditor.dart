@@ -31,7 +31,7 @@ class _ThemeEditorState extends State<ThemeEditor> {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
     _colorPalette = theme.colors;
 
     double width = SizeInfo.of(context).width;

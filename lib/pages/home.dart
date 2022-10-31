@@ -1,4 +1,5 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:legend_design_core/libraries/scaffold.dart';
 import 'package:legend_design_core/widgets/elevation/animated_card.dart';
@@ -18,7 +19,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     const double verticalSpacing = 24;
     var width = MediaQuery.of(context).size.width;
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
     ScaffoldInfo info = ScaffoldInfo.of(context);
 
     return LegendRouteBody(
@@ -488,7 +489,7 @@ class PackageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
     return AnimatedCard(
       borderRadius: theme.sizing.radius2.asRadius(),
       elevation: 1,
@@ -558,7 +559,7 @@ class LegendListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),

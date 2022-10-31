@@ -7,6 +7,7 @@ import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/menuDrawer/menu_drawer_colors.dart';
+import 'package:legend_design_core/styles/colors/subcolors/micros/sidemenu/sidemenu_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/sub_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/core/override.dart';
@@ -15,7 +16,6 @@ import 'package:legend_design_core/styles/sizing/sub_sizing/micros/menu/menu_siz
 import 'package:legend_design_core/styles/sizing/sub_sizing/micros/sidemenu/sidemenu_sizing.dart';
 import 'package:legend_design_core/styles/typography/style/typography_sizing.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
-import 'package:legend_router/router/legend_router.dart';
 
 class AppTheme extends ThemeInterface {
   const AppTheme() : super();
@@ -54,11 +54,19 @@ class AppTheme extends ThemeInterface {
                 foreground: Colors.indigo[50],
               ),
               menuDrawer: MenuDrawerColorsOverride(
-                background: Colors.white,
-                backgroundMenu: colors.onPrimary,
-                foreground: colors.primary,
-                background_selection: colors.primary,
+                background: colors.background1,
+                backgroundMenu: Colors.black,
+                foreground: colors.onPrimary,
+                background_selection: colors.secondary,
                 background_menu_selection: colors.primary,
+                buildComponents: (sizing) {
+                  return MenuDrawerColorsComponentsOverride(
+                      menuColors: SideMenuColorsOverride(
+                    background: colors.background3,
+                    menuBackground: colors.background1,
+                    foreground: colors.foreground1,
+                  ));
+                },
               ),
             );
           },
@@ -88,11 +96,13 @@ class AppTheme extends ThemeInterface {
           },
           subcolors: (colors) {
             return LegendSubColors(
-              appBar: AppBarColorsOverride(
-                background: Colors.red,
-                foreground: Colors.indigo[50],
-              ),
-            );
+                appBar: AppBarColorsOverride(
+                  background: Colors.red,
+                  foreground: Colors.indigo[50],
+                ),
+                menuDrawer: MenuDrawerColorsOverride(
+                  background: Colors.red,
+                ));
           },
         ),
       ],
@@ -151,8 +161,11 @@ class AppTheme extends ThemeInterface {
                     borderRadius: BorderRadius.zero,
                     iconSize: 24,
                     itemHeight: 48,
-                    spacing: 4,
-                    padding: EdgeInsets.all(4),
+                    spacing: 8,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 25,
+                      vertical: 4,
+                    ),
                   ),
                 );
               },
@@ -177,12 +190,13 @@ class AppTheme extends ThemeInterface {
               buildComponents: (sizing) {
                 return AppBarSizingComponents(
                   menuSizing: MenuSizingStyle(
-                      borderRadius: BorderRadius.zero,
-                      iconSize: 24,
-                      height: 48,
-                      itemSpacing: 8,
-                      spacing: 4,
-                      padding: EdgeInsets.all(4)),
+                    borderRadius: BorderRadius.zero,
+                    iconSize: 32,
+                    height: 48,
+                    itemSpacing: 8,
+                    spacing: 12,
+                    padding: EdgeInsets.all(4),
+                  ),
                   subMenuSizing: SideMenuSizingStyle(
                     borderRadius: BorderRadius.zero,
                     iconSize: 24,
@@ -211,11 +225,13 @@ class AppTheme extends ThemeInterface {
               buildComponents: (sizing) {
                 return MenuDrawerSizingComponents(
                   sideMenuSizing: SideMenuSizingStyle(
-                    borderRadius: BorderRadius.zero,
+                    borderRadius: BorderRadius.circular(
+                      12,
+                    ),
                     iconSize: 24,
                     itemHeight: 48,
-                    spacing: 4,
-                    padding: EdgeInsets.all(4),
+                    spacing: 12,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                   ),
                 );
               },
@@ -247,7 +263,7 @@ class AppTheme extends ThemeInterface {
       overrides: [
         LegendSizingOverride(
           key: 480,
-          spacing1: 8,
+          spacing1: 16,
           spacing2: 12,
         ),
         LegendSizingOverride(
@@ -280,31 +296,4 @@ class AppTheme extends ThemeInterface {
       h0: TextStyle(),
     );
   }
-
-  @override
-  ScaffoldConfig Function(LegendTheme theme)? buildConfig() =>
-      (LegendTheme theme) => ScaffoldConfig(
-            builders: ScaffoldBuilders(
-              appBarActions: (c) {
-                return LegendAnimatedIcon(
-                  icon: Icons.color_lens,
-                  theme: LegendAnimtedIconTheme(
-                    enabled: theme.colors.selection,
-                    disabled: theme.colors.appBar.foreground,
-                  ),
-                  iconSize: theme.appBarSizing.iconSize,
-                  disableShadow: true,
-                  onPressed: () {
-                    ModalRouter.of(c).push(
-                      settings: RouteSettings(name: "/settings"),
-                      useKey: true,
-                    );
-                  },
-                );
-              },
-              customFooter: FixedFooter(
-                builder: ((context, sizing, colors) => const GlobalFooter()),
-              ),
-            ),
-          );
 }

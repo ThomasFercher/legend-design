@@ -20,7 +20,7 @@ class CarouselPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
     ParagraphType heading =
         ParagraphType(textStyle: theme.typography.h5, bottom: 8);
     ParagraphType heading2 =

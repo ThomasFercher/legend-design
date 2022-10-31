@@ -10,7 +10,7 @@ class WidgetComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LegendTheme theme = context.watch<LegendTheme>();
+    LegendTheme theme = LegendTheme.of(context);
     return LegendRouteBody(
       children: [
         LegendText("Components", textStyle: theme.typography.h5),
