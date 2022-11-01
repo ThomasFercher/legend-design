@@ -7,6 +7,7 @@ import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/menuDrawer/menu_drawer_colors.dart';
+import 'package:legend_design_core/styles/colors/subcolors/micros/menu/menu_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/micros/sidemenu/sidemenu_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/sub_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
@@ -52,6 +53,17 @@ class AppTheme extends ThemeInterface {
               appBar: AppBarColorsOverride(
                 background: colors.primary,
                 foreground: Colors.indigo[50],
+                buildComponents: (_colors) {
+                  return AppBarColorsComponentsOverride(
+                    menuColors: MenuColorsOverride(
+                      foreground: colors.background1,
+                    ),
+                    subMenuColors: SideMenuColorsOverride(
+                      background: colors.background1,
+                      menuBackground: colors.background1,
+                    ),
+                  );
+                },
               ),
               menuDrawer: MenuDrawerColorsOverride(
                 background: colors.background1,
@@ -190,19 +202,25 @@ class AppTheme extends ThemeInterface {
               buildComponents: (sizing) {
                 return AppBarSizingComponents(
                   menuSizing: MenuSizingStyle(
-                    borderRadius: BorderRadius.zero,
-                    iconSize: 32,
+                    borderRadius: BorderRadius.circular(12),
+                    iconSize: 24,
                     height: 48,
                     itemSpacing: 8,
                     spacing: 12,
-                    padding: EdgeInsets.all(4),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                   ),
                   subMenuSizing: SideMenuSizingStyle(
-                    borderRadius: BorderRadius.zero,
+                    borderRadius: BorderRadius.circular(12),
                     iconSize: 24,
                     itemHeight: 48,
                     spacing: 4,
-                    padding: EdgeInsets.all(4),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                   ),
                 );
               },
