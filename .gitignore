@@ -48,11 +48,11 @@ app.*.map.json
 pubspec.lock
 android/
 
-pubspec.yaml
 
 /.github
 /ios
 /.vscode
 /macos
 /web
+/linux
 /windows
