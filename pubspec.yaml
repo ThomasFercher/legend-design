@@ -55,6 +55,5 @@ flutter:
     - assets/
     - assets/flares/
     - assets/photos/
-    - packages/legend_design_core/assets/menu.riv
 
   uses-material-design: true
