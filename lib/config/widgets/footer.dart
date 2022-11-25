@@ -9,7 +9,7 @@ class GlobalFooter extends LegendWidget {
 
   @override
   Widget build(BuildContext context, LegendTheme theme) {
-    FooterColorsStyle colors = theme.footerColors;
+    final colors = theme.footerColors;
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

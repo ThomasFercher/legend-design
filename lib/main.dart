@@ -1,45 +1,47 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:legend_design/config/routes.dart';
-import 'package:legend_design/firebase_options.dart';
 import 'package:legend_design_core/legend_app.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
 import 'config/theme.dart';
+import 'package:legend_utils/urlstrategy/url_strategy.dart';
 
 void main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
   runApp(
     ProviderScope(
       child: LegendApp(
         routesDelegate: const RoutesTheme(),
         themeDelegate: const AppTheme(),
-        logo: SizedBox(
-          width: 240,
-          child: Row(
+        logoBuilder: (context) {
+          final theme = LegendTheme.of(context);
+
+          return Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               SvgPicture.asset(
                 "assets/photos/larrylegend.svg",
-                width: 48,
-                height: 48,
+                width: theme.appBarSizing.logoSize,
+                height: theme.appBarSizing.logoSize,
               ),
               const SizedBox(
-                width: 8,
+                width: 4,
               ),
               Text(
-                "Legend Design",
-                style: GoogleFonts.lobsterTwo(
-                  fontSize: 32,
+                "Legend",
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.w300,
+                  color: theme.appBarColors.foreground,
+                  fontSize: theme.typography.h5.fontSize,
                 ),
               )
             ],
-          ),
-        ),
+          );
+        },
         title: "Legend Design",
         buildSplashscreen: (context, theme) {
           return Container(

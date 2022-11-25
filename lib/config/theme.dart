@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:legend_design/config/widgets/footer.dart';
 import 'package:legend_design_core/interfaces/theme_interface.dart';
-import 'package:legend_design_core/layout/footer/fixed_footer.dart';
-import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/menuDrawer/menu_drawer_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/micros/menu/menu_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/micros/sidemenu/sidemenu_colors.dart';
+import 'package:legend_design_core/styles/colors/subcolors/micros/tabbar/tabbar_colors.dart';
 import 'package:legend_design_core/styles/colors/subcolors/sub_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/sizing/core/override.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/legend_sub_sizing.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/micros/menu/menu_sizing.dart';
 import 'package:legend_design_core/styles/sizing/sub_sizing/micros/sidemenu/sidemenu_sizing.dart';
+import 'package:legend_design_core/styles/sizing/sub_sizing/micros/tabbar/tabbar_sizing.dart';
 import 'package:legend_design_core/styles/typography/style/typography_sizing.dart';
-import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
 
 class AppTheme extends ThemeInterface {
   const AppTheme() : super();
@@ -42,7 +40,7 @@ class AppTheme extends ThemeInterface {
           error: Colors.redAccent,
           disabled: LegendColors.gray7,
           selection: Colors.tealAccent[400]!,
-          onPrimary: Colors.indigo[200]!,
+          onPrimary: Colors.indigo[400]!,
           onSecondary: Colors.teal[200]!,
           onTertiary: Colors.teal[200]!,
           custom: {
@@ -62,6 +60,21 @@ class AppTheme extends ThemeInterface {
                       background: colors.background1,
                       menuBackground: colors.background1,
                     ),
+                    tabbarColors: TabbarColorsOverride(),
+                  );
+                },
+              ),
+              sider: SiderColorsOverride(
+                background: colors.primary,
+                buildComponents: (_colors) {
+                  return SiderColorsComponentsOverride(
+                    menuColors: SideMenuColorsOverride(
+                      background: colors.primary.lighten(0.05),
+                      menuBackground: colors.primary,
+                      foreground: colors.background1,
+                      activeBackground: colors.onPrimary.lighten(),
+                      activeForeground: colors.selection,
+                    ),
                   );
                 },
               ),
@@ -69,16 +82,21 @@ class AppTheme extends ThemeInterface {
                 background: colors.background1,
                 backgroundMenu: Colors.black,
                 foreground: colors.onPrimary,
-                background_selection: colors.secondary,
-                background_menu_selection: colors.primary,
+                backgroundSelection: colors.secondary,
+                backgroundMenuSelection: colors.primary,
                 buildComponents: (sizing) {
                   return MenuDrawerColorsComponentsOverride(
-                      menuColors: SideMenuColorsOverride(
-                    background: colors.background3,
-                    menuBackground: colors.background1,
-                    foreground: colors.foreground1,
-                  ));
+                    menuColors: SideMenuColorsOverride(
+                      background: colors.background3,
+                      menuBackground: colors.background1,
+                      foreground: colors.foreground1,
+                    ),
+                  );
                 },
+              ),
+              footer: FooterColorsOverride(
+                background: colors.foreground1,
+                foreground: colors.background1,
               ),
             );
           },
@@ -147,42 +165,32 @@ class AppTheme extends ThemeInterface {
         spacing4: 32,
         subSizing: (sizing) {
           return LegendSubSizing(
-            footerSizing: FooterSizingStyle(
+            footerSizing: FooterSizing(
               height: 100,
               maxWidth: 1000,
               padding: EdgeInsets.all(24),
             ),
-            siderSizing: SiderSizingStyle(
+            siderSizing: SiderSizing(
               width: 200,
               iconSize: 24,
-              itemHeight: 48,
               spacing: 8,
-              itemPadding: EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 2,
-              ),
-              subMenuHeaderHeight: 48,
-              subItemPadding: EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 2,
-              ),
-              horizontalPadding: 12,
+              padding: EdgeInsets.all(4),
               buildComponents: (SiderSizingInfo sizing) {
                 return SiderSizingComponents(
-                  sideMenuSizing: SideMenuSizingStyle(
-                    borderRadius: BorderRadius.zero,
+                  sideMenuSizing: SideMenuSizing(
+                    borderRadius: BorderRadius.circular(12),
                     iconSize: 24,
                     itemHeight: 48,
                     spacing: 8,
                     padding: EdgeInsets.symmetric(
-                      horizontal: 25,
+                      horizontal: 16,
                       vertical: 4,
                     ),
                   ),
                 );
               },
             ),
-            typographySizing: TypographySizingStyle(
+            typographySizing: TypographySizing(
               h0: 12,
               h1: 14,
               h2: 16,
@@ -190,7 +198,7 @@ class AppTheme extends ThemeInterface {
               h4: 26,
               h5: 30,
             ),
-            appBarSizing: AppBarSizingStyle(
+            appBarSizing: AppBarSizing(
               appBarHeight: 80,
               contentPadding: EdgeInsets.only(
                 right: 16,
@@ -201,7 +209,7 @@ class AppTheme extends ThemeInterface {
               logoSize: 48,
               buildComponents: (sizing) {
                 return AppBarSizingComponents(
-                  menuSizing: MenuSizingStyle(
+                  menuSizing: MenuSizing(
                     borderRadius: BorderRadius.circular(12),
                     iconSize: 24,
                     height: 48,
@@ -212,7 +220,7 @@ class AppTheme extends ThemeInterface {
                       vertical: 6,
                     ),
                   ),
-                  subMenuSizing: SideMenuSizingStyle(
+                  subMenuSizing: SideMenuSizing(
                     borderRadius: BorderRadius.circular(12),
                     iconSize: 24,
                     itemHeight: 48,
@@ -222,10 +230,14 @@ class AppTheme extends ThemeInterface {
                       vertical: 6,
                     ),
                   ),
+                  tabbarSizing: TabbarSizing(
+                    height: 48,
+                    alignment: MainAxisAlignment.center,
+                  ),
                 );
               },
             ),
-            menuDrawerSizing: MenuDrawerSizingStyle(
+            menuDrawerSizing: MenuDrawerSizing(
               width: 320,
               iconSize: 24,
               itemHeight: 48,
@@ -242,7 +254,7 @@ class AppTheme extends ThemeInterface {
               subMenuIconSize: 12,
               buildComponents: (sizing) {
                 return MenuDrawerSizingComponents(
-                  sideMenuSizing: SideMenuSizingStyle(
+                  sideMenuSizing: SideMenuSizing(
                     borderRadius: BorderRadius.circular(
                       12,
                     ),
@@ -254,7 +266,7 @@ class AppTheme extends ThemeInterface {
                 );
               },
             ),
-            bottomBarSizing: BottomBarSizingStyle(
+            bottomBarSizing: BottomBarSizing(
               iconSize: 24,
               height: 80,
               itemWidth: 72,
@@ -283,11 +295,35 @@ class AppTheme extends ThemeInterface {
           key: 480,
           spacing1: 16,
           spacing2: 12,
+          subSizing: (sizing) {
+            return LegendSubSizingOverride(
+              typographySizing: TypographySizingOverride(
+                h0: 12,
+                h5: 22,
+              ),
+              appBarSizing: AppBarSizingOverride(
+                appBarHeight: 64,
+                logoSize: 40,
+              ),
+            );
+          },
         ),
         LegendSizingOverride(
           key: 720,
           spacing1: 12,
           spacing2: 16,
+          subSizing: (sizing) {
+            return LegendSubSizingOverride(
+              typographySizing: TypographySizingOverride(
+                h0: 16,
+                h5: 26,
+              ),
+              appBarSizing: AppBarSizingOverride(
+                appBarHeight: 72,
+                logoSize: 48,
+              ),
+            );
+          },
         ),
         LegendSizingOverride(
           key: 1080,

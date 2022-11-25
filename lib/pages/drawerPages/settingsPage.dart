@@ -6,6 +6,7 @@ import 'package:legend_design_core/styles/colors/legend_color_theme.dart' as ct;
 import 'package:legend_design_core/styles/colors/legend_colors.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
+import 'package:legend_design_core/widgets/size_info.dart';
 import 'package:legend_utils/legend_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class SettingsPage extends StatelessWidget {
     LegendTheme theme = LegendTheme.of(context);
     PaletteType? themeType = context.watch<ThemeProvider>().colorTheme.type;
     return Container(
-      height: MediaQuery.of(context).size.height,
+      height: SizeInfo.of(context).height,
       color: theme.colors.background1,
       width: theme.sizing.menuDrawerSizing.width,
       padding: EdgeInsets.only(

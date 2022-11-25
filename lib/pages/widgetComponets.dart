@@ -5,6 +5,7 @@ import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.d
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 import 'package:legend_design_widgets/datadisplay/header/legend_header.dart';
+import 'package:legend_design_widgets/datadisplay/list/list_item.dart';
 import 'package:legend_design_widgets/input/text/legendInputDecoration.dart';
 import 'package:legend_design_widgets/input/text/legendTextField.dart';
 

@@ -8,21 +8,17 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     LegendTheme theme = LegendTheme.of(context);
 
+    print(ModalRoute.of(context)!.settings.arguments);
+    print(RouteInfoProvider.of(context)?.route.urlArguments);
     return LegendRouteBody(
       singlePage: true,
       builder: (context, s) {
-        return Column(
-          children: [
-            Image.asset("assets/photos/larrylegend.png"),
-            ElevatedButton(
-              onPressed: () => LegendRouter.of(context).pushPage(
-                settings: RouteSettings(
-                  name: "/about/1",
-                ),
-              ),
-              child: Text("t"),
-            ),
-          ],
+        return Container(
+          color: Colors.red,
+          child: Text(
+            "testr",
+            style: theme.typography.h5,
+          ),
         );
       },
     );

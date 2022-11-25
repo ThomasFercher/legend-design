@@ -1,16 +1,15 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/libraries/scaffold.dart';
 import 'package:legend_design_core/widgets/elevation/animated_card.dart';
-import 'package:legend_design_core/widgets/elevation/elevated_card.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
-import 'package:legend_router/router/legend_router.dart';
+import 'package:legend_design_widgets/datadisplay/list/list_item.dart';
+import 'package:legend_design_widgets/legendButton/legendButton.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 import 'package:legend_design_core/styles/typography/rich/legend_rich_text.dart';
 import 'package:legend_design_widgets/legend_design_widgets.dart';
-import 'package:legend_utils/legend_utils.dart';
 
 class Home extends StatelessWidget {
   const Home();
@@ -20,17 +19,28 @@ class Home extends StatelessWidget {
     const double verticalSpacing = 24;
     var width = MediaQuery.of(context).size.width;
     LegendTheme theme = LegendTheme.of(context);
-    ScaffoldInfo info = ScaffoldInfo.of(context);
+    ScaffoldInfo info = ScaffoldInfo.of(context)!;
 
     return LegendRouteBody(
       children: [
         LegendText(
           "Legend Design",
-          textStyle: theme.typography.h5,
+          textStyle: theme.typography.h0,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
           ),
         ),
+        LegendButton(
+            text: LegendText("test"),
+            onPressed: () {
+              LegendRouter.of(context).pushPage(
+                "/about",
+                arguments: "aha",
+                urlArguments: {
+                  "test": "test",
+                },
+              );
+            }),
         LegendText(
           "Legend Design is developed to be a all around Library for Flutter, which provides UI Components, Layouts, Routing, Dynamic Sizing and Theming for Cross Platform Applications.",
           textStyle: theme.typography.h1,
@@ -439,7 +449,7 @@ class Home extends StatelessWidget {
               text: "Documentation",
               onTap: () {
                 LegendRouter.of(context).pushPage(
-                  settings: const RouteSettings(name: "/widgets"),
+                  "/widgets",
                 );
               },
             ),
@@ -542,43 +552,6 @@ class PackageCard extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class LegendListItem extends StatelessWidget {
-  final Icon icon;
-  final LegendText text;
-
-  const LegendListItem({
-    Key? key,
-    required this.icon,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    LegendTheme theme = LegendTheme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: Row(
-        children: [
-          Icon(
-            Icons.circle_outlined,
-            color: theme.colors.foreground3,
-            size: 8,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          icon,
-          const SizedBox(
-            width: 8,
-          ),
-          Expanded(child: text)
-        ],
       ),
     );
   }
