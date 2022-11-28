@@ -117,7 +117,7 @@ class RoutesTheme extends RouteInterface<String> {
           appBarLayout: AppBarLayout(
             layout: AppBarLayoutConfig.fixedAbove,
             aligment: AppBarLayoutType.TiMeAc,
-            showTabbar: true,
+            showTabbar: false,
           ),
           footerLayout: FooterLayout(),
           siderLayout: SiderLayout(left: false),
@@ -172,6 +172,9 @@ class RoutesTheme extends RouteInterface<String> {
         icon: Icons.home,
         config: ScaffoldRouteConfig(
           layout: layouts.get(header),
+          whether: ScaffoldWhether(
+            showAppBarMenu: true,
+          ),
         ),
         page: Home(),
       ),
@@ -252,6 +255,7 @@ class RoutesTheme extends RouteInterface<String> {
           whether: ScaffoldWhether(
             showSiderMenu: true,
             showSiderSubMenu: true,
+            showAppBarMenu: false,
           ),
         ),
         page: WidgetComponents(),
@@ -348,6 +352,7 @@ class RoutesTheme extends RouteInterface<String> {
     return ScaffoldConfig(
       whether: ScaffoldWhether(
         showBackButton: false,
+        showAppBarMenu: true,
       ),
       builders: ScaffoldBuilders(
         appBarActions: (c, theme) {

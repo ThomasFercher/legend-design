@@ -102,19 +102,19 @@ class AppTheme extends ThemeInterface {
           },
         ),
         LegendPalette(
-          primary: Colors.indigo,
-          secondary: Colors.teal,
+          primary: Colors.indigo[800]!,
+          secondary: Colors.teal[600]!,
           tertiary: Colors.teal,
-          foreground1: LegendColors.gray8,
-          foreground2: LegendColors.gray9,
-          foreground3: LegendColors.gray10,
-          foreground4: LegendColors.gray11,
-          foreground5: LegendColors.gray12,
-          background1: LegendColors.gray11,
-          background2: LegendColors.gray8,
-          background3: LegendColors.gray5,
-          background4: LegendColors.gray4,
-          background5: LegendColors.gray2,
+          foreground1: LegendColors.gray5,
+          foreground2: LegendColors.gray5,
+          foreground3: LegendColors.gray4,
+          foreground4: LegendColors.gray4,
+          foreground5: LegendColors.gray3,
+          background1: LegendColors.gray12,
+          background2: LegendColors.gray11,
+          background3: LegendColors.gray10,
+          background4: LegendColors.gray9,
+          background5: LegendColors.gray8,
           error: Colors.red,
           disabled: LegendColors.gray7,
           selection: Colors.tealAccent[400]!,
@@ -126,13 +126,59 @@ class AppTheme extends ThemeInterface {
           },
           subcolors: (colors) {
             return LegendSubColors(
-                appBar: AppBarColorsOverride(
-                  background: Colors.red,
-                  foreground: Colors.indigo[50],
-                ),
-                menuDrawer: MenuDrawerColorsOverride(
-                  background: Colors.red,
-                ));
+              appBar: AppBarColorsOverride(
+                background: colors.primary,
+                foreground: Colors.indigo[50],
+                buildComponents: (_colors) {
+                  return AppBarColorsComponentsOverride(
+                    menuColors: MenuColorsOverride(
+                      foreground: colors.foreground3,
+                    ),
+                    subMenuColors: SideMenuColorsOverride(
+                      background: colors.background3,
+                      menuBackground: colors.background3,
+                    ),
+                    tabbarColors: TabbarColorsOverride(),
+                  );
+                },
+              ),
+              sider: SiderColorsOverride(
+                background: colors.primary,
+                backgroundMenu: colors.primary,
+                foreground: colors.foreground1,
+                buildComponents: (_colors) {
+                  return SiderColorsComponentsOverride(
+                    menuColors: SideMenuColorsOverride(
+                      background: colors.primary.lighten(0.05),
+                      menuBackground: colors.primary,
+                      //foreground: colors.b,
+                      activeBackground: colors.onPrimary.lighten(),
+                      activeForeground: colors.selection,
+                    ),
+                  );
+                },
+              ),
+              menuDrawer: MenuDrawerColorsOverride(
+                background: colors.background1,
+                backgroundMenu: Colors.black,
+                foreground: colors.onPrimary,
+                backgroundSelection: colors.secondary,
+                backgroundMenuSelection: colors.primary,
+                buildComponents: (sizing) {
+                  return MenuDrawerColorsComponentsOverride(
+                    menuColors: SideMenuColorsOverride(
+                      background: colors.background3,
+                      menuBackground: colors.background1,
+                      foreground: colors.foreground1,
+                    ),
+                  );
+                },
+              ),
+              footer: FooterColorsOverride(
+                background: colors.background4,
+                foreground: colors.foreground3,
+              ),
+            );
           },
         ),
       ],
