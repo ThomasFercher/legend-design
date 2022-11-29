@@ -1,334 +1,120 @@
 import 'package:flutter/material.dart';
+import 'package:legend_design/main.dart';
+import 'package:legend_design_core/state/legend_state.dart';
 import 'package:legend_design_core/styles/theme_provider.dart';
-import 'package:legend_design_core/widgets/gestures/detector.dart';
+import 'package:legend_design_core/widgets/elevation/animated_card.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
-import 'package:legend_design_core/styles/colors/legend_color_theme.dart' as ct;
-import 'package:legend_design_core/styles/colors/legend_colors.dart';
-import 'package:legend_design_core/styles/legend_theme.dart';
 import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 import 'package:legend_design_core/widgets/size_info.dart';
 import 'package:legend_utils/legend_utils.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends LegendWidget {
   const SettingsPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    LegendTheme theme = LegendTheme.of(context);
-    PaletteType? themeType = context.watch<ThemeProvider>().colorTheme.type;
+  Widget build(BuildContext context, LegendTheme theme) {
+    final colorTheme = context.watch<ThemeProvider>().colorTheme;
+    final dark = theme.colors == colorTheme.dark;
+    final light = theme.colors == colorTheme.light;
+
     return Container(
       height: SizeInfo.of(context).height,
       color: theme.colors.background1,
       width: theme.sizing.menuDrawerSizing.width,
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-        left: 24,
-        right: 24,
-        bottom: 24,
-      ),
+      padding: EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                LegendText(
-                  "Themes",
-                  textStyle: theme.typography.h5.copyWith(
-                    color: theme.colors.foreground1,
-                  ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              LegendText(
+                "Themes",
+                textStyle: theme.typography.h5.copyWith(
+                  color: theme.colors.foreground1,
                 ),
-                LegendAnimatedIcon(
-                  icon: Icons.close,
-                  disableShadow: true,
-                  theme: LegendAnimtedIconTheme(
-                    enabled: theme.colors.selection,
-                    disabled: theme.colors.foreground1,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+              ),
+              LegendAnimatedIcon(
+                icon: Icons.close,
+                disableShadow: true,
+                theme: LegendAnimtedIconTheme(
+                  enabled: theme.colors.selection,
+                  disabled: theme.colors.foreground1,
                 ),
-              ],
-            ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
           ),
           Divider(
             color: theme.colors.background3,
+            height: 32,
           ),
-          Expanded(
-            child: Column(
-              children: [
-                LegendDetector(
-                  onTap: () {
-                    context
-                        .read<ThemeProvider>()
-                        .changeColorTheme(PaletteType.dark());
-                  },
-                  child: Container(
-                    height: 180,
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: themeType == ct.PaletteType.dark()
-                          ? Border.all(
-                              color: theme.colors.primary,
-                              width: 2,
-                            )
-                          : null,
-                      borderRadius: theme.sizing.radius1.asRadius(),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(
-                        theme.sizing.radius2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: LegendColors.gray8,
-                        borderRadius: theme.sizing.radius2.asRadius(),
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: 4,
-                            bottom: 4,
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray10,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 60,
-                            top: 40,
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray9,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 20,
-                            right: 10,
-                            child: Container(
-                              width: 40,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray10,
-                                border: Border.all(
-                                  width: 2,
-                                  color: LegendColors.gray9,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 20,
-                            top: 4,
-                            child: Container(
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray11,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+          AnimatedCard(
+            border: Border.all(
+              color: theme.colors.selection,
+              width: 2,
+            ).boolInit(light),
+            borderRadius: theme.sizing.radius4.asRadius(),
+            background: colorTheme.light.background1,
+            elevation: 1,
+            height: 128,
+            onTap: () {
+              context
+                  .read<ThemeProvider>()
+                  .changeColorTheme(PaletteType.light());
+
+              SharedPreferences.getInstance().then(
+                (pref) => pref.setString(colorThemeKey, lightKey),
+              );
+            },
+            padding: EdgeInsets.zero,
+            child: Center(
+              child: LegendText(
+                "Light",
+                textStyle: theme.typography.h3.copyWith(
+                  color: colorTheme.light.foreground3,
                 ),
-                LegendDetector(
-                  onTap: () {
-                    context
-                        .read<ThemeProvider>()
-                        .changeColorTheme(PaletteType.light());
-                  },
-                  child: Container(
-                    height: 180,
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: themeType == ct.PaletteType.light()
-                          ? Border.all(
-                              color: theme.colors.primary,
-                              width: 2,
-                            )
-                          : null,
-                      borderRadius: theme.sizing.radius1.asRadius(),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(
-                        theme.sizing.radius2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: LegendColors.gray2,
-                        borderRadius: theme.sizing.radius2.asRadius(),
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: 4,
-                            bottom: 4,
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray5,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 60,
-                            top: 40,
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray6,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 20,
-                            right: 10,
-                            child: Container(
-                              width: 40,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray5,
-                                border: Border.all(
-                                  width: 2,
-                                  color: LegendColors.gray6,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 20,
-                            top: 4,
-                            child: Container(
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray7,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                selectable: false,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          AnimatedCard(
+            border: Border.all(
+              color: theme.colors.selection,
+              width: 2,
+            ).boolInit(dark),
+            borderRadius: theme.sizing.radius4.asRadius(),
+            background: colorTheme.dark.background3,
+            elevation: 3,
+            height: 128,
+            onTap: () {
+              context
+                  .read<ThemeProvider>()
+                  .changeColorTheme(PaletteType.dark());
+
+              SharedPreferences.getInstance().then(
+                (pref) => pref.setString(colorThemeKey, darkKey),
+              );
+            },
+            padding: EdgeInsets.zero,
+            child: Center(
+              child: LegendText(
+                "Dark",
+                textStyle: theme.typography.h3.copyWith(
+                  color: colorTheme.dark.foreground3,
                 ),
-                LegendDetector(
-                  onTap: () {
-                    context
-                        .read<ThemeProvider>()
-                        .changeColorTheme(PaletteType.custom(i: 2));
-                  },
-                  child: Container(
-                    height: 180,
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      border: themeType == ct.PaletteType.custom(i: 0)
-                          ? Border.all(
-                              color: theme.colors.primary,
-                              width: 2,
-                            )
-                          : null,
-                      borderRadius: theme.sizing.radius1.asRadius(),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(
-                        theme.sizing.radius2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: LegendColors.gray2,
-                        borderRadius: theme.sizing.radius2.asRadius(),
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: 4,
-                            bottom: 4,
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray5,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 60,
-                            top: 40,
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray6,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(8),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 20,
-                            right: 10,
-                            child: Container(
-                              width: 40,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray5,
-                                border: Border.all(
-                                  width: 2,
-                                  color: LegendColors.gray6,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 20,
-                            top: 4,
-                            child: Container(
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                color: LegendColors.gray7,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                selectable: false,
+              ),
             ),
           ),
         ],
