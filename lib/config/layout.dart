@@ -142,6 +142,12 @@ class AppLayout extends LayoutDelegate {
       whether: ScaffoldWhether(
         showBackButton: false,
         showAppBarMenu: true,
+        shareParentSiderMenu: false,
+        showSiderChildMenu: false,
+        showSiderMenu: false,
+        showSiderSubMenu: false,
+        showTopSubMenu: false,
+        singlePage: false,
       ),
       builders: ScaffoldBuilders(
         appBarActions: (c, theme) {

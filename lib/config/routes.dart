@@ -41,7 +41,7 @@ class AppRoutes extends RoutesDelegate {
         icon: Icons.home,
         config: ScaffoldRouteConfig(
           layout: layouts.get(header),
-          whether: ScaffoldWhether(
+          whether: ScaffoldWhetherOverride(
             showAppBarMenu: true,
           ),
         ),
@@ -62,7 +62,7 @@ class AppRoutes extends RoutesDelegate {
         icon: Icons.shop,
         config: ScaffoldRouteConfig(
           layout: layouts.get(header_tabbar),
-          whether: ScaffoldWhether(
+          whether: ScaffoldWhetherOverride(
             showSiderMenu: true,
           ),
         ),
@@ -75,7 +75,7 @@ class AppRoutes extends RoutesDelegate {
             page: About(),
             config: ScaffoldRouteConfig(
               layout: layouts.get(header_tabbar),
-              whether: ScaffoldWhether(
+              whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
             ),
@@ -87,7 +87,7 @@ class AppRoutes extends RoutesDelegate {
             page: About(),
             config: ScaffoldRouteConfig(
               layout: layouts.get(header_tabbar),
-              whether: ScaffoldWhether(
+              whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
             ),
@@ -99,7 +99,7 @@ class AppRoutes extends RoutesDelegate {
             page: About(),
             config: ScaffoldRouteConfig(
               layout: layouts.get(header_tabbar),
-              whether: ScaffoldWhether(
+              whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
             ),
@@ -121,7 +121,7 @@ class AppRoutes extends RoutesDelegate {
         icon: Icons.wallet,
         config: ScaffoldRouteConfig(
           layout: layouts.get(headerSider),
-          whether: ScaffoldWhether(
+          whether: ScaffoldWhetherOverride(
             showSiderMenu: true,
             showSiderSubMenu: true,
             showAppBarMenu: false,
