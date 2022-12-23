@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
 
-import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 import 'package:legend_utils/extensions/extensions.dart';
 import 'package:legend_design_widgets/datadisplay/carousel/legend_carousel.dart';
@@ -13,7 +10,6 @@ import 'package:legend_design_widgets/datadisplay/table/legendRowValue.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTable.dart';
 import 'package:legend_design_widgets/datadisplay/table/legendTableCell.dart';
 import 'package:legend_design_widgets/input/text/paragraph/legendParagraph.dart';
-import 'package:provider/src/provider.dart';
 
 class CarouselPage extends StatelessWidget {
   const CarouselPage({Key? key}) : super(key: key);
@@ -21,12 +17,22 @@ class CarouselPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LegendTheme theme = LegendTheme.of(context);
-    ParagraphType heading =
-        ParagraphType(textStyle: theme.typography.h5, bottom: 8);
-    ParagraphType heading2 =
-        ParagraphType(textStyle: theme.typography.h4, bottom: 6);
-    ParagraphType content =
-        ParagraphType(textStyle: theme.typography.h1, bottom: 32);
+    ParagraphType heading = ParagraphType(theme.typography.h5, bottom: 8);
+    ParagraphType heading2 = ParagraphType(theme.typography.h4, bottom: 6);
+    ParagraphType content = ParagraphType(theme.typography.h1, bottom: 32);
+
+    final tableStyle = LegendTableStyle(
+      backgroundColor: theme.colors.background1,
+      selectionColor: theme.colors.background2,
+      borderRadiusGeometry: theme.sizing.radius2.asRadius(),
+      textStyle: theme.typography.h1,
+      rowPadding: EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 12,
+      ),
+      headerColor: theme.colors.background1,
+      headerTextStyle: theme.typography.h3,
+    );
 
     return LegendRouteBody(
       builder: (context, s) {
@@ -55,21 +61,20 @@ class CarouselPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 32,
+            ),
             Container(
-              margin: EdgeInsets.all(theme.sizing.spacing1 * 2),
-              padding: EdgeInsets.all(theme.sizing.spacing1 * 1.5),
               decoration: BoxDecoration(
-                color: theme.colors.foreground1,
+                color: theme.colors.background2,
                 borderRadius: theme.sizing.radius1.asRadius(),
               ),
+              padding: EdgeInsets.all(theme.sizing.spacing3),
               width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   LegendParagraph(
-                    margin: EdgeInsets.only(
-                      bottom: 8,
-                    ),
                     values: {
                       heading: "Carousel",
                       content:
@@ -79,14 +84,14 @@ class CarouselPage extends StatelessWidget {
                           "Carousel is a widget that displays a set of items in a carousel. It is a special type of scrollable list that can be used to display a series of elements. The user can swipe left and right on the carousel to scroll through the list of items. The carousel can be controlled using a controller that can be used to control the carousel programmatically. ",
                     },
                   ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   LegendHeader(
-                    margin: EdgeInsets.only(
-                      bottom: 32,
-                    ),
-                    spacing: 8,
+                    spacing: theme.sizing.spacing1,
                     header: LegendText(
                       "Api",
-                      textStyle: theme.typography.h4,
+                      style: theme.typography.h4,
                     ),
                     child: LegendTable(
                       columnNames: [
@@ -94,18 +99,7 @@ class CarouselPage extends StatelessWidget {
                         "Description",
                         "Type",
                       ],
-                      showHeader: true,
-                      style: LegendTableStyle(
-                        backgroundColor: theme.colors.foreground1,
-                        selectionColor: theme.colors.foreground1.lighten(),
-                        borderRadiusGeometry: theme.sizing.radius2.asRadius(),
-                        textStyle: theme.typography.h1,
-                        rowPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                        ),
-                        headerColor: theme.colors.foreground1.lighten(),
-                        headerTextStyle: theme.typography.h0,
-                      ),
+                      style: tableStyle,
                       rowHeight: 56,
                       columnTypes: [
                         LegendTableValueType.TEXT,
@@ -114,7 +108,7 @@ class CarouselPage extends StatelessWidget {
                       ],
                       flexValues: [
                         1,
-                        4,
+                        3,
                         2,
                       ],
                       values: [
@@ -123,8 +117,8 @@ class CarouselPage extends StatelessWidget {
                             "items",
                             "List of Widgets which will be displayed in the carousel.",
                             [
-                              ["List<Widget>", Colors.teal],
-                              ["required", Colors.red],
+                              ["List<Widget>", Colors.blue],
+                              ["required", Colors.purple[400]!],
                             ],
                           ],
                         ),
@@ -153,7 +147,7 @@ class CarouselPage extends StatelessWidget {
                             "intervall",
                             "If specified the carousel will automatically scroll to the next item after the given duration.",
                             [
-                              ["Duration", Colors.orange],
+                              ["Duration", Colors.orange[400]!],
                               ["nullable", Colors.pink],
                             ],
                           ],
@@ -165,7 +159,7 @@ class CarouselPage extends StatelessWidget {
                             [
                               [
                                 "EdgeInsetGeometry",
-                                Colors.grey,
+                                Colors.blueGrey[400]!,
                               ],
                               ["nullable", Colors.pink],
                             ],
@@ -173,6 +167,9 @@ class CarouselPage extends StatelessWidget {
                         )
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 8,
                   ),
                   /*  LegendHeader(
                     margin: EdgeInsets.only(

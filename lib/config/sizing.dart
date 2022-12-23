@@ -29,10 +29,10 @@ class AppSizing extends SizingDelegate {
       radius2: 8,
       radius3: 12,
       radius4: 16,
-      spacing1: 8,
+      spacing1: 64,
       spacing2: 16,
       spacing3: 24,
-      spacing4: 32,
+      spacing4: 64,
       subSizing: (sizing) {
         return LegendSubSizing(
           footerSizing: FooterSizing(
@@ -185,7 +185,7 @@ class AppSizing extends SizingDelegate {
       LegendSizingOverride(
         key: 720,
         spacing1: 12,
-        spacing2: 16,
+        spacing2: 24,
         subSizing: (sizing) {
           return LegendSubSizingOverride(
             typographySizing: TypographySizingOverride(
@@ -201,13 +201,13 @@ class AppSizing extends SizingDelegate {
       ),
       LegendSizingOverride(
         key: 1080,
-        spacing1: 16,
-        spacing2: 22,
+        spacing1: 24,
+        spacing2: 32,
       ),
       LegendSizingOverride(
         key: 1600,
-        spacing1: 18,
-        spacing2: 26,
+        spacing1: 32,
+        spacing2: 42,
       ),
     ];
   }

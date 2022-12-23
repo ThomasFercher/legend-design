@@ -35,7 +35,7 @@ class SettingsPage extends LegendWidget {
             children: [
               LegendText(
                 "Themes",
-                textStyle: theme.typography.h5.copyWith(
+                style: theme.typography.h5.copyWith(
                   color: theme.colors.foreground1,
                 ),
               ),
@@ -78,7 +78,7 @@ class SettingsPage extends LegendWidget {
             child: Center(
               child: LegendText(
                 "Light",
-                textStyle: theme.typography.h3.copyWith(
+                style: theme.typography.h3.copyWith(
                   color: colorTheme.light.foreground3,
                 ),
                 selectable: false,
@@ -110,7 +110,7 @@ class SettingsPage extends LegendWidget {
             child: Center(
               child: LegendText(
                 "Dark",
-                textStyle: theme.typography.h3.copyWith(
+                style: theme.typography.h3.copyWith(
                   color: colorTheme.dark.foreground3,
                 ),
                 selectable: false,

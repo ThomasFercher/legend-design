@@ -55,7 +55,11 @@ class AppColors extends ColorsDelegate {
                   background: colors.background3,
                   menuBackground: colors.background3,
                 ),
-                tabbarColors: TabbarColorsOverride(),
+                tabbarColors: TabbarColorsOverride(
+                  background: colors.background2,
+                  foreground: colors.foreground1,
+                  selection: colors.primary.lighten(0.2),
+                ),
               );
             },
           ),

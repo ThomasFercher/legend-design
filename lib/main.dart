@@ -9,8 +9,8 @@ import 'package:legend_design/config/sizing.dart';
 import 'package:legend_design/config/typography.dart';
 import 'package:legend_design_core/interfaces/legend_config.dart';
 import 'package:legend_design_core/legend_app.dart';
+import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_utils/urlstrategy/url_strategy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const colorThemeKey = 'colorTheme';
@@ -22,6 +22,8 @@ void main() async {
   final pref = await SharedPreferences.getInstance();
   final key = pref.getString(colorThemeKey);
   final initalColorTheme = key == null ? PaletteType.light() : PaletteType(key);
+
+  Logger.log("Inital Color Theme: ${initalColorTheme.key}", 'main');
 
   runApp(
     ProviderScope(
@@ -36,7 +38,6 @@ void main() async {
         ),
         logoBuilder: (context) {
           final theme = LegendTheme.of(context);
-
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -60,11 +61,6 @@ void main() async {
           );
         },
         title: "Legend Design",
-        buildSplashscreen: (context, theme) {
-          return Container(
-            color: theme.colors.primary,
-          );
-        },
       ),
     ),
   );

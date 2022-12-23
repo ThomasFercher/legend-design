@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:legend_design/config/layout.dart';
 import 'package:legend_design/pages/about.dart';
-import 'package:legend_design/pages/drawerPages/settingsPage.dart';
-import 'package:legend_design/pages/home.dart';
-import 'package:legend_design/pages/services.dart';
+import 'package:legend_design/pages/getting_started/getting_started.dart';
+import 'package:legend_design/pages/services/counseling/counseling.dart';
+import 'package:legend_design/pages/services/development/development.dart';
+import 'package:legend_design/pages/services/templates/templates.dart';
+import 'package:legend_design/pages/settings/settingsPage.dart';
+import 'package:legend_design/pages/home/home.dart';
+import 'package:legend_design/pages/services/services.dart';
 import 'package:legend_design/pages/themeEditor/themeEditor.dart';
 import 'package:legend_design/pages/widgetComponets.dart';
 import 'package:legend_design/pages/widgets/buttons.dart';
@@ -31,7 +35,12 @@ class AppRoutes extends RoutesDelegate {
     Map<String, DynamicRouteLayout> layouts,
   ) {
     final headerSiderChildren = ScaffoldRouteConfig(
-      layout: layouts.get(header),
+      layout: layouts.get(headerSider),
+      whether: ScaffoldWhetherOverride(
+        showAppBarMenu: false,
+        showSiderMenu: true,
+        showSiderSubMenu: true,
+      ),
     );
 
     return [
@@ -48,14 +57,18 @@ class AppRoutes extends RoutesDelegate {
         page: Home(),
       ),
       PageInfo(
-        name: "/about",
-        title: "About",
-        icon: Icons.info,
+        name: "/getting-started",
+        title: "Getting Started",
+        icon: Icons.start,
         config: ScaffoldRouteConfig(
-          layout: layouts.get(header2),
+          layout: layouts.get(header),
+          whether: ScaffoldWhetherOverride(
+            showAppBarMenu: true,
+          ),
         ),
-        page: About(),
+        page: GettingStartedPage(),
       ),
+
       PageInfo(
         name: "/products",
         title: "Products",
@@ -72,7 +85,7 @@ class AppRoutes extends RoutesDelegate {
             name: "/products/development",
             title: "Development",
             icon: Icons.developer_board_rounded,
-            page: About(),
+            page: DevelopmentPage(),
             config: ScaffoldRouteConfig(
               layout: layouts.get(header_tabbar),
               whether: ScaffoldWhetherOverride(
@@ -84,7 +97,7 @@ class AppRoutes extends RoutesDelegate {
             name: "/products/templates",
             title: "Templates",
             icon: Icons.settings_input_component_rounded,
-            page: About(),
+            page: TemplatesPage(),
             config: ScaffoldRouteConfig(
               layout: layouts.get(header_tabbar),
               whether: ScaffoldWhetherOverride(
@@ -96,7 +109,7 @@ class AppRoutes extends RoutesDelegate {
             name: "/products/counseling",
             title: "Counseling",
             icon: Icons.question_answer_outlined,
-            page: About(),
+            page: CounsellingPage(),
             config: ScaffoldRouteConfig(
               layout: layouts.get(header_tabbar),
               whether: ScaffoldWhetherOverride(
@@ -106,15 +119,15 @@ class AppRoutes extends RoutesDelegate {
           ),
         ],
       ),
-      PageInfo(
-        name: "/theme",
-        title: "Theme",
-        icon: Icons.color_lens,
-        config: ScaffoldRouteConfig(
-          layout: layouts.get(header),
-        ),
-        page: ThemeEditor(),
-      ),
+      // PageInfo(
+      //   name: "/theme",
+      //   title: "Theme",
+      //   icon: Icons.color_lens,
+      //   config: ScaffoldRouteConfig(
+      //     layout: layouts.get(headerSider),
+      //   ),
+      //   page: ThemeEditor(),
+      // ),
       PageInfo(
         name: "/widgets",
         title: "Widgets",
@@ -122,9 +135,9 @@ class AppRoutes extends RoutesDelegate {
         config: ScaffoldRouteConfig(
           layout: layouts.get(headerSider),
           whether: ScaffoldWhetherOverride(
-            showSiderMenu: true,
             showSiderSubMenu: true,
             showAppBarMenu: false,
+            showSiderMenu: true,
           ),
         ),
         page: WidgetComponents(),
@@ -200,6 +213,15 @@ class AppRoutes extends RoutesDelegate {
             page: RatingPage(),
           ),
         ],
+      ),
+      PageInfo(
+        name: "/about",
+        title: "About",
+        icon: Icons.info,
+        config: ScaffoldRouteConfig(
+          layout: layouts.get(header),
+        ),
+        page: About(),
       ),
       ModalRouteInfo(
         name: "/settings",

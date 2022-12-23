@@ -12,8 +12,9 @@ class ProductsPage extends StatelessWidget {
     ScaffoldInfo info = ScaffoldInfo.of(context)!;
     return LegendRouteBody(
       singlePage: false,
+      disableContentDecoration: false,
       builder: (context, sup) {
-        return Container();
+        return Center();
       },
 
       /*  sliverPersistentHeader: PersistentHeader(

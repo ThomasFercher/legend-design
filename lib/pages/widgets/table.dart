@@ -20,7 +20,6 @@ class TablePage extends StatelessWidget {
         return Column(
           children: [
             LegendTable(
-              header: "Test Table",
               rowHeight: 56,
               columnTypes: [
                 LegendTableValueType.TEXT,
