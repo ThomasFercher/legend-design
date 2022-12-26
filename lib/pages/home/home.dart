@@ -82,27 +82,34 @@ class Home extends LegendWidget {
                               style: theme.typography.h2.copyWith(
                                 color: Colors.white,
                               ),
+                              margin: EdgeInsets.all(8),
+                              elevation: 0,
+                              selElevation: 2,
+                              height: 48,
+                              padding: EdgeInsets.symmetric(horizontal: 24),
                               onTap: () {
                                 LegendRouter.of(context)
                                     .pushPage("/getting-started");
                               },
                               background: theme.colors.primary,
+                              selBackground: theme.colors.primary.lighten(),
+                              borderRadius: theme.sizing.radius1.asRadius(),
                             ),
                             const SizedBox(
                               width: 16,
                             ),
                             LegendButton.text(
-                              background: Colors.cyan,
-                              selBackground: Colors.cyanAccent,
+                              background: Colors.pink,
+                              selBackground: Colors.pinkAccent,
                               elevation: 0,
                               selElevation: 2,
+                              style: theme.typography.h2.copyWith(
+                                color: Colors.white,
+                              ),
                               padding: EdgeInsets.symmetric(horizontal: 24),
                               height: 48,
-                              margin: EdgeInsets.all(4),
-                              borderRadius: BorderRadius.circular(
-                                12,
-                              ),
-                              text: "testaaaaaaaaaaaaaaaaaaaaaaaa",
+                              borderRadius: theme.sizing.radius1.asRadius(),
+                              text: "Buy Now",
                               onTap: () {
                                 print("testaaaaaaaaaa");
                               },

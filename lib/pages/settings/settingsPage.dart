@@ -64,6 +64,7 @@ class SettingsPage extends LegendWidget {
             borderRadius: theme.sizing.radius4.asRadius(),
             background: colorTheme.light.background1,
             elevation: 1,
+            selElevation: 3,
             height: 128,
             onTap: () {
               context
@@ -95,7 +96,8 @@ class SettingsPage extends LegendWidget {
             ).boolInit(dark),
             borderRadius: theme.sizing.radius4.asRadius(),
             background: colorTheme.dark.background3,
-            elevation: 3,
+            elevation: 1,
+            selElevation: 3,
             height: 128,
             onTap: () {
               context
