@@ -33,14 +33,12 @@ class GettingStartedPage extends LegendWidget {
         actions: info?.scaffold.builders.appBarActions,
       ),
       children: [
+        const SizedBox(
+          height: 24,
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            LegendParagraph(
-              values: {
-                ParagraphType(theme.typography.h5): "Tesat",
-              },
-            ),
             Padding(
               padding: EdgeInsets.only(bottom: verticalSpacing / 1.5),
               child: Row(

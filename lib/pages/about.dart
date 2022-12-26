@@ -24,13 +24,7 @@ class About extends StatelessWidget {
         actions: info?.scaffold.builders.appBarActions,
       ),
       builder: (context, s) {
-        return Container(
-          color: Colors.red,
-          child: Text(
-            "testr",
-            style: theme.typography.h5,
-          ),
-        );
+        return Container();
       },
     );
   }
