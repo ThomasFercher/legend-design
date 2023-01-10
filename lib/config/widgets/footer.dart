@@ -9,7 +9,7 @@ class GlobalFooter extends LegendWidget {
 
   @override
   Widget build(BuildContext context, LegendTheme theme) {
-    FooterColorsStyle colors = theme.footerColors;
+    final colors = theme.footerColors;
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -24,7 +24,7 @@ class GlobalFooter extends LegendWidget {
               children: [
                 LegendText(
                   "Repository",
-                  textStyle: theme.typography.h2.copyWith(
+                  style: theme.typography.h2.copyWith(
                     color: colors.foreground,
                   ),
                 ),
@@ -58,7 +58,7 @@ class GlobalFooter extends LegendWidget {
               children: [
                 LegendText(
                   "Useful Links",
-                  textStyle: theme.typography.h2.copyWith(
+                  style: theme.typography.h2.copyWith(
                     color: colors.foreground,
                   ),
                 ),
@@ -74,8 +74,7 @@ class GlobalFooter extends LegendWidget {
               children: [
                 LegendText(
                   "Contact Us",
-                  textStyle:
-                      theme.typography.h2.copyWith(color: colors.foreground),
+                  style: theme.typography.h2.copyWith(color: colors.foreground),
                 ),
                 Expanded(flex: 4, child: Container()),
                 Row(
@@ -105,7 +104,7 @@ class GlobalFooter extends LegendWidget {
                   child: LegendText(
                     textAlign: TextAlign.left,
                     "Social Media",
-                    textStyle: theme.typography.h2.copyWith(
+                    style: theme.typography.h2.copyWith(
                       color: colors.foreground,
                     ),
                   ),

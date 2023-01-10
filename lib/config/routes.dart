@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design/config/dynamic_route.dart';
+import 'package:legend_design/config/layout.dart';
 import 'package:legend_design/pages/about.dart';
-import 'package:legend_design/pages/documentation/docs.dart';
-import 'package:legend_design/pages/documentation/models/article.dart';
-import 'package:legend_design/pages/drawerPages/settingsPage.dart';
-import 'package:legend_design/pages/home.dart';
-import 'package:legend_design/pages/services.dart';
+import 'package:legend_design/pages/getting_started/getting_started.dart';
+import 'package:legend_design/pages/services/counseling/counseling.dart';
+import 'package:legend_design/pages/services/development/development.dart';
+import 'package:legend_design/pages/services/templates/templates.dart';
+import 'package:legend_design/pages/settings/settingsPage.dart';
+import 'package:legend_design/pages/home/home.dart';
+import 'package:legend_design/pages/services/services.dart';
 import 'package:legend_design/pages/themeEditor/themeEditor.dart';
 import 'package:legend_design/pages/widgetComponets.dart';
 import 'package:legend_design/pages/widgets/buttons.dart';
-import 'package:legend_design_core/interfaces/route_inferface.dart';
-import 'package:legend_design_core/layout/appBar.dart/layout/appbar_layout.dart';
-import 'package:legend_design_core/layout/config/appbar_layout.dart';
-import 'package:legend_design_core/layout/config/layout_config.dart';
-import 'package:legend_design_core/layout/drawers/menu_drawer.dart';
-import 'package:legend_design_core/layout/footer/fixed_footer.dart';
-import 'package:legend_design_core/layout/navigation/tabbar/legend_tabbar.dart';
+import 'package:legend_design_core/interfaces/route_delegate.dart';
+import 'package:legend_design_core/layout/config/dynamic_route_layout.dart';
+import 'package:legend_design_core/layout/menu_drawer/menu_drawer.dart';
 import 'package:legend_design_core/layout/scaffold/config/scaffold_config.dart';
 import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/router/scaffold_route_info.dart';
-import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
-import 'package:legend_router/router/legend_router.dart';
-import 'package:legend_design_core/styles/legend_theme.dart';
 
 import '../pages/widgets/carousel.dart';
 import '../pages/widgets/form.dart';
@@ -32,111 +27,21 @@ import '../pages/widgets/selectButtonBar.dart';
 import '../pages/widgets/table.dart';
 import '../pages/widgets/tags.dart';
 import '../pages/widgets/textfield.dart';
-import 'widgets/footer.dart';
+import 'package:legend_utils/extensions/maps.dart';
 
-enum PageLayout {
-  Header,
-  HeaderSider,
-  Sider,
-}
-
-class RoutesTheme extends RouteInterface<PageLayout> {
-  const RoutesTheme() : super();
-
-  @override
-  Map<PageLayout, DynamicRouteLayout> buildLayouts(LegendTheme theme) {
-    List<double> splits = theme.splits;
-    return {
-      PageLayout.Header: DynamicRouteLayout.firstExpand(
-        splits,
-        [
-          RouteLayout(
-            appBarLayout: AppBarLayout(
-              AppBarLayoutConfig.fixedAbove,
-              AppBarLayoutType.TiMeAc,
-            ),
-            bottomBarLayout: BottomBarLayout.Show,
-            footerLayout: FooterLayout.None,
-            siderLayout: SiderLayout.None,
-          ),
-          RouteLayout(
-            appBarLayout: AppBarLayout(
-              AppBarLayoutConfig.fixedAbove,
-              AppBarLayoutType.TiMeAc,
-            ),
-            bottomBarLayout: BottomBarLayout.None,
-            footerLayout: FooterLayout.Show,
-            siderLayout: SiderLayout.None,
-          ),
-        ],
-      ),
-      PageLayout.HeaderSider: DynamicRouteLayout.firstExpand(
-        splits,
-        [
-          RouteLayout(
-            appBarLayout: AppBarLayout(
-              AppBarLayoutConfig.fixedAbove,
-              AppBarLayoutType.TiMeAc,
-            ),
-            bottomBarLayout: BottomBarLayout.Show,
-            footerLayout: FooterLayout.None,
-            siderLayout: SiderLayout.None,
-          ),
-          RouteLayout(
-            appBarLayout: AppBarLayout(
-              AppBarLayoutConfig.fixedAbove,
-              AppBarLayoutType.TiMeAc,
-            ),
-            bottomBarLayout: BottomBarLayout.None,
-            footerLayout: FooterLayout.Show,
-            siderLayout: SiderLayout.Left,
-          ),
-        ],
-      ),
-      PageLayout.Sider: DynamicRouteLayout.firstExpand(
-        splits,
-        [
-          RouteLayout(
-            appBarLayout: AppBarLayout(
-              AppBarLayoutConfig.body,
-              AppBarLayoutType.TiMeAc,
-            ),
-            bottomBarLayout: BottomBarLayout.Show,
-            footerLayout: FooterLayout.None,
-            siderLayout: SiderLayout.None,
-          ),
-          RouteLayout(
-            appBarLayout: AppBarLayout(
-              AppBarLayoutConfig.body,
-              AppBarLayoutType.TiMeAc,
-            ),
-            bottomBarLayout: BottomBarLayout.None,
-            footerLayout: FooterLayout.Show,
-            siderLayout: SiderLayout.Left,
-          ),
-        ],
-      ),
-    };
-  }
-
+class AppRoutes extends RoutesDelegate {
   @override
   List<RouteInfo> buildRoutes(
-    Map<PageLayout, DynamicRouteLayout> layouts,
-    LegendTheme theme,
+    Map<String, DynamicRouteLayout> layouts,
   ) {
-    // TODO: We neeed to access Firebase here. Make this Function async
-    /*  List<PageInfo> docs_gen_pages = DynamicRoute.generateDynamicRoutes<Article>(
-      config: ScaffoldRouteConfig(
-        pageName: "pageName",
-        layout: layouts[PageLayout.Header]!,
+    final headerSiderChildren = ScaffoldRouteConfig(
+      layout: layouts.get(headerSider),
+      whether: ScaffoldWhetherOverride(
+        showAppBarMenu: false,
+        showSiderMenu: true,
+        showSiderSubMenu: true,
       ),
-      base: (config) => Text(config.toString()),
-      models: [
-        PageModel("/about/1", 1),
-        PageModel("/about/2", 2),
-        PageModel("/about/3", 3),
-      ],
-    );*/
+    );
 
     return [
       PageInfo(
@@ -144,122 +49,95 @@ class RoutesTheme extends RouteInterface<PageLayout> {
         title: "Home",
         icon: Icons.home,
         config: ScaffoldRouteConfig(
-          pageName: "pageName",
-          layout: layouts[PageLayout.Header]!,
+          layout: layouts.get(header),
+          whether: ScaffoldWhetherOverride(
+            showAppBarMenu: true,
+          ),
         ),
         page: Home(),
       ),
-      /* PageInfo(
-        name: "/documentation",
-        title: "Home",
-        config: ScaffoldRouteConfig(
-          pageName: "pageName",
-          layout: layouts[PageLayout.Header]!,
-        ),
-        page: DocsPage(),
-        // children: docs_gen_pages,
-      ),*/
       PageInfo(
-        name: "/about",
-        title: "About",
-        icon: Icons.info,
+        name: "/getting-started",
+        title: "Getting Started",
+        icon: Icons.start,
         config: ScaffoldRouteConfig(
-          pageName: "pageName",
-          layout: layouts[PageLayout.Header]!,
+          layout: layouts.get(header),
+          whether: ScaffoldWhetherOverride(
+            showAppBarMenu: true,
+          ),
         ),
-        page: About(),
+        page: GettingStartedPage(),
       ),
-      TabviewPageInfo(
+
+      PageInfo(
         name: "/products",
         title: "Products",
         icon: Icons.shop,
-        style: TabBarStyle(
-          alignment: MainAxisAlignment.center,
-          background: theme.colors.background1,
-          height: 56,
-        ),
         config: ScaffoldRouteConfig(
-          layout: layouts[PageLayout.Header]!,
-          whether: ScaffoldWhether(
+          layout: layouts.get(header_tabbar),
+          whether: ScaffoldWhetherOverride(
             showSiderMenu: true,
           ),
-          pageName: "pageName",
         ),
         page: ProductsPage(),
         children: [
-          TabviewChildPageInfo(
+          PageInfo(
             name: "/products/development",
             title: "Development",
             icon: Icons.developer_board_rounded,
-            page: CarouselPage(),
+            page: DevelopmentPage(),
             config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              whether: ScaffoldWhether(
+              layout: layouts.get(header_tabbar),
+              whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
-              pageName: "pageName",
             ),
           ),
-          TabviewChildPageInfo(
+          PageInfo(
             name: "/products/templates",
             title: "Templates",
             icon: Icons.settings_input_component_rounded,
-            page: About(),
+            page: TemplatesPage(),
             config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              whether: ScaffoldWhether(
+              layout: layouts.get(header_tabbar),
+              whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
-              pageName: "pageName",
             ),
           ),
-          TabviewChildPageInfo(
+          PageInfo(
             name: "/products/counseling",
             title: "Counseling",
             icon: Icons.question_answer_outlined,
-            page: About(),
+            page: CounsellingPage(),
             config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              whether: ScaffoldWhether(
+              layout: layouts.get(header_tabbar),
+              whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
-              pageName: "pageName",
             ),
           ),
         ],
       ),
-      PageInfo(
-        name: "/theme",
-        title: "Theme",
-        icon: Icons.color_lens,
-        config: ScaffoldRouteConfig(
-          layout: layouts[PageLayout.Header]!,
-          pageName: "pageName",
-        ),
-        page: ThemeEditor(),
-      ),
-      ModalRouteInfo(
-        name: "/settings",
-        title: "Home",
-        page: SettingsPage(),
-        width: 360,
-      ),
-      ModalRouteInfo(
-        name: "/menudrawer",
-        title: "Home",
-        page: MenuDrawer(),
-        width: theme.menuDrawerSizing.width,
-      ),
+      // PageInfo(
+      //   name: "/theme",
+      //   title: "Theme",
+      //   icon: Icons.color_lens,
+      //   config: ScaffoldRouteConfig(
+      //     layout: layouts.get(headerSider),
+      //   ),
+      //   page: ThemeEditor(),
+      // ),
       PageInfo(
         name: "/widgets",
         title: "Widgets",
         icon: Icons.wallet,
         config: ScaffoldRouteConfig(
-          layout: layouts[PageLayout.HeaderSider]!,
-          pageName: "pageName",
-          whether: ScaffoldWhether(
-            showSiderMenu: true,
+          layout: layouts.get(headerSider),
+          whether: ScaffoldWhetherOverride(
             showSiderSubMenu: true,
+            showAppBarMenu: false,
+            showSiderMenu: true,
           ),
         ),
         page: WidgetComponents(),
@@ -268,134 +146,95 @@ class RoutesTheme extends RouteInterface<PageLayout> {
             title: "Buttons",
             icon: Icons.smart_button_rounded,
             name: "/widgets/buttons",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: ButtonsPage(),
           ),
           PageInfo(
             title: "Icons",
             icon: Icons.text_fields_sharp,
             name: "/widgets/icons",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: IconsPage(),
           ),
           PageInfo(
             title: "Modals",
             icon: Icons.card_membership_rounded,
             name: "/widgets/modals",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: ModalsPage(),
           ),
           PageInfo(
             title: "Selection",
             name: "/widgets/selectbar",
             icon: Icons.select_all,
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: SelectButtonBarPage(),
           ),
           PageInfo(
             title: "Carousel",
             icon: Icons.book,
             name: "/widgets/carousel",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: CarouselPage(),
           ),
           PageInfo(
             title: "Textfield",
             icon: Icons.input,
             name: "/widgets/textfield",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: TextfieldPage(),
           ),
           PageInfo(
             title: "Form",
             icon: Icons.document_scanner_outlined,
             name: "/widgets/form",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: FormPage(),
           ),
           PageInfo(
             title: "Table",
             icon: Icons.table_bar_rounded,
             name: "/widgets/table",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: TablePage(),
           ),
           PageInfo(
             title: "Tags",
             icon: Icons.tag,
             name: "/widgets/tags",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: TagsPage(),
           ),
           PageInfo(
             title: "Rating",
             icon: Icons.star,
             name: "/widgets/rating",
-            config: ScaffoldRouteConfig(
-              layout: layouts[PageLayout.Header]!,
-              pageName: "pageName",
-            ),
+            config: headerSiderChildren,
             page: RatingPage(),
           ),
         ],
       ),
-    ];
-  }
-
-  @override
-  ScaffoldConfig buildConfig() {
-    return ScaffoldConfig(
-      builders: ScaffoldBuilders(
-        appBarActions: (c, theme) {
-          return LegendAnimatedIcon(
-            icon: Icons.color_lens,
-            theme: LegendAnimtedIconTheme(
-              enabled: theme.colors.selection,
-              disabled: theme.colors.appBar.foreground,
-            ),
-            padding: EdgeInsets.all(4),
-            iconSize: theme.appBarSizing.iconSize,
-            disableShadow: true,
-            onPressed: () {
-              print("object");
-              ModalRouter.of(c).push(
-                settings: RouteSettings(name: "/settings"),
-                useKey: true,
-              );
-            },
-          );
-        },
-        customFooter: FixedFooter(
-          builder: ((context, sizing, colors) => const GlobalFooter()),
+      PageInfo(
+        name: "/about",
+        title: "About",
+        icon: Icons.info,
+        config: ScaffoldRouteConfig(
+          layout: layouts.get(header),
         ),
+        page: About(),
       ),
-    );
+      ModalRouteInfo(
+        name: "/settings",
+        title: "Home",
+        page: SettingsPage(),
+        // width: 360,
+      ),
+      ModalRouteInfo(
+        name: "/menudrawer",
+        title: "Home",
+        page: MenuDrawer(),
+        //  width: theme.menuDrawerSizing.width,
+      ),
+    ];
   }
 }

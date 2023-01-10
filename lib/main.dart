@@ -1,51 +1,66 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:legend_design/config/colors.dart';
+import 'package:legend_design/config/layout.dart';
 import 'package:legend_design/config/routes.dart';
-import 'package:legend_design/firebase_options.dart';
+import 'package:legend_design/config/sizing.dart';
+import 'package:legend_design/config/typography.dart';
+import 'package:legend_design_core/interfaces/legend_config.dart';
 import 'package:legend_design_core/legend_app.dart';
-import 'config/theme.dart';
+import 'package:legend_design_core/legend_design_core.dart';
+import 'package:legend_design_core/styles/legend_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const colorThemeKey = 'colorTheme';
 
 void main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  final pref = await SharedPreferences.getInstance();
+  final key = pref.getString(colorThemeKey);
+  final initalColorTheme = key == null ? PaletteType.light() : PaletteType(key);
+
+  Logger.log("Inital Color Theme: ${initalColorTheme.key}", 'main');
+
   runApp(
     ProviderScope(
       child: LegendApp(
-        routesDelegate: const RoutesTheme(),
-        themeDelegate: const AppTheme(),
-        logo: SizedBox(
-          width: 240,
-          child: Row(
+        config: LegendConfig(
+          colorsDelegate: AppColors(),
+          layoutDelegate: AppLayout(),
+          sizingDelegate: AppSizing(),
+          routesDelegate: AppRoutes(),
+          typographyDelegate: AppTypography(),
+          initalColors: initalColorTheme,
+        ),
+        logoBuilder: (context) {
+          final theme = LegendTheme.of(context);
+          return Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               SvgPicture.asset(
                 "assets/photos/larrylegend.svg",
-                width: 48,
-                height: 48,
+                width: theme.appBarSizing.logoSize,
+                height: theme.appBarSizing.logoSize,
               ),
               const SizedBox(
-                width: 8,
+                width: 4,
               ),
               Text(
-                "Legend Design",
-                style: GoogleFonts.lobsterTwo(
-                  fontSize: 32,
+                "Legend",
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.w300,
+                  color: theme.appBarColors.foreground,
+                  fontSize: theme.typography.h5.fontSize,
                 ),
               )
             ],
-          ),
-        ),
-        title: "Legend Design",
-        buildSplashscreen: (context, theme) {
-          return Container(
-            color: theme.colors.primary,
           );
         },
+        title: "Legend Design",
       ),
     ),
   );

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:legend_design_core/layout/scaffold/legend_scaffold.dart';
 import 'package:legend_design_core/layout/scaffold/routebody/legend_route_body.dart';
-import 'package:legend_design_core/styles/layouts/layout_type.dart';
 import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/layout/scaffold/config/whether.dart';
 import 'package:legend_design_widgets/datadisplay/card/legend_card.dart';
 import 'package:legend_design_widgets/datadisplay/stars/legend_stars.dart';
-import 'package:provider/src/provider.dart';
 
 class RatingPage extends StatelessWidget {
   const RatingPage({Key? key}) : super(key: key);

@@ -1,47 +1,46 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:legend_design/widgets/package_card.dart';
+import 'package:legend_design_core/layout/appBar.dart/appbar_config.dart';
+import 'package:legend_design_core/layout/appBar.dart/legend_sliverbar.dart';
+import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/libraries/scaffold.dart';
-import 'package:legend_design_core/widgets/elevation/animated_card.dart';
-import 'package:legend_design_core/widgets/elevation/elevated_card.dart';
-import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
-import 'package:legend_router/router/legend_router.dart';
-import 'package:legend_design_core/styles/legend_theme.dart';
-import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
+import 'package:legend_design_core/state/legend_state.dart';
 import 'package:legend_design_core/styles/typography/rich/legend_rich_text.dart';
+import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
+import 'package:legend_design_widgets/datadisplay/list/list_item.dart';
+import 'package:legend_design_widgets/input/text/paragraph/legendParagraph.dart';
 import 'package:legend_design_widgets/legend_design_widgets.dart';
-import 'package:legend_utils/legend_utils.dart';
 
-class Home extends StatelessWidget {
-  const Home();
+const verticalSpacing = 24.0;
+
+class GettingStartedPage extends LegendWidget {
+  const GettingStartedPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    const double verticalSpacing = 24;
-    var width = MediaQuery.of(context).size.width;
-    LegendTheme theme = LegendTheme.of(context);
-    ScaffoldInfo info = ScaffoldInfo.of(context);
+  Widget build(BuildContext context, LegendTheme theme) {
+    final info = ScaffoldInfo.of(context);
+
+    // Create 4 Different Paragraph Types for Article and 1 highlighted Base Text
 
     return LegendRouteBody(
+      sliverAppBar: LegendSliverBar(
+        config: LegendAppBarConfig(
+          appBarHeight: 80,
+          elevation: 1,
+          floating: true,
+        ),
+        actions: info?.scaffold.builders.appBarActions,
+      ),
       children: [
-        LegendText(
-          "Legend Design",
-          textStyle: theme.typography.h5,
-          padding: const EdgeInsets.only(
-            bottom: verticalSpacing / 1.5,
-          ),
-        ),
-        LegendText(
-          "Legend Design is developed to be a all around Library for Flutter, which provides UI Components, Layouts, Routing, Dynamic Sizing and Theming for Cross Platform Applications.",
-          textStyle: theme.typography.h1,
-        ),
         const SizedBox(
-          height: verticalSpacing,
+          height: 24,
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: verticalSpacing / 1.5),
+              padding: EdgeInsets.only(bottom: verticalSpacing / 1.5),
               child: Row(
                 children: [
                   Icon(
@@ -54,7 +53,7 @@ class Home extends StatelessWidget {
                   ),
                   LegendText(
                     "Features",
-                    textStyle: theme.typography.h5,
+                    style: theme.typography.h5,
                   ),
                 ],
               ),
@@ -67,7 +66,7 @@ class Home extends StatelessWidget {
               ),
               text: LegendText(
                 "UI Components designed for cross platform Applications.",
-                textStyle: theme.typography.h1,
+                style: theme.typography.h1,
               ),
             ),
             LegendListItem(
@@ -78,7 +77,7 @@ class Home extends StatelessWidget {
               ),
               text: LegendText(
                 "Devoloper friendly",
-                textStyle: theme.typography.h1,
+                style: theme.typography.h1,
               ),
             ),
             LegendListItem(
@@ -89,7 +88,7 @@ class Home extends StatelessWidget {
               ),
               text: LegendText(
                 "Devloped completely standalone, without any third party dependencies.",
-                textStyle: theme.typography.h1,
+                style: theme.typography.h1,
               ),
             ),
             LegendListItem(
@@ -100,7 +99,7 @@ class Home extends StatelessWidget {
               ),
               text: LegendText(
                 "Powerful Sizing and Theming for every Platform",
-                textStyle: theme.typography.h1,
+                style: theme.typography.h1,
               ),
             ),
             LegendListItem(
@@ -111,7 +110,7 @@ class Home extends StatelessWidget {
               ),
               text: LegendText(
                 "Native Functionalites in Kotlyn, Swift, C++ and Javascript.",
-                textStyle: theme.typography.h1,
+                style: theme.typography.h1,
               ),
             ),
           ],
@@ -126,67 +125,46 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: verticalSpacing / 1.5),
               child: LegendText(
                 "Packages",
-                textStyle: theme.typography.h5,
+                style: theme.typography.h5,
               ),
             ),
-            /*   DynamicRow(
-                    spacing: 12,
-                    verticalSpacing: 12,
-                    children: [
-                      PackageCard(
-                        icon: AntIcons.githubFilled,
-                        name: "Legend_Design_Core",
-                        version: "0.1.0",
-                        width: 380,
-                      ),
-                      PackageCard(
-                        icon: AntIcons.githubFilled,
-                        name: "Legend_Design_Widgets",
-                        version: "0.1.0",
-                        width: 380,
-                      ),
-                      PackageCard(
-                        icon: AntIcons.githubFilled,
-                        name: "Legend_Design_Platform",
-                        version: "0.0.1",
-                        width: 380,
-                      ),
-                      PackageCard(
-                        icon: AntIcons.githubFilled,
-                        name: "Legend_Design_Template",
-                        version: "1.0.0",
-                        width: 380,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  )*/
             LegendWidgetLayout.dyn(
               children: [
                 PackageCard(
                   icon: AntIcons.githubFilled,
-                  name: "Legend_Design_Core",
+                  name: "Legend Core",
                   version: "0.1.0",
-                  url: "https://github.com/ThomasFercher/Legend-Design-Core",
+                  url: "https://github.com/ThomasFercher/legend-core",
                 ),
                 PackageCard(
                   icon: AntIcons.githubFilled,
-                  name: "Legend_Design_Widgets",
+                  name: "Legend Widgets",
                   version: "0.1.0",
-                  url: "https://github.com/ThomasFercher/Legend-Design-Widgets",
+                  url: "https://github.com/ThomasFercher/legend-widgets",
                 ),
                 PackageCard(
                   icon: AntIcons.githubFilled,
-                  name: "Legend_Design_Platform",
+                  name: "Legend Platform",
                   version: "0.0.1",
-                  url: "https://github.com/ThomasFercher/Legend-Design-Cross",
+                  url: "https://github.com/ThomasFercher/legend-cross",
                 ),
                 PackageCard(
                   icon: AntIcons.githubFilled,
-                  name: "Legend_Design_Template",
+                  name: "Legend Template",
                   version: "1.0.0",
-                  url: "https://github.com/ThomasFercher/Legend-Design-Templae",
+                  url: "https://github.com/ThomasFercher/legend-template",
+                ),
+                PackageCard(
+                  icon: AntIcons.githubFilled,
+                  name: "Legend Router",
+                  version: "0.1.0",
+                  url: "https://github.com/ThomasFercher/legend_router",
+                ),
+                PackageCard(
+                  icon: AntIcons.githubFilled,
+                  name: "Legend Utils",
+                  version: "0.1.0",
+                  url: "https://github.com/ThomasFercher/legend_utils",
                 ),
               ],
               layouts: {
@@ -197,6 +175,8 @@ class Home extends StatelessWidget {
                     LegendCustomWidget(1),
                     LegendCustomWidget(2),
                     LegendCustomWidget(3),
+                    LegendCustomWidget(4),
+                    LegendCustomWidget(5),
                   ],
                 ),
                 1560: LegendCustomColumn(
@@ -216,15 +196,34 @@ class Home extends StatelessWidget {
                         LegendCustomWidget(3, flex: 1),
                       ],
                     ),
+                    LegendCustomRow(
+                      spacing: 12,
+                      children: [
+                        LegendCustomWidget(4, flex: 1),
+                        LegendCustomWidget(5, flex: 1),
+                      ],
+                    ),
                   ],
                 ),
-                1920: LegendCustomRow(
+                1920: LegendCustomColumn(
                   spacing: 12,
                   children: [
-                    LegendCustomWidget(0, flex: 1),
-                    LegendCustomWidget(1, flex: 1),
-                    LegendCustomWidget(2, flex: 1),
-                    LegendCustomWidget(3, flex: 1),
+                    LegendCustomRow(
+                      spacing: 12,
+                      children: [
+                        LegendCustomWidget(0, flex: 1),
+                        LegendCustomWidget(1, flex: 1),
+                        LegendCustomWidget(2, flex: 1),
+                      ],
+                    ),
+                    LegendCustomRow(
+                      spacing: 12,
+                      children: [
+                        LegendCustomWidget(3, flex: 1),
+                        LegendCustomWidget(4, flex: 1),
+                        LegendCustomWidget(5, flex: 1),
+                      ],
+                    ),
                   ],
                 ),
               },
@@ -237,14 +236,14 @@ class Home extends StatelessWidget {
         ),
         LegendText(
           "Installation",
-          textStyle: theme.typography.h5,
+          style: theme.typography.h5,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
           ),
         ),
         LegendText(
           "With Command",
-          textStyle: theme.typography.h1,
+          style: theme.typography.h1,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
           ),
@@ -276,7 +275,7 @@ class Home extends StatelessWidget {
         ),
         LegendText(
           "Or you can manually add these to your pubspec.yaml.",
-          textStyle: theme.typography.h1,
+          style: theme.typography.h1,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
             top: verticalSpacing / 1.5,
@@ -346,14 +345,14 @@ class Home extends StatelessWidget {
           children: [
             LegendText(
               "Usage",
-              textStyle: theme.typography.h5,
+              style: theme.typography.h5,
               padding: const EdgeInsets.only(
                 bottom: verticalSpacing / 1.5,
               ),
             ),
             LegendText(
               "In your Flutter project you can use the following imports.",
-              textStyle: theme.typography.h1,
+              style: theme.typography.h1,
               padding: const EdgeInsets.only(
                 bottom: verticalSpacing / 1.5,
               ),
@@ -420,7 +419,7 @@ class Home extends StatelessWidget {
         ),
         LegendText(
           "Get Started",
-          textStyle: theme.typography.h5,
+          style: theme.typography.h5,
           padding: const EdgeInsets.only(
             bottom: verticalSpacing / 1.5,
           ),
@@ -439,7 +438,7 @@ class Home extends StatelessWidget {
               text: "Documentation",
               onTap: () {
                 LegendRouter.of(context).pushPage(
-                  settings: const RouteSettings(name: "/widgets"),
+                  "/widgets",
                 );
               },
             ),
@@ -448,138 +447,7 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: verticalSpacing * 2,
         ),
-
-        /* LegendWidgetLayout.dyn(
-                children: [
-                  Container(
-                    height: 400,
-                    width: 400,
-                    color: theme.colors.background[1],
-                  ),
-                ],
-                layouts: {
-                  400: LegendCustomColumn(
-                    children: [
-                      LegendCustomWidget(0),
-                    ],
-                  ),
-                },
-                width: s.width,
-              )*/
       ],
-    );
-  }
-}
-
-class PackageCard extends StatelessWidget {
-  final String name;
-  final String version;
-  final IconData icon;
-  final String? url;
-  final double? width;
-
-  const PackageCard({
-    Key? key,
-    required this.name,
-    required this.version,
-    required this.icon,
-    this.width,
-    this.url,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    LegendTheme theme = LegendTheme.of(context);
-    return AnimatedCard(
-      borderRadius: theme.sizing.radius2.asRadius(),
-      elevation: 1,
-      padding: EdgeInsets.all(4),
-      child: Container(
-        height: 64,
-        width: width,
-        color: theme.colors.background3,
-        padding: EdgeInsets.symmetric(
-          horizontal: theme.sizing.spacing1,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: LegendText(
-                name,
-                textStyle: theme.typography.h4,
-                dynamicSizing: true,
-              ),
-            ),
-            const SizedBox(
-              width: 24,
-            ),
-            Container(
-              width: 48,
-              decoration: BoxDecoration(
-                color: theme.colors.secondary,
-                borderRadius: theme.sizing.radius2.asRadius(),
-              ),
-              alignment: Alignment.center,
-              child: LegendText(
-                version,
-                textStyle: theme.typography.h0.copyWith(color: Colors.white),
-              ),
-              height: 20,
-            ),
-            const SizedBox(
-              width: 24,
-            ),
-            LegendAnimatedIcon(
-              icon: icon,
-              iconSize: 32,
-              theme: LegendAnimtedIconTheme(
-                enabled: theme.colors.selection,
-                disabled: theme.colors.foreground4,
-              ),
-              onPressed: () {
-                if (url != null) LegendFunctions.launchInBrowser(url!);
-              },
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LegendListItem extends StatelessWidget {
-  final Icon icon;
-  final LegendText text;
-
-  const LegendListItem({
-    Key? key,
-    required this.icon,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    LegendTheme theme = LegendTheme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: Row(
-        children: [
-          Icon(
-            Icons.circle_outlined,
-            color: theme.colors.foreground3,
-            size: 8,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          icon,
-          const SizedBox(
-            width: 8,
-          ),
-          Expanded(child: text)
-        ],
-      ),
     );
   }
 }
