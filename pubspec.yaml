@@ -28,13 +28,13 @@ dependencies:
   rive: ^0.9.0
   legend_design_widgets:
     git:
-      url: https://github.com/ThomasFercher/legend-widgets.git
+      url: https://github.com/ThomasFercher/legend-widgets
   legend_design_core:
     git:
-      url: https://github.com/ThomasFercher/legend-core.git
+      url: https://github.com/ThomasFercher/legend-core
   legend_design_platform:
     git:
-      url: https://github.com/ThomasFercher/legend-cross.git
+      url: https://github.com/ThomasFercher/legend-cross
 
 dev_dependencies:
   flutter_test:
