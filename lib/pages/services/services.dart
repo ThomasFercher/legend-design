@@ -14,7 +14,7 @@ class ProductsPage extends StatelessWidget {
       singlePage: false,
       disableContentDecoration: false,
       builder: (context, sup) {
-        return Center();
+        return Container();
       },
 
       /*  sliverPersistentHeader: PersistentHeader(

@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:legend_design_core/libraries/scaffold.dart';
+import 'package:legend_design_core/state/legend_state.dart';
+import 'package:legend_design_core/styles/typography/widgets/legend_text.dart';
 
 const content = """
 Are you struggling to keep up with the demands of software development in-house? At [Company Name], we offer development as a service to help you bring your ideas to life without the hassle of managing a development team.
@@ -21,14 +23,15 @@ In addition to development, we also offer a range of related services, such as p
 Whether you need a custom software solution for your business or are looking to bring a new product to market, Legend Design has the expertise and resources to help you achieve your goals. Contact us today to learn more and see how we can help your project succeed.
 """;
 
-class DevelopmentPage extends StatelessWidget {
+class DevelopmentPage extends LegendWidget {
   const DevelopmentPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, theme) {
     return LegendRouteBody(
       builder: (context, s) => Container(
-        child: Text(
+        child: LegendText(
+          style: theme.typography.h1,
           content,
         ),
       ),
