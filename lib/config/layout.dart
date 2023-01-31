@@ -12,20 +12,19 @@ import 'package:legend_design_core/layout/sider/sider_layout.dart';
 import 'package:legend_design_core/legend_design_core.dart';
 import 'package:legend_design_core/widgets/icons/legend_animated_icon.dart';
 import 'package:legend_design_widgets/input/button/legendButton/legend_button.dart';
-
 import 'widgets/footer.dart';
 
-const header = "header";
-
-const header2 = "header2";
-const header_tabbar = "header_tabbar";
-const headerSider = "header_sider";
+enum PageLayout {
+  header,
+  header_tabbar,
+  headerSider,
+}
 
 class AppLayout extends LayoutDelegate {
   @override
-  Map<String, DynamicRouteLayout> buildLayouts(splits) {
+  Map<PageLayout, DynamicRouteLayout> buildLayouts(splits) {
     return {
-      header: DynamicRouteLayout.override(
+      PageLayout.header: DynamicRouteLayout.override(
         splits,
         defaultLayout: RouteLayout(
           appBarLayout: AppBarLayout(
@@ -45,10 +44,16 @@ class AppLayout extends LayoutDelegate {
             bottomBarLayout: BottomBarLayoutOverride(
               selectionType: BottomBarSelectionType.whole,
             ),
+            appBarLayout: AppBarLayoutOverride(
+              layout: AppBarLayoutConfig.body,
+              aligment: AppBarLayoutType.TiMeAc,
+              showTabbar: false,
+            ),
+            footerLayout: NoFooterLayoutOverride(),
           ),
         },
       ),
-      header_tabbar: DynamicRouteLayout.override(
+      PageLayout.header_tabbar: DynamicRouteLayout.override(
         splits,
         defaultLayout: RouteLayout(
           appBarLayout: AppBarLayout(
@@ -72,7 +77,7 @@ class AppLayout extends LayoutDelegate {
           ),
         },
       ),
-      headerSider: DynamicRouteLayout.override(
+      PageLayout.headerSider: DynamicRouteLayout.override(
         splits,
         defaultLayout: RouteLayout(
           appBarLayout: AppBarLayout(
@@ -92,6 +97,11 @@ class AppLayout extends LayoutDelegate {
             bottomBarLayout: BottomBarLayoutOverride(
               selectionType: BottomBarSelectionType.icon,
             ),
+            siderLayout: NoSiderLayoutOverride(),
+            footerLayout: NoFooterLayoutOverride(),
+          ),
+          splits[1]: RouteLayoutOverride(
+            siderLayout: NoSiderLayoutOverride(),
           ),
         },
       ),

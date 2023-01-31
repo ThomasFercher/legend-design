@@ -8,7 +8,6 @@ import 'package:legend_design/pages/services/templates/templates.dart';
 import 'package:legend_design/pages/settings/settingsPage.dart';
 import 'package:legend_design/pages/home/home.dart';
 import 'package:legend_design/pages/services/services.dart';
-import 'package:legend_design/pages/themeEditor/themeEditor.dart';
 import 'package:legend_design/pages/widgetComponets.dart';
 import 'package:legend_design/pages/widgets/buttons.dart';
 import 'package:legend_design_core/interfaces/route_delegate.dart';
@@ -32,10 +31,10 @@ import 'package:legend_utils/extensions/maps.dart';
 class AppRoutes extends RoutesDelegate {
   @override
   List<RouteInfo> buildRoutes(
-    Map<String, DynamicRouteLayout> layouts,
+    Map<Enum, DynamicRouteLayout> layouts,
   ) {
     final headerSiderChildren = ScaffoldRouteConfig(
-      layout: layouts.get(headerSider),
+      layout: layouts.get(PageLayout.headerSider),
       whether: ScaffoldWhetherOverride(
         showAppBarMenu: false,
         showSiderMenu: true,
@@ -49,7 +48,7 @@ class AppRoutes extends RoutesDelegate {
         title: "Home",
         icon: Icons.home,
         config: ScaffoldRouteConfig(
-          layout: layouts.get(header),
+          layout: layouts.get(PageLayout.header),
           whether: ScaffoldWhetherOverride(
             showAppBarMenu: true,
           ),
@@ -61,7 +60,7 @@ class AppRoutes extends RoutesDelegate {
         title: "Getting Started",
         icon: Icons.start,
         config: ScaffoldRouteConfig(
-          layout: layouts.get(header),
+          layout: layouts.get(PageLayout.header),
           whether: ScaffoldWhetherOverride(
             showAppBarMenu: true,
           ),
@@ -74,7 +73,7 @@ class AppRoutes extends RoutesDelegate {
         title: "Products",
         icon: Icons.shop,
         config: ScaffoldRouteConfig(
-          layout: layouts.get(header_tabbar),
+          layout: layouts.get(PageLayout.header_tabbar),
           whether: ScaffoldWhetherOverride(
             showSiderMenu: true,
           ),
@@ -87,7 +86,7 @@ class AppRoutes extends RoutesDelegate {
             icon: Icons.developer_board_rounded,
             page: DevelopmentPage(),
             config: ScaffoldRouteConfig(
-              layout: layouts.get(header_tabbar),
+              layout: layouts.get(PageLayout.header_tabbar),
               whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
@@ -99,7 +98,7 @@ class AppRoutes extends RoutesDelegate {
             icon: Icons.settings_input_component_rounded,
             page: TemplatesPage(),
             config: ScaffoldRouteConfig(
-              layout: layouts.get(header_tabbar),
+              layout: layouts.get(PageLayout.header_tabbar),
               whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
@@ -111,7 +110,7 @@ class AppRoutes extends RoutesDelegate {
             icon: Icons.question_answer_outlined,
             page: CounsellingPage(),
             config: ScaffoldRouteConfig(
-              layout: layouts.get(header_tabbar),
+              layout: layouts.get(PageLayout.header_tabbar),
               whether: ScaffoldWhetherOverride(
                 showSiderMenu: true,
               ),
@@ -128,98 +127,98 @@ class AppRoutes extends RoutesDelegate {
       //   ),
       //   page: ThemeEditor(),
       // ),
-      PageInfo(
-        name: "/widgets",
-        title: "Widgets",
-        icon: Icons.wallet,
-        config: ScaffoldRouteConfig(
-          layout: layouts.get(headerSider),
-          whether: ScaffoldWhetherOverride(
-            showSiderSubMenu: true,
-            showAppBarMenu: false,
-            showSiderMenu: true,
-          ),
-        ),
-        page: WidgetComponents(),
-        children: [
-          PageInfo(
-            title: "Buttons",
-            icon: Icons.smart_button_rounded,
-            name: "/widgets/buttons",
-            config: headerSiderChildren,
-            page: ButtonsPage(),
-          ),
-          PageInfo(
-            title: "Icons",
-            icon: Icons.text_fields_sharp,
-            name: "/widgets/icons",
-            config: headerSiderChildren,
-            page: IconsPage(),
-          ),
-          PageInfo(
-            title: "Modals",
-            icon: Icons.card_membership_rounded,
-            name: "/widgets/modals",
-            config: headerSiderChildren,
-            page: ModalsPage(),
-          ),
-          PageInfo(
-            title: "Selection",
-            name: "/widgets/selectbar",
-            icon: Icons.select_all,
-            config: headerSiderChildren,
-            page: SelectButtonBarPage(),
-          ),
-          PageInfo(
-            title: "Carousel",
-            icon: Icons.book,
-            name: "/widgets/carousel",
-            config: headerSiderChildren,
-            page: CarouselPage(),
-          ),
-          PageInfo(
-            title: "Textfield",
-            icon: Icons.input,
-            name: "/widgets/textfield",
-            config: headerSiderChildren,
-            page: TextfieldPage(),
-          ),
-          PageInfo(
-            title: "Form",
-            icon: Icons.document_scanner_outlined,
-            name: "/widgets/form",
-            config: headerSiderChildren,
-            page: FormPage(),
-          ),
-          PageInfo(
-            title: "Table",
-            icon: Icons.table_bar_rounded,
-            name: "/widgets/table",
-            config: headerSiderChildren,
-            page: TablePage(),
-          ),
-          PageInfo(
-            title: "Tags",
-            icon: Icons.tag,
-            name: "/widgets/tags",
-            config: headerSiderChildren,
-            page: TagsPage(),
-          ),
-          PageInfo(
-            title: "Rating",
-            icon: Icons.star,
-            name: "/widgets/rating",
-            config: headerSiderChildren,
-            page: RatingPage(),
-          ),
-        ],
-      ),
+      // PageInfo(
+      //   name: "/widgets",
+      //   title: "Widgets",
+      //   icon: Icons.wallet,
+      //   config: ScaffoldRouteConfig(
+      //     layout: layouts.get(PageLayout.headerSider),
+      //     whether: ScaffoldWhetherOverride(
+      //       showSiderSubMenu: true,
+      //       showAppBarMenu: false,
+      //       showSiderMenu: true,
+      //     ),
+      //   ),
+      //   page: WidgetComponents(),
+      //   children: [
+      //     PageInfo(
+      //       title: "Buttons",
+      //       icon: Icons.smart_button_rounded,
+      //       name: "/widgets/buttons",
+      //       config: headerSiderChildren,
+      //       page: ButtonsPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Icons",
+      //       icon: Icons.text_fields_sharp,
+      //       name: "/widgets/icons",
+      //       config: headerSiderChildren,
+      //       page: IconsPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Modals",
+      //       icon: Icons.card_membership_rounded,
+      //       name: "/widgets/modals",
+      //       config: headerSiderChildren,
+      //       page: ModalsPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Selection",
+      //       name: "/widgets/selectbar",
+      //       icon: Icons.select_all,
+      //       config: headerSiderChildren,
+      //       page: SelectButtonBarPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Carousel",
+      //       icon: Icons.book,
+      //       name: "/widgets/carousel",
+      //       config: headerSiderChildren,
+      //       page: CarouselPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Textfield",
+      //       icon: Icons.input,
+      //       name: "/widgets/textfield",
+      //       config: headerSiderChildren,
+      //       page: TextfieldPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Form",
+      //       icon: Icons.document_scanner_outlined,
+      //       name: "/widgets/form",
+      //       config: headerSiderChildren,
+      //       page: FormPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Table",
+      //       icon: Icons.table_bar_rounded,
+      //       name: "/widgets/table",
+      //       config: headerSiderChildren,
+      //       page: TablePage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Tags",
+      //       icon: Icons.tag,
+      //       name: "/widgets/tags",
+      //       config: headerSiderChildren,
+      //       page: TagsPage(),
+      //     ),
+      //     PageInfo(
+      //       title: "Rating",
+      //       icon: Icons.star,
+      //       name: "/widgets/rating",
+      //       config: headerSiderChildren,
+      //       page: RatingPage(),
+      //     ),
+      //   ],
+      // ),
       PageInfo(
         name: "/about",
         title: "About",
         icon: Icons.info,
         config: ScaffoldRouteConfig(
-          layout: layouts.get(header),
+          layout: layouts.get(PageLayout.header),
         ),
         page: About(),
       ),

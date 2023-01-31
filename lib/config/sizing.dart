@@ -36,7 +36,7 @@ class AppSizing extends SizingDelegate {
       subSizing: (sizing) {
         return LegendSubSizing(
           footerSizing: FooterSizing(
-            height: 100,
+            height: 140,
             maxWidth: 1000,
             padding: EdgeInsets.all(24),
           ),
